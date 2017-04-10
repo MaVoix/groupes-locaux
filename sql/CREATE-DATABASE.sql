@@ -25,45 +25,36 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `candidature`
+-- Structure de la table `groups`
 --
 
-CREATE TABLE `candidature` (
+CREATE TABLE `groups` (
   `id` int(11) NOT NULL,
   `date_created` datetime DEFAULT NULL,
   `date_amended` datetime DEFAULT NULL,
   `date_deleted` datetime DEFAULT NULL,
-  `state` varchar(10) NOT NULL DEFAULT 'offline',
-  `civility` varchar(5) NOT NULL,
-  `firstname` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `ad1` varchar(255) NOT NULL,
-  `ad2` varchar(255) NOT NULL,
-  `ad3` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `zipcode` varchar(10) NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `tel` varchar(100) NOT NULL,
-  `presentation` text NOT NULL,
-  `url_video` varchar(255) NOT NULL,
-  `path_pic` varchar(255) NOT NULL,
-  `path_certificate` varchar(255) NOT NULL,
-  `path_idcard` varchar(255) NOT NULL,
-  `path_idcard_verso` varchar(255) NOT NULL,
-  `path_criminal_record` varchar(255) NOT NULL,
-  `is_certificate` tinyint(1) NOT NULL DEFAULT '0',
-  `is_idcard` tinyint(1) NOT NULL DEFAULT '0',
-  `is_criminal_record` tinyint(1) NOT NULL DEFAULT '0',
-  `comment` text NOT NULL,
+  `departement` int(11) NOT NULL,
+  `circonscription` int(11) NOT NULL,
+  `mandataire` int(11) NOT NULL,
+  `members` int(11) NOT NULL,
   `key_edit` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Structure de la table `people`
 --
+
+CREATE TABLE `people` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `surname` varchar(100) NOT NULL,
+  `type` varchar(20) NOT NULL, -- mandataire or member
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
@@ -80,12 +71,16 @@ CREATE TABLE `user` (
 --
 -- Index pour la table `candidature`
 --
-ALTER TABLE `candidature`
+ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `user`
+-- Index pour la table `people`
 --
+ALTER TABLE `people`
+  ADD PRIMARY KEY (`id`);
+
+
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
@@ -96,13 +91,16 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT pour la table `candidature`
 --
-ALTER TABLE `candidature`
+ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+
+ALTER TABLE `people`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
