@@ -1,0 +1,142 @@
+{% extends "admin/base.html.twig" %}
+
+{%  block css %}
+    {{ parent() }}
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+{% endblock %}
+
+{%  block javascripts %}
+    {{ parent() }}
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+                    <h1>Validation des candidatures</h1>
+                </div>
+                <div class="p-b-x4">
+                <form action="/candidature/list.html" method="post" autocomplete="off"  data-ajax="true">
+                <div class="col-xs-12 m-b-x2">
+                    <label for="search" class="control-label">Chercher :</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control"
+                                   value="{{ search }}" autofocus  id="search" name="search" placeholder="Nom, prénom, ville, code postal ...">
+                            <span class="input-group-btn"><button type="submit"  class="btn btn-default btn-group-fontsize"><i class="fa fa-search"></i></button>
+                            </span>                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6" >
+                    <div class="form-group">
+                            <label for="filter" class="control-label">Filtrer :</label>
+                            <select id="filter" name="filter" class="form-control submitOnChange">
+                                <option value="">Tous</option>
+                                <option value="online" {% if filter=='online' %} selected {% endif %}>En ligne</option>
+                                <option value="offline"  {% if filter=='offline' %} selected {% endif %}>Hors ligne</option>
+                                <option value="is_certificate"  {% if filter=='is_certificate' %} selected {% endif %}>Attestation valide</option>
+                                <option value="not_certificate"  {% if filter=='is_certificate' %} selected {% endif %}>Attestation non-valide</option>
+                                <option value="is_idcard"  {% if filter=='is_idcard' %} selected {% endif %}>Carte ID valide</option>
+                                <option value="not_idcard"  {% if filter=='not_idcard' %} selected {% endif %}>Carte ID non-valide</option>
+                                <option value="is_criminal_record"  {% if filter=='is_criminal_record' %} selected {% endif %}>Extrait judiciaire valide</option>
+                                <option value="not_criminal_record"  {% if filter=='not_criminal_record' %} selected {% endif %}>Extrait judiciaire non-valide</option>
+                                </option>
+                            </select>
+                        </div>
+
+
+                </div>
+                    <div class="col-xs-12 col-md-6" >
+                        <div class="form-group">
+                            <label for="order" class="control-label">Trier par :</label>
+                            <select id="order" name="order" class="form-control submitOnChange">
+                                <option value="date_created--desc"  {% if order=='date_created--desc' %} selected {% endif %}>Date (derniers inscrits)</option>
+                                <option value="date_created--asc"  {% if order=='date_created--asc' %} selected {% endif %}>Date (premiers inscrits)</option>
+                                <option value="name--asc"  {% if order=='name--asc' %} selected {% endif %}>Nom</option>
+                                <option value="firstname--asc"  {% if order=='firstname--asc' %} selected {% endif %}>Prénom</option>
+                                <option value="city--asc"  {% if order=='city--asc' %} selected {% endif %}>Ville</option>
+                                <option value="zipcode--asc"  {% if order=='zipcode--asc' %} selected {% endif %}>Code postal</option>
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 m-b-x2">
+                        <a href="/candidature/export.csv" class="btn btn-default pull-left" download="export.csv" >Export CSV</a>
+                        <button type="button" class="btn btn-default pull-right jsBtReset" >Affichage par défaut</button>
+                    </div>
+
+                </form>
+                </div>
+                <table class="updatableContent table" data-updateIndex="1">
+                  <thead>
+                    <th>Numéro</th>
+                    <th>Photo</th>
+                    <th>Nom et ville</th>
+                    <th>Commentaire</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </thead>
+                  <tbody>
+
+                {% for candidature in candidatures %}
+
+                <tr>
+                  <td><a class="anchor" name="{{ candidature.id }}"></a><span style="font-size:2em">{{ candidature.id }}</span></td>
+                  <td>
+                   {#  <a href="/candidature/fiche.html?id={{ candidature.id }}"><div style="background-image:url('/{{ candidature.path_pic_fit }}');" class="square-pic-candidature-small jsLink" ></div></a> #}
+                   <a href="/candidature/candidat.html?id={{ candidature.id }}"><div style="background-image:url('/{{ candidature.path_pic_fit }}');" class="square-pic-candidature-small jsLink" ></div></a>
+                  </td>
+
+                  <td>
+                    <p>{{ candidature.civility }} {{ candidature.firstname|ucwords }} {{ candidature.name|upper }}</p>
+                    <p>{{ candidature.city|capitalizefirst }} ({{ candidature.zipcode }})</p>
+                  </td>
+
+                  <td>
+                  <div class="scrollable">
+                    {{ candidature.comment_nl2br|raw }}
+                  </div>
+                  </td>
+
+                  <td>  <a href="/{{ candidature.path_idcard }}" target="_blank" class="btn btn-block {%  if candidature.is_idcard == 1 %} btn-success {% else %} btn-primary {% endif %}"><i class="fa fa-file-pdf-o pull-left" aria-hidden="true"></i> ID</a>
+                      {%  if candidature.path_idcard_verso !=''  %}
+                      <a href="/{{ candidature.path_idcard_verso }}" target="_blank" class="btn btn-block {%  if candidature.is_idcard == 1 %} btn-success {% else %} btn-primary {% endif %}"><i class="fa fa-file-pdf-o pull-left" aria-hidden="true"></i> ID verso</a>
+                      {% endif %}
+                    {%  if candidature.path_criminal_record !=''  %}
+                          <a href="/{{ candidature.path_criminal_record }}" target="_blank" class="btn btn-block {%  if candidature.is_criminal_record == 1 %} btn-success {% else %} btn-primary {% endif %}"><i class="fa fa-file-pdf-o pull-left" aria-hidden="true"></i> Extrait casier</a>
+                    {%  else %}
+                        <button disabled  class="btn btn-default btn-block" ><i class="fa fa-file-pdf-o pull-left" aria-hidden="true"></i> Extrait casier</button>
+                    {% endif %}
+
+
+                  </td>
+                  <td>
+                    <a href="{{ ConfigService.get("urlSite") }}/candidature/form.html?id={{ candidature.id }}&key={{ candidature.key_edit }}" class="btn btn-info btn-block"   >Editer</a>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" class="jsSwitchAjax" data-onstyle="success"
+                               {% if candidature.is_idcard=='1' %}checked{% endif %} data-toggle="toggle"
+                               data-url="/candidature/idcard-valid.json" data-param="id={{ candidature.id }}"> Carte
+                        ID valide
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" class="jsSwitchAjax" data-onstyle="success" {%  if candidature.path_criminal_record !=''  %} data-param="id={{ candidature.id }}" data-url="/candidature/criminal-record-valid.json" {% endif %} {% if candidature.is_criminal_record=='1' and  candidature.path_criminal_record !=''%}checked{% endif %} data-toggle="toggle"
+
+                               > Extrait casier valide
+                    </label>
+                    <label class="checkbox-inline" >
+                        <input type="checkbox" class="jsSwitchAjax" {%  if candidature.state=='online'  %}checked{% endif %} data-onstyle="success"  data-toggle="toggle" data-url="/candidature/state.json" data-param="id={{ candidature.id }}"> En ligne
+                    </label>
+
+                            </td>
+                </tr>
+
+
+                {% endfor %}
+              </tbody>
+            </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
