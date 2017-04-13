@@ -35,6 +35,7 @@ CREATE TABLE `groups` (
   `date_deleted` datetime DEFAULT NULL,
   `departement` int(11) NOT NULL,
   `circonscription` int(11) NOT NULL,
+  `path_pic` varchar(255) NOT NULL,
   `mandataire` int(11) NOT NULL,
   `members` int(11) NOT NULL,
   `key_edit` varchar(255) NOT NULL
@@ -48,11 +49,17 @@ CREATE TABLE `groups` (
 
 CREATE TABLE `people` (
   `id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `surname` varchar(100) NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `ad1` varchar(255) NOT NULL,
+  `ad2` varchar(255) NOT NULL,
+  `ad3` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `zipcode` varchar(10) NOT NULL,
+  `country` varchar(255) NOT NULL,
   `type` varchar(20) NOT NULL, -- mandataire or member
   `email` varchar(100) NOT NULL,
-  `phone` varchar(100) NOT NULL
+  `tel` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
