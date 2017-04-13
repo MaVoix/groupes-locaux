@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `date_created` datetime DEFAULT NULL,
   `date_amended` datetime DEFAULT NULL,
   `date_deleted` datetime DEFAULT NULL,
