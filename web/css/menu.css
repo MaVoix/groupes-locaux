@@ -1,0 +1,35 @@
+.topmenu {
+    background-color: #f2e732;
+    color:#000000;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a{
+    text-decoration: none;
+    background-color: transparent;
+    color:#000;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+    text-decoration: none;
+    background-color: #eee;
+}
+.topmenu .navbar-toggle,.topmenu .navbar-toggle:focus,.topmenu .navbar-toggle:hover, .topmenu .navbar-toggle:active {
+    border-color: #000000;
+    color:#000000;
+    background-color: transparent;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border:none;
+}
+
+.navbar-right {
+    font-weight: bold;
+
+}
+
+.navbar-right a {
+    color: black;
+}
+
+#logo {
+    padding-top: 7px;
+}

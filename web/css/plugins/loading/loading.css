@@ -1,0 +1,26 @@
+#loading{
+    z-index:100000;
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background-color:rgba(0,0,0,0.6);
+}
+#loading.show{
+    display:block;
+}
+.loading-display{
+    background-color:#ffffff;
+    border-radius:5px;
+    width:280px;
+    height:130px;
+    position:absolute;
+    margin-left:-140px;
+    margin-top:-65px;
+    left:50%;
+    top:50%;
+    text-align:center;
+    padding:25px 10px 10px 10px;
+}

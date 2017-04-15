@@ -1,0 +1,26 @@
+{% extends "visitor/base.html.twig" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="wrapper-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h1>PAGE D'ACCUEIL</h1>
+                <ul>
+                    <li>Message de bienvenue</li>
+                    <li>Pourquoi donner, à quoi servent les dons</li>
+                    <li>Pourquoi on ne peut prendre que des chèques établis à l'ordre des mandataires financiers</li>
+                    <li>Explication pour la défiscalisation (donner ses coordonnées exactes pour l'envoi du reçu fiscal)</li>
+                </ul>
+                <div class="text-center"> <a href="/home/circonscriptions.html" class="btn btn-lg btn-primary">Je participe !</a></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "visitor/base.html.twig" %}
+
+{% block title %}{{  parent() }}{% endblock %}
+
+{% block stylesheets %}{{  parent() }}
+    <style>
+        #toast-container{
+            position: relative;
+        }
+        .modal{
+            position: relative;
+
+        }
+        .conflitnumber{
+            color: #990000;
+        }
+    </style>
+{% endblock %}
+
+{% block header %}{{  parent() }}{% endblock %}
+
+{% block body %}
+    {{  parent() }}
+{% endblock %}
+
+{% block footer %}{{  parent() }}{% endblock %}
+
+{% block javascripts %}{{ parent() }}{% endblock %}

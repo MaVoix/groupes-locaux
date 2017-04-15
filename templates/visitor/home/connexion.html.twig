@@ -1,0 +1,31 @@
+{% extends "visitor/base.html.twig" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="wrapper-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <form action="/home/connexion-send.json"  method="post" autocomplete="off" data-ajax="true">
+                    <h1>CONNEXION</h1>
+                    <hr>
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email *</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="votre adresse e-mail">
+                    </div>
+                    <div class="form-group">
+                        <label for="pass" class="control-label">Pass *</label>
+                        <input type="text" class="form-control" id="pass" name="pass" placeholder="votre mot de passe">
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">Connexion</button>
+                </form>
+                <a href="#" >Mot de passe oublié ?</a>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

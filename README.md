@@ -21,13 +21,21 @@ Version de test : https://engagement.maudry.fr
 - PHP GD module
 - MySQL database
 
+## Installation 
 
-## Installation
-
-1. Set documentRoot of your VHOST on /web/
-1. Set chmod 777 on /web/data folder
-1. Set chmod 777 on /tmp folder
-1. execute CREATE-DATABASE.sql in a new database
-1. Create a user admin (use PASSWORD function on pass field)
-1. Run composer update
-1. Copy web/config.sample.php into web/config.php and customize it
+- Clonage du dépot 
+```
+git clone https://github.com/MaVoix/groupes-locaux.git 
+```
+-  Mettre à jour les paquets composer
+```
+  php composer.phar update
+```
+- Paramétrez votre VHOST sur /web/
+- Créer/modifier le fichier **config.php** à partir du config.sample.php
+- Créer/modifier le fichier **maintenance.php** à partir du maintenance.sample.php
+- Ajouter son adresse IP dans maintenance.php (important pour la compilation JS et CSS !)
+- Importer la structure de la base **/sql/CREATE-DATABASE.sql**
+- Créer un utilisateur admin (utiliser la fonction PASSWORD  sur le champ "pass" )
+- Mettre les **droits en écriture** sur les dossiers **/web/js**,**/cache**,**/tmp** et **/web/css**
+- Compiler les fichiers JS et CSS en appelant les liens **/tool/make-js.php** et **/tool/make-css.php**
