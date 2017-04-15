@@ -39,6 +39,10 @@ CREATE TABLE `groups` (
   `path_pic` varchar(255) NOT NULL,
   `mandataire` int(11) NOT NULL,
   `members` int(11) NOT NULL,
+  `bank_name` varchar(255) NOT NULL,
+  `bank_city` varchar(255) NOT NULL,
+  `amount_promises` decimal(10,2) NOT NULL,
+  `amount_donations` decimal(10,2) NOT NULL,
   `key_edit` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
