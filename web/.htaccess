@@ -1,3 +1,0 @@
-Options +FollowSymlinks
-RewriteEngine On
-RewriteRule ^(?!css|js|fonts|data|tool)(.*)/(.*)\.(.*)$ /index.php?area=$1&page=$2&format=$3&%{QUERY_STRING} [L]
