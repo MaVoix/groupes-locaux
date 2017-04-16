@@ -1,0 +1,225 @@
+{% extends "visitor/base.html.twig" %}
+
+{% block meta %}
+    {{ parent() }}
+    <meta property="og:title" content="#MAVOIX - Formulaire d'engagement"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ urlPage }}"/>
+    <meta property="og:image" content="{{ urlSite }}/css/images/image-panneaux.png"/>
+    <meta property="og:description"  content="Affirmez votre engagement de porter une candidature #MAVOIX aux élections législatives."/>
+    <meta name="description"  content=""/>
+    <!-- TWITTER --->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@MAVOIX2017">
+    <meta name="twitter:creator" content="@MAVOIX2017">
+    <meta name="twitter:title" content="#MAVOIX - Formulaire d'engagement">
+    <meta name="twitter:description" content="Affirmez votre engagement de porter une candidature #MAVOIX aux élections législatives.">
+    <meta name="twitter:image" content="{{ urlSite }}/css/images/image-panneaux.png">
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                    <form action="/engagement/save.json" id="formengagement" method="post" autocomplete="off"
+                          data-ajax="true"
+                          enctype="multipart/form-data">
+                        {% if group.id!='' %}
+                            <input type="hidden" id="id" name="id" value="{{ group.id }}"/>
+                            <input type="hidden" id="key" name="key" value="{{ key }}"/>
+                        {% endif %}
+                        {% if oMe.type=='admin' and group.id!='' %}
+                            <div style="margin:auto">
+                                <h1>Édition du groupe</h1>
+                            </div>
+                            <hr/>
+                            <p>Ce champ est réservé aux administrateurs, il n'est pas affiché sur le site et n'est pas visible au public ou au groupe :</p>
+                            <div class="form-group">
+                                <label for="comment" class="control-label">Commentaires sur le groupe :</label>
+                                <textarea class="form-control" rows="8" id="comment"
+                                          name="comment"> {{ group.comment }}</textarea>
+                            </div>
+                            <hr/>
+                        {%  else %}
+
+
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label for="civilite" class="control-label"><strong>Nous collectif local de</strong></label>
+                            <input type="text" class="form-control" id="group_name" name="group_name"
+                                   value="{{ group.name }}"
+                                   placeholder="Nom">
+                        </div>
+                        <div class="form-group">
+                            <label for="nom" class="control-label">><strong>Nous engageons à réaliser la campagne législative #MAVOIX dans la circonscription</strong></label>
+                            <select class="form-control" id="departement" name="departement">
+                                <option value="#" selected="selected">Choisissez un département</option><option value="1">01 Ain</option><option value="2">02 Aisne</option><option value="3">03 Allier</option><option value="4">04 Alpes-de-Haute-Provence</option><option value="5">05 Hautes-Alpes</option><option value="6">06 Alpes-Maritimes</option>
+                                <option value="7">07 Ardèche</option><option value="8">08 Ardennes</option><option value="9">09 Ariège</option><option value="10">10 Aube</option><option value="11">11 Aude</option><option value="12">12 Aveyron</option><option value="13">13 Bouches-du-Rhône</option>
+                                <option value="14">14 Calvados</option><option value="15">15 Cantal</option><option value="16">16 Charente</option><option value="17">17 Charente-Maritime</option><option value="18">18 Cher</option><option value="19">19 Corrèze</option><option value="2a">2A Corse-du-Sud</option><option value="2b">2B Haute-Corse</option>
+                                <option value="21">21 Côte-d'Or</option><option value="22">22 Côtes-d'Armor</option><option value="23">23 Creuse</option><option value="24">24 Dordogne</option><option value="25">25 Doubs</option><option value="26">26 Drôme</option><option value="27">27 Eure</option><option value="28">28 Eure-et-Loir</option><option value="29">29 Finistère</option><option value="30">30 Gard</option><option value="31">31 Haute-Garonne</option><option value="32">32 Gers</option><option value="33">33 Gironde</option><option value="34">34 Hérault</option><option value="35">35 Ille-et-Vilaine</option><option value="36">36 Indre</option><option value="37">37 Indre-et-Loire</option><option value="38">38 Isère</option><option value="39">39 Jura</option><option value="40">40 Landes</option><option value="41">41 Loir-et-Cher</option><option value="42">42 Loire</option><option value="43">43 Haute-Loire</option><option value="44">44 Loire-Atlantique</option><option value="45">45 Loiret</option><option value="46">46 Lot</option><option value="47">47 Lot-et-Garonne</option><option value="48">48 Lozère</option><option value="49">49 Maine-et-Loire</option><option value="50">50 Manche</option><option value="51">51 Marne</option><option value="52">52 Haute-Marne</option><option value="53">53 Mayenne</option><option value="54">54 Meurthe-et-Moselle</option><option value="55">55 Meuse</option><option value="56">56 Morbihan</option><option value="57">57 Moselle</option><option value="58">58 Nièvre</option><option value="59">59 Nord</option><option value="60">60 Oise</option><option value="61">61 Orne</option><option value="62">62 Pas-de-Calais</option><option value="63">63 Puy-de-Dôme</option><option value="64">64 Pyrénées-Atlantiques</option><option value="65">65 Hautes-Pyrénées</option><option value="66">66 Pyrénées-Orientales</option><option value="67">67 Bas-Rhin</option><option value="68">68 Haut-Rhin</option><option value="69">69 Rhône</option><option value="70">70 Haute-Saône</option><option value="71">71 Saône-et-Loire</option><option value="72">72 Sarthe</option><option value="73">73 Savoie</option><option value="74">74 Haute-Savoie</option><option value="75">75 Paris</option><option value="76">76 Seine-Maritime</option><option value="77">77 Seine-et-Marne</option><option value="78">78 Yvelines</option><option value="79">79 Deux-Sèvres</option><option value="80">80 Somme</option><option value="81">81 Tarn</option><option value="82">82 Tarn-et-Garonne</option><option value="83">83 Var</option><option value="84">84 Vaucluse</option><option value="85">85 Vendée</option><option value="86">86 Vienne</option><option value="87">87 Haute-Vienne</option><option value="88">88 Vosges</option><option value="89">89 Yonne</option><option value="90">90 Territoire de Belfort</option><option value="91">91 Essonne</option><option value="92">92 Hauts-de-Seine</option><option value="93">93 Seine-Saint-Denis</option><option value="94">94 Val-de-Marne</option><option value="95">95 Val-d'Oise</option><option value="971">971 Guadeloupe</option><option value="972">972 Martinique</option><option value="973">973 Guyane</option><option value="974">974 Réunion</option><option value="975">975 Saint-Pierre-et-Miquelon</option><option value="976">976 Mayotte</option><option value="977">977 St Barthélemy et St Martin</option><option value="986">986 Wallis et Futuna</option><option value="987">987 Polynésie française</option><option value="988">988 Nouvelle-Calédonie</option><option value="99">Français établis hors de France</option>					</select>          <select class="form-control" id="departement" name="departement"><option value="#" selected="selected">Choisissez un numéro de circonscription</option><option value="1">1ère</option><option value="2">2ème</option><option value="3">3ème</option><option value="4">4ème</option><option value="5">5ème</option><option value="6">6ème</option><option value="7">7ème</option><option value="8">8ème</option><option value="9">9ème</option><option value="10">10ème</option><option value="11">11ème</option>
+                                <option value="12">12ème</option><option value="13">13ème</option><option value="14">14ème</option><option value="15">15ème</option><option value="16">16ème</option><option value="17">17ème</option><option value="18">18ème</option><option value="19">19ème</option><option value="20">20ème</option><option value="21">21ème</option><option value="22">22ème</option><option value="23">23ème</option><option value="24">24ème</option><option value="25">25ème</option>
+                            </select>
+                            <p>Si votre groupe fait campagne dans plusieurs circonscriptions, remplissez un formulaire par circonscription.</p>
+
+                        </div>
+
+                        <h3>Le ou la mandataire financier</h3>
+                        <div class="form-group">
+
+                            <label for="mandataire_nom" class="control-label">Nom de famille : *</label>
+                            <input type="text" class="form-control publicinfo" id="nom" name="nom"
+                                   value="{{ mandataire.name|ucwords }}"
+                                   placeholder="Nom de famille">
+                        </div>
+                        <div class="form-group">
+
+                            <label for="mandataire_prenom" class="control-label">Prénom : *</label>
+                            <input type="text" class="form-control publicinfo" id="prenom" name="prenom"
+                                   value="{{ mandataire.firstname|ucwords }}"
+                                   placeholder="Prénom">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mandataire_email" class="control-label">E-mail : *</label>
+                            <input type="email" class="form-control" id="mandataire_email" name="mandataire_email"
+                                   value="{{ mandataire.email }}"
+                                   placeholder="xxxxxx@xxxxx.com ">
+                        </div>
+                        <div class="form-group">
+                            <label for="mandataire_tel" class="control-label">Téléphone : *</label>
+                            {% if group.tel!=''  %}
+                                <input type="text" class="form-control" id="mandataire_tel" name="mandataire_tel" placeholder="+33XXXXXXXXX"
+                                       value="{{ mandataire.tel }}">
+                                <p class="help-block">Format international par ex. : +33661616161</p>
+                            {%  else %}
+                                <br /><input id="mandataire_tel" type="tel" class="form-control" name="mandataire_tel" >
+                                <input type="hidden" class="form-control" id="mandataire_tel" name="mandataire_tel" placeholder="XXXXXXXXX"
+                                       value="{{ mandataire.tel }}" style="position:absolute;top:-10000px;"> {# <button type="button" class="jsTestPhone">TEST</button> #}
+                            {% endif %}
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="mandataire_ad1" class="control-label">Adresse champ 1 : *</label>
+                            <input type="text" class="form-control" id="mandataire_ad1" name="mandataire_ad1"
+                                   placeholder="N°, type de voie, nom de la voie" value="{{ mandataire.ad1 }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="mandataire_ad2" class="control-label">Adresse champ 2 :</label>
+                            <input type="text" class="form-control" id="mandataire_ad2" name="mandataire_ad2" value="{{ mandataire.ad2 }}"
+                                   placeholder="Immeuble, Résidence, Z.I ...">
+                        </div>
+                        <div class="form-group">
+                            <label for="mandataire_ad3" class="control-label">Adresse champ 3 :</label>
+                            <input type="text" class="form-control" id="mandataire_ad3" name="mandataire_ad3" value="{{ grmandataireoup.ad3 }}"
+                                   placeholder="BP, TSA, Lieu dit">
+                        </div>
+                        <div class="form-group">
+                            <label for="mandataire_cp" class="control-label">Code postal : *</label>
+                            <input type="text" class="form-control publicinfo" id="mandataire_cp" name="mandataire_cp" value="{{ mandataire.zipcode }}"
+                                   placeholder="XXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="mandataire_ville" class="control-label">Ville : *</label>
+                            <input type="text" class="form-control publicinfo" id="mandataire_ville" name="mandataire_ville"
+                                   value="{{ mandataire.city|capitalizefirst }}"
+                                   placeholder="Nom de la ville">
+                        </div>
+                        <p>Il / elle est d’accord pour contribuer et partager les informations avec les autres mandataires financiers qui se réunissent chaque mercredi soir en ligne. 
+                            Il.elle a déjà pris contact avec la banque suivante afin de préparer l’ouverture du compte.</p>
+                        <div class="form-group">
+                            <label for="banque_nom" class="control-label">Nom de la banque :</label>
+                            <input type="text" class="form-control" id="banque_nom" name="banque_nom" value="{{ mandataire.bank_name }}"
+                                   placeholder="Crédit Démocratique de la Madeleine">
+                        </div>
+                        <div class="form-group">
+                            <label for="banque_ville" class="control-label">Ville :</label>
+                            <input type="text" class="form-control" id="banque_ville" name="banque_ville" value="{{ groupe.bank_city }}"
+                                   placeholder="BP, TSA, Lieu dit">
+                        </div>
+
+
+                        <hr/>
+                        <h2></h2>
+
+                        <div class="form-group">
+                            <label for="imagefile" class="control-label">Photo :</label>
+
+
+                            <div class="input-group image-preview  publicinfo">
+                                <input type="file" accept="image/jpeg" name="image" id="imagefile"/>
+                                <input type="hidden" id="imageData" name="imageData"
+                                       value="{% if group.path_pic!='' %}{{ base64image }}{% endif %}"/>
+                                <input type="hidden" id="imageFilename" name="imageFilename"
+                                       value="{% if group.path_pic!='' %}{{ nameimage }}{% endif %}"/>
+                                <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default image-preview-clear"
+                                            style="display:none;">
+                                        <span class="fa fa-times"></span>
+                                    </button>
+                                    <div class="btn btn-default image-preview-input">
+                                        <span class="fa fa-folder-open"></span>
+                                        <span class="image-preview-input-title">Choisir</span>
+                                        <input type="hidden" name="MAX_FILE_SIZE"
+                                               value="{{ ConfigService.get("max-filesize")*1024*1024 }}"/>
+                                    </div>
+                                </span>
+                            </div>
+
+                            <div class="help-block">Idéalement format carré (entre {{ ConfigService.get("min-width") }}px et {{ ConfigService.get("max-height") }}px ). {{  ConfigService.get("max-filesize") }}Mo max</div>
+
+                            <div class="drop-zone publicinfo"
+                                 style="{%  if group.path_pic!='' %}background-image:url('/{{ group.path_pic }}'){% endif %}"></div>
+
+                        </div>
+
+
+                        {% if ConfigService.get("enable-captcha")== 1  %}
+                            <div class="form-group">
+                                <label for="captcha" class="control-label">Code de sécurité : *</label>
+                                <div class="p-b">
+                                    <img src="/captcha/image.jpg" class="jsCaptcha" style="border:1px solid #000000;"/><br /><a href="javascript:void(0);" class="text-primary jsCaptchaRefresh" style="color:#000000;"> Ce code est illisible !  </a>
+                                </div>
+                                <input type="text" class="form-control" id="captcha" name="captcha"
+                                       value=""
+                                       placeholder="copiez ici le code de sécurité">
+                            </div>
+                        {% endif  %}
+
+                        <hr />
+                        <p>En cliquant sur le bouton ci-dessous, vous reconnaissez avoir pris connaissance de notre <a href="/home/mentions-legales.html">politique de gestion des données personnelles</a> et acceptez que les informations des champs encadrés en <span style="color:#05a60d;font-weight:bold">vert</span> soient rendues publiques.</p>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">
+                                {% if group.id!='' %}
+                                    Enregistrer
+                                {% else %}
+                                    Envoyer ma engagement
+                                {% endif %}
+                            </button>
+                        </div>
+                        {% if oMe.type=='admin' and group.state=='offline' %}
+                            <div class="text-center p-t-x2 p-b-x2">
+                                <input type="hidden" name="autovalid" id="autovalid" value="0" >
+                                <button type="button" class="btn  btn-primary jsBtAutoValid">Enregistrer et mettre en ligne</button>
+                            </div>
+                        {% endif %}
+                        {% if oMe.type=='admin' %}
+                            <div class="text-center p-t-x4 p-b-x4">
+                                <button type="button" class="btn btn-primary jsBackButton">
+                                    Retour
+                                </button>
+                            </div>
+                        {% endif %}
+                        <div class="text-center p-t-x4 p-b-x4">
+                            <div class="fb-share-button" data-href="{{ urlPage }}" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlPageEncoded }}&amp;src=sdkpreparse">Partager</a></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
