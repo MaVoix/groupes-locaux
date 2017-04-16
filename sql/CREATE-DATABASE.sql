@@ -744,7 +744,8 @@ INSERT INTO `departement` (`id`, `date_created`, `date_amended`, `date_deleted`,
   (98, NULL, NULL, NULL, '971', 'Guadeloupe', 'GUADELOUPE', 'guadeloupe', 'G341'),
   (99, NULL, NULL, NULL, '973', 'Guyane', 'GUYANE', 'guyane', 'G500'),
   (100, NULL, NULL, NULL, '972', 'Martinique', 'MARTINIQUE', 'martinique', 'M6352'),
-  (101, NULL, NULL, NULL, '974', 'Réunion', 'RÉUNION', 'reunion', 'R500');
+  (101, NULL, NULL, NULL, '974', 'Réunion', 'RÉUNION', 'reunion', 'R500'),
+  (102, NULL, NULL, NULL, 'ZZ', 'Français de l\'étranger', 'FRANCAIS DE L\'ETRANGER', 'francais-de-l-etranger', NULL);
 
 -- --------------------------------------------------------
 
