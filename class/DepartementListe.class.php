@@ -30,6 +30,8 @@ class DepartementListe extends Liste
         parent::__construct();
         $this->setTablePrincipale("departement");
         $this->setAliasPrincipal("Departement");
+        $this->setSens("ASC");
+        $this->setTri("code");
         /*$this->setTri("");
         $this->setSens("DESC");
         $this->setSearchFields(array(
@@ -52,5 +54,29 @@ class DepartementListe extends Liste
     {
         $this->setFields(self::$_champs);
     }
+
+    private function notDeleted()
+    {
+        $this->setAllFields();
+
+        $this->addCriteres([
+            [
+                "field" => "date_deleted",
+                "compare" => "IS NULL",
+                "value" => ""
+            ]
+        ]);
+
+        return $this;
+    }
+
+    public function applyRules4All()
+    {
+        $this->setFields(self::$_champs);
+
+        $this->notDeleted();
+    }
+
+
 
 }
