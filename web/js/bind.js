@@ -32,6 +32,19 @@ $(document).ready(function () {
 
     });
 
+    $body.on("change",".updateContentOnChange",function(e){
+        e.preventDefault();
+
+        var $element = $(this);
+
+        if (!isSendingForm)
+        {
+            var data =$element.attr("name")+"="+$element.val();
+            ajaxUpdateContent(data, $element.data("blocks"),$element.data("url"))
+        }
+
+    });
+
 
     $body.on('dblclick', '.error', function (e)
     {
@@ -281,7 +294,7 @@ function sendAjaxRequest($obj, url, aData, onSuccess, bFadeLoading)
 
 }
 
-function ajaxUpdateContent(params, parts)
+function ajaxUpdateContent(params, parts,url)
 {
     if( typeof params==="undefined" )
     {
@@ -291,8 +304,12 @@ function ajaxUpdateContent(params, parts)
     {
         parts = [];
     }
+    if( typeof url==="undefined" )
+    {
+        url =  window.location.href;
+    }
 
-    sendAjaxRequest({}, window.location.href, params, function (r)
+    sendAjaxRequest({}, url, params, function (r)
     {
         var $updatedPage = jQuery(r);
 
@@ -300,9 +317,9 @@ function ajaxUpdateContent(params, parts)
 
         $(".updatableContent[data-updateIndex]").each(function (i, content)
         {
+
             var $currentContent = $(content);
             var updateIndex =  $currentContent.attr("data-updateIndex") ;
-
             if( parts.length===0 || parts.indexOf(updateIndex)!==-1 )
             {
                 var $updatedContent = $updatedPage.find(".updatableContent[data-updateIndex='"+ updateIndex +"']");
@@ -313,14 +330,11 @@ function ajaxUpdateContent(params, parts)
 
                 if( $updatedContent.length>0 )
                 {
-                    if(updateIndex=="zoom"){
-                        $currentContent.removeClass("updatableContent");
-                        $('body').append($updatedContent);
-                    }else{
-                        $currentContent.replaceWith($updatedContent);
-                    }
 
-                    initRating();
+                    $currentContent.replaceWith($updatedContent);
+
+                    // liveBind();
+
                 }
             }
         });

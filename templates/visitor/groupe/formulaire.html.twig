@@ -38,15 +38,34 @@
                         </div>
                         <div class="form-group">
                             <label for="nom" class="control-label"><strong>Nous engageons à réaliser la campagne législative #MAVOIX dans la circonscription</strong></label>
-                            <select class="form-control" id="departement" name="departement">
+                            <select class="form-control updateContentOnChange" id="departement" name="departement" data-url="/groupe/formulaire.html" data-blocks="['divCirconsciptions']" >
                                 <option value="">Choisissez un département</option>
                               {% for departement in departements  %}
-                                <option value="{{ departement.code }}" {%  if group.departement==departement.id %} selected {% endif %}>{{ departement.code }} - {{ departement.name }}</option>
+                                <option value="{{ departement.id }}" {%  if group.departement==departement.id %} selected {% endif %}>{{ departement.code }} - {{ departement.name }}</option>
                                 {% endfor %}
                             </select>
-                            <p>Si votre groupe fait campagne dans plusieurs circonscriptions, remplissez un formulaire par circonscription.</p>
-
                         </div>
+                        <div class="form-group">
+                            <div class="updatableContent" data-updateIndex="divCirconsciptions">
+                                {% if circonscriptions|length>0 %}
+                                    <select class="form-control" id="circonscription" name="circonscription"  >
+                                        <option value="">Choisissez une circonscription</option>
+                                    {% for circonscription in circonscriptions  %}
+                                        <option value="{{ circonscription.id }}" {%  if group.circonscription==circonscription.id %} selected {% endif %}>{{ sup(circonscription.number,'f',true) }} circonscription</option>
+                                    {% endfor %}
+                                    </select>
+                                {% else %}
+                                    <select class="form-control" id="circonscription" name="circonscription"  disabled>
+                                        <option value="">Choisissez une circonscription</option>
+                                </select>
+                                {% endif %}
+
+                            </div>
+                            <p class="help-block">Si votre groupe fait campagne dans plusieurs circonscriptions, remplissez un formulaire par circonscription.</p>
+                        </div>
+
+
+
 
                         <h3>Le ou la mandataire financier</h3>
                         <div class="form-group">

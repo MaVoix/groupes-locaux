@@ -37,7 +37,38 @@ class Twig_AppExtension extends Twig_Extension
           new Twig_SimpleFunction("time", function()
           {
               return time();
-          })
+          }),
+            new Twig_SimpleFunction("sup", function ($n,$gender="m",$is_option_mode=false,$is_nd_mode=false)
+            {
+                $n=intval($n);
+                $sup="";
+                $out=$n;
+                if($n!=0){
+                    if($n==1){
+                        $sup="er";
+                        if($gender=="f"){
+                            $sup="ère";
+                        }
+                    }else{
+                        if($is_nd_mode==true && $n==2){
+                            $sup="nd";
+                            if($gender=="f"){
+                                $sup="nde";
+                            }
+                        }else{
+                            $sup="ème";
+                        }
+
+                    }
+                }
+                if($is_option_mode){
+                    $out=$n."".$sup;
+                }else{
+                    $out=$n."<sup>".$sup."</sup>";
+                }
+                return $out;
+
+            },array('is_safe' => array('html')) )
         ];
     }
 
