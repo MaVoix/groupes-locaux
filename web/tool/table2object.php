@@ -28,7 +28,7 @@ function getTable($s){
     //CREER LA BASE
     $oDb = new Mysql($aSqlParam);
 
-    $oDb->select("DESCRIBE ". getTable( $_GET["table"] ));
+    $oDb->select("DESCRIBE `". getTable( $_GET["table"]."`" ));
     $aFields = $oDb->getRes();
 
     $sLiens = "";
