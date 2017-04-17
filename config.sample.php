@@ -29,7 +29,7 @@ $_CONFIG["mail-smtp-pass"]			        ="-"; //server smtp pass
 //main
 $_CONFIG["idSite"]                          = "collectedon"; //for unique session var prefix
 $_CONFIG["types"]			                = "visitor|user>visitor|admin>user>visitor";
-$_CONFIG["area-default"]                    = array("visitor"=>"home","user"=>"home","admin"=>"home");
-$_CONFIG["page-default"]                    = array("visitor"=>"home","user"=>"home","admin"=>"home");
+$_CONFIG["area-default"]                    = array("visitor"=>"groupe","user"=>"home","admin"=>"home");
+$_CONFIG["page-default"]                    = array("visitor"=>"form","user"=>"home","admin"=>"home");
 $_CONFIG["format-default"]                  = "html";
 
