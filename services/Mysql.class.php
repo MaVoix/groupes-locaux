@@ -112,7 +112,7 @@ class Mysql extends PDO {
             $this->aBigInsert[$sTable]=array();
         }
         if($aParam){
-            $sSql="DESCRIBE $sTable";
+            $sSql="DESCRIBE `$sTable`";
             $this->select($sSql);
             $aLignes=$this->getRes();
             $sColonnes="(";
@@ -156,10 +156,11 @@ class Mysql extends PDO {
             $sValeurs .= ")";
             $sSqlReturn = $sValeurs;
         }
+
         if($bExecute){
             array_push($this->aBigInsert[$sTable],$sSqlReturn);
             if($this->aBigInsert[$sTable]){
-                $sSql="INSERT INTO $sTable $sColonnes VALUES ";
+                $sSql="INSERT INTO `$sTable` $sColonnes VALUES ";
                 $n=0;
                 foreach($this->aBigInsert[$sTable] as $sInsertValeurs){
                     if($n>0){
@@ -172,7 +173,7 @@ class Mysql extends PDO {
                 $this->execute($sSql);
                 return $this->lastInsertId();
             }
-            $this->execute("INSERT INTO $sTable $sColonnes VALUES ".$sSqlReturn);
+            $this->execute("INSERT INTO `$sTable` $sColonnes VALUES ".$sSqlReturn);
             //echo "INSERT INTO $sTable $sColonnes VALUES ".$sSqlReturn;
             return intval( $this->lastInsertId() );
         }else{
@@ -184,7 +185,7 @@ class Mysql extends PDO {
         //$sTable => nom de la table
         //$aParam => tableau associatif nomdecolonne=>valeur
         if($aParam){
-            $sSql="DESCRIBE $sTable";
+            $sSql="DESCRIBE `$sTable`";
             $this->select($sSql);
             $aLignes=$this->getRes();
             $sColonnes="(";
@@ -214,14 +215,14 @@ class Mysql extends PDO {
             }
             $sColonnes.=")";
             $sValeurs.=")";
-            $sSql="INSERT INTO $sTable $sColonnes VALUES ".$sValeurs." ON DUPLICATE KEY UPDATE ".$sUpdate;
+            $sSql="INSERT INTO `$sTable` $sColonnes VALUES ".$sValeurs." ON DUPLICATE KEY UPDATE ".$sUpdate;
             $this->execute($sSql);
         }
         return $this->lastInsertId();
     }
     //update des données a partir d'un tableau
     function update($sTable,$aParam,$sSqlCondition){
-        $sSql="DESCRIBE $sTable";
+        $sSql="DESCRIBE `$sTable`";
         $this->select($sSql);
         $aLignes=$this->getRes();
         $sValeurs="";
@@ -268,7 +269,7 @@ class Mysql extends PDO {
         {
             $sSqlCondition = "AND {$sSqlCondition}";
         }
-        $sSqlReturn = "UPDATE {$sTable} SET {$sValeurs} WHERE 1=1 {$sSqlCondition}";
+        $sSqlReturn = "UPDATE `{$sTable}` SET {$sValeurs} WHERE 1=1 {$sSqlCondition}";
         if($nbCol){
             return $this->execute($sSqlReturn);
         }else{
@@ -277,7 +278,7 @@ class Mysql extends PDO {
     }
     //duplique une ligne sur des conditions
     function duplicate($sTable,$sSqlCondition){
-        $sSql="DESCRIBE $sTable";
+        $sSql="DESCRIBE `$sTable`";
         if($sSqlCondition){
             $sSqlCondition="AND ".$sSqlCondition;
         }
@@ -294,13 +295,13 @@ class Mysql extends PDO {
                 $n++;
             }
         }
-        $this->execute("INSERT INTO $sTable ($sCol) SELECT $sCol FROM $sTable WHERE 1=1 $sSqlCondition ");
+        $this->execute("INSERT INTO `$sTable` ($sCol) SELECT $sCol FROM `$sTable` WHERE 1=1 $sSqlCondition ");
         return $this->lastInsertId();
     }
     //recupere un tableau d'une table en vu d'une hydratation simple d'un objet / nId peut etre de la forme id1='value' AND id2='value2'
     public function selectForHydrate($nId,$sTable,$aFields)
     {
-        $sSql="DESCRIBE ". $sTable;
+        $sSql="DESCRIBE `". $sTable."`";
         $this->select($sSql);
         $aColonnes=$this->getCol("Field");
         $sPrimaryKey = "";
