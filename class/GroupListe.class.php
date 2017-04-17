@@ -58,4 +58,37 @@ class GroupListe extends Liste
         $this->setFields(self::$_champs);
     }
 
+    public function applyRules4Key($key,$id)
+    {
+        $this->setAllFields();
+
+        $this->addCriteres([
+            [
+                "field" => "key_edit",
+                "compare" => "=",
+                "value" => vars::secureInjection($key)
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "id",
+                "compare" => "=",
+                "value" => vars::secureInjection($id)
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "date_deleted",
+                "compare" => "IS NULL",
+                "value" => ""
+            ]
+        ]);
+
+
+
+
+        return $this;
+    }
 }

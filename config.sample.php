@@ -32,4 +32,10 @@ $_CONFIG["types"]			                = "visitor|user>visitor|admin>user>visitor";
 $_CONFIG["area-default"]                    = array("visitor"=>"groupe","user"=>"home","admin"=>"home");
 $_CONFIG["page-default"]                    = array("visitor"=>"form","user"=>"home","admin"=>"home");
 $_CONFIG["format-default"]                  = "html";
+$_CONFIG["max-filesize"]                    = 8; // in Mb
+$_CONFIG["max-width"]                       = 4000; // in PX
+$_CONFIG["max-height"]                      = 4000; // in PX
+$_CONFIG["min-width"]                       = 600; // in PX
+$_CONFIG["min-height"]                      = 600; // in PX
+$_CONFIG["mime-type-limit"]                 = array('image/jpeg'=>'jpg','image/png'=>'png');
 
