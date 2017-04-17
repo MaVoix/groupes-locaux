@@ -65,40 +65,38 @@
                         </div>
 
 
-
-
                         <h3>Le ou la mandataire financier</h3>
                         <div class="form-group">
 
-                            <label for="mandataire_nom" class="control-label">Nom de famille : *</label>
-                            <input type="text" class="form-control publicinfo" id="nom" name="nom"
-                                   value="{{ mandataire.name|ucwords }}"
+                            <label for="people_name[mandataire]" class="control-label">Nom de famille : *</label>
+                            <input type="text" class="form-control publicinfo" id="people_name[mandataire]" name="people_name[mandataire]"
+                                   value="{{ people["mandataire"].name|ucwords }}"
                                    placeholder="Nom de famille">
                         </div>
                         <div class="form-group">
 
-                            <label for="mandataire_prenom" class="control-label">Prénom : *</label>
-                            <input type="text" class="form-control publicinfo" id="prenom" name="prenom"
-                                   value="{{ mandataire.firstname|ucwords }}"
+                            <label for="people_firstname[mandataire]" class="control-label">Prénom : *</label>
+                            <input type="text" class="form-control publicinfo" id="people_firstname[mandataire]" name="people_firstname[mandataire]"
+                                   value="{{ people["mandataire"].firstname|ucwords }}"
                                    placeholder="Prénom">
                         </div>
 
                         <div class="form-group">
-                            <label for="mandataire_email" class="control-label">E-mail : *</label>
-                            <input type="email" class="form-control" id="mandataire_email" name="mandataire_email"
-                                   value="{{ mandataire.email }}"
+                            <label for="people_email[mandataire]" class="control-label">E-mail : *</label>
+                            <input type="email" class="form-control" id="people_email[mandataire]" name="people_email[mandataire]"
+                                   value="{{ people["mandataire"].email }}"
                                    placeholder="xxxxxx@xxxxx.com ">
                         </div>
                         <div class="form-group">
-                            <label for="mandataire_tel" class="control-label">Téléphone : *</label>
+                            <label for="people_tel[mandataire]" class="control-label">Téléphone : *</label>
                             {% if group.tel!=''  %}
-                                <input type="text" class="form-control" id="mandataire_tel" name="mandataire_tel" placeholder="+33XXXXXXXXX"
+                                <input type="text" class="form-control" id="people_tel[mandataire]" name="people_tel[mandataire]" placeholder="+33XXXXXXXXX"
                                        value="{{ mandataire.tel }}">
                                 <p class="help-block">Format international par ex. : +33661616161</p>
                             {%  else %}
-                                <br /><input id="mandataire_tel" type="tel" class="form-control" name="mandataire_tel" >
-                                <input type="hidden" class="form-control" id="mandataire_tel" name="mandataire_tel" placeholder="XXXXXXXXX"
-                                       value="{{ mandataire.tel }}" style="position:absolute;top:-10000px;"> {# <button type="button" class="jsTestPhone">TEST</button> #}
+                                <br /><input id="people_tel[mandataire]" type="text" class="form-control" name="people_tel[mandataire]" >
+                                <input type="hidden" class="form-control" id="people_tel[mandataire]" name="people_tel[mandataire]" placeholder="XXXXXXXXX"
+                                       value="{{ people["mandataire"].email  }}" style="position:absolute;top:-10000px;"> {# <button type="button" class="jsTestPhone">TEST</button> #}
                             {% endif %}
 
 
@@ -106,42 +104,42 @@
 
                         <h4>L'adresse à laquelle le ou la mandataire recevra les chèques de dons</h4>
                         <div class="form-group">
-                            <label for="mandataire_ad1" class="control-label">Adresse champ 1 : *</label>
-                            <input type="text" class="form-control" id="mandataire_ad1" name="mandataire_ad1"
-                                   placeholder="N°, type de voie, nom de la voie" value="{{ mandataire.ad1 }}">
+                            <label for="people_adl[mandataire]" class="control-label">Adresse champ 1 : *</label>
+                            <input type="text" class="form-control" id="people_adl[mandataire]" name="people_adl[mandataire]"
+                                   placeholder="N°, type de voie, nom de la voie" value="{{ people["mandataire"].ad1 }}">
                         </div>
                         <div class="form-group">
-                            <label for="mandataire_ad2" class="control-label">Adresse champ 2 :</label>
-                            <input type="text" class="form-control" id="mandataire_ad2" name="mandataire_ad2" value="{{ mandataire.ad2 }}"
+                            <label for="people_ad2[mandataire]" class="control-label">Adresse champ 2 :</label>
+                            <input type="text" class="form-control" id="people_ad2[mandataire]" name="people_ad2[mandataire]" value="{{ people["mandataire"].ad2 }}"
                                    placeholder="Immeuble, Résidence, Z.I ...">
                         </div>
                         <div class="form-group">
-                            <label for="mandataire_ad3" class="control-label">Adresse champ 3 :</label>
-                            <input type="text" class="form-control" id="mandataire_ad3" name="mandataire_ad3" value="{{ grmandataireoup.ad3 }}"
+                            <label for="people_ad3[mandataire]" class="control-label">Adresse champ 3 :</label>
+                            <input type="text" class="form-control" id="people_ad3[mandataire]" name="people_ad3[mandataire]" value="{{ people["mandataire"].ad3}}"
                                    placeholder="BP, TSA, Lieu dit">
                         </div>
                         <div class="form-group">
-                            <label for="mandataire_cp" class="control-label">Code postal : *</label>
-                            <input type="text" class="form-control publicinfo" id="mandataire_cp" name="mandataire_cp" value="{{ mandataire.zipcode }}"
+                            <label for="people_cp[mandataire]" class="control-label">Code postal : *</label>
+                            <input type="text" class="form-control publicinfo" id="people_cp[mandataire]" name="people_cp[mandataire]" value="{{ people["mandataire"].zipcode }}"
                                    placeholder="XXXXX">
                         </div>
                         <div class="form-group">
-                            <label for="mandataire_ville" class="control-label">Ville : *</label>
-                            <input type="text" class="form-control publicinfo" id="mandataire_ville" name="mandataire_ville"
-                                   value="{{ mandataire.city|capitalizefirst }}"
+                            <label for="people_ville[mandataire]" class="control-label">Ville : *</label>
+                            <input type="text" class="form-control publicinfo" id="people_ville[mandataire]" name="people_ville[mandataire]"
+                                   value="{{ people["mandataire"].city|capitalizefirst }}"
                                    placeholder="Nom de la ville">
                         </div>
                         <p>Il / elle est d’accord pour contribuer et partager les informations avec les autres mandataires financiers qui se réunissent chaque mercredi soir en ligne. 
                             Il.elle a déjà pris contact avec la banque suivante afin de préparer l’ouverture du compte.</p>
                         <div class="form-group">
-                            <label for="banque_nom" class="control-label">Nom de la banque :</label>
-                            <input type="text" class="form-control" id="banque_nom" name="banque_nom" value="{{ mandataire.bank_name }}"
+                            <label for="bank_name" class="control-label">Nom de la banque :</label>
+                            <input type="text" class="form-control" id="banque_nom" name="bank_name" value="{{ group.bank_name }}"
                                    placeholder="Crédit Démocratique de la Madeleine">
                         </div>
                         <div class="form-group">
-                            <label for="banque_ville" class="control-label">Ville :</label>
-                            <input type="text" class="form-control" id="banque_ville" name="banque_ville" value="{{ groupe.bank_city }}"
-                                   placeholder="BP, TSA, Lieu dit">
+                            <label for="bank_city" class="control-label">Ville :</label>
+                            <input type="text" class="form-control" id="banque_city" name="bank_city" value="{{ group.bank_city }}"
+                                   placeholder="Ville de votre banque">
                         </div>
 
 
@@ -200,7 +198,7 @@
                                 {% if group.id!='' %}
                                     Enregistrer
                                 {% else %}
-                                    Envoyer ma engagement
+                                    Envoyer mon engagement
                                 {% endif %}
                             </button>
                         </div>
