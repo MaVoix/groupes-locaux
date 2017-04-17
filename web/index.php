@@ -22,10 +22,12 @@ if($bMaintenance){
 
     require_once '../class/Liste.class.php';
     //class loader
-    require_once '../class/Departement.class.php';
-    require_once '../class/DepartementListe.class.php';
     require_once '../class/Circonscription.class.php';
     require_once '../class/CirconscriptionListe.class.php';
+    require_once '../class/Departement.class.php';
+    require_once '../class/DepartementListe.class.php';
+    require_once '../class/Group.class.php';
+    require_once '../class/GroupListe.class.php';
     require_once '../class/Navigate.class.php';
     require_once '../class/TwigAppExtension.class.php';
     require_once '../class/TwigExtension.class.php';
