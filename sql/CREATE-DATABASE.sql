@@ -750,15 +750,16 @@ INSERT INTO `departement` (`id`, `date_created`, `date_amended`, `date_deleted`,
 -- --------------------------------------------------------
 
 --
--- Structure de la table `groups`
+-- Structure de la table `group`
 --
 
-CREATE TABLE `groups` (
+CREATE TABLE `group` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `date_created` datetime DEFAULT NULL,
   `date_amended` datetime DEFAULT NULL,
   `date_deleted` datetime DEFAULT NULL,
+  `state` varchar(10) NOT NULL,
   `departement` int(11) NOT NULL,
   `circonscription` int(11) NOT NULL,
   `path_pic` varchar(255) NOT NULL,
@@ -780,7 +781,7 @@ CREATE TABLE `people` (
   `date_created` datetime DEFAULT NULL,
   `date_amended` datetime DEFAULT NULL,
   `date_deleted` datetime DEFAULT NULL,
-  `groups_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
   `firstname` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `ad1` varchar(255) NOT NULL,
@@ -833,9 +834,9 @@ ALTER TABLE `departement`
   ADD KEY `departement_nom_soundex` (`name_soundex`);
 
 --
--- Index pour la table `groups`
+-- Index pour la table `group`
 --
-ALTER TABLE `groups`
+ALTER TABLE `group`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -865,9 +866,9 @@ ALTER TABLE `circonscription`
 ALTER TABLE `departement`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 --
--- AUTO_INCREMENT pour la table `groups`
+-- AUTO_INCREMENT pour la table `group`
 --
-ALTER TABLE `groups`
+ALTER TABLE `group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `people`
