@@ -29,6 +29,8 @@ if($bMaintenance){
     require_once '../class/Group.class.php';
     require_once '../class/GroupListe.class.php';
     require_once '../class/Navigate.class.php';
+    require_once '../class/People.class.php';
+    require_once '../class/PeopleListe.class.php';
     require_once '../class/TwigAppExtension.class.php';
     require_once '../class/TwigExtension.class.php';
     require_once '../class/User.class.php';
