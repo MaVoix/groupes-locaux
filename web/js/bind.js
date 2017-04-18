@@ -152,6 +152,40 @@ $(document).ready(function () {
         toastr[$(this).data("toastr")]($(this).data("toastr-message"), $(this).data("toastr-title"));
     });
 
+    //upload preview
+    $('.uploadpic').on('change', function (e) {
+        var files = $(this)[0].files;
+
+        if (files.length > 0) {
+            var file = files[0],$image_preview = $('#image_preview');
+            $image_preview.find('.thumbnail').removeClass('hidden');
+            $image_preview.find('img').attr('src', window.URL.createObjectURL(file));
+            $image_preview.find('h4').html(file.name);
+            $image_preview.find('.caption p:first').html(file.size + ' bytes');
+        }
+    });
+
+    // Bouton "Annuler" pour vider le champ d'upload
+    $('#image_preview').find('button[type="button"]').on('click', function (e) {
+        e.preventDefault();
+
+        $('#formcandidature').find('input[name="image"]').val('');
+        $('#image_preview').find('.thumbnail').addClass('hidden');
+    });
+
+    $(document).on('click', '#close-preview', function(){
+        $('.image-preview').popover('hide');
+        // Hover befor close the preview
+        $('.image-preview').hover(
+            function () {
+                $('.image-preview').popover('show');
+            },
+            function () {
+                $('.image-preview').popover('hide');
+            }
+        );
+    });
+
     //keep-awake
     setInterval(function () {
         if (!isSendingForm) {
