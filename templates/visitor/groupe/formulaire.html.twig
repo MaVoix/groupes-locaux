@@ -145,11 +145,12 @@
 
                         <hr/>
                         <h2>Les engagements</h2>
+                        <h3>Collecte de dons</h3>
 
                         <div class="form-group engagements-a">
                             <div class="checkbox">
 
-                                <label class="label-checkbox" for="engagement-a1"><strong>J'attends que le texte des engagements soit stable pour les mettre tous.</strong></label>
+                                <label class="label-checkbox" for="engagement-a1"><strong>Nous nous engageons sur la commande d'affiches, de bulletins de vote et de professions de foi.</strong></label>
                                 <label class="control-label">
                                     <input id="engagement-a1" value="ok" type="checkbox"
                                            name="engagement-a1" {{ checkedengagement }}>
@@ -157,11 +158,28 @@
                                 </label>
                                 <span>Oui *</span>
                             </div>
+
                         </div>
+                        <div class="form-group">
+                            <label for="posters" class="control-label">Nombre d'affiches :</label>
+                            <input type="text" class="form-control" id="people_ad2[mandataire]" name="people_ad2[mandataire]" value="{{ circonscription.posters }}"
+                                   placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="ballots" class="control-label">Nombre de bulletins de vote :</label>
+                            <input type="text" class="form-control" id="people_ad2[mandataire]" name="people_ad2[mandataire]" value="{{ circonscription.ballots }}"
+                                   placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="professions_de_foi" class="control-label">Nombre de professions de foi :</label>
+                            <input type="text" class="form-control" id="professions_de_foi" name="professions_de_foi" value="{{circonscription.professions_de_foi}}"
+                                   placeholder="0">
+                        </div>
+
+
                         <div class="form-group engagements-a">
                             <div class="checkbox">
-
-                                <label class="label-checkbox" for="engagement-a2"><strong>J'attends que le texte des engagements soit stable pour les mettre tous.</strong></label>
+                                <label class="label-checkbox" for="engagement-a2"><strong>Nous nous engageons à tout mettre en oeuvre pour réunir la somme d’environ 2500 à 3000€ nécessaire pour payer les frais d’imprimerie (affiches, bulletins de vote, professions de foi), les frais postaux (timbres pour envoyer les reçus fiscaux), les frais bancaires éventuels, les menues dépenses pour faire l’affichage (colle néoprène, brosse), l’expert comptable. Les collectifs locaux partagent leurs bonnes pratiques, outils et idées créatives expérimentées en local, mais aussi parfois les difficultés rencontrées, pour se soutenir les uns les autres dans la réalisation de cet objectif par chacun.</strong></label>
                                 <label class="control-label">
                                     <input id="engagement-a2" value="ok" type="checkbox"
                                            name="engagement-a2" {{ checkedengagement }}>
@@ -170,6 +188,191 @@
                                 <span>Oui *</span>
                             </div>
                         </div>
+
+                        <h3>Engagement pour le tirage au sort</h3>
+
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a3"><strong>Nous nous engageons à envoyer au moins l’une ou l’un d’entre nous au tirage au sort à Paris le 6 mai de 10h à 14h pour vivre ce moment qui fera date, y contribuer et aussi rencontrer les titulaires et suppléant.e.s désigné.e.s par le tirage au sort et organiser avec elles et eux leur venue le 15 mai pour déposer dès l’ouverture à la préfecture la candidature, enregistrer le mandataire.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a3" value="ok" type="checkbox"
+                                           name="engagement-a3" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <!-- Liste des personnes -->
+
+                        <h3>Engagements pendant la campagne</h3>
+                      <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a4"><strong>Nous nous engageons à organiser l’arrivée du candidat ou du suppléant le 15 mai à la préfecture en faisant une animation collective (par exemple filmer ce joli moment de rencontre).</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a4" value="ok" type="checkbox"
+                                           name="engagement-a4" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a5"><strong>Nous nous engageons à nous déplacer à la Préfecture lors du tirage au sort des panneaux d’affichages, le vendredi 19 mai à 18h30 (possibilité de filmer cet évènement, très peu connu du public, en live sur notre page Facebook).</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a5" value="ok" type="checkbox"
+                                           name="engagement-a5" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a6"><strong>Nous nous engageons à coller les affiches sur les panneaux électoraux dès le lundi 22 mai jour de démarrage de la campagne officielle, et à vérifier que tous les panneaux à l’entrée des bureaux de vote sont collés et propres le jour du scrutin. Nous pourrons partager avec les autres contributeurs notre façon de faire (un tutoriel filmé par exemple) .</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a6" value="ok" type="checkbox"
+                                           name="engagement-a6" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a7"><strong>Nous nous engageons à préparer le jour de vote du 11 juin en nous formant au préalable les uns les autres aux rôles de délégué, scrutateurs, assesseurs et constituant l’équipe nécessaire pour tenir ces rôles le jour J.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a7" value="ok" type="checkbox"
+                                           name="engagement-a7" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <h3>Engagement en cas de passage au second tour</h3>
+
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a8"><strong>Nous nous engageons, si nous passons au second tour, à financer à nouveau le matériel électoral (nouvelle circulaire + bulletins) : nous avons conscience que nous serons alors soutenu.e.s par l’ensemble des contributeurs.tries #MAVOIX sur le territoire car ce serait historique ;-).
+</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a8" value="ok" type="checkbox"
+                                           name="engagement-a8" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <h3>Engagement de soutien et de partage entre groupes locaux</h3>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a9"><strong>Nous nous engageons à soutenir le mandataire financier dans le remplissage des reçus fiscaux (ça va beaucoup plus vite à plusieurs).</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a9" value="ok" type="checkbox"
+                                           name="engagement-a9" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a10"><strong>Nous nous engageons à envoyer l’un.e d’entre nous aux réunions des jeudis soirs en ligne où se construisent collectivement les réponses, à chaque étape de la campagne, où nous partageons les bonnes et mauvaises expériences vécues, les solutions trouvées pour inspirer les autres collectifs et faire grandir l’expérience.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a10" value="ok" type="checkbox"
+                                           name="engagement-a10" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a11"><strong>Nous nous engageons à ne jamais rester seul.e.s devant un problème, un collectif local a sûrement déjà trouvé la réponse ;-) et en tout cas il sera plus facile de la trouver en s’inspirant les un.e.s les autres.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a11" value="ok" type="checkbox"
+                                           name="engagement-a11" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <h3>Engagements sur l'ADN de #MAVOIX</h3>
+
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a12"><strong>Nous nous engageons à respecter les ingrédients fondateurs de l’expérimentation #MAVOIX : coopératif et décentralisé : pas de structure, pas de parti / pas de personnification dans les médias et pas de relation presse (communiqués de presse), mais une incarnation horizontale et une publication de nos créations / contenus via nos propres réseaux sociaux / co-construction / intelligence collective / processus créatif / entraide / formation pair à pair / transparence des comptes de campagnes / financement par des petits dons / pas de financement public / logiciel libre</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a12" value="ok" type="checkbox"
+                                           name="engagement-a12" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a13"><strong>Nous nous engageons à respecter la posture de #MAVOIX "NO DEAL" (pas d'accord avec d'autres mouvements quels qu'ils soient voir article https://www.mavoix.info/project/mavoix-et-les-autres-partismouvements-politiques/), ni avant le premier tour, ni entre les deux tours. La nature des projets ne serait de fait pas compatible. </strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a13" value="ok" type="checkbox"
+                                           name="engagement-a13" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a14"><strong>Nous avons bien compris que la.le député.e #MAVOIX, une fois élu.e, n’est plus rattaché.e à sa circonscription d’élection. Nous reviendrons ainsi dans l’esprit de la loi originel de la fonction de député telle que décrite sur le site de l’Assemblée nationale : « Chaque député, bien qu'élu dans un cadre géographique déterminé, est le représentant de la Nation tout entière »</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a14" value="ok" type="checkbox"
+                                           name="engagement-a14" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a15"><strong>Nous sommes d’accord avec l’objectif de l’expérimentation : que chaque citoyen.ne qui le souhaite puisse décider directement des lois à travers des député.e.s #MAVOIX qui relaieront leurs décisions à la proportionnelle dans l’hémicycle.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a15" value="ok" type="checkbox"
+                                           name="engagement-a15" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <h3>Engagements pour l'après-élection</h3>
+
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a16"><strong>S’il devait y avoir des élu.e.s #MAVOIX nous notons qu’il y aura un séminaire après le second tour et avant la première session extraordinaire parlementaire auquel nous sommes toutes et tous conviés pour mettre en place les premiers jours de l’expérimentation dans une nouvelle phase.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a16" value="ok" type="checkbox"
+                                           name="engagement-a16" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a17"><strong>S’il ne devait pas y avoir d’élu.e.s #MAVOIX, nous notons que nous pourrons enfin prendre des vacances et que nous ferons un séminaire en septembre pour documenter l’expérimentation, analyser les bénéfices et limites des ingrédients choisis, écrire collectivement ce que nous offrons au bien commun et à la démocratie.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a17" value="ok" type="checkbox"
+                                           name="engagement-a17" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        
 
                         <h2>La photo (facultative)</h2>
 
