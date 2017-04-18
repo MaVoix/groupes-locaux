@@ -7,6 +7,11 @@ body{
     padding-top: 50px;
 }
 
+.publicinfo {
+    border-color: #05a60d;
+    border-width: 2px;
+}
+
 
 .error{
     top:50px;
