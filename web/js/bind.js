@@ -134,6 +134,16 @@ $(document).ready(function () {
     //click form
     $body.on('submit', 'form[data-ajax="true"]', function (e) {
         e.preventDefault();
+
+        var $tel= $(".telInput");
+        if($tel.length>0){
+            $tel.each(function(){
+                var val=$(this).intlTelInput("getNumber");
+                var newId=$(this).attr("id").replace("_display","").replace("[","\\[").replace("]","\\]");
+                $('#'+newId).val(val);
+            });
+        }
+
         if (!isSendingForm) {
             var $form = $(this);
             var aData = $form.getFormDatas();
@@ -184,6 +194,12 @@ $(document).ready(function () {
                 $('.image-preview').popover('hide');
             }
         );
+    });
+
+    //tel international plugin
+    $(".telInput").intlTelInput({
+        utilsScript: "/js/plugins/intlTelInput/utils.js",
+        preferredCountries : ["fr"]
     });
 
     //keep-awake

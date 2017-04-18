@@ -7,7 +7,7 @@ $pathJS = '../js/'; //with slash at the end
 $pathOutJSMin = '../js/site.min.js';
 $addedFilesAtFirst = array($pathRoot . "vendor/components/jquery/jquery.js", $pathRoot . "vendor/twitter/bootstrap/dist/js/bootstrap.js");
 $addedFilesAtEnd = array($pathJS . "bind.js");
-$excludedFiles=array($pathOutJSMin);
+$excludedFiles=array($pathOutJSMin,"../js/plugins/intlTelInput/utils.js");
 $allFiles = array();
 $out = "";
 if( in_array($_SERVER["REMOTE_ADDR"],$aIp)){
@@ -21,6 +21,7 @@ if( in_array($_SERVER["REMOTE_ADDR"],$aIp)){
     }
     foreach ($files as $file) {
         $sPathFile=str_replace("\\","/",$file[0]);
+
         if (!in_array($sPathFile, $addedFilesAtFirst) && !in_array($sPathFile, $addedFilesAtEnd)  && !in_array($sPathFile,$excludedFiles) ) {
             array_push($allFiles, $sPathFile);
         }

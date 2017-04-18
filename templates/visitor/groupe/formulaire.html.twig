@@ -88,19 +88,21 @@
                                    placeholder="xxxxxx@xxxxx.com ">
                         </div>
                         <div class="form-group">
-                            <label for="people_tel[mandataire]" class="control-label">Téléphone : *</label>
+                            <label for="people_tel_display[mandataire]" class="control-label">Téléphone : *</label>
                             {% if group.tel!=''  %}
-                                <input type="text" class="form-control" id="people_tel[mandataire]" name="people_tel[mandataire]" placeholder="+33XXXXXXXXX"
+                                <input type="text" class="form-control telInput" id="people_tel_display[mandataire]" name="people_tel_display[mandataire]" placeholder="+33XXXXXXXXX"
                                        value="{{ mandataire.tel }}">
                                 <p class="help-block">Format international par ex. : +33661616161</p>
                             {%  else %}
-                                <br /><input id="people_tel[mandataire]" type="text" class="form-control" name="people_tel[mandataire]" >
+                                <br /><input id="people_tel_display[mandataire]" type="text" class="form-control telInput" name="people_tel_display[mandataire]" >
                                 <input type="hidden" class="form-control" id="people_tel[mandataire]" name="people_tel[mandataire]" placeholder="XXXXXXXXX"
                                        value="{{ people["mandataire"].email  }}" style="position:absolute;top:-10000px;"> {# <button type="button" class="jsTestPhone">TEST</button> #}
                             {% endif %}
 
 
                         </div>
+
+
 
                         <h4>L'adresse à laquelle le ou la mandataire recevra les chèques de dons</h4>
                         <div class="form-group">
