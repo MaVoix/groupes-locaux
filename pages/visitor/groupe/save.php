@@ -35,11 +35,11 @@ if(isset($_POST["id"]) && isset($_POST["key"])){
 
 
 //mandatory fields
-$aMandoryFields=array("group_name");
+$aMandoryFields=array("group_name","departement","circonscription");
 
 //ajoute les engagements si l'utilisateur n'est pas admin
 if($oMe->getType()!="admin"){
-    $aEngagements=array();
+    $aEngagements=array("engagement-a2");
     $aMandoryFields=array_merge($aMandoryFields,$aEngagements);
 }
 
@@ -51,6 +51,48 @@ foreach($aMandoryFields as $sField){
         $_POST[$sField]="";
     }
 }
+
+
+//parcours des peoples
+$fieldsPeople=["people_name","people_firstname","people_tel","people_email","people_ad1","people_ad2","people_ad3","people_zipcode","people_city"];
+$fieldsPeopleMandatory=["people_name","people_firstname","people_tel","people_email","people_ad1","people_zipcode","people_city"];
+$nPeopleMax=ConfigService::get("people-max"); // nombres de people MAX (hors mandataire)
+
+$aPeople=[];
+for($n=0;$n<=$nPeopleMax+1;$n++){
+    if($n==0){
+        $aPeople["mandataire"]=[];
+        $aPeople["mandataire"]["type"]="mandataire";
+    }else{
+        $aPeople["membre".$n]=[];
+        $aPeople["membre"]["type"]="mandataire";
+    }
+}
+
+foreach($fieldsPeople as $field){
+   if(isset($_POST[$field])){
+       foreach($_POST[$field] as $type=>$value){
+           if(in_array($field,$fieldsPeopleMandatory) && $_POST[$field][$type]==""){
+               $nError++;
+               array_push($aResponse["required"], array("field" => $field."\\[".$type."\\]"));
+               if($field=="people_tel"){
+                   array_push($aResponse["required"], array("field" => "people_tel_display"."\\[".$type."\\]"));
+               }
+           }else {
+               $aPeople["$type"][str_replace("people_", "", $field)] = $value;
+           }
+       }
+   }else{
+       if(in_array($field,$fieldsPeopleMandatory)){
+           $nError++;
+           array_push($aResponse["required"], array("field" => $field."\\[".$type."\\]"));
+           if($field=="people_tel"){
+               array_push($aResponse["required"], array("field" => "people_tel_display"."\\[".$type."\\]"));
+           }
+       }
+   }
+}
+
 
 /*
 if(ConfigService::get("enable-captcha")){

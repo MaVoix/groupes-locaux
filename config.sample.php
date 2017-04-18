@@ -38,4 +38,5 @@ $_CONFIG["max-height"]                      = 4000; // in PX
 $_CONFIG["min-width"]                       = 600; // in PX
 $_CONFIG["min-height"]                      = 600; // in PX
 $_CONFIG["mime-type-limit"]                 = array('image/jpeg'=>'jpg','image/png'=>'png');
+$_CONFIG["people-max"]                      = 10;
 

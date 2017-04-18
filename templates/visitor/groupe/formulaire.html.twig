@@ -121,13 +121,13 @@
                                    placeholder="BP, TSA, Lieu dit">
                         </div>
                         <div class="form-group">
-                            <label for="people_cp[mandataire]" class="control-label">Code postal : *</label>
-                            <input type="text" class="form-control publicinfo" id="people_cp[mandataire]" name="people_cp[mandataire]" value="{{ people["mandataire"].zipcode }}"
+                            <label for="people_zipcode[mandataire]" class="control-label">Code postal : *</label>
+                            <input type="text" class="form-control publicinfo" id="people_zipcode[mandataire]" name="people_zipcode[mandataire]" value="{{ people["mandataire"].zipcode }}"
                                    placeholder="XXXXX">
                         </div>
                         <div class="form-group">
-                            <label for="people_ville[mandataire]" class="control-label">Ville : *</label>
-                            <input type="text" class="form-control publicinfo" id="people_ville[mandataire]" name="people_ville[mandataire]"
+                            <label for="people_city[mandataire]" class="control-label">Ville : *</label>
+                            <input type="text" class="form-control publicinfo" id="people_city[mandataire]" name="people_city[mandataire]"
                                    value="{{ people["mandataire"].city|capitalizefirst }}"
                                    placeholder="Nom de la ville">
                         </div>
@@ -164,12 +164,12 @@
                         </div>
                         <div class="form-group">
                             <label for="posters" class="control-label">Nombre d'affiches :</label>
-                            <input type="text" class="form-control" id="people_ad2[mandataire]" name="people_ad2[mandataire]" value="{{ circonscription.posters }}"
+                            <input type="text" class="form-control" id="posters" name="posters" value="{{ circonscription.posters }}"
                                    placeholder="0">
                         </div>
                         <div class="form-group">
                             <label for="ballots" class="control-label">Nombre de bulletins de vote :</label>
-                            <input type="text" class="form-control" id="people_ad2[mandataire]" name="people_ad2[mandataire]" value="{{ circonscription.ballots }}"
+                            <input type="text" class="form-control" id="ballots" name="ballots" value="{{ circonscription.ballots }}"
                                    placeholder="0">
                         </div>
                         <div class="form-group">
