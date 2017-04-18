@@ -22,6 +22,12 @@
 .image-preview input[type=file] {
     display:none;
 }
+.image-preview-clear{
+    font-size:14px !important;
+}
+.image-preview-input{
+    font-size:14px !important;
+}
 
 .drop-zone{
     width:100%;
@@ -47,3 +53,4 @@
 .image-preview-input-title {
     margin-left:2px;
 }
+
