@@ -771,6 +771,9 @@ CREATE TABLE `group` (
   `bank_city` varchar(255) NOT NULL,
   `amount_promises` decimal(10,2) NOT NULL,
   `amount_donations` decimal(10,2) NOT NULL,
+  `posters` int(11) NOT NULL DEFAULT '0',
+  `ballots` int(11) NOT NULL DEFAULT '0',
+  `professions_de_foi` int(11) NOT NULL DEFAULT '0',
   `key_edit` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
