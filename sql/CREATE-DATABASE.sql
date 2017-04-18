@@ -35,7 +35,11 @@ CREATE TABLE `circonscription` (
   `date_deleted` datetime DEFAULT NULL,
   `code` varchar(10) NOT NULL,
   `code_departement` varchar(10) NOT NULL,
-  `number` int(11) NOT NULL
+  `number` int(11) NOT NULL,
+  `posters` int(11) NOT NULL,
+  `ballots` int(11) NOT NULL,
+  `professions_de_foi` int(11) NOT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
