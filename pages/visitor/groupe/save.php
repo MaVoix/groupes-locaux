@@ -191,7 +191,25 @@ if($nError==0){
     }
 
     $Group->setName($_POST["group_name"]);
+    //todo : vérifier les ID avant sauvegarde
+    $Group->setDepartement(intval($_POST["departement"]));
+    $Group->setCirconscription(intval($_POST["circonscription"]));
 
+    if(isset($_POST["bank_name"])){
+        $Group->setBank_name($_POST["bank_name"]);
+    }
+    if(isset($_POST["bank_city"])){
+        $Group->setBank_city($_POST["bank_city"]);
+    }
+    if(isset($_POST["ballots"])){
+        $Group->setBank_city(intval($_POST["ballots"]));
+    }
+    if(isset($_POST["profession_de_fois"])){
+        $Group->setBank_city(intval($_POST["profession_de_fois"]));
+    }
+    if(isset($_POST["poster"])){
+        $Group->setBank_city(intval($_POST["poster"]));
+    }
 
     //save Files
     /*$outputDir = "data/" . date("Y") . "/" . date("m") . "/" . date("d") . "/". time() . session_id() . "/";
