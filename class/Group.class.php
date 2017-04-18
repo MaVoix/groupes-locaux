@@ -22,6 +22,9 @@ class Group	{
     private $sBank_city;
     private $nAmount_promises;
     private $nAmount_donations;
+    private $nPosters;
+    private $nBallots;
+    private $nProfessions_de_foi;
     private $sKey_edit;
 
 
@@ -206,6 +209,21 @@ class Group	{
             $aData["amount_donations"]=$this->getAmount_donations();
         }
 
+        if(isset($this->aDataSet["posters"]))
+        {
+            $aData["posters"]=$this->getPosters();
+        }
+
+        if(isset($this->aDataSet["ballots"]))
+        {
+            $aData["ballots"]=$this->getBallots();
+        }
+
+        if(isset($this->aDataSet["professions_de_foi"]))
+        {
+            $aData["professions_de_foi"]=$this->getProfessions_de_foi();
+        }
+
         if(isset($this->aDataSet["key_edit"]))
         {
             $aData["key_edit"]=$this->getKey_edit();
@@ -241,6 +259,9 @@ class Group	{
         $this->setBank_city(NULL);
         $this->setAmount_promises(0);
         $this->setAmount_donations(0);
+        $this->setPosters(NULL);
+        $this->setBallots(NULL);
+        $this->setProfessions_de_foi(NULL);
         $this->setKey_edit(NULL);
     }
 
@@ -263,6 +284,9 @@ class Group	{
             "bank_city" => $this->getBank_city(),
             "amount_promises" => $this->getAmount_promises(),
             "amount_donations" => $this->getAmount_donations(),
+            "posters" => $this->getPosters(),
+            "ballots" => $this->getBallots(),
+            "professions_de_foi" => $this->getProfessions_de_foi(),
             "key_edit" => $this->getKey_edit()
         ];
 
@@ -858,6 +882,147 @@ class Group	{
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
             return $this->nAmount_donations;
+        }
+    }
+
+
+
+    /**
+     * Set le champ posters
+     * @param number $nPosters nouvelle valeur pour le champ posters
+     */
+    public function setPosters($nPosters)
+    {
+        if( is_null($nPosters) ) $nPosters='';
+        if( is_numeric($nPosters)  || $nPosters=='' )
+        {
+            $this->nPosters = $nPosters;
+            $this->aDataSet["posters"]=1;
+        }
+    }
+
+
+
+    /**
+     * Get le champ posters
+     * @return number valeur du champ posters
+     */
+    public function getPosters()
+    {
+        if( !is_null($this->nPosters) )
+        {
+            if( $this->nPosters==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->nPosters;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('posters'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->nPosters;
+        }
+    }
+
+
+
+    /**
+     * Set le champ ballots
+     * @param number $nBallots nouvelle valeur pour le champ ballots
+     */
+    public function setBallots($nBallots)
+    {
+        if( is_null($nBallots) ) $nBallots='';
+        if( is_numeric($nBallots)  || $nBallots=='' )
+        {
+            $this->nBallots = $nBallots;
+            $this->aDataSet["ballots"]=1;
+        }
+    }
+
+
+
+    /**
+     * Get le champ ballots
+     * @return number valeur du champ ballots
+     */
+    public function getBallots()
+    {
+        if( !is_null($this->nBallots) )
+        {
+            if( $this->nBallots==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->nBallots;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('ballots'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->nBallots;
+        }
+    }
+
+
+
+    /**
+     * Set le champ professions_de_foi
+     * @param number $nProfessions_de_foi nouvelle valeur pour le champ professions_de_foi
+     */
+    public function setProfessions_de_foi($nProfessions_de_foi)
+    {
+        if( is_null($nProfessions_de_foi) ) $nProfessions_de_foi='';
+        if( is_numeric($nProfessions_de_foi)  || $nProfessions_de_foi=='' )
+        {
+            $this->nProfessions_de_foi = $nProfessions_de_foi;
+            $this->aDataSet["professions_de_foi"]=1;
+        }
+    }
+
+
+
+    /**
+     * Get le champ professions_de_foi
+     * @return number valeur du champ professions_de_foi
+     */
+    public function getProfessions_de_foi()
+    {
+        if( !is_null($this->nProfessions_de_foi) )
+        {
+            if( $this->nProfessions_de_foi==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->nProfessions_de_foi;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('professions_de_foi'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->nProfessions_de_foi;
         }
     }
 

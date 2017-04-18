@@ -23,6 +23,9 @@ class GroupListe extends Liste
         "bank_city",
         "amount_promises",
         "amount_donations",
+        "posters",
+        "ballots",
+        "professions_de_foi",
         "key_edit"
     );
 
