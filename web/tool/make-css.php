@@ -7,7 +7,7 @@ $pathRoot = '../../';
 $pathCSS = '../css/'; //with slash at the end
 $pathOutCSSMin = '../css/site.min.css';
 $addedFilesAtFirst = array($pathRoot . "vendor/twitter/bootstrap/dist/css/bootstrap.css", $pathRoot . "vendor/components/font-awesome/css/font-awesome.css");
-$pathVendorReplace=array("../../vendor/components/font-awesome/"=>"");
+$pathVendorReplace=array("../../vendor/components/font-awesome/"=>"","../../vendor/twitter/bootstrap/dist/"=>"");
 $addedFilesAtEnd = array($pathCSS . "styles.css");
 $excludedFiles=array(basename($pathOutCSSMin));
 $allFiles = array();
