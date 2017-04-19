@@ -112,63 +112,69 @@ if(ConfigService::get("enable-captcha")){
 
 
 //check upload picture
-/*$aLimitMime = ConfigService::get("mime-type-limit");
-$aMime = array_keys(ConfigService::get("mime-type-limit"));
+$bIsUploadedPic=false;
+if (isset($_POST["imageFilename"]) && $_POST["imageFilename"] != "") {
+    $aLimitMime = ConfigService::get("mime-type-limit");
+    $aMime = array_keys(ConfigService::get("mime-type-limit"));
 
-if ($nError == 0) {
-    if (!isset($_POST["imageFilename"]) || $_POST["imageFilename"] == "") {
-        $nError++;
-        $aResponse["message"]["text"] = "N'oubliez pas d'envoyer votre photo !";
+    if ($nError == 0) {
+        if (!isset($_POST["imageFilename"]) || $_POST["imageFilename"] == "") {
+            $nError++;
+            $aResponse["message"]["text"] = "N'oubliez pas d'envoyer votre photo !";
+        }
+        if (!isset($_POST["imageData"]) || $_POST["imageData"] == "") {
+            $nError++;
+            $aResponse["message"]["text"] = "N'oubliez pas d'envoyer votre photo !";
+        }
     }
-    if (!isset($_POST["imageData"]) || $_POST["imageData"] == "") {
-        $nError++;
-        $aResponse["message"]["text"] = "N'oubliez pas d'envoyer votre photo !";
+
+    $sExtension = "jpg";
+    if ($nError == 0) {
+        //Add base 64 encode data in FILE "image"
+        if (!isset($_FILES)) {
+            $_FILES = array("image" => array());
+        }
+        $sExtension = strtolower(substr($_POST["imageFilename"], -3));
+        if ($sExtension == "peg") {
+            $sExtension = "jpg";
+        }
+        $_FILES["image"]["tmp_name"] = '../tmp/' . md5(rand(1000, 99999) . time() . ConfigService::get("key")) . '.' . $sExtension;
+        $_FILES["image"]["name"] = $_POST["imageFilename"];
+        $encodedData = explode(',', $_POST["imageData"]);
+        $decodedData = base64_decode($encodedData[1]);
+        file_put_contents($_FILES["image"]["tmp_name"], $decodedData);
+    }
+
+    if ($nError == 0) {
+        if (!in_array(mime_content_type($_FILES['image']['tmp_name']), $aMime)) {
+            $nError++;
+            $aResponse["message"]["text"] = "Format de fichier de votre photo non reconnu.";
+        }
+    }
+    if ($nError == 0) {
+        if (filesize($_FILES['image']['tmp_name']) > ConfigService::get("max-filesize") * 1024 * 1024) {
+            $nError++;
+            $aResponse["message"]["text"] = "Votre photo dépasse le poids maximum autorisé. (" . ConfigService::get("max-filesize") . " Mb )";
+        }
+    }
+
+
+    if ($nError == 0) {
+        //format de l'image
+        $img = new claviska\ SimpleImage($_FILES['image']['tmp_name']);
+        if (
+            $img->getWidth() < ConfigService::get("min-width") || $img->getWidth() > ConfigService::get("max-width") ||
+            $img->getHeight() < ConfigService::get("min-height") || $img->getHeight() > ConfigService::get("max-height")
+        ) {
+            $nError++;
+            $aResponse["message"]["text"] = "Les dimensions de votre photo ne sont pas valides ( entre " . ConfigService::get("min-width") . "px et " . ConfigService::get("max-height") . "px )";
+        }
+
+    }
+    if($nError==0){
+        $bIsUploadedPic=true;
     }
 }
-
-$sExtension="jpg";
-if ($nError == 0 ) {
-    //Add base 64 encode data in FILE "image"
-    if(!isset($_FILES)){
-        $_FILES=array("image"=>array());
-    }
-    $sExtension=strtolower(substr($_POST["imageFilename"],-3));
-    if($sExtension=="peg"){
-        $sExtension="jpg";
-    }
-    $_FILES["image"]["tmp_name"]= '../tmp/'.md5(rand(1000,99999).time().ConfigService::get("key")).'.'.$sExtension;
-    $_FILES["image"]["name"]=$_POST["imageFilename"];
-    $encodedData = explode(',', $_POST["imageData"]);
-    $decodedData = base64_decode($encodedData[1]);
-    file_put_contents($_FILES["image"]["tmp_name"], $decodedData ) ;
-}
-
-if ($nError == 0 ) {
-    if (!in_array(mime_content_type($_FILES['image']['tmp_name']), $aMime)) {
-        $nError++;
-        $aResponse["message"]["text"] = "Format de fichier de votre photo non reconnu.";
-    }
-}
-if ($nError == 0) {
-    if (filesize($_FILES['image']['tmp_name']) > ConfigService::get("max-filesize") * 1024 * 1024) {
-        $nError++;
-        $aResponse["message"]["text"] = "Votre photo dépasse le poids maximum autorisé. (" . ConfigService::get("max-filesize") . " Mb )";
-    }
-}
-
-
-if ($nError == 0) {
-    //format de l'image
-    $img = new claviska\ SimpleImage($_FILES['image']['tmp_name']);
-    if (
-        $img->getWidth() < ConfigService::get("min-width") || $img->getWidth() > ConfigService::get("max-width") ||
-        $img->getHeight() < ConfigService::get("min-height") || $img->getHeight() > ConfigService::get("max-height")
-    ) {
-        $nError++;
-        $aResponse["message"]["text"] = "Les dimensions de votre photo ne sont pas valides ( entre ".ConfigService::get("min-width")."px et ".ConfigService::get("max-height")."px )";
-    }
-
-}*/
 
 
 if($nError==0){
@@ -214,21 +220,24 @@ if($nError==0){
 
 
     //save Files
-    /*$outputDir = "data/" . date("Y") . "/" . date("m") . "/" . date("d") . "/". time() . session_id() . "/";
-    mkdir($outputDir, 0777, true);
-    $outputFilePhoto= $outputDir."original.".$sExtension;
-
-    $outputFilePhotoFit= $outputDir."photo-fit.jpg";
-    if (@copy($_FILES['image']['tmp_name'], $outputFilePhoto)) {
-        $img = new claviska\ SimpleImage($outputFilePhoto);
-        $img->bestFit(800, 800);
-        $img->toFile($outputFilePhotoFit, "image/jpeg", 100);
-        $Group->setPath_pic($outputFilePhoto);
+    if($bIsUploadedPic) {
+        $outputDir = "data/" . date("Y") . "/" . date("m") . "/" . date("d") . "/" . time() . session_id() . "/";
+        mkdir($outputDir, 0777, true);
+        $outputFilePhoto = $outputDir . "original." . $sExtension;
+        $outputFilePhotoFit = $outputDir . "photo-fit.jpg";
+        if (@copy($_FILES['image']['tmp_name'], $outputFilePhoto)) {
+            $img = new claviska\ SimpleImage($outputFilePhoto);
+            $img->bestFit(800, 800);
+            $img->toFile($outputFilePhotoFit, "image/jpeg", 100);
+            $Group->setPath_pic($outputFilePhoto);
+        } else {
+            $aResponse["message"]["text"] = "Erreur lors de l'enregistrement de votre photo.";
+            $nError++;
+        }
+        @unlink($_FILES['image']['tmp_name']);
     }else{
-        $aResponse["message"]["text"] = "Erreur lors de l'enregistrement de votre photo.";
-        $nError++;
+        $Group->setPath_pic("");
     }
-    @unlink($_FILES['image']['tmp_name']);*/
 
 
 
@@ -290,13 +299,16 @@ if($nError==0){
         $aResponse["durationFade"] = "10000";
         $aResponse["message"]["title"] = "";
         $aResponse["message"]["type"] = "success";
+
         //if edit clean old file
-        /*if($bEdit){
-            @unlink($OldGroup->getPath_pic());
+        if($bEdit){
+            if($bIsUploadedPic){
+                @unlink($OldGroup->getPath_pic());
+            }
             $aResponse["message"]["text"] = "Modification enregistrée !";
         }else{
-            $aResponse["message"]["text"] = "Group envoyée correctement !";
-        }*/
+            $aResponse["message"]["text"] = "Groupe enregistré !";
+        }
 
     }
 
