@@ -202,13 +202,13 @@ if($nError==0){
         $Group->setBank_city($_POST["bank_city"]);
     }
     if(isset($_POST["ballots"])){
-        $Group->setBank_city(intval($_POST["ballots"]));
+        $Group->setBallots(intval($_POST["ballots"]));
     }
     if(isset($_POST["profession_de_fois"])){
-        $Group->setBank_city(intval($_POST["profession_de_fois"]));
+        $Group->setProfessions_de_foi(intval($_POST["profession_de_fois"]));
     }
     if(isset($_POST["poster"])){
-        $Group->setBank_city(intval($_POST["poster"]));
+        $Group->setPosters(intval($_POST["poster"]));
     }
 
     //save Files
