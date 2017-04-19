@@ -54,7 +54,7 @@ foreach($aMandoryFields as $sField){
 
 
 //parcours des peoples
-$fieldsPeople=["people_name","people_firstname","people_tel","people_email","people_ad1","people_ad2","people_ad3","people_zipcode","people_city"];
+$fieldsPeople=["people_id","people_delete","people_name","people_firstname","people_tel","people_email","people_ad1","people_ad2","people_ad3","people_zipcode","people_city"];
 $fieldsPeopleMandatory=["people_name","people_firstname","people_tel","people_email","people_ad1","people_zipcode","people_city"];
 $nPeopleMax=ConfigService::get("people-max"); // nombres de people MAX (hors mandataire)
 
@@ -65,7 +65,7 @@ for($n=0;$n<=$nPeopleMax+1;$n++){
         $aPeople["mandataire"]["type"]="mandataire";
     }else{
         $aPeople["membre".$n]=[];
-        $aPeople["membre"]["type"]="mandataire";
+        $aPeople["membre".$n]["type"]="membre";
     }
 }
 
@@ -204,12 +204,14 @@ if($nError==0){
     if(isset($_POST["ballots"])){
         $Group->setBallots(intval($_POST["ballots"]));
     }
-    if(isset($_POST["profession_de_fois"])){
-        $Group->setProfessions_de_foi(intval($_POST["profession_de_fois"]));
+    if(isset($_POST["professions_de_foi"])){
+        $Group->setProfessions_de_foi(intval($_POST["professions_de_foi"]));
     }
-    if(isset($_POST["poster"])){
-        $Group->setPosters(intval($_POST["poster"]));
+    if(isset($_POST["posters"])){
+        $Group->setPosters(intval($_POST["posters"]));
     }
+
+
 
     //save Files
     /*$outputDir = "data/" . date("Y") . "/" . date("m") . "/" . date("d") . "/". time() . session_id() . "/";
@@ -233,6 +235,34 @@ if($nError==0){
     if( $nError==0){
 
         $Group->save();
+
+        $nIdGroup=$Group->getId();
+
+        //sauvegarde People
+
+        foreach($aPeople as $sType=>$people){
+            if(isset($people["id"])){
+                if(intval($people["id"])==0){
+                    $oPeople=new People();
+                }else{
+                    $oPeople=new People(array("id"=>intval($people["id"])));
+                }
+                $oPeople->setGroup_id($nIdGroup);
+                $oPeople->setName($people["name"]);
+                $oPeople->setFirstname($people["firstname"]);
+                $oPeople->setEmail($people["email"]);
+                $oPeople->setTel($people["tel"]);
+                $oPeople->setAd1($people["ad1"]);
+                $oPeople->setAd2($people["ad2"]);
+                $oPeople->setAd3($people["ad3"]);
+                $oPeople->setZipcode($people["zipcode"]);
+                $oPeople->setCity($people["city"]);
+                $oPeople->setType($people["type"]);
+                $oPeople->save();
+            }
+
+
+        }
 
        /* $TwigEngine = App::getTwig();
         $sBodyMailHTML = $TwigEngine->render("visitor/mail/body.html.twig", [
