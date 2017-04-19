@@ -330,11 +330,11 @@ class Mysql extends PDO {
         }
         if(strstr($nId, "=")!==false)
         {
-            $aReturns=$this->execute("SELECT ".$sSqlSelect." FROM ".$sTable." WHERE ".$nId." ");
+            $aReturns=$this->execute("SELECT ".$sSqlSelect." FROM `".$sTable."` WHERE ".$nId." ");
         }
         else
         {
-            $aReturns=$this->execute("SELECT ".$sSqlSelect." FROM ".$sTable." WHERE `".$sPrimaryKey."`=".intval($nId)." ");
+            $aReturns=$this->execute("SELECT ".$sSqlSelect." FROM `".$sTable."` WHERE `".$sPrimaryKey."`=".intval($nId)." ");
             //print_r( "SELECT ".$sSqlSelect." FROM ".$sTable." WHERE `".$sPrimaryKey."`=".intval($nId)." " );
         }
         if(!isset($aReturns[0])){

@@ -60,4 +60,16 @@ class PeopleListe extends Liste
         $this->setFields(self::$_champs);
     }
 
+    public function applyRules4Group($id)
+    {
+        $this->setAllFields();
+
+        $this->addCriteres([
+            [
+                "field" => "group_id",
+                "compare" => "=",
+                "value" => vars::secureInjection(intval($id))
+            ]
+        ]);
+    }
 }

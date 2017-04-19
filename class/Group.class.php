@@ -123,7 +123,7 @@ class Group	{
      */
     public function delete()
     {
-        $oReq=DbLink::getInstance($this->_sDbInstance)->prepare('DELETE FROM '."group".' WHERE  id=:id ');
+        $oReq=DbLink::getInstance($this->_sDbInstance)->prepare('DELETE FROM '."`group`".' WHERE  id=:id ');
         $oReq->execute(array("id"=>$this->getId()));
         $this->vide();
     }
@@ -137,7 +137,7 @@ class Group	{
      */
     public static function exists($nId=0, $sDbInstance=null)
     {
-        $oReq=DbLink::getInstance($sDbInstance)->prepare('SELECT id FROM '."group".' WHERE  id=:id ');
+        $oReq=DbLink::getInstance($sDbInstance)->prepare('SELECT id FROM '."`group`".' WHERE  id=:id ');
         $oReq->execute(array("id"=>$nId));
         $aRes=$oReq->getRow(0);
         return (count($aRes)!=0);
