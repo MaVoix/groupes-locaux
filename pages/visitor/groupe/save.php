@@ -248,7 +248,7 @@ if($nError==0){
         $nIdGroup=$Group->getId();
 
         //sauvegarde People
-
+        $sEmail="";
         foreach($aPeople as $sType=>$people){
             if(isset($people["id"])){
                 if(intval($people["id"])==0){
@@ -268,21 +268,26 @@ if($nError==0){
                 $oPeople->setCity($people["city"]);
                 $oPeople->setType($people["type"]);
                 $oPeople->save();
+
+                //recuperation du mail du mandataire
+                if($people["type"]=="mandataire"){
+                    $sEmail=$people["email"];
+                }
             }
 
 
         }
 
-       /* $TwigEngine = App::getTwig();
+        $TwigEngine = App::getTwig();
         $sBodyMailHTML = $TwigEngine->render("visitor/mail/body.html.twig", [
             "group" => $Group
         ]);
         $sBodyMailTXT = $TwigEngine->render("visitor/mail/body.txt.twig", [
             "group" => $Group
         ]);
-        if(!$bEdit) {
-          Mail::sendMail($Group->getEmail(), "Confirmation de group", $sBodyMailHTML, $sBodyMailTXT, true);
-        }*/
+        if(!$bEdit && $sEmail!="") {
+          Mail::sendMail($sEmail, "Confirmation de groupe", $sBodyMailHTML, $sBodyMailTXT, true);
+        }
 
         if($oMe->getType()=="admin"){
             $aResponse["message"]["text"] = "Informations enreigistrées correctement !";
