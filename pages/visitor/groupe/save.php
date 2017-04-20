@@ -79,8 +79,17 @@ foreach($fieldsPeople as $field){
                    array_push($aResponse["required"], array("field" => "people_tel_display"."\\[".$type."\\]"));
                }
            }else {
-               $aPeople["$type"][str_replace("people_", "", $field)] = $value;
+               $aPeople[$type][str_replace("people_", "", $field)] = $value;
            }
+           //verification saisie
+           if($field=="people_email" && $_POST[$field][$type]!=""){
+               if (!filter_var( $_POST[$field][$type], FILTER_VALIDATE_EMAIL)) {
+                   $aResponse["message"]["text"] = "L'adresse e-mail est incorrecte.";
+                   array_push($aResponse["required"],array("field"=>"people_email"."\\[".$type."\\]"));
+                   $nError++;
+               }
+           }
+
        }
    }else{
        if(in_array($field,$fieldsPeopleMandatory)){
