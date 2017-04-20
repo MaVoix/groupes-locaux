@@ -39,4 +39,7 @@ $_CONFIG["min-width"]                       = 600; // in PX
 $_CONFIG["min-height"]                      = 600; // in PX
 $_CONFIG["mime-type-limit"]                 = array('image/jpeg'=>'jpg','image/png'=>'png');
 $_CONFIG["people-max"]                      = 10;
+$_CONFIG["passwordMinLength"]               = 6;
+$_CONFIG["passwordMaxLength"]               = 30;
+$_CONFIG["passwordConstraint"]              = "/^[a-z0-9]+$/i";
 

@@ -1068,6 +1068,14 @@ class People	{
     ********************************************************************************************
     */
 
+    public static function encodePassword($sString){
+        //encode PASS
+        $oReq=DbLink::getInstance()->prepare(" SELECT PASSWORD(:pass) as pass ");
+        $aData=array("pass"=>$sString);
+        $oReq->execute($aData);
+        $sPassword=$oReq->getCase("pass",0);
+        return  $sPassword;
+    }
 
     /*
     ********************************************************************************************
