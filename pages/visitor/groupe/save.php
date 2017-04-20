@@ -274,18 +274,25 @@ if($nError==0){
                 $oPeople->setFirstname($people["firstname"]);
                 $oPeople->setEmail($people["email"]);
                 $oPeople->setTel($people["tel"]);
-                $oPeople->setAd1($people["ad1"]);
-                $oPeople->setAd2($people["ad2"]);
-                $oPeople->setAd3($people["ad3"]);
-                $oPeople->setZipcode($people["zipcode"]);
-                $oPeople->setCity($people["city"]);
+
                 $oPeople->setType($people["type"]);
-                $oPeople->save();
+
 
                 //recuperation du mail du mandataire
                 if($people["type"]=="mandataire"){
+                    $oPeople->setAd1($people["ad1"]);
+                    $oPeople->setAd2($people["ad2"]);
+                    $oPeople->setAd3($people["ad3"]);
+                    $oPeople->setZipcode($people["zipcode"]);
+                    $oPeople->setCity($people["city"]);
                     $sEmail=$people["email"];
+                }else{
+                    if($people["delete"]==1){
+                        $oPeople->setDate_deleted(date("Y-m-d H:i:s"));
+                    }
                 }
+
+                $oPeople->save();
             }
 
 

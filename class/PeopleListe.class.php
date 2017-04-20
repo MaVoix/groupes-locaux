@@ -71,5 +71,13 @@ class PeopleListe extends Liste
                 "value" => vars::secureInjection(intval($id))
             ]
         ]);
+
+        $this->addCriteres([
+            [
+                "field" => "date_deleted",
+                "compare" => "IS NULL",
+                "value" => ""
+            ]
+        ]);
     }
 }
