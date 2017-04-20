@@ -39,7 +39,11 @@ $aMandoryFields=array("group_name","departement","circonscription");
 
 //ajoute les engagements si l'utilisateur n'est pas admin
 if($oMe->getType()!="admin"){
-    $aEngagements=array("engagement-a2");
+    $aEngagements=array();
+    //verification des engagements 1 à 17
+    for($i=2;$i<=17;$i++){
+        $aEngagements[]="engagement-a".$i;
+    }
     $aMandoryFields=array_merge($aMandoryFields,$aEngagements);
 }
 
