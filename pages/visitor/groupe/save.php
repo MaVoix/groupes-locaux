@@ -70,27 +70,36 @@ for($n=0;$n<=$nPeopleMax+1;$n++){
 }
 
 foreach($fieldsPeople as $field){
-   if(isset($_POST[$field])){
-       foreach($_POST[$field] as $type=>$value){
-           if(in_array($field,$fieldsPeopleMandatory) && $_POST[$field][$type]==""){
-               $nError++;
-               array_push($aResponse["required"], array("field" => $field."\\[".$type."\\]"));
-               if($field=="people_tel"){
-                   array_push($aResponse["required"], array("field" => "people_tel_display"."\\[".$type."\\]"));
-               }
-           }else {
-               $aPeople["$type"][str_replace("people_", "", $field)] = $value;
-           }
-       }
-   }else{
-       if(in_array($field,$fieldsPeopleMandatory)){
-           $nError++;
-           array_push($aResponse["required"], array("field" => $field."\\[".$type."\\]"));
-           if($field=="people_tel"){
-               array_push($aResponse["required"], array("field" => "people_tel_display"."\\[".$type."\\]"));
-           }
-       }
-   }
+    if(isset($_POST[$field])){
+        foreach($_POST[$field] as $type=>$value){
+            if(in_array($field,$fieldsPeopleMandatory) && $_POST[$field][$type]==""){
+                $nError++;
+                array_push($aResponse["required"], array("field" => $field."\\[".$type."\\]"));
+                if($field=="people_tel"){
+                    array_push($aResponse["required"], array("field" => "people_tel_display"."\\[".$type."\\]"));
+                }
+            }else {
+                $aPeople[$type][str_replace("people_", "", $field)] = $value;
+            }
+            //verification saisie
+            if($field=="people_email" && $_POST[$field][$type]!=""){
+                if (!filter_var( $_POST[$field][$type], FILTER_VALIDATE_EMAIL)) {
+                    $aResponse["message"]["text"] = "L'adresse e-mail est incorrecte.";
+                    array_push($aResponse["required"],array("field"=>"people_email"."\\[".$type."\\]"));
+                    $nError++;
+                }
+            }
+
+        }
+    }else{
+        if(in_array($field,$fieldsPeopleMandatory)){
+            $nError++;
+            array_push($aResponse["required"], array("field" => $field."\\[".$type."\\]"));
+            if($field=="people_tel"){
+                array_push($aResponse["required"], array("field" => "people_tel_display"."\\[".$type."\\]"));
+            }
+        }
+    }
 }
 
 
@@ -286,7 +295,7 @@ if($nError==0){
             "group" => $Group
         ]);
         if(!$bEdit && $sEmail!="") {
-          Mail::sendMail($sEmail, "Confirmation de groupe", $sBodyMailHTML, $sBodyMailTXT, true);
+            Mail::sendMail($sEmail, "Confirmation de groupe", $sBodyMailHTML, $sBodyMailTXT, true);
         }
 
         if($oMe->getType()=="admin"){
