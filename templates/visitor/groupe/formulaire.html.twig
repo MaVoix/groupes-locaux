@@ -65,7 +65,7 @@
                         </div>
 
 
-                        <h3>Le ou la mandataire financier</h3>
+                        <h3>Vos informations (en tant que mandataire financier)</h3>
 
                         <input type="hidden" id="people_id[mandataire]" name="people_id[mandataire]"
                                value="{{ people["mandataire"].id }}" >
@@ -94,17 +94,25 @@
                                    value="{{ people["mandataire"].email }}"
                                    placeholder="xxxxxx@xxxxx.com ">
                         </div>
+
+                        {% if group.id=='' %}
+                        <div class="form-group">
+                            <label for="people_pass[mandataire]" class="control-label">Mot de passe : *</label>
+                            <input type="password" class="form-control" id="people_pass[mandataire]" name="people_pass[mandataire]"
+                                   value=""
+                                   placeholder=" ">
+                        </div>
+                        <div class="form-group">
+                            <label for="people_pass_confirm[mandataire]" class="control-label">Confirmation du Mot de passe : *</label>
+                            <input type="password" class="form-control" id="people_pass_confirm[mandataire]" name="people_pass_confirm[mandataire]"
+                                   value=""
+                                   placeholder=" ">
+                            <p class="help-block">Votre mot de passe doit contenir des lettres et des chiffres (6 caractères minimum). Conservez-le précisieusement, il vous servira à vous connecter à la page de votre groupe.</p>
+                        </div>
+                        <p>&nbsp;</p>
+                        {%  endif %}
                         <div class="form-group">
                             <label for="people_tel_display[mandataire]" class="control-label">Téléphone : *</label>
-                            {# {% if people["mandataire"].tel!=''  %}
-                                <br /><input type="text" class="form-control telInput" id="people_tel_display[mandataire]" name="people_tel_display[mandataire]" placeholder="+33XXXXXXXXX"
-                                       value="{{ people["mandataire"].tel }}">
-                            {%  else %}
-                                <br /><input id="people_tel_display[mandataire]" type="text" class="form-control telInput" name="people_tel_display[mandataire]" >
-                                <input type="hidden" class="form-control" id="people_tel[mandataire]" name="people_tel[mandataire]" placeholder="XXXXXXXXX"
-                                       value="{{ people["mandataire"].tel  }}" style="position:absolute;top:-10000px;">
-                            {% endif %}
-                            #}
                             <br /><input id="people_tel_display[mandataire]"  value="{{ people["mandataire"].tel  }}" type="text" class="form-control telInput" name="people_tel_display[mandataire]" >
                             <input type="hidden" class="form-control" id="people_tel[mandataire]" name="people_tel[mandataire]" placeholder="XXXXXXXXX"
                                    value="{{ people["mandataire"].tel  }}" style="position:absolute;top:-10000px;">
@@ -142,7 +150,7 @@
                                    value="{{ people["mandataire"].city|capitalizefirst }}"
                                    placeholder="Nom de la ville">
                         </div>
-                        <p>Il / elle est d’accord pour contribuer et partager les informations avec les autres mandataires financiers qui se réunissent chaque mercredi soir en ligne. 
+                        <p>Je suis d’accord pour contribuer et partager les informations avec les autres mandataires financiers qui se réunissent chaque mercredi soir en ligne. 
                             Il.elle a déjà pris contact avec la banque suivante afin de préparer l’ouverture du compte.</p>
                         <div class="form-group">
                             <label for="bank_name" class="control-label">Nom de la banque :</label>
