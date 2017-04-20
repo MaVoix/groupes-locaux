@@ -799,6 +799,7 @@ CREATE TABLE `people` (
   `country` varchar(255) NOT NULL,
   `type` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `pass` varchar(255) NOT NULL,
   `tel` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
