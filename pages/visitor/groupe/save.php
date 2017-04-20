@@ -142,6 +142,18 @@ if ($nError == 0) {
     }
 }
 
+
+//vérifie si le mail est déjà utilisé
+if( $nError==0 ) {
+    $oListePeople = new PeopleListe();
+    $oListePeople->applyRules4SearchByEmail($_POST["people_email"]["mandataire"]);
+    $aPeoples=$oListePeople->getPage();
+    if(count($aPeoples)){
+        $aResponse["message"]["text"] =  "Un compte est déjà associé à cette adresse e-mail.";
+        array_push($aResponse["required"],array("field"=>"people_email" . "\\[mandataire\\]"));
+        $nError++;
+    }
+}
 /*
 if(ConfigService::get("enable-captcha")){
     if (!isset($_POST["captcha"]) || $_POST["captcha"] == "") {
