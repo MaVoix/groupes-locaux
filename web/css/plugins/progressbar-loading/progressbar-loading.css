@@ -1,3 +1,4 @@
+/*** LOADING BAR *****/
 #progress-wrp {
     margin-top:-20px;
     position: relative;
@@ -9,17 +10,18 @@
 }
 #progress-wrp .progress-bar{
     height: 40px;
-    background-color: #d7031c;
+    background-color: #f2e732;
     width: 0;
     border-radius: 5px;
 
 }
-#progress-wrp .status{
-    padding-top:10px;
-    width:280px;
-    margin-left:-140px;
-    left:50%;
-    text-align:center;
-    position:absolute;
+#progress-wrp .status {
+    padding-top: 10px;
+    width: 280px;
+    margin-left: -140px;
+    left: 50%;
+    text-align: center;
+    position: absolute;
     color: #ffffff;
+    text-shadow: 2px 2px 4px #000000;
 }
