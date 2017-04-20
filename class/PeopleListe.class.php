@@ -25,6 +25,7 @@ class PeopleListe extends Liste
         "country",
         "type",
         "email",
+        "pass",
         "tel"
     );
 
@@ -59,6 +60,7 @@ class PeopleListe extends Liste
     {
         $this->setFields(self::$_champs);
     }
+
 
     public function applyRules4Group($id)
     {

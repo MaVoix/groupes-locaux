@@ -24,6 +24,7 @@ class People	{
     private $sCountry;
     private $sType;
     private $sEmail;
+    private $sPass;
     private $sTel;
 
 
@@ -218,6 +219,11 @@ class People	{
             $aData["email"]=$this->getEmail();
         }
 
+        if(isset($this->aDataSet["pass"]))
+        {
+            $aData["pass"]=$this->getPass();
+        }
+
         if(isset($this->aDataSet["tel"]))
         {
             $aData["tel"]=$this->getTel();
@@ -255,6 +261,7 @@ class People	{
         $this->setCountry(NULL);
         $this->setType(NULL);
         $this->setEmail(NULL);
+        $this->setPass(NULL);
         $this->setTel(NULL);
     }
 
@@ -279,6 +286,7 @@ class People	{
             "country" => $this->getCountry(),
             "type" => $this->getType(),
             "email" => $this->getEmail(),
+            "pass" => $this->getPass(),
             "tel" => $this->getTel()
         ];
 
@@ -963,6 +971,50 @@ class People	{
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
             return $this->sEmail;
+        }
+    }
+
+
+
+    /**
+     * Set le champ pass
+     * @param string $sPass nouvelle valeur pour le champ pass
+     */
+    public function setPass($sPass)
+    {
+        if( is_null($sPass) ) $sPass='';
+        $this->sPass = $sPass;
+        $this->aDataSet["pass"]=1;
+    }
+
+
+
+    /**
+     * Get le champ pass
+     * @return string valeur du champ pass
+     */
+    public function getPass()
+    {
+        if( !is_null($this->sPass) )
+        {
+            if( $this->sPass==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sPass;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('pass'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sPass;
         }
     }
 
