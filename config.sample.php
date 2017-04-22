@@ -30,7 +30,7 @@ $_CONFIG["mail-smtp-pass"]			        ="-"; //server smtp pass
 $_CONFIG["idSite"]                          = "collectedon"; //for unique session var prefix
 $_CONFIG["types"]			                = "visitor|donor>visitor|mandataire>donor>visitor|admin>mandataire>donor>visitor";
 $_CONFIG["area-default"]                    = array("visitor"=>"groupe","mandataire"=>"groupe","admin"=>"groupe");
-$_CONFIG["page-default"]                    = array("visitor"=>"formulaire","mandataire"=>"accueil","admin"=>"list");
+$_CONFIG["page-default"]                    = array("visitor"=>"formulaire","mandataire"=>"accueil","admin"=>"liste");
 $_CONFIG["format-default"]                  = "html";
 $_CONFIG["max-filesize"]                    = 8; // in Mb
 $_CONFIG["max-width"]                       = 4000; // in PX
