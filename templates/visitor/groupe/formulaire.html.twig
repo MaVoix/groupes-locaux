@@ -30,15 +30,18 @@
                             <input type="hidden" id="key" name="key" value="{{ key }}"/>
                         {% endif %}
 
+                        <p><strong>Bienvenue sur le formulaire d'engagement des groupes locaux #MAVOIX !</strong></p>
+                        <p>Les informations <span style="color:#05a60d;font-weight:bold;">en vert</span> seront rendues publiques.</p>
+
                         <div class="form-group">
                             <label for="group_name" class="control-label"><strong>Nous groupe local de</strong></label>
-                            <input type="text" class="form-control" id="group_name" name="group_name"
+                            <input type="text" class="form-control publicinfo" id="group_name" name="group_name"
                                    value="{{ group.name }}"
                                    placeholder="Nom">
                         </div>
                         <div class="form-group">
                             <label for="nom" class="control-label"><strong>Nous engageons à réaliser la campagne législative #MAVOIX dans la circonscription</strong></label>
-                            <select class="form-control updateContentOnChange" id="departement" name="departement" data-url="/groupe/formulaire.html" data-blocks="['divCirconsciptions']" >
+                            <select class="form-control updateContentOnChange publicinfo" id="departement" name="departement" data-url="/groupe/formulaire.html" data-blocks="['divCirconsciptions']" >
                                 <option value="">Choisissez un département</option>
                               {% for departement in departements  %}
                                 <option value="{{ departement.id }}" {%  if group.departement==departement.id %} selected {% endif %}>{{ departement.code }} - {{ departement.name }}</option>
@@ -48,7 +51,7 @@
                         <div class="form-group">
                             <div class="updatableContent" data-updateIndex="divCirconsciptions">
                                 {% if circonscriptions|length>0 %}
-                                    <select class="form-control" id="circonscription" name="circonscription"  >
+                                    <select class="form-control  publicinfo" id="circonscription" name="circonscription"  >
                                         <option value="">Choisissez une circonscription</option>
                                     {% for circonscription in circonscriptions  %}
                                         <option value="{{ circonscription.id }}" {%  if group.circonscription==circonscription.id %} selected {% endif %}>{{ sup(circonscription.number,'f',true) }} circonscription</option>
@@ -108,27 +111,22 @@
                             <br /><input id="people_tel_display[mandataire]"  value="{{ people["mandataire"].tel  }}" type="text" class="form-control telInput" name="people_tel_display[mandataire]" >
                             <input type="hidden" class="form-control" id="people_tel[mandataire]" name="people_tel[mandataire]" placeholder="XXXXXXXXX"
                                    value="{{ people["mandataire"].tel  }}" style="position:absolute;top:-10000px;">
-
-
-
                         </div>
 
-
-
-                        <h4>L'adresse à laquelle le ou la mandataire recevra les chèques de dons</h4>
+                        <h4>L'adresse à laquelle le ou la mandataire recevra les chèques de dons :</h4>
                         <div class="form-group">
                             <label for="people_ad1[mandataire]" class="control-label">Adresse champ 1 : *</label>
-                            <input type="text" class="form-control" id="people_ad1[mandataire]" name="people_ad1[mandataire]"
+                            <input type="text" class="form-control publicinfo" id="people_ad1[mandataire]" name="people_ad1[mandataire]"
                                    placeholder="N°, type de voie, nom de la voie" value="{{ people["mandataire"].ad1 }}">
                         </div>
                         <div class="form-group">
                             <label for="people_ad2[mandataire]" class="control-label">Adresse champ 2 :</label>
-                            <input type="text" class="form-control" id="people_ad2[mandataire]" name="people_ad2[mandataire]" value="{{ people["mandataire"].ad2 }}"
+                            <input type="text" class="form-control publicinfo" id="people_ad2[mandataire]" name="people_ad2[mandataire]" value="{{ people["mandataire"].ad2 }}"
                                    placeholder="Immeuble, Résidence, Z.I ...">
                         </div>
                         <div class="form-group">
                             <label for="people_ad3[mandataire]" class="control-label">Adresse champ 3 :</label>
-                            <input type="text" class="form-control" id="people_ad3[mandataire]" name="people_ad3[mandataire]" value="{{ people["mandataire"].ad3}}"
+                            <input type="text" class="form-control publicinfo" id="people_ad3[mandataire]" name="people_ad3[mandataire]" value="{{ people["mandataire"].ad3}}"
                                    placeholder="BP, TSA, Lieu dit">
                         </div>
                         <div class="form-group">
