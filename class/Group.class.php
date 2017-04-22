@@ -612,7 +612,7 @@ class Group	{
         }
     }
 
-    public function Departement()
+    public function getDepartement()
     {
         if( $this->nDepartement_id){
             $oDepartement = new Departement(array("id"=>$this->nDepartement_id));
@@ -669,7 +669,7 @@ class Group	{
         }
     }
 
-    public function Circonscription()
+    public function getCirconscription()
     {
         if( $this->nCirconscription_id){
             $oCirconscription = new Circonscription(array("id"=>$this->nCirconscription_id));
