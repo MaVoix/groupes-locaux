@@ -99,4 +99,51 @@ class UserListe extends Liste
         return  $this->notDeleted()->withEmail($email,$sType);
     }
 
+
+    public function applyRules4Connexion($email, $pass)
+    {
+        $this->setAllFields();
+
+        $this->addCriteres([
+            [
+                "field" => "email",
+                "compare" => "=",
+                "value" => vars::secureInjection($email)
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "pass",
+                "compare" => "=",
+                "value" => vars::secureInjection($pass)
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "pass",
+                "compare" => "!=",
+                "value" => ""
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "enable",
+                "compare" => "=",
+                "value" => "1"
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "type",
+                "compare" => "!=",
+                "value" => "membre"
+            ]
+        ]);
+
+        return $this;
+    }
 }

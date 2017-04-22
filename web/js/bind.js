@@ -272,7 +272,7 @@ function sendAjaxRequest($obj, url, aData, onSuccess, bFadeLoading)
         onSuccess = function() {};
     }
 
-    aData.noHistoryTrack = 1;
+
 
     var paramAjax = {
         "type": "post",
