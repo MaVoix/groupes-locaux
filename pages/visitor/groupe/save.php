@@ -62,8 +62,8 @@ foreach ($aMandoryFields as $sField) {
 
 
 //parcours des users
-$fieldsUser = ["user_id", "user_delete", "user_name", "user_firstname", "user_tel", "user_email", "user_ad1", "user_ad2", "user_ad3", "user_zipcode", "user_city"];
-$fieldsUserMandatory = ["user_name", "user_firstname", "user_tel", "user_email", "user_ad1", "user_zipcode", "user_city"];
+$fieldsUser = ["user_id", "user_delete", "user_civility", "user_name", "user_firstname", "user_tel", "user_email", "user_ad1", "user_ad2", "user_ad3", "user_zipcode", "user_city"];
+$fieldsUserMandatory = ["user_name", "user_civility","user_firstname", "user_tel", "user_email", "user_ad1", "user_zipcode", "user_city"];
 $nUserMax = ConfigService::get("member-max"); // nombres de user MAX (hors mandataire)
 
 $aUsersMember = [];
@@ -261,8 +261,8 @@ if ($nError == 0) {
 
     $Group->setName($_POST["group_name"]);
     //todo : vérifier les ID avant sauvegarde
-    $Group->setDepartement(intval($_POST["departement"]));
-    $Group->setCirconscription(intval($_POST["circonscription"]));
+    $Group->setDepartement_id(intval($_POST["departement"]));
+    $Group->setCirconscription_id(intval($_POST["circonscription"]));
 
     if (isset($_POST["bank_name"])) {
         $Group->setBank_name($_POST["bank_name"]);
@@ -310,6 +310,7 @@ if ($nError == 0) {
 
         //sauvegarde User
         $sEmail = "";
+
         foreach ($aUsersMember as $sType => $user) {
             if (isset($user["id"])) {
                 if (intval($user["id"]) == 0) {
@@ -318,6 +319,7 @@ if ($nError == 0) {
                     $oUser = new User(array("id" => intval($user["id"])));
                 }
                 $oUser->setGroup_id($nIdGroup);
+                $oUser->setCivility($user["civility"]);
                 $oUser->setName($user["name"]);
                 $oUser->setFirstname($user["firstname"]);
                 $oUser->setEmail($user["email"]);

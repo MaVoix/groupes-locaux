@@ -76,6 +76,15 @@
                         <input type="hidden" id="user_delete[mandataire]" name="user_delete[mandataire]"
                                value="0" >
 
+                        <div class="form-group ">
+                            <label for="user_civility[mandataire]" class="control-label">Civilité : *</label>
+                            <select id="user_civility[mandataire]" name="user_civility[mandataire]" class="form-control publicinfo">
+                                <option value="">Choisir ...</option>
+                                <option value="M." {% if user["mandataire"].civility=='M.' %} selected {% endif %}>M.</option>
+                                <option value="Mme" {% if user["mandataire"].civility=='Mme' or user["mandataire"].civility=='Mme.' %} selected {% endif %}>Mme</option>
+                            </select>
+                        </div>
+
                         <div class="form-group">
 
                             <label for="user_name[mandataire]" class="control-label">Nom de famille : *</label>
