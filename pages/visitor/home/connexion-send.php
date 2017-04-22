@@ -53,7 +53,7 @@ if($nError==0) {
             SessionService::set("user-id",$aUser["id"]);
 
             if($aUser["type"]=="admin"){
-                $aResponse["redirect"] = "/groupe/list.html";
+                $aResponse["redirect"] = "/groupe/liste.html";
             }else{
                 $aResponse["redirect"] = "/groupe/accueil.html";
             }
