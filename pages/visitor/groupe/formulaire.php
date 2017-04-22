@@ -35,21 +35,21 @@ if(isset($_GET["key"]) && isset($_GET["id"])){
         $listCirconscriptions->applyRules4Departement(intval($Group->getDepartement()));
         $aDataScript["circonscriptions"]=  $listCirconscriptions->getPage();
 
-        //people
-        $oListePeople=new PeopleListe();
-        $oListePeople->applyRules4Group($Group->getId());
-        $aDataScript["people"]=[];
-        $aPeoples=$oListePeople->getPage();
+        //user
+        $oListeUser=new UserListe();
+        $oListeUser->applyRules4Group($Group->getId());
+        $aDataScript["user"]=[];
+        $aUsers=$oListeUser->getPage();
         $n=0;
-        foreach($aPeoples as $aPeople){
-            $aPeople["tel_display"]=$aPeople["tel"];
-            if($aPeople["type"]=="membre"){
+        foreach($aUsers as $aUser){
+            $aUser["tel_display"]=$aUser["tel"];
+            if($aUser["type"]=="membre"){
                 $n++;
                 $sKey="membre".$n;
             }else{
                 $sKey="mandataire";
             }
-            $aDataScript["people"][$sKey]=$aPeople;
+            $aDataScript["user"][$sKey]=$aUser;
         }
 
 
