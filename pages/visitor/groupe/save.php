@@ -57,50 +57,50 @@ foreach ($aMandoryFields as $sField) {
 }
 
 
-//parcours des peoples
-$fieldsPeople = ["people_id", "people_delete", "people_name", "people_firstname", "people_tel", "people_email", "people_ad1", "people_ad2", "people_ad3", "people_zipcode", "people_city"];
-$fieldsPeopleMandatory = ["people_name", "people_firstname", "people_tel", "people_email", "people_ad1", "people_zipcode", "people_city"];
-$nPeopleMax = ConfigService::get("people-max"); // nombres de people MAX (hors mandataire)
+//parcours des users
+$fieldsUser = ["user_id", "user_delete", "user_name", "user_firstname", "user_tel", "user_email", "user_ad1", "user_ad2", "user_ad3", "user_zipcode", "user_city"];
+$fieldsUserMandatory = ["user_name", "user_firstname", "user_tel", "user_email", "user_ad1", "user_zipcode", "user_city"];
+$nUserMax = ConfigService::get("user-max"); // nombres de user MAX (hors mandataire)
 
-$aPeople = [];
-for ($n = 0; $n <= $nPeopleMax + 1; $n++) {
+$aUser = [];
+for ($n = 0; $n <= $nUserMax + 1; $n++) {
     if ($n == 0) {
-        $aPeople["mandataire"] = [];
-        $aPeople["mandataire"]["type"] = "mandataire";
+        $aUser["mandataire"] = [];
+        $aUser["mandataire"]["type"] = "mandataire";
     } else {
-        $aPeople["membre" . $n] = [];
-        $aPeople["membre" . $n]["type"] = "membre";
+        $aUser["membre" . $n] = [];
+        $aUser["membre" . $n]["type"] = "membre";
     }
 }
 
-foreach ($fieldsPeople as $field) {
+foreach ($fieldsUser as $field) {
     if (isset($_POST[$field])) {
         foreach ($_POST[$field] as $type => $value) {
-            if (in_array($field, $fieldsPeopleMandatory) && $_POST[$field][$type] == "") {
+            if (in_array($field, $fieldsUserMandatory) && $_POST[$field][$type] == "") {
                 $nError++;
                 array_push($aResponse["required"], array("field" => $field . "\\[" . $type . "\\]"));
-                if ($field == "people_tel") {
-                    array_push($aResponse["required"], array("field" => "people_tel_display" . "\\[" . $type . "\\]"));
+                if ($field == "user_tel") {
+                    array_push($aResponse["required"], array("field" => "user_tel_display" . "\\[" . $type . "\\]"));
                 }
             } else {
-                $aPeople[$type][str_replace("people_", "", $field)] = $value;
+                $aUser[$type][str_replace("user_", "", $field)] = $value;
             }
             //verification saisie
-            if ($field == "people_email" && $_POST[$field][$type] != "") {
+            if ($field == "user_email" && $_POST[$field][$type] != "") {
                 if (!filter_var($_POST[$field][$type], FILTER_VALIDATE_EMAIL)) {
                     $aResponse["message"]["text"] = "L'adresse e-mail est incorrecte.";
-                    array_push($aResponse["required"], array("field" => "people_email" . "\\[" . $type . "\\]"));
+                    array_push($aResponse["required"], array("field" => "user_email" . "\\[" . $type . "\\]"));
                     $nError++;
                 }
             }
 
         }
     } else {
-        if (in_array($field, $fieldsPeopleMandatory)) {
+        if (in_array($field, $fieldsUserMandatory)) {
             $nError++;
             array_push($aResponse["required"], array("field" => $field . "\\[" . $type . "\\]"));
-            if ($field == "people_tel") {
-                array_push($aResponse["required"], array("field" => "people_tel_display" . "\\[" . $type . "\\]"));
+            if ($field == "user_tel") {
+                array_push($aResponse["required"], array("field" => "user_tel_display" . "\\[" . $type . "\\]"));
             }
         }
     }
@@ -145,12 +145,12 @@ if ($nError == 0) {
 
 //vérifie si le mail est déjà utilisé
 if( $nError==0 ) {
-    $oListePeople = new PeopleListe();
-    $oListePeople->applyRules4SearchByEmail($_POST["people_email"]["mandataire"]);
-    $aPeoples=$oListePeople->getPage();
-    if(count($aPeoples)){
+    $oListeUser = new UserListe();
+    $oListeUser->applyRules4SearchByEmail($_POST["user_email"]["mandataire"]);
+    $aUsers=$oListeUser->getPage();
+    if(count($aUsers)){
         $aResponse["message"]["text"] =  "Un compte est déjà associé à cette adresse e-mail.";
-        array_push($aResponse["required"],array("field"=>"people_email" . "\\[mandataire\\]"));
+        array_push($aResponse["required"],array("field"=>"user_email" . "\\[mandataire\\]"));
         $nError++;
     }
 }
@@ -304,37 +304,37 @@ if ($nError == 0) {
 
         $nIdGroup = $Group->getId();
 
-        //sauvegarde People
+        //sauvegarde User
         $sEmail = "";
-        foreach ($aPeople as $sType => $people) {
-            if (isset($people["id"])) {
-                if (intval($people["id"]) == 0) {
-                    $oPeople = new People();
+        foreach ($aUser as $sType => $user) {
+            if (isset($user["id"])) {
+                if (intval($user["id"]) == 0) {
+                    $oUser = new User();
                 } else {
-                    $oPeople = new People(array("id" => intval($people["id"])));
+                    $oUser = new User(array("id" => intval($user["id"])));
                 }
-                $oPeople->setGroup_id($nIdGroup);
-                $oPeople->setName($people["name"]);
-                $oPeople->setFirstname($people["firstname"]);
-                $oPeople->setEmail($people["email"]);
-                $oPeople->setTel($people["tel"]);
-                $oPeople->setAd1($people["ad1"]);
-                $oPeople->setAd2($people["ad2"]);
-                $oPeople->setAd3($people["ad3"]);
-                $oPeople->setZipcode($people["zipcode"]);
-                $oPeople->setCity($people["city"]);
-                $oPeople->setType($people["type"]);
+                $oUser->setGroup_id($nIdGroup);
+                $oUser->setName($user["name"]);
+                $oUser->setFirstname($user["firstname"]);
+                $oUser->setEmail($user["email"]);
+                $oUser->setTel($user["tel"]);
+                $oUser->setAd1($user["ad1"]);
+                $oUser->setAd2($user["ad2"]);
+                $oUser->setAd3($user["ad3"]);
+                $oUser->setZipcode($user["zipcode"]);
+                $oUser->setCity($user["city"]);
+                $oUser->setType($user["type"]);
 
 
                 //recuperation du mail du mandataire
-                if ($people["type"] == "mandataire") {
-                    $sEmail = $people["email"];
+                if ($user["type"] == "mandataire") {
+                    $sEmail = $user["email"];
                     if (isset($_POST["mandataire_pass"])) {
-                        $oPeople->setPass($oPeople::encodePassword($_POST["mandataire_pass"]));
+                        $oUser->setPass($oUser::encodePassword($_POST["mandataire_pass"]));
                     }
                 }
 
-                $oPeople->save();
+                $oUser->save();
             }
 
         }
