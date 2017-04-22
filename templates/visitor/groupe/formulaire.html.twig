@@ -166,6 +166,20 @@
 
 
                         <hr/>
+                        <p>&nbsp;</p>
+                        <h2>Les membres du groupes</h2>
+                        <div id="MemberList">
+                        {%  for member in user %}
+                            {% if member.type=="membre" %}
+                                {%  set num=loop.index %}
+                                {% embed "visitor/blocks/member.html.twig" %}{% endembed %}
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                        <button type="button" class="btn btn-primary jsAddItem" data-target="MemberList" data-url="/groupe/membre.html" >Ajouter un membre</button>
+
+
+                        <p>&nbsp;</p>
                         <h2>Les engagements</h2>
                         <h3>Collecte de dons</h3>
 

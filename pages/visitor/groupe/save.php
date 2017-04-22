@@ -64,16 +64,16 @@ foreach ($aMandoryFields as $sField) {
 //parcours des users
 $fieldsUser = ["user_id", "user_delete", "user_name", "user_firstname", "user_tel", "user_email", "user_ad1", "user_ad2", "user_ad3", "user_zipcode", "user_city"];
 $fieldsUserMandatory = ["user_name", "user_firstname", "user_tel", "user_email", "user_ad1", "user_zipcode", "user_city"];
-$nUserMax = ConfigService::get("user-max"); // nombres de user MAX (hors mandataire)
+$nUserMax = ConfigService::get("member-max"); // nombres de user MAX (hors mandataire)
 
-$aUser = [];
+$aUsersMember = [];
 for ($n = 0; $n <= $nUserMax + 1; $n++) {
     if ($n == 0) {
-        $aUser["mandataire"] = [];
-        $aUser["mandataire"]["type"] = "mandataire";
+        $aUsersMember["mandataire"] = [];
+        $aUsersMember["mandataire"]["type"] = "mandataire";
     } else {
-        $aUser["membre" . $n] = [];
-        $aUser["membre" . $n]["type"] = "membre";
+        $aUsersMember["membre" . $n] = [];
+        $aUsersMember["membre" . $n]["type"] = "membre";
     }
 }
 
@@ -87,7 +87,7 @@ foreach ($fieldsUser as $field) {
                     array_push($aResponse["required"], array("field" => "user_tel_display" . "\\[" . $type . "\\]"));
                 }
             } else {
-                $aUser[$type][str_replace("user_", "", $field)] = $value;
+                $aUsersMember[$type][str_replace("user_", "", $field)] = $value;
             }
             //verification saisie
             if ($field == "user_email" && $_POST[$field][$type] != "") {
@@ -151,8 +151,8 @@ if ($nError == 0) {
 if( $nError==0 ) {
     $oListeUser = new UserListe();
     $oListeUser->applyRules4SearchByEmail($_POST["user_email"]["mandataire"]);
-    $aUsers=$oListeUser->getPage();
-    if(count($aUsers)){
+    $aUsersMails=$oListeUser->getPage();
+    if(count($aUsersMails)){
         $aResponse["message"]["text"] =  "Un compte est déjà associé à cette adresse e-mail.";
         array_push($aResponse["required"],array("field"=>"user_email" . "\\[mandataire\\]"));
         $nError++;
@@ -310,7 +310,7 @@ if ($nError == 0) {
 
         //sauvegarde User
         $sEmail = "";
-        foreach ($aUser as $sType => $user) {
+        foreach ($aUsersMember as $sType => $user) {
             if (isset($user["id"])) {
                 if (intval($user["id"]) == 0) {
                     $oUser = new User();
@@ -322,27 +322,29 @@ if ($nError == 0) {
                 $oUser->setFirstname($user["firstname"]);
                 $oUser->setEmail($user["email"]);
                 $oUser->setTel($user["tel"]);
-                $oUser->setAd1($user["ad1"]);
-                $oUser->setAd2($user["ad2"]);
-                $oUser->setAd3($user["ad3"]);
-                $oUser->setZipcode($user["zipcode"]);
-                $oUser->setCity($user["city"]);
+
                 $oUser->setType($user["type"]);
 
 
                 //recuperation du mail du mandataire
-                if ($user["type"] == "mandataire") {
-                    $sEmail = $user["email"];
-                    if (isset($_POST["mandataire_pass"])) {
-                        $oUser->setPass($oUser::encodePassword($_POST["mandataire_pass"]));
+                if($user["type"]=="mandataire"){
+                    $oUser->setAd1($user["ad1"]);
+                    $oUser->setAd2($user["ad2"]);
+                    $oUser->setAd3($user["ad3"]);
+                    $oUser->setZipcode($user["zipcode"]);
+                    $oUser->setCity($user["city"]);
+                    $sEmail=$user["email"];
+                }else{
+                    if($user["delete"]==1){
+                        $oUser->setDate_deleted(date("Y-m-d H:i:s"));
                     }
                 }
 
                 $oUser->save();
             }
 
-        }
 
+        }
 
         $TwigEngine = App::getTwig();
         $sBodyMailHTML = $TwigEngine->render("visitor/mail/body.html.twig", [

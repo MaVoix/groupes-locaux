@@ -152,6 +152,48 @@ $(document).ready(function () {
 
     });
 
+    //click addItem
+    $body.on('click','.jsAddItem',function(){
+        var $element = $(this);
+
+        if (!isSendingForm)
+        {
+            var url = $element.data("url");
+            var list = $("#"+$element.data("target"));
+            var maxNum=1;
+            var nbItem=0;
+            list.find("[data-num]").each(function(){
+                if($(this).data("num")>maxNum){
+                    maxNum=$(this).data("num");
+                    //ne comptabilise que les elements non supprimé
+                    if($(this).find(".jsItemDeleted").val()===0){
+                        nbItem++
+                    }
+                }
+            });
+            var data = {'maxnum': maxNum,'nbitem':nbItem};
+            sendAjaxRequest($element, url, data, function(response){
+                if(response===""){
+                    toastr["error"]("Vous ne pouvez pas ajouter plus d'éléments","Erreur");
+                }else{
+                    list.append(response);
+                    //tel international plugin
+                    $(".telInput").intlTelInput({
+                        utilsScript: "/js/plugins/intlTelInput/utils.js",
+                        preferredCountries : ["fr"]
+                    });
+                }
+
+            });
+        }
+    });
+    //delete item
+    $body.on('click','.jsDeleteItem',function(){
+        var $div=$(this).closest("[data-num]");
+        $div.find(".jsItemDeleted").val(1);
+       $div.hide();
+    });
+
     //toastr message
     $body.on('click', '[data-toastr]', function (e) {
         if ($(this).data("toastr-timeout")) {
