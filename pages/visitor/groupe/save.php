@@ -333,6 +333,10 @@ if ($nError == 0) {
                     $oUser->setAd3($user["ad3"]);
                     $oUser->setZipcode($user["zipcode"]);
                     $oUser->setCity($user["city"]);
+
+                    $sPassword=User::encodePassword($_POST["mandataire_pass"]);
+                    $oUser->setPass($sPassword);
+
                     $sEmail=$user["email"];
                 }else{
                     if($user["delete"]==1){
@@ -362,7 +366,7 @@ if ($nError == 0) {
             $aResponse["redirect"] = "/groupe/list.html";
         } else {
             $aResponse["message"]["text"] = "Félicitations !";
-            $aResponse["redirect"] = "/groupe/felicitation.html";
+            $aResponse["redirect"] = "/groupe/felicitations.html";
         }
 
         SessionService::set("last-save-id", $Group->getId());
