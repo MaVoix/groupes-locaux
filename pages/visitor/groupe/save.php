@@ -150,7 +150,7 @@ if ($nError == 0) {
 //vérifie si le mail est déjà utilisé
 if( $nError==0 ) {
     $oListeUser = new UserListe();
-    $oListeUser->applyRules4SearchByEmail($_POST["user_email"]["mandataire"]);
+    $oListeUser->applyRules4SearchByEmail($_POST["user_email"]["mandataire"],"mandataire");
     $aUsersMails=$oListeUser->getPage();
     if(count($aUsersMails)){
         $aResponse["message"]["text"] =  "Un compte est déjà associé à cette adresse e-mail.";

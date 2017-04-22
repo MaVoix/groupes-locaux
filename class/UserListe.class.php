@@ -74,10 +74,13 @@ class UserListe extends Liste
         ]);
         return $this;
     }
-    private function withEmail($sEmail)
+    private function withEmail($sEmail,$sType)
     {
         $this-> setAllFields();
         $this->addCritere(array("field"=>"email", "value"=>strtolower(Vars::secureInjection($sEmail)), "compare"=>"="));
+        if(!is_null($sType)){
+            $this->addCritere(array("field"=>"type", "value"=>strtolower(Vars::secureInjection($sType)), "compare"=>"="));
+        }
         return $this;
     }
     public function applyRules4Group($id)
@@ -91,9 +94,9 @@ class UserListe extends Liste
             ]
         ]);
     }
-    public function applyRules4SearchByEmail($email)
+    public function applyRules4SearchByEmail($email,$sType=null)
     {
-        return  $this->notDeleted()->withEmail($email);
+        return  $this->notDeleted()->withEmail($email,$sType);
     }
 
 }
