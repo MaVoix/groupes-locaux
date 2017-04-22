@@ -15,8 +15,8 @@ class Group	{
     private $sDate_amended;
     private $sDate_deleted;
     private $sState;
-    private $nDepartement;
-    private $nCirconscription;
+    private $nDepartement_id;
+    private $nCirconscription_id;
     private $sPath_pic;
     private $sBank_name;
     private $sBank_city;
@@ -123,7 +123,7 @@ class Group	{
      */
     public function delete()
     {
-        $oReq=DbLink::getInstance($this->_sDbInstance)->prepare('DELETE FROM '."`group`".' WHERE  id=:id ');
+        $oReq=DbLink::getInstance($this->_sDbInstance)->prepare('DELETE FROM '."group".' WHERE  id=:id ');
         $oReq->execute(array("id"=>$this->getId()));
         $this->vide();
     }
@@ -137,7 +137,7 @@ class Group	{
      */
     public static function exists($nId=0, $sDbInstance=null)
     {
-        $oReq=DbLink::getInstance($sDbInstance)->prepare('SELECT id FROM '."`group`".' WHERE  id=:id ');
+        $oReq=DbLink::getInstance($sDbInstance)->prepare('SELECT id FROM '."group".' WHERE  id=:id ');
         $oReq->execute(array("id"=>$nId));
         $aRes=$oReq->getRow(0);
         return (count($aRes)!=0);
@@ -174,14 +174,14 @@ class Group	{
             $aData["state"]=$this->getState();
         }
 
-        if(isset($this->aDataSet["departement"]))
+        if(isset($this->aDataSet["departement_id"]))
         {
-            $aData["departement"]=$this->getDepartement();
+            $aData["departement_id"]=$this->getDepartement_id();
         }
 
-        if(isset($this->aDataSet["circonscription"]))
+        if(isset($this->aDataSet["circonscription_id"]))
         {
-            $aData["circonscription"]=$this->getCirconscription();
+            $aData["circonscription_id"]=$this->getCirconscription_id();
         }
 
         if(isset($this->aDataSet["path_pic"]))
@@ -252,8 +252,8 @@ class Group	{
         $this->setDate_amended(NULL);
         $this->setDate_deleted(NULL);
         $this->setState(NULL);
-        $this->setDepartement(NULL);
-        $this->setCirconscription(NULL);
+        $this->setDepartement_id(NULL);
+        $this->setCirconscription_id(NULL);
         $this->setPath_pic(NULL);
         $this->setBank_name(NULL);
         $this->setBank_city(NULL);
@@ -277,8 +277,8 @@ class Group	{
             "date_amended" => $this->getDate_amended(),
             "date_deleted" => $this->getDate_deleted(),
             "state" => $this->getState(),
-            "departement" => $this->getDepartement(),
-            "circonscription" => $this->getCirconscription(),
+            "departement_id" => $this->getDepartement_id(),
+            "circonscription_id" => $this->getCirconscription_id(),
             "path_pic" => $this->getPath_pic(),
             "bank_name" => $this->getBank_name(),
             "bank_city" => $this->getBank_city(),
@@ -568,97 +568,117 @@ class Group	{
 
 
     /**
-     * Set le champ departement
-     * @param number $nDepartement nouvelle valeur pour le champ departement
+     * Set le champ departement_id
+     * @param number $nDepartement_id nouvelle valeur pour le champ departement_id
      */
-    public function setDepartement($nDepartement)
+    public function setDepartement_id($nDepartement_id)
     {
-        if( is_null($nDepartement) ) $nDepartement='';
-        if( is_numeric($nDepartement)  || $nDepartement=='' )
+        if( is_null($nDepartement_id) ) $nDepartement_id='';
+        if( is_numeric($nDepartement_id)  || $nDepartement_id=='' )
         {
-            $this->nDepartement = $nDepartement;
-            $this->aDataSet["departement"]=1;
+            $this->nDepartement_id = $nDepartement_id;
+            $this->aDataSet["departement_id"]=1;
         }
     }
 
 
 
     /**
-     * Get le champ departement
-     * @return number valeur du champ departement
+     * Get le champ departement_id
+     * @return number valeur du champ departement_id
      */
-    public function getDepartement()
+    public function getDepartement_id()
     {
-        if( !is_null($this->nDepartement) )
+        if( !is_null($this->nDepartement_id) )
         {
-            if( $this->nDepartement==='' )
+            if( $this->nDepartement_id==='' )
             {
                 return NULL;
             }
             else
             {
-                return $this->nDepartement;
+                return $this->nDepartement_id;
             }
         }
         else
         {
-            $this->hydrateFromBDD(array('departement'));
+            $this->hydrateFromBDD(array('departement_id'));
             $this->callHydrateFromBDDOnGet++;
             if($this->callHydrateFromBDDOnGet>10)
             {
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
-            return $this->nDepartement;
+            return $this->nDepartement_id;
+        }
+    }
+
+    public function Departement()
+    {
+        if( $this->nDepartement_id){
+            $oDepartement = new Departement(array("id"=>$this->nDepartement_id));
+            $oDepartement->HydrateFromBDD(array("*"));
+            return $oDepartement;
+        }else{
+            return NULL;
+        }
+    }
+
+
+    /**
+     * Set le champ circonscription_id
+     * @param number $nCirconscription_id nouvelle valeur pour le champ circonscription_id
+     */
+    public function setCirconscription_id($nCirconscription_id)
+    {
+        if( is_null($nCirconscription_id) ) $nCirconscription_id='';
+        if( is_numeric($nCirconscription_id)  || $nCirconscription_id=='' )
+        {
+            $this->nCirconscription_id = $nCirconscription_id;
+            $this->aDataSet["circonscription_id"]=1;
         }
     }
 
 
 
     /**
-     * Set le champ circonscription
-     * @param number $nCirconscription nouvelle valeur pour le champ circonscription
+     * Get le champ circonscription_id
+     * @return number valeur du champ circonscription_id
      */
-    public function setCirconscription($nCirconscription)
+    public function getCirconscription_id()
     {
-        if( is_null($nCirconscription) ) $nCirconscription='';
-        if( is_numeric($nCirconscription)  || $nCirconscription=='' )
+        if( !is_null($this->nCirconscription_id) )
         {
-            $this->nCirconscription = $nCirconscription;
-            $this->aDataSet["circonscription"]=1;
-        }
-    }
-
-
-
-    /**
-     * Get le champ circonscription
-     * @return number valeur du champ circonscription
-     */
-    public function getCirconscription()
-    {
-        if( !is_null($this->nCirconscription) )
-        {
-            if( $this->nCirconscription==='' )
+            if( $this->nCirconscription_id==='' )
             {
                 return NULL;
             }
             else
             {
-                return $this->nCirconscription;
+                return $this->nCirconscription_id;
             }
         }
         else
         {
-            $this->hydrateFromBDD(array('circonscription'));
+            $this->hydrateFromBDD(array('circonscription_id'));
             $this->callHydrateFromBDDOnGet++;
             if($this->callHydrateFromBDDOnGet>10)
             {
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
-            return $this->nCirconscription;
+            return $this->nCirconscription_id;
         }
     }
 
+    public function Circonscription()
+    {
+        if( $this->nCirconscription_id){
+            $oCirconscription = new Circonscription(array("id"=>$this->nCirconscription_id));
+            $oCirconscription->HydrateFromBDD(array("*"));
+            return $oCirconscription;
+        }else{
+            return NULL;
+        }
+    }
 
 
     /**
