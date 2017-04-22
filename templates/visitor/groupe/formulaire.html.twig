@@ -35,13 +35,13 @@
 
                         <div class="form-group">
                             <label for="group_name" class="control-label"><strong>Nous groupe local de</strong></label>
-                            <input type="text" class="form-control publicinfo" id="group_name" name="group_name"
+                            <input title="Nom du groupe local" type="text" class="form-control publicinfo" id="group_name" name="group_name"
                                    value="{{ group.name }}"
                                    placeholder="Nom">
                         </div>
                         <div class="form-group">
                             <label for="nom" class="control-label"><strong>Nous engageons à réaliser la campagne législative #MAVOIX dans la circonscription</strong></label>
-                            <select class="form-control updateContentOnChange publicinfo" id="departement" name="departement" data-url="/groupe/formulaire.html" data-blocks="['divCirconsciptions']" >
+                            <select title="Département" class="form-control updateContentOnChange publicinfo" id="departement" name="departement" data-url="/groupe/formulaire.html" data-blocks="['divCirconsciptions']" >
                                 <option value="">Choisissez un département</option>
                               {% for departement in departements  %}
                                 <option value="{{ departement.id }}" {%  if group.departement==departement.id %} selected {% endif %}>{{ departement.code }} - {{ departement.name }}</option>
@@ -51,14 +51,14 @@
                         <div class="form-group">
                             <div class="updatableContent" data-updateIndex="divCirconsciptions">
                                 {% if circonscriptions|length>0 %}
-                                    <select class="form-control  publicinfo" id="circonscription" name="circonscription"  >
+                                    <select title="Numéro de circonscription" class="form-control  publicinfo" id="circonscription" name="circonscription"  >
                                         <option value="">Choisissez une circonscription</option>
                                     {% for circonscription in circonscriptions  %}
                                         <option value="{{ circonscription.id }}" {%  if group.circonscription==circonscription.id %} selected {% endif %}>{{ sup(circonscription.number,'f',true) }} circonscription</option>
                                     {% endfor %}
                                     </select>
                                 {% else %}
-                                    <select class="form-control" id="circonscription" name="circonscription"  disabled>
+                                    <select title="Numéro de circonscription" class="form-control" id="circonscription" name="circonscription"  disabled>
                                         <option value="">Choisissez une circonscription</option>
                                 </select>
                                 {% endif %}
@@ -79,21 +79,21 @@
                         <div class="form-group">
 
                             <label for="user_name[mandataire]" class="control-label">Nom de famille : *</label>
-                            <input type="text" class="form-control publicinfo" id="user_name[mandataire]" name="user_name[mandataire]"
+                            <input title="Nom de famille du mandataire financier" type="text" class="form-control publicinfo" id="user_name[mandataire]" name="user_name[mandataire]"
                                    value="{{ user["mandataire"].name|ucwords }}"
                                    placeholder="Nom de famille">
                         </div>
                         <div class="form-group">
 
                             <label for="user_firstname[mandataire]" class="control-label">Prénom : *</label>
-                            <input type="text" class="form-control publicinfo" id="user_firstname[mandataire]" name="user_firstname[mandataire]"
+                            <input  title="Prénom du mandataire financier"type="text" class="form-control publicinfo" id="user_firstname[mandataire]" name="user_firstname[mandataire]"
                                    value="{{ user["mandataire"].firstname|ucwords }}"
                                    placeholder="Prénom">
                         </div>
 
                         <div class="form-group">
                             <label for="user_email[mandataire]" class="control-label">E-mail : *</label>
-                            <input type="email" class="form-control" id="user_email[mandataire]" name="user_email[mandataire]"
+                            <input  title="Adresse email du mandataire financier"type="email" class="form-control" id="user_email[mandataire]" name="user_email[mandataire]"
                                    value="{{ user["mandataire"].email }}"
                                    placeholder="xxxxxx@xxxxx.com ">
                         </div>
@@ -101,13 +101,13 @@
                         {% if group.id=='' %}
                         <div class="form-group">
                             <label for="mandataire_pass" class="control-label">Mot de passe : *</label>
-                            <input type="password" class="form-control" id="mandataire_pass" name="mandataire_pass"
+                            <input  title="Mot de passe du mandataire financier"type="password" class="form-control" id="mandataire_pass" name="mandataire_pass"
                                    value=""
                                    placeholder=" ">
                         </div>
                         <div class="form-group">
                             <label for="mandataire_pass_confirm" class="control-label">Confirmation du mot de passe : *</label>
-                            <input type="password" class="form-control" id="mandataire_pass_confirm" name="mandataire_pass_confirm"
+                            <input  title="Confirmation du mot de passe" type="password" class="form-control" id="mandataire_pass_confirm" name="mandataire_pass_confirm"
                                    value=""
                                    placeholder=" ">
                             <p class="help-block">Votre mot de passe doit contenir des lettres et des chiffres (6 caractères minimum). Conservez-le précieusement, il vous servira à vous connecter à la page de votre groupe.</p>
@@ -116,7 +116,7 @@
                         {%  endif %}
                         <div class="form-group">
                             <label for="user_tel_display[mandataire]" class="control-label">Téléphone : *</label>
-                            <br /><input id="user_tel_display[mandataire]"  value="{{ user["mandataire"].tel  }}" type="text" class="form-control telInput" name="user_tel_display[mandataire]" >
+                            <br /><input  title="Numéro de téléphone du mandataire financier" id="user_tel_display[mandataire]"  value="{{ user["mandataire"].tel  }}" type="text" class="form-control telInput" name="user_tel_display[mandataire]" >
                             <input type="hidden" class="form-control" id="user_tel[mandataire]" name="user_tel[mandataire]" placeholder="XXXXXXXXX"
                                    value="{{ user["mandataire"].tel  }}" style="position:absolute;top:-10000px;">
 
@@ -127,27 +127,27 @@
                         <h4>L'adresse à laquelle le ou la mandataire recevra les chèques de dons :</h4>
                         <div class="form-group">
                             <label for="user_ad1[mandataire]" class="control-label">Adresse champ 1 : *</label>
-                            <input type="text" class="form-control publicinfo" id="user_ad1[mandataire]" name="user_ad1[mandataire]"
+                            <input   title="Ligne 1 de l'adresse postale du mandataire financier" type="text" class="form-control publicinfo" id="user_ad1[mandataire]" name="user_ad1[mandataire]"
                                    placeholder="N°, type de voie, nom de la voie" value="{{ user["mandataire"].ad1 }}">
                         </div>
                         <div class="form-group">
                             <label for="user_ad2[mandataire]" class="control-label">Adresse champ 2 :</label>
-                            <input type="text" class="form-control publicinfo" id="user_ad2[mandataire]" name="user_ad2[mandataire]" value="{{ user["mandataire"].ad2 }}"
+                            <input  title="Ligne 2 de l'adresse postale du mandataire financier" type="text" class="form-control publicinfo" id="user_ad2[mandataire]" name="user_ad2[mandataire]" value="{{ user["mandataire"].ad2 }}"
                                    placeholder="Immeuble, Résidence, Z.I ...">
                         </div>
                         <div class="form-group">
                             <label for="user_ad3[mandataire]" class="control-label">Adresse champ 3 :</label>
-                            <input type="text" class="form-control publicinfo" id="user_ad3[mandataire]" name="user_ad3[mandataire]" value="{{ user["mandataire"].ad3}}"
+                            <input  title="Ligne 3 de l'adresse postale du mandataire financier" type="text" class="form-control publicinfo" id="user_ad3[mandataire]" name="user_ad3[mandataire]" value="{{ user["mandataire"].ad3}}"
                                    placeholder="BP, TSA, Lieu dit">
                         </div>
                         <div class="form-group">
                             <label for="user_zipcode[mandataire]" class="control-label">Code postal : *</label>
-                            <input type="text" class="form-control publicinfo" id="user_zipcode[mandataire]" name="user_zipcode[mandataire]" value="{{ user["mandataire"].zipcode }}"
+                            <input   title="Code postal du mandataire financier"type="text" class="form-control publicinfo" id="user_zipcode[mandataire]" name="user_zipcode[mandataire]" value="{{ user["mandataire"].zipcode }}"
                                    placeholder="XXXXX">
                         </div>
                         <div class="form-group">
                             <label for="user_city[mandataire]" class="control-label">Ville : *</label>
-                            <input type="text" class="form-control publicinfo" id="user_city[mandataire]" name="user_city[mandataire]"
+                            <input   title="Ville du mandataire financier" type="text" class="form-control publicinfo" id="user_city[mandataire]" name="user_city[mandataire]"
                                    value="{{ user["mandataire"].city|capitalizefirst }}"
                                    placeholder="Nom de la ville">
                         </div>
@@ -155,12 +155,12 @@
                             Il.elle a déjà pris contact avec la banque suivante afin de préparer l’ouverture du compte.</p>
                         <div class="form-group">
                             <label for="bank_name" class="control-label">Nom de la banque :</label>
-                            <input type="text" class="form-control" id="banque_nom" name="bank_name" value="{{ group.bank_name }}"
+                            <input   title="Nom de la banque du groupe local" type="text" class="form-control" id="banque_nom" name="bank_name" value="{{ group.bank_name }}"
                                    placeholder="Crédit Démocratique de la Madeleine">
                         </div>
                         <div class="form-group">
                             <label for="bank_city" class="control-label">Ville :</label>
-                            <input type="text" class="form-control" id="bank_city" name="bank_city" value="{{ group.bank_city }}"
+                            <input   title="Ville de la banque du groupe local" type="text" class="form-control" id="bank_city" name="bank_city" value="{{ group.bank_city }}"
                                    placeholder="Ville de votre banque">
                         </div>
 
@@ -464,7 +464,7 @@
                                 {% if group.id!='' %}
                                     Enregistrer
                                 {% else %}
-                                    Envoyer mon engagement
+                                    Envoyer notre engagement
                                 {% endif %}
                             </button>
                         </div>
