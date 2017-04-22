@@ -27,10 +27,10 @@
                   </thead>
                   <tbody>
 
-                {% for groupe in groupes %}
+                {% for group in groups %}
 
                 <tr>
-                  <td><a class="anchor" name="{{ group.id }}"></a><span style="font-size:2em">{{ group.departement_name}} ({{group.departement.id}}) ({{group.circonscription.number}}{%  if group.circonscription.number == 1 %}ère{% else %}ème{% endif %})</span></td>
+                  <td><a class="anchor" name="{{ group.id }}"></a><span style="font-size:2em">{{ group.departement.name}} ({{group.departement.id}}) ({{group.circonscription.number}}{%  if group.circonscription.number == 1 %}ère{% else %}ème{% endif %})</span></td>
                   <td>
                    <a href="/groupe/groupe.html?id={{ group.id }}"><div style="background-image:url('/{{ group.path_pic_fit }}');" class="square-pic-group-small jsLink" ></div></a>
                   </td>

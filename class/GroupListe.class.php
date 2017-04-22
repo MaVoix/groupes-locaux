@@ -94,4 +94,17 @@ class GroupListe extends Liste
 
         return $this;
     }
+
+    public function applyRules4ListAdmin()
+    {
+        $this->setAllFields();
+        $this->addCriteres([
+            [
+                "field" => "date_deleted",
+                "compare" => "IS NULL",
+                "value" => ""
+            ]
+        ]);
+
+    }
 }
