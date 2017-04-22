@@ -363,7 +363,7 @@ if ($nError == 0) {
             "group" => $Group
         ]);
         if (!$bEdit && $sEmail != "") {
-            Mail::sendMail($sEmail, "Confirmation de groupe", $sBodyMailHTML, $sBodyMailTXT, true);
+            Mail::sendMail($sEmail, "Confirmation d'engagement de groupe local", $sBodyMailHTML, $sBodyMailTXT, true);
         }
 
         if ($oMe->getType() == "admin") {
