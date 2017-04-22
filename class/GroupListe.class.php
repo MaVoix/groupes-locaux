@@ -60,4 +60,17 @@ class GroupListe extends Liste
     {
         $this->setFields(self::$_champs);
     }
+
+    public function applyRules4ListAdmin()
+    {
+        $this->setAllFields();
+        $this->addCriteres([
+            [
+                "field" => "date_deleted",
+                "compare" => "IS NULL",
+                "value" => ""
+            ]
+        ]);
+
+    }
 }
