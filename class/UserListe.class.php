@@ -13,11 +13,21 @@ class UserListe extends Liste
         "date_created",
         "date_amended",
         "date_deleted",
-        "people_id",
-        "login",
+        "email",
         "pass",
         "type",
-        "enable"
+        "enable",
+        "group_id",
+        "civility",
+        "firstname",
+        "name",
+        "ad1",
+        "ad2",
+        "ad3",
+        "city",
+        "zipcode",
+        "country",
+        "tel"
     );
 
     /**
