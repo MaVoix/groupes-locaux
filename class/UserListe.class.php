@@ -52,4 +52,38 @@ class UserListe extends Liste
         $this->setFields(self::$_champs);
     }
 
+    private function notDeleted()
+    {
+        $this->setAllFields();
+        $this->addCriteres([
+            [
+                "field" => "date_deleted",
+                "compare" => "IS NULL",
+                "value" => ""
+            ]
+        ]);
+        return $this;
+    }
+    private function withEmail($sEmail)
+    {
+        $this-> setAllFields();
+        $this->addCritere(array("field"=>"email", "value"=>strtolower(Vars::secureInjection($sEmail)), "compare"=>"="));
+        return $this;
+    }
+    public function applyRules4Group($id)
+    {
+        $this->setAllFields();
+        $this->addCriteres([
+            [
+                "field" => "group_id",
+                "compare" => "=",
+                "value" => vars::secureInjection(intval($id))
+            ]
+        ]);
+    }
+    public function applyRules4SearchByEmail($email)
+    {
+        return  $this->notDeleted()->withEmail($email);
+    }
+
 }

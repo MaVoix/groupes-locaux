@@ -13,11 +13,21 @@ class User	{
     private $sDate_created;
     private $sDate_amended;
     private $sDate_deleted;
-    private $nPeople_id;
-    private $sLogin;
+    private $sEmail;
     private $sPass;
     private $sType;
     private $bEnable;
+    private $nGroup_id;
+    private $sCivility;
+    private $sFirstname;
+    private $sName;
+    private $sAd1;
+    private $sAd2;
+    private $sAd3;
+    private $sCity;
+    private $sZipcode;
+    private $sCountry;
+    private $sTel;
 
 
     /**
@@ -156,14 +166,9 @@ class User	{
             $aData["date_deleted"]=$this->getDate_deleted();
         }
 
-        if(isset($this->aDataSet["people_id"]))
+        if(isset($this->aDataSet["email"]))
         {
-            $aData["people_id"]=$this->getPeople_id();
-        }
-
-        if(isset($this->aDataSet["login"]))
-        {
-            $aData["login"]=$this->getLogin();
+            $aData["email"]=$this->getEmail();
         }
 
         if(isset($this->aDataSet["pass"]))
@@ -179,6 +184,61 @@ class User	{
         if(isset($this->aDataSet["enable"]))
         {
             $aData["enable"]=$this->getEnable();
+        }
+
+        if(isset($this->aDataSet["group_id"]))
+        {
+            $aData["group_id"]=$this->getGroup_id();
+        }
+
+        if(isset($this->aDataSet["civility"]))
+        {
+            $aData["civility"]=$this->getCivility();
+        }
+
+        if(isset($this->aDataSet["firstname"]))
+        {
+            $aData["firstname"]=$this->getFirstname();
+        }
+
+        if(isset($this->aDataSet["name"]))
+        {
+            $aData["name"]=$this->getName();
+        }
+
+        if(isset($this->aDataSet["ad1"]))
+        {
+            $aData["ad1"]=$this->getAd1();
+        }
+
+        if(isset($this->aDataSet["ad2"]))
+        {
+            $aData["ad2"]=$this->getAd2();
+        }
+
+        if(isset($this->aDataSet["ad3"]))
+        {
+            $aData["ad3"]=$this->getAd3();
+        }
+
+        if(isset($this->aDataSet["city"]))
+        {
+            $aData["city"]=$this->getCity();
+        }
+
+        if(isset($this->aDataSet["zipcode"]))
+        {
+            $aData["zipcode"]=$this->getZipcode();
+        }
+
+        if(isset($this->aDataSet["country"]))
+        {
+            $aData["country"]=$this->getCountry();
+        }
+
+        if(isset($this->aDataSet["tel"]))
+        {
+            $aData["tel"]=$this->getTel();
         }
 
         if($this->getId()>0)
@@ -202,11 +262,21 @@ class User	{
         $this->setDate_created(NULL);
         $this->setDate_amended(NULL);
         $this->setDate_deleted(NULL);
-        $this->setPeople_id(NULL);
-        $this->setLogin(NULL);
+        $this->setEmail(NULL);
         $this->setPass(NULL);
         $this->setType(NULL);
         $this->setEnable(0);
+        $this->setGroup_id(NULL);
+        $this->setCivility(NULL);
+        $this->setFirstname(NULL);
+        $this->setName(NULL);
+        $this->setAd1(NULL);
+        $this->setAd2(NULL);
+        $this->setAd3(NULL);
+        $this->setCity(NULL);
+        $this->setZipcode(NULL);
+        $this->setCountry(NULL);
+        $this->setTel(NULL);
     }
 
     /**
@@ -219,11 +289,21 @@ class User	{
             "date_created" => $this->getDate_created(),
             "date_amended" => $this->getDate_amended(),
             "date_deleted" => $this->getDate_deleted(),
-            "people_id" => $this->getPeople_id(),
-            "login" => $this->getLogin(),
+            "email" => $this->getEmail(),
             "pass" => $this->getPass(),
             "type" => $this->getType(),
-            "enable" => $this->getEnable()
+            "enable" => $this->getEnable(),
+            "group_id" => $this->getGroup_id(),
+            "civility" => $this->getCivility(),
+            "firstname" => $this->getFirstname(),
+            "name" => $this->getName(),
+            "ad1" => $this->getAd1(),
+            "ad2" => $this->getAd2(),
+            "ad3" => $this->getAd3(),
+            "city" => $this->getCity(),
+            "zipcode" => $this->getZipcode(),
+            "country" => $this->getCountry(),
+            "tel" => $this->getTel()
         ];
 
         return json_encode($aObjet);
@@ -416,101 +496,44 @@ class User	{
 
 
     /**
-     * Set le champ people_id
-     * @param number $nPeople_id nouvelle valeur pour le champ people_id
+     * Set le champ email
+     * @param string $sEmail nouvelle valeur pour le champ email
      */
-    public function setPeople_id($nPeople_id)
+    public function setEmail($sEmail)
     {
-        if( is_null($nPeople_id) ) $nPeople_id='';
-        if( is_numeric($nPeople_id)  || $nPeople_id=='' )
-        {
-            $this->nPeople_id = $nPeople_id;
-            $this->aDataSet["people_id"]=1;
-        }
+        if( is_null($sEmail) ) $sEmail='';
+        $this->sEmail = $sEmail;
+        $this->aDataSet["email"]=1;
     }
 
 
 
     /**
-     * Get le champ people_id
-     * @return number valeur du champ people_id
+     * Get le champ email
+     * @return string valeur du champ email
      */
-    public function getPeople_id()
+    public function getEmail()
     {
-        if( !is_null($this->nPeople_id) )
+        if( !is_null($this->sEmail) )
         {
-            if( $this->nPeople_id==='' )
+            if( $this->sEmail==='' )
             {
                 return NULL;
             }
             else
             {
-                return $this->nPeople_id;
+                return $this->sEmail;
             }
         }
         else
         {
-            $this->hydrateFromBDD(array('people_id'));
+            $this->hydrateFromBDD(array('email'));
             $this->callHydrateFromBDDOnGet++;
             if($this->callHydrateFromBDDOnGet>10)
             {
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
-            return $this->nPeople_id;
-        }
-    }
-
-    public function People()
-    {
-        if( $this->nPeople_id){
-            $oPeople = new People(array("id"=>$this->nPeople_id));
-            $oPeople->HydrateFromBDD(array("*"));
-            return $oPeople;
-        }else{
-            return NULL;
-        }
-    }
-
-
-    /**
-     * Set le champ login
-     * @param string $sLogin nouvelle valeur pour le champ login
-     */
-    public function setLogin($sLogin)
-    {
-        if( is_null($sLogin) ) $sLogin='';
-        $this->sLogin = $sLogin;
-        $this->aDataSet["login"]=1;
-    }
-
-
-
-    /**
-     * Get le champ login
-     * @return string valeur du champ login
-     */
-    public function getLogin()
-    {
-        if( !is_null($this->sLogin) )
-        {
-            if( $this->sLogin==='' )
-            {
-                return NULL;
-            }
-            else
-            {
-                return $this->sLogin;
-            }
-        }
-        else
-        {
-            $this->hydrateFromBDD(array('login'));
-            $this->callHydrateFromBDDOnGet++;
-            if($this->callHydrateFromBDDOnGet>10)
-            {
-                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
-            }
-            return $this->sLogin;
+            return $this->sEmail;
         }
     }
 
@@ -649,12 +672,516 @@ class User	{
         }
     }
 
+
+
+    /**
+     * Set le champ group_id
+     * @param number $nGroup_id nouvelle valeur pour le champ group_id
+     */
+    public function setGroup_id($nGroup_id)
+    {
+        if( is_null($nGroup_id) ) $nGroup_id='';
+        if( is_numeric($nGroup_id)  || $nGroup_id=='' )
+        {
+            $this->nGroup_id = $nGroup_id;
+            $this->aDataSet["group_id"]=1;
+        }
+    }
+
+
+
+    /**
+     * Get le champ group_id
+     * @return number valeur du champ group_id
+     */
+    public function getGroup_id()
+    {
+        if( !is_null($this->nGroup_id) )
+        {
+            if( $this->nGroup_id==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->nGroup_id;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('group_id'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->nGroup_id;
+        }
+    }
+
+    public function Group()
+    {
+        if( $this->nGroup_id){
+            $oGroup = new Group(array("id"=>$this->nGroup_id));
+            $oGroup->HydrateFromBDD(array("*"));
+            return $oGroup;
+        }else{
+            return NULL;
+        }
+    }
+
+
+    /**
+     * Set le champ civility
+     * @param string $sCivility nouvelle valeur pour le champ civility
+     */
+    public function setCivility($sCivility)
+    {
+        if( is_null($sCivility) ) $sCivility='';
+        $this->sCivility = $sCivility;
+        $this->aDataSet["civility"]=1;
+    }
+
+
+
+    /**
+     * Get le champ civility
+     * @return string valeur du champ civility
+     */
+    public function getCivility()
+    {
+        if( !is_null($this->sCivility) )
+        {
+            if( $this->sCivility==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sCivility;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('civility'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sCivility;
+        }
+    }
+
+
+
+    /**
+     * Set le champ firstname
+     * @param string $sFirstname nouvelle valeur pour le champ firstname
+     */
+    public function setFirstname($sFirstname)
+    {
+        if( is_null($sFirstname) ) $sFirstname='';
+        $this->sFirstname = $sFirstname;
+        $this->aDataSet["firstname"]=1;
+    }
+
+
+
+    /**
+     * Get le champ firstname
+     * @return string valeur du champ firstname
+     */
+    public function getFirstname()
+    {
+        if( !is_null($this->sFirstname) )
+        {
+            if( $this->sFirstname==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sFirstname;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('firstname'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sFirstname;
+        }
+    }
+
+
+
+    /**
+     * Set le champ name
+     * @param string $sName nouvelle valeur pour le champ name
+     */
+    public function setName($sName)
+    {
+        if( is_null($sName) ) $sName='';
+        $this->sName = $sName;
+        $this->aDataSet["name"]=1;
+    }
+
+
+
+    /**
+     * Get le champ name
+     * @return string valeur du champ name
+     */
+    public function getName()
+    {
+        if( !is_null($this->sName) )
+        {
+            if( $this->sName==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sName;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('name'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sName;
+        }
+    }
+
+
+
+    /**
+     * Set le champ ad1
+     * @param string $sAd1 nouvelle valeur pour le champ ad1
+     */
+    public function setAd1($sAd1)
+    {
+        if( is_null($sAd1) ) $sAd1='';
+        $this->sAd1 = $sAd1;
+        $this->aDataSet["ad1"]=1;
+    }
+
+
+
+    /**
+     * Get le champ ad1
+     * @return string valeur du champ ad1
+     */
+    public function getAd1()
+    {
+        if( !is_null($this->sAd1) )
+        {
+            if( $this->sAd1==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sAd1;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('ad1'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sAd1;
+        }
+    }
+
+
+
+    /**
+     * Set le champ ad2
+     * @param string $sAd2 nouvelle valeur pour le champ ad2
+     */
+    public function setAd2($sAd2)
+    {
+        if( is_null($sAd2) ) $sAd2='';
+        $this->sAd2 = $sAd2;
+        $this->aDataSet["ad2"]=1;
+    }
+
+
+
+    /**
+     * Get le champ ad2
+     * @return string valeur du champ ad2
+     */
+    public function getAd2()
+    {
+        if( !is_null($this->sAd2) )
+        {
+            if( $this->sAd2==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sAd2;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('ad2'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sAd2;
+        }
+    }
+
+
+
+    /**
+     * Set le champ ad3
+     * @param string $sAd3 nouvelle valeur pour le champ ad3
+     */
+    public function setAd3($sAd3)
+    {
+        if( is_null($sAd3) ) $sAd3='';
+        $this->sAd3 = $sAd3;
+        $this->aDataSet["ad3"]=1;
+    }
+
+
+
+    /**
+     * Get le champ ad3
+     * @return string valeur du champ ad3
+     */
+    public function getAd3()
+    {
+        if( !is_null($this->sAd3) )
+        {
+            if( $this->sAd3==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sAd3;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('ad3'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sAd3;
+        }
+    }
+
+
+
+    /**
+     * Set le champ city
+     * @param string $sCity nouvelle valeur pour le champ city
+     */
+    public function setCity($sCity)
+    {
+        if( is_null($sCity) ) $sCity='';
+        $this->sCity = $sCity;
+        $this->aDataSet["city"]=1;
+    }
+
+
+
+    /**
+     * Get le champ city
+     * @return string valeur du champ city
+     */
+    public function getCity()
+    {
+        if( !is_null($this->sCity) )
+        {
+            if( $this->sCity==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sCity;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('city'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sCity;
+        }
+    }
+
+
+
+    /**
+     * Set le champ zipcode
+     * @param string $sZipcode nouvelle valeur pour le champ zipcode
+     */
+    public function setZipcode($sZipcode)
+    {
+        if( is_null($sZipcode) ) $sZipcode='';
+        $this->sZipcode = $sZipcode;
+        $this->aDataSet["zipcode"]=1;
+    }
+
+
+
+    /**
+     * Get le champ zipcode
+     * @return string valeur du champ zipcode
+     */
+    public function getZipcode()
+    {
+        if( !is_null($this->sZipcode) )
+        {
+            if( $this->sZipcode==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sZipcode;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('zipcode'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sZipcode;
+        }
+    }
+
+
+
+    /**
+     * Set le champ country
+     * @param string $sCountry nouvelle valeur pour le champ country
+     */
+    public function setCountry($sCountry)
+    {
+        if( is_null($sCountry) ) $sCountry='';
+        $this->sCountry = $sCountry;
+        $this->aDataSet["country"]=1;
+    }
+
+
+
+    /**
+     * Get le champ country
+     * @return string valeur du champ country
+     */
+    public function getCountry()
+    {
+        if( !is_null($this->sCountry) )
+        {
+            if( $this->sCountry==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sCountry;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('country'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sCountry;
+        }
+    }
+
+
+
+    /**
+     * Set le champ tel
+     * @param string $sTel nouvelle valeur pour le champ tel
+     */
+    public function setTel($sTel)
+    {
+        if( is_null($sTel) ) $sTel='';
+        $this->sTel = $sTel;
+        $this->aDataSet["tel"]=1;
+    }
+
+
+
+    /**
+     * Get le champ tel
+     * @return string valeur du champ tel
+     */
+    public function getTel()
+    {
+        if( !is_null($this->sTel) )
+        {
+            if( $this->sTel==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sTel;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('tel'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sTel;
+        }
+    }
+
     /*
     ********************************************************************************************
     *                             DEBUT FONCTIONS PERSONNALISES                  	           *
     ********************************************************************************************
     */
-
+    public static function encodePassword($sString){
+        //encode PASS
+        $oReq=DbLink::getInstance()->prepare(" SELECT PASSWORD(:pass) as pass ");
+        $aData=array("pass"=>$sString);
+        $oReq->execute($aData);
+        $sPassword=$oReq->getCase("pass",0);
+        return  $sPassword;
+    }
 
     /*
     ********************************************************************************************
