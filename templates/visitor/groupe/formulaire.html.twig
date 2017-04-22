@@ -108,6 +108,10 @@
                         </div>
 
                         {% if group.id=='' %}
+                        <h3>Mot de passe du mandataire financier</h3>
+                          <p>Si vous n'êtes pas le ou la mandataire financier, merci de penser à lui transmettre le mot de passe choisi. Les administrateurs de ce site n'ont pas accès aux mots de passe.</p>
+                          <p>Ce mot de passe donnera accès à l'interface de gestion des dons pour la circonscription.</p>
+
                         <div class="form-group">
                             <label for="mandataire_pass" class="control-label">Mot de passe : *</label>
                             <input  title="Mot de passe du mandataire financier"type="password" class="form-control" id="mandataire_pass" name="mandataire_pass"
@@ -121,6 +125,7 @@
                                    placeholder=" ">
                             <p class="help-block">Votre mot de passe doit contenir des lettres et des chiffres (6 caractères minimum). Conservez-le précieusement, il vous servira à vous connecter à la page de votre groupe.</p>
                         </div>
+
                         <p>&nbsp;</p>
                         {%  endif %}
                         <div class="form-group">
@@ -160,8 +165,8 @@
                                    value="{{ user["mandataire"].city|capitalizefirst }}"
                                    placeholder="Nom de la ville">
                         </div>
-                        <p>Il / elle est d’accord pour contribuer et partager les informations avec les autres mandataires financiers qui se réunissent chaque mercredi soir en ligne. 
-                            Il.elle a déjà pris contact avec la banque suivante afin de préparer l’ouverture du compte.</p>
+                        <p>Cette personne est d'accord pour contribuer et partager les informations avec les autres mandataires financiers qui se réunissent chaque mercredi soir en ligne. 
+                            Elle a déjà pris contact avec la banque suivante afin de préparer l’ouverture du compte.</p>
                         <div class="form-group">
                             <label for="bank_name" class="control-label">Nom de la banque :</label>
                             <input   title="Nom de la banque du groupe local" type="text" class="form-control" id="banque_nom" name="bank_name" value="{{ group.bank_name }}"
