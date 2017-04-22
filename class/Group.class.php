@@ -1096,6 +1096,25 @@ class Group	{
     ********************************************************************************************
     */
 
+    public function getMandataire(){
+        $oListeUser= new UserListe();
+        $oListeUser->applyRules4Group($this->getId(),"mandataire");
+        $aUsers=$oListeUser->getPage();
+        if(count($aUsers)){
+            $user=new User(array("id"=>$aUsers[0]["id"]));
+            $user->hydrate($aUsers[0]);
+        }else{
+            $user=new User();
+        }
+        return  $user;
+    }
+
+    public function getListeMember(){
+        $oListeUser= new UserListe();
+        $oListeUser->applyRules4Group($this->getId(),"membre");
+        return $oListeUser;
+    }
+
 
     /*
     ********************************************************************************************

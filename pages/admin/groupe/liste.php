@@ -9,10 +9,12 @@ $groupsOut=[];
 foreach($groups as $datagroup){
    $group=new Group(array("id"=>$datagroup["id"]));
    $group->hydrate($datagroup);
+
    $oDepartement=$group->getDepartement();
    $oCirconscription=$group->getCirconscription();
    $datagroup["departement"]=  $oDepartement;
    $datagroup["circonscription"]= $oCirconscription;
+    $datagroup["mandataire"]=$group->getMandataire();
    $groupsOut[$oDepartement->getCode()."-".$oCirconscription->getCode()."-".$group->getId()]=$datagroup;
 
 }
