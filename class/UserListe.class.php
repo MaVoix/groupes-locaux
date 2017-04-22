@@ -83,7 +83,7 @@ class UserListe extends Liste
         }
         return $this;
     }
-    public function applyRules4Group($id)
+    public function applyRules4Group($id,$type=null)
     {
         $this->setAllFields();
         $this->addCriteres([
@@ -93,6 +93,16 @@ class UserListe extends Liste
                 "value" => vars::secureInjection(intval($id))
             ]
         ]);
+        if(!is_null($type)){
+            $this->addCriteres([
+                [
+                    "field" => "type",
+                    "compare" => "=",
+                    "value" => vars::secureInjection($type)
+                ]
+            ]);
+        }
+        $this->notDeleted();
     }
     public function applyRules4SearchByEmail($email,$sType=null)
     {
@@ -103,6 +113,7 @@ class UserListe extends Liste
     public function applyRules4Connexion($email, $pass)
     {
         $this->setAllFields();
+        $this->notDeleted();
 
         $this->addCriteres([
             [
@@ -146,4 +157,7 @@ class UserListe extends Liste
 
         return $this;
     }
+
+
+
 }
