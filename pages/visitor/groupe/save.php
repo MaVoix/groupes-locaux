@@ -111,51 +111,53 @@ foreach ($fieldsUser as $field) {
 }
 
 //verification mot de passes
+if (!$bEdit) {
+    if ($nError == 0) {
+        $passwordLength = strlen($_POST["mandataire_pass"]);
 
-if ($nError == 0) {
-    $passwordLength = strlen($_POST["mandataire_pass"]);
+        if ($passwordLength < ConfigService::get("passwordMinLength") OR $passwordLength > ConfigService::get("passwordMaxLength")) {
+            $aResponse["message"]["text"] = sprintf("Le mot de passe doit faire entre %s et %s caractères", ConfigService::get("passwordMinLength"), ConfigService::get("passwordMaxLength"));
+            $nError++;
+            $aResponse["required"][] = [
+                "field" => "mandataire_pass"
+            ];
+        }
+    }
 
-    if ($passwordLength < ConfigService::get("passwordMinLength") OR $passwordLength > ConfigService::get("passwordMaxLength")) {
-        $aResponse["message"]["text"] = sprintf("Le mot de passe doit faire entre %s et %s caractères", ConfigService::get("passwordMinLength"), ConfigService::get("passwordMaxLength"));
-        $nError++;
-        $aResponse["required"][] = [
-            "field" => "mandataire_pass"
-        ];
+    if ($nError == 0) {
+        $password = $_POST["mandataire_pass"];
+
+        if (preg_match(ConfigService::get("passwordConstraint"), $password) !== 1) {
+            $aResponse["message"]["text"] = "Votre mot de passe contient des caractères non autorisés (uniquement chiffre et lettre";
+            $nError++;
+            $aResponse["required"][] = [
+                "field" => "mandataire_pass"
+            ];
+        }
+    }
+
+
+    if ($nError == 0) {
+        if ($_POST["mandataire_pass"] != $_POST["mandataire_pass_confirm"]) {
+            $nError++;
+            $aResponse["message"]["text"] = "Le mot de passe n'est pas identique à sa confirmation.";
+            array_push($aResponse["required"], array("field" => "mandataire_pass"));
+            array_push($aResponse["required"], array("field" => "mandataire_pass_confirm"));
+        }
     }
 }
-
-if ($nError == 0) {
-    $password = $_POST["mandataire_pass"];
-
-    if (preg_match(ConfigService::get("passwordConstraint"), $password) !== 1) {
-        $aResponse["message"]["text"] = "Votre mot de passe contient des caractères non autorisés (uniquement chiffre et lettre";
-        $nError++;
-        $aResponse["required"][] = [
-            "field" => "mandataire_pass"
-        ];
-    }
-}
-
-
-if ($nError == 0) {
-    if ($_POST["mandataire_pass"] != $_POST["mandataire_pass_confirm"]) {
-        $nError++;
-        $aResponse["message"]["text"] = "Le mot de passe n'est pas identique à sa confirmation.";
-        array_push($aResponse["required"], array("field" => "mandataire_pass"));
-        array_push($aResponse["required"], array("field" => "mandataire_pass_confirm"));
-    }
-}
-
 
 //vérifie si le mail est déjà utilisé
-if( $nError==0 ) {
-    $oListeUser = new UserListe();
-    $oListeUser->applyRules4SearchByEmail($_POST["user_email"]["mandataire"],"mandataire");
-    $aUsersMails=$oListeUser->getPage();
-    if(count($aUsersMails)){
-        $aResponse["message"]["text"] =  "Un compte est déjà associé à cette adresse e-mail.";
-        array_push($aResponse["required"],array("field"=>"user_email" . "\\[mandataire\\]"));
-        $nError++;
+if (!$bEdit) {
+    if ($nError == 0) {
+        $oListeUser = new UserListe();
+        $oListeUser->applyRules4SearchByEmail($_POST["user_email"]["mandataire"], "mandataire");
+        $aUsersMails = $oListeUser->getPage();
+        if (count($aUsersMails)) {
+            $aResponse["message"]["text"] = "Un compte est déjà associé à cette adresse e-mail.";
+            array_push($aResponse["required"], array("field" => "user_email" . "\\[mandataire\\]"));
+            $nError++;
+        }
     }
 }
 /*
@@ -335,9 +337,10 @@ if ($nError == 0) {
                     $oUser->setAd3($user["ad3"]);
                     $oUser->setZipcode($user["zipcode"]);
                     $oUser->setCity($user["city"]);
-
-                    $sPassword=User::encodePassword($_POST["mandataire_pass"]);
-                    $oUser->setPass($sPassword);
+                    if (!$bEdit) {
+                        $sPassword = User::encodePassword($_POST["mandataire_pass"]);
+                        $oUser->setPass($sPassword);
+                    }
 
                     $sEmail=$user["email"];
                 }else{

@@ -15,8 +15,8 @@
             <label for="user_civility[membre{{ num }}]" class="control-label">Civilité : *</label>
             <select id="user_civility[membre{{ num }}]" name="user_civility[membre{{ num }}]" class="form-control publicinfo">
                 <option value="">Choisir ...</option>
-                <option value="M." {% if user["membre"].civility=='M.' %} selected {% endif %}>M.</option>
-                <option value="Mme" {% if user["membre"].civility=='Mme' or user["membre"].civility=='Mme.' %} selected {% endif %}>Mme</option>
+                <option value="M." {% if member.civility=='M.' %} selected {% endif %}>M.</option>
+                <option value="Mme" {% if member.civility=='Mme' or member.civility=='Mme.' %} selected {% endif %}>Mme</option>
             </select>
         </div>
         <div class="form-group">

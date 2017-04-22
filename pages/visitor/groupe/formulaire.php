@@ -32,7 +32,7 @@ if(isset($_GET["key"]) && isset($_GET["id"])){
 
         //criconscription
         $listCirconscriptions=new CirconscriptionListe();
-        $listCirconscriptions->applyRules4Departement(intval($Group->getDepartement()));
+        $listCirconscriptions->applyRules4Departement(intval($Group->getDepartement_id()));
         $aDataScript["circonscriptions"]=  $listCirconscriptions->getPage();
 
         //user

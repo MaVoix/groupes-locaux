@@ -44,7 +44,7 @@
                             <select title="Département" class="form-control updateContentOnChange publicinfo" id="departement" name="departement" data-url="/groupe/formulaire.html" data-blocks="['divCirconsciptions']" >
                                 <option value="">Choisissez un département</option>
                               {% for departement in departements  %}
-                                <option value="{{ departement.id }}" {%  if group.departement==departement.id %} selected {% endif %}>{{ departement.code }} - {{ departement.name }}</option>
+                                <option value="{{ departement.id }}" {%  if group.departement_id==departement.id %} selected {% endif %}>{{ departement.code }} - {{ departement.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -54,7 +54,7 @@
                                     <select title="Numéro de circonscription" class="form-control  publicinfo" id="circonscription" name="circonscription"  >
                                         <option value="">Choisissez une circonscription</option>
                                     {% for circonscription in circonscriptions  %}
-                                        <option value="{{ circonscription.id }}" {%  if group.circonscription==circonscription.id %} selected {% endif %}>{{ sup(circonscription.number,'f',true) }} circonscription</option>
+                                        <option value="{{ circonscription.id }}" {%  if group.circonscription_id==circonscription.id %} selected {% endif %}>{{ sup(circonscription.number,'f',true) }} circonscription</option>
                                     {% endfor %}
                                     </select>
                                 {% else %}
