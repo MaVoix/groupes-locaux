@@ -28,7 +28,7 @@ $_CONFIG["mail-smtp-pass"]			        ="-"; //server smtp pass
 
 //main
 $_CONFIG["idSite"]                          = "collectedon"; //for unique session var prefix
-$_CONFIG["types"]			                = "visitor|user>visitor|admin>user>visitor";
+$_CONFIG["types"]			                = "visitor|donor>visitor|mandataire>donor>visitor|admin>mandataire>donor>visitor";
 $_CONFIG["area-default"]                    = array("visitor"=>"groupe","user"=>"home","admin"=>"home");
 $_CONFIG["page-default"]                    = array("visitor"=>"formulaire","user"=>"home","admin"=>"home");
 $_CONFIG["format-default"]                  = "html";
@@ -38,4 +38,7 @@ $_CONFIG["max-height"]                      = 4000; // in PX
 $_CONFIG["min-width"]                       = 600; // in PX
 $_CONFIG["min-height"]                      = 600; // in PX
 $_CONFIG["mime-type-limit"]                 = array('image/jpeg'=>'jpg','image/png'=>'png');
-$_CONFIG["people-max"]                      = 10;
+$_CONFIG["member-max"]                      = 10;
+$_CONFIG["passwordMinLength"]               = 6;
+$_CONFIG["passwordMaxLength"]               = 30;
+$_CONFIG["passwordConstraint"]              = "/^[a-z0-9]+$/i";

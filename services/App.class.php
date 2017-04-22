@@ -64,7 +64,7 @@ class App
             $oUser=new User();
             $oUser->setId(0);
             $oUser->setType("visitor");
-            $oUser->setLogin("Visitor");
+            $oUser->setEmail("xxx@xxx.xxx");
         }
         return $oUser;
 

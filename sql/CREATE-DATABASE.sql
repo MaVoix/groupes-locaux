@@ -777,33 +777,6 @@ CREATE TABLE `group` (
   `key_edit` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `people`
---
-
-CREATE TABLE `people` (
-  `id` int(11) NOT NULL,
-  `date_created` datetime DEFAULT NULL,
-  `date_amended` datetime DEFAULT NULL,
-  `date_deleted` datetime DEFAULT NULL,
-  `group_id` int(11) NOT NULL,
-  `firstname` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `ad1` varchar(255) NOT NULL,
-  `ad2` varchar(255) NOT NULL,
-  `ad3` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `zipcode` varchar(10) NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `type` varchar(20) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `tel` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
 --
 -- Structure de la table `user`
 --
@@ -813,11 +786,21 @@ CREATE TABLE `user` (
   `date_created` datetime DEFAULT NULL,
   `date_amended` datetime DEFAULT NULL,
   `date_deleted` datetime DEFAULT NULL,
-  `people_id` int(11) DEFAULT NULL,
-  `login` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `pass` varchar(100) NOT NULL,
   `type` varchar(20) NOT NULL,
-  `enable` tinyint(1) NOT NULL DEFAULT '1'
+  `enable` tinyint(1) NOT NULL DEFAULT '1',
+  `group_id` int(11) NULL,
+  `civility` varchar(4) NULL,
+  `firstname` varchar(100) NULL,
+  `name` varchar(100) NULL,
+  `ad1` varchar(255)  NULL,
+  `ad2` varchar(255) NULL,
+  `ad3` varchar(255) NULL,
+  `city` varchar(255) NULL,
+  `zipcode` varchar(10) NULL,
+  `country` varchar(255) NULL,
+  `tel` varchar(100) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -846,11 +829,6 @@ ALTER TABLE `departement`
 ALTER TABLE `group`
   ADD PRIMARY KEY (`id`);
 
---
--- Index pour la table `people`
---
-ALTER TABLE `people`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `user`
@@ -877,11 +855,7 @@ ALTER TABLE `departement`
 --
 ALTER TABLE `group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `people`
---
-ALTER TABLE `people`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `user`
 --

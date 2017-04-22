@@ -3,7 +3,7 @@
 $oMsg = MessageService::getNode('system','entry','all-fields-required');
 
 if(isset($_POST["email"]) && trim($_POST["email"])!="" && isset($_POST["pass"]) && trim($_POST["pass"])!=""){
-    $oMsg = MessageService::getNode('connexion','login','success');
+    $oMsg = MessageService::getNode('connexion','login','error');
 }
 
 $aResponse=array();

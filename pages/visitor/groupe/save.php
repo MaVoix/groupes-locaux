@@ -5,9 +5,9 @@ $aResponse = array();
 $aResponse["type"] = "message";
 
 $aResponse["message"] = array();
-$aResponse["message"]["title"]="Erreur";
-$aResponse["message"]["type"]="error";
-$aResponse["message"]["text"]="Tous les champs suivi de * sont obligatoires !";
+$aResponse["message"]["title"] = "Erreur";
+$aResponse["message"]["type"] = "error";
+$aResponse["message"]["text"] = "Tous les champs suivi de * sont obligatoires !";
 $aResponse["durationMessage"] = "3000";
 $aResponse["durationRedirect"] = "1";
 $aResponse["durationFade"] = "500";
@@ -16,17 +16,17 @@ $aResponse["required"] = array();
 $nError = 0;
 
 //check edit KEY
-$bEdit=false;
-$OldGroup=new Group();
-if(isset($_POST["id"]) && isset($_POST["key"])){
-    $oListeGroup=new GroupListe();
-    $oListeGroup->applyRules4Key($_POST["key"],$_POST["id"]);
-    $aGroups=$oListeGroup->getPage();
-    if(count($aGroups)==1){
-        $bEdit=true;
-        $OldGroup=new Group(array("id"=>$aGroups[0]["id"]));
+$bEdit = false;
+$OldGroup = new Group();
+if (isset($_POST["id"]) && isset($_POST["key"])) {
+    $oListeGroup = new GroupListe();
+    $oListeGroup->applyRules4Key($_POST["key"], $_POST["id"]);
+    $aGroups = $oListeGroup->getPage();
+    if (count($aGroups) == 1) {
+        $bEdit = true;
+        $OldGroup = new Group(array("id" => $aGroups[0]["id"]));
         $OldGroup->hydrateFromBDD(array('*'));
-    }else{
+    } else {
 
         $nError++;
         $aResponse["message"]["text"] = "Impossible de modifier ce groupe.";
@@ -35,7 +35,11 @@ if(isset($_POST["id"]) && isset($_POST["key"])){
 
 
 //mandatory fields
-$aMandoryFields=array("group_name","departement","circonscription");
+$aMandoryFields = array("group_name", "departement", "circonscription");
+if (!$bEdit) {
+    $aMandoryFields[] = "mandataire_pass";
+    $aMandoryFields[] = "mandataire_pass_confirm";
+}
 
 //ajoute les engagements si l'utilisateur n'est pas admin
 if($oMe->getType()!="admin"){
@@ -48,65 +52,112 @@ if($oMe->getType()!="admin"){
 }
 
 
-foreach($aMandoryFields as $sField){
+foreach ($aMandoryFields as $sField) {
     if (!isset($_POST[$sField]) || $_POST[$sField] == "") {
         $nError++;
         array_push($aResponse["required"], array("field" => $sField));
-        $_POST[$sField]="";
+        $_POST[$sField] = "";
     }
 }
 
 
-//parcours des peoples
-$fieldsPeople=["people_id","people_delete","people_name","people_firstname","people_tel","people_email","people_ad1","people_ad2","people_ad3","people_zipcode","people_city"];
-$fieldsPeopleMandatory=["people_name","people_firstname","people_tel","people_email","people_ad1","people_zipcode","people_city"];
-$nPeopleMax=ConfigService::get("people-max"); // nombres de people MAX (hors mandataire)
+//parcours des users
+$fieldsUser = ["user_id", "user_delete", "user_name", "user_firstname", "user_tel", "user_email", "user_ad1", "user_ad2", "user_ad3", "user_zipcode", "user_city"];
+$fieldsUserMandatory = ["user_name", "user_firstname", "user_tel", "user_email", "user_ad1", "user_zipcode", "user_city"];
+$nUserMax = ConfigService::get("member-max"); // nombres de user MAX (hors mandataire)
 
-$aPeople=[];
-for($n=0;$n<=$nPeopleMax+1;$n++){
-    if($n==0){
-        $aPeople["mandataire"]=[];
-        $aPeople["mandataire"]["type"]="mandataire";
-    }else{
-        $aPeople["membre".$n]=[];
-        $aPeople["membre".$n]["type"]="membre";
+$aUsersMember = [];
+for ($n = 0; $n <= $nUserMax + 1; $n++) {
+    if ($n == 0) {
+        $aUsersMember["mandataire"] = [];
+        $aUsersMember["mandataire"]["type"] = "mandataire";
+    } else {
+        $aUsersMember["membre" . $n] = [];
+        $aUsersMember["membre" . $n]["type"] = "membre";
     }
 }
 
-foreach($fieldsPeople as $field){
-   if(isset($_POST[$field])){
-       foreach($_POST[$field] as $type=>$value){
-           if(in_array($field,$fieldsPeopleMandatory) && $_POST[$field][$type]==""){
-               $nError++;
-               array_push($aResponse["required"], array("field" => $field."\\[".$type."\\]"));
-               if($field=="people_tel"){
-                   array_push($aResponse["required"], array("field" => "people_tel_display"."\\[".$type."\\]"));
-               }
-           }else {
-               $aPeople[$type][str_replace("people_", "", $field)] = $value;
-           }
-           //verification saisie
-           if($field=="people_email" && $_POST[$field][$type]!=""){
-               if (!filter_var( $_POST[$field][$type], FILTER_VALIDATE_EMAIL)) {
-                   $aResponse["message"]["text"] = "L'adresse e-mail est incorrecte.";
-                   array_push($aResponse["required"],array("field"=>"people_email"."\\[".$type."\\]"));
-                   $nError++;
-               }
-           }
+foreach ($fieldsUser as $field) {
+    if (isset($_POST[$field])) {
+        foreach ($_POST[$field] as $type => $value) {
+            if (in_array($field, $fieldsUserMandatory) && $_POST[$field][$type] == "") {
+                $nError++;
+                array_push($aResponse["required"], array("field" => $field . "\\[" . $type . "\\]"));
+                if ($field == "user_tel") {
+                    array_push($aResponse["required"], array("field" => "user_tel_display" . "\\[" . $type . "\\]"));
+                }
+            } else {
+                $aUsersMember[$type][str_replace("user_", "", $field)] = $value;
+            }
+            //verification saisie
+            if ($field == "user_email" && $_POST[$field][$type] != "") {
+                if (!filter_var($_POST[$field][$type], FILTER_VALIDATE_EMAIL)) {
+                    $aResponse["message"]["text"] = "L'adresse e-mail est incorrecte.";
+                    array_push($aResponse["required"], array("field" => "user_email" . "\\[" . $type . "\\]"));
+                    $nError++;
+                }
+            }
 
-       }
-   }else{
-       if(in_array($field,$fieldsPeopleMandatory)){
-           $nError++;
-           array_push($aResponse["required"], array("field" => $field."\\[".$type."\\]"));
-           if($field=="people_tel"){
-               array_push($aResponse["required"], array("field" => "people_tel_display"."\\[".$type."\\]"));
-           }
-       }
-   }
+        }
+    } else {
+        if (in_array($field, $fieldsUserMandatory)) {
+            $nError++;
+            array_push($aResponse["required"], array("field" => $field . "\\[" . $type . "\\]"));
+            if ($field == "user_tel") {
+                array_push($aResponse["required"], array("field" => "user_tel_display" . "\\[" . $type . "\\]"));
+            }
+        }
+    }
+}
+
+//verification mot de passes
+
+if ($nError == 0) {
+    $passwordLength = strlen($_POST["mandataire_pass"]);
+
+    if ($passwordLength < ConfigService::get("passwordMinLength") OR $passwordLength > ConfigService::get("passwordMaxLength")) {
+        $aResponse["message"]["text"] = sprintf("Le mot de passe doit faire entre %s et %s caractères", ConfigService::get("passwordMinLength"), ConfigService::get("passwordMaxLength"));
+        $nError++;
+        $aResponse["required"][] = [
+            "field" => "mandataire_pass"
+        ];
+    }
+}
+
+if ($nError == 0) {
+    $password = $_POST["mandataire_pass"];
+
+    if (preg_match(ConfigService::get("passwordConstraint"), $password) !== 1) {
+        $aResponse["message"]["text"] = "Votre mot de passe contient des caractères non autorisés (uniquement chiffre et lettre";
+        $nError++;
+        $aResponse["required"][] = [
+            "field" => "mandataire_pass"
+        ];
+    }
 }
 
 
+if ($nError == 0) {
+    if ($_POST["mandataire_pass"] != $_POST["mandataire_pass_confirm"]) {
+        $nError++;
+        $aResponse["message"]["text"] = "Le mot de passe n'est pas identique à sa confirmation.";
+        array_push($aResponse["required"], array("field" => "mandataire_pass"));
+        array_push($aResponse["required"], array("field" => "mandataire_pass_confirm"));
+    }
+}
+
+
+//vérifie si le mail est déjà utilisé
+if( $nError==0 ) {
+    $oListeUser = new UserListe();
+    $oListeUser->applyRules4SearchByEmail($_POST["user_email"]["mandataire"],"mandataire");
+    $aUsersMails=$oListeUser->getPage();
+    if(count($aUsersMails)){
+        $aResponse["message"]["text"] =  "Un compte est déjà associé à cette adresse e-mail.";
+        array_push($aResponse["required"],array("field"=>"user_email" . "\\[mandataire\\]"));
+        $nError++;
+    }
+}
 /*
 if(ConfigService::get("enable-captcha")){
     if (!isset($_POST["captcha"]) || $_POST["captcha"] == "") {
@@ -123,9 +174,8 @@ if(ConfigService::get("enable-captcha")){
 }*/
 
 
-
 //check upload picture
-$bIsUploadedPic=false;
+$bIsUploadedPic = false;
 if (isset($_POST["imageFilename"]) && $_POST["imageFilename"] != "") {
     $aLimitMime = ConfigService::get("mime-type-limit");
     $aMime = array_keys(ConfigService::get("mime-type-limit"));
@@ -184,28 +234,28 @@ if (isset($_POST["imageFilename"]) && $_POST["imageFilename"] != "") {
         }
 
     }
-    if($nError==0){
-        $bIsUploadedPic=true;
+    if ($nError == 0) {
+        $bIsUploadedPic = true;
     }
 }
 
 
-if($nError==0){
-    if($bEdit){
-        $Group=new Group(array("id"=>$OldGroup->getId()));
+if ($nError == 0) {
+    if ($bEdit) {
+        $Group = new Group(array("id" => $OldGroup->getId()));
         $Group->setDate_amended(date("Y-m-d H:i:s"));
         $OldGroup->hydrateFromBDD(array('*'));
-    }else{
-        $Group=new Group();
+    } else {
+        $Group = new Group();
         $Group->setDate_created(date("Y-m-d H:i:s"));
         //generate key for link
-        $sKey=sha1($_SERVER["REMOTE_ADDR"].ConfigService::get("key").rand(1000,9999).time());
+        $sKey = sha1($_SERVER["REMOTE_ADDR"] . ConfigService::get("key") . rand(1000, 9999) . time());
         $Group->setKey_edit($sKey);
         $Group->setState("offline");
     }
 
     //force le mode offline sur l'enregistrement par un utilisateur
-    if($oMe->getType()!="admin"){
+    if ($oMe->getType() != "admin") {
         $Group->setState("offline");
     }
 
@@ -214,26 +264,25 @@ if($nError==0){
     $Group->setDepartement(intval($_POST["departement"]));
     $Group->setCirconscription(intval($_POST["circonscription"]));
 
-    if(isset($_POST["bank_name"])){
+    if (isset($_POST["bank_name"])) {
         $Group->setBank_name($_POST["bank_name"]);
     }
-    if(isset($_POST["bank_city"])){
+    if (isset($_POST["bank_city"])) {
         $Group->setBank_city($_POST["bank_city"]);
     }
-    if(isset($_POST["ballots"])){
+    if (isset($_POST["ballots"])) {
         $Group->setBallots(intval($_POST["ballots"]));
     }
-    if(isset($_POST["professions_de_foi"])){
+    if (isset($_POST["professions_de_foi"])) {
         $Group->setProfessions_de_foi(intval($_POST["professions_de_foi"]));
     }
-    if(isset($_POST["posters"])){
+    if (isset($_POST["posters"])) {
         $Group->setPosters(intval($_POST["posters"]));
     }
 
 
-
     //save Files
-    if($bIsUploadedPic) {
+    if ($bIsUploadedPic) {
         $outputDir = "data/" . date("Y") . "/" . date("m") . "/" . date("d") . "/" . time() . session_id() . "/";
         mkdir($outputDir, 0777, true);
         $outputFilePhoto = $outputDir . "original." . $sExtension;
@@ -248,44 +297,50 @@ if($nError==0){
             $nError++;
         }
         @unlink($_FILES['image']['tmp_name']);
-    }else{
+    } else {
         $Group->setPath_pic("");
     }
 
 
-
-    if( $nError==0){
+    if ($nError == 0) {
 
         $Group->save();
 
-        $nIdGroup=$Group->getId();
+        $nIdGroup = $Group->getId();
 
-        //sauvegarde People
-        $sEmail="";
-        foreach($aPeople as $sType=>$people){
-            if(isset($people["id"])){
-                if(intval($people["id"])==0){
-                    $oPeople=new People();
-                }else{
-                    $oPeople=new People(array("id"=>intval($people["id"])));
+        //sauvegarde User
+        $sEmail = "";
+        foreach ($aUsersMember as $sType => $user) {
+            if (isset($user["id"])) {
+                if (intval($user["id"]) == 0) {
+                    $oUser = new User();
+                } else {
+                    $oUser = new User(array("id" => intval($user["id"])));
                 }
-                $oPeople->setGroup_id($nIdGroup);
-                $oPeople->setName($people["name"]);
-                $oPeople->setFirstname($people["firstname"]);
-                $oPeople->setEmail($people["email"]);
-                $oPeople->setTel($people["tel"]);
-                $oPeople->setAd1($people["ad1"]);
-                $oPeople->setAd2($people["ad2"]);
-                $oPeople->setAd3($people["ad3"]);
-                $oPeople->setZipcode($people["zipcode"]);
-                $oPeople->setCity($people["city"]);
-                $oPeople->setType($people["type"]);
-                $oPeople->save();
+                $oUser->setGroup_id($nIdGroup);
+                $oUser->setName($user["name"]);
+                $oUser->setFirstname($user["firstname"]);
+                $oUser->setEmail($user["email"]);
+                $oUser->setTel($user["tel"]);
+
+                $oUser->setType($user["type"]);
+
 
                 //recuperation du mail du mandataire
-                if($people["type"]=="mandataire"){
-                    $sEmail=$people["email"];
+                if($user["type"]=="mandataire"){
+                    $oUser->setAd1($user["ad1"]);
+                    $oUser->setAd2($user["ad2"]);
+                    $oUser->setAd3($user["ad3"]);
+                    $oUser->setZipcode($user["zipcode"]);
+                    $oUser->setCity($user["city"]);
+                    $sEmail=$user["email"];
+                }else{
+                    if($user["delete"]==1){
+                        $oUser->setDate_deleted(date("Y-m-d H:i:s"));
+                    }
                 }
+
+                $oUser->save();
             }
 
 
@@ -298,19 +353,19 @@ if($nError==0){
         $sBodyMailTXT = $TwigEngine->render("visitor/mail/body.txt.twig", [
             "group" => $Group
         ]);
-        if(!$bEdit && $sEmail!="") {
-          Mail::sendMail($sEmail, "Confirmation de groupe", $sBodyMailHTML, $sBodyMailTXT, true);
+        if (!$bEdit && $sEmail != "") {
+            Mail::sendMail($sEmail, "Confirmation de groupe", $sBodyMailHTML, $sBodyMailTXT, true);
         }
 
-        if($oMe->getType()=="admin"){
+        if ($oMe->getType() == "admin") {
             $aResponse["message"]["text"] = "Informations enreigistrées correctement !";
             $aResponse["redirect"] = "/groupe/list.html";
-        }else{
+        } else {
             $aResponse["message"]["text"] = "Félicitations !";
             $aResponse["redirect"] = "/groupe/felicitation.html";
         }
 
-        SessionService::set("last-save-id",$Group->getId());
+        SessionService::set("last-save-id", $Group->getId());
 
         $aResponse["durationMessage"] = "2000";
         $aResponse["durationRedirect"] = "2000";
@@ -319,12 +374,12 @@ if($nError==0){
         $aResponse["message"]["type"] = "success";
 
         //if edit clean old file
-        if($bEdit){
-            if($bIsUploadedPic){
+        if ($bEdit) {
+            if ($bIsUploadedPic) {
                 @unlink($OldGroup->getPath_pic());
             }
             $aResponse["message"]["text"] = "Modification enregistrée !";
-        }else{
+        } else {
             $aResponse["message"]["text"] = "Groupe enregistré !";
         }
 
