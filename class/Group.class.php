@@ -1115,6 +1115,11 @@ class Group	{
         return $oListeUser;
     }
 
+    public function getPath_pic_fit()
+    {
+        return str_replace(basename($this->getPath_pic()),"photo-fit.jpg",$this->getPath_pic());
+    }
+
 
     /*
     ********************************************************************************************

@@ -229,3 +229,22 @@ h2, h3 {
 
 
 
+
+.square-pic-group{
+    width:100%;
+    margin:auto;
+    padding-bottom:100%;
+    background-size:cover;
+    background-position:center center;
+    background-color:#000000;
+}
+
+.square-pic-group-small{
+    height:140px;
+    width:140px;
+    /*margin:0;
+    padding:0;*/
+    background-size: cover;
+    background-position: center center;
+    background-color:#000000;
+}

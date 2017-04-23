@@ -15,6 +15,7 @@ foreach($groups as $datagroup){
    $datagroup["departement"]=  $oDepartement;
    $datagroup["circonscription"]= $oCirconscription;
     $datagroup["mandataire"]=$group->getMandataire();
+    $datagroup["path_pic_fit"]=$group->getPath_pic_fit();
    $groupsOut[$oDepartement->getCode()."-".$oCirconscription->getCode()."-".$group->getId()]=$datagroup;
 
 }
