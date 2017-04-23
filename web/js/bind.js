@@ -59,6 +59,17 @@ $(document).ready(function () {
 
     });
 
+    //toggle offline/online
+    $body.on('change','.jsSwitchAjax',function() {
+        var $element = $(this);
+        if (!isSendingForm)
+        {
+            var url = $element.data("url");
+            var data = $element.data("param")+'&checked='+$element.prop('checked');
+            sendAjaxRequest({}, url, data);
+        }
+    });
+
     //click link modal
     $body.on("click", ".click-send-ajax-confirm", function (e)
     {
