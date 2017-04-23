@@ -248,3 +248,10 @@ h2, h3 {
     background-position: center center;
     background-color:#000000;
 }
+
+.sticker-name{
+    background-color:rgba(255,255,255,0.8);
+    position:absolute;
+    padding:20px 40px 10px 10px;
+    width:100%;
+}

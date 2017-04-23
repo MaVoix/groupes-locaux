@@ -5,9 +5,23 @@
     <div class="wrapper-page">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
-                    <h1>Voici les {{ groups|length }} groupes #MAVOIX</h1>
-                    <p>PAGE EN CONSTRUCTION</p>
+                <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+                    <h1>{{ groups|length }} groupes #MAVOIX</h1>
+                    {% for group in groups %}
+
+                            <div class="col-xs-12 col-md-6 p-t-x2">
+
+                                <div class="text-center sticker-name">
+                                    <h3 class="no-margin">{{group.departement.code}} - {{ group.departement.name}}</h3>
+                                        <div>{{ sup(group.circonscription.number,'f',false) }} circo.</div>
+
+                                </div>
+                                <div style="background-image:url('/{{ group.path_pic_fit }}');"
+                                     class="square-pic-group"></div>
+
+
+                            </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

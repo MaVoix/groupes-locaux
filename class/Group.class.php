@@ -1117,7 +1117,12 @@ class Group	{
 
     public function getPath_pic_fit()
     {
-        return str_replace(basename($this->getPath_pic()),"photo-fit.jpg",$this->getPath_pic());
+     if($this->getPath_pic()!=""){
+         return str_replace(basename($this->getPath_pic()),"photo-fit.jpg",$this->getPath_pic());
+     }else{
+         return "css/images/image-panneaux.png";
+     }
+
     }
 
 

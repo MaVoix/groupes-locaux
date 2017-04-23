@@ -74,6 +74,26 @@ class GroupListe extends Liste
 
     }
 
+    public function applyRules4ListVisitor()
+    {
+        $this->setAllFields();
+        $this->addCriteres([
+            [
+                "field" => "date_deleted",
+                "compare" => "IS NULL",
+                "value" => ""
+            ]
+        ]);
+        $this->addCriteres([
+            [
+                "field" => "state",
+                "compare" => "=",
+                "value" => "online"
+            ]
+        ]);
+
+    }
+
     public function applyRules4GetGroupAdmin($id)
     {
         $this->setAllFields();
@@ -97,6 +117,8 @@ class GroupListe extends Liste
 
         return $this;
     }
+
+
 
     public function applyRules4Key($key,$id)
     {
