@@ -52,6 +52,13 @@ $(document).ready(function () {
     });
 
 
+    //submit auto-valid pour l'admin
+    $(".jsBtAutoValid").on('click', function() {
+        $("#autovalid").val("1");
+        $("#formgroup").submit();
+
+    });
+
     //click link modal
     $body.on("click", ".click-send-ajax-confirm", function (e)
     {

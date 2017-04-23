@@ -259,6 +259,10 @@ if ($nError == 0) {
     //force le mode offline sur l'enregistrement par un utilisateur
     if ($oMe->getType() != "admin") {
         $Group->setState("offline");
+    }else{
+        if (isset($_POST["autovalid"]) && $_POST["autovalid"] == "1") {
+            $Group->setState("online");
+        }
     }
 
     $Group->setName($_POST["group_name"]);
@@ -368,7 +372,7 @@ if ($nError == 0) {
 
         if ($oMe->getType() == "admin") {
             $aResponse["message"]["text"] = "Informations enreigistrées correctement !";
-            $aResponse["redirect"] = "/groupe/list.html";
+            $aResponse["redirect"] = "/groupe/liste.html";
         } else {
             $aResponse["message"]["text"] = "Félicitations !";
             $aResponse["redirect"] = "/groupe/felicitations.html";
