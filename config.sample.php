@@ -12,19 +12,20 @@ $_CONFIG["urlSite"]                         = "http://groupeslocaux";
 // mysql
 $_CONFIG["bdd-login"]			            = "root";
 $_CONFIG["bdd-pass"]			            = "";
-$_CONFIG["bdd-base"]			            = "groupeslocaux";
+$_CONFIG["bdd-base"]			            = "groupes-locaux";
 $_CONFIG["bdd-serveur"]			            = "localhost";
 
 //mail
-$_CONFIG["mail-expediteur-mail"]	        ="contact@mavoix.info";
-$_CONFIG["mail-expediteur-nom"]		        ="MAVOIX";
-$_CONFIG["mail-bcc"]				        =array();
+$_CONFIG["mail-expediteur-mail"]	      ="contact@mavoix.info";
+$_CONFIG["mail-expediteur-nom"]		      ="MAVOIX";
+$_CONFIG["mail-bcc"]				            =array();
 $_CONFIG["mail-reply-mail"]			        ="contact@mavoix.info";
 $_CONFIG["mail-reply-nom"]			        ="MAVOIX";
-$_CONFIG["mail-isSMTP"]				        =false; //server smtp enable (use php mail function if false)
-$_CONFIG["mail-smtp-serveur"]		        ="-"; //server smtp
-$_CONFIG["mail-smtp-login"]			        ="-"; //server smtp login
-$_CONFIG["mail-smtp-pass"]			        ="-"; //server smtp pass
+$_CONFIG["mail-isSMTP"]				          =false; //server smtp enable (use php mail function if false)
+$_CONFIG["mail-smtp-serveur"]		        =""; //server smtp
+$_CONFIG["mail-smtp-port"]		          =465; //port server smtp
+$_CONFIG["mail-smtp-login"]			        =""; //server smtp login
+$_CONFIG["mail-smtp-pass"]			        =""; //server smtp pass
 
 //main
 $_CONFIG["idSite"]                          = "collectedon"; //for unique session var prefix

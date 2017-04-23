@@ -58,6 +58,7 @@ class Mail
         {
             $mail->isSMTP();                                      // Set mailer to use SMTP
             $mail->Host = ConfigService::get("mail-smtp-serveur");  // Specify main and backup server
+            $mail->Port = ConfigService::get("mail-smtp-port"); 
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = ConfigService::get("mail-smtp-login");                            // SMTP username
             $mail->Password = ConfigService::get("mail-smtp-pass");                           // SMTP password
