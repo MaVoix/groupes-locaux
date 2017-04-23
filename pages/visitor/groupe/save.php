@@ -373,7 +373,10 @@ if ($nError == 0) {
         if ($oMe->getType() == "admin") {
             $aResponse["message"]["text"] = "Informations enreigistrées correctement !";
             $aResponse["redirect"] = "/groupe/liste.html";
-        } else {
+        } elseif($oMe->getType() == "mandataire") {
+            $aResponse["message"]["text"] = "Informations enreigistrées correctement !";
+            $aResponse["redirect"] = "/groupe/accueil.html";
+        }else{
             $aResponse["message"]["text"] = "Félicitations !";
             $aResponse["redirect"] = "/groupe/felicitations.html";
         }
