@@ -18,6 +18,7 @@ Version de test : https://groupes-locaux.maudry.fr
 
 - PHP 5 or later
 - Composer
+- sendmail
 - PHP mcrypt module
 - PHP curl module
 - PHP GD module
