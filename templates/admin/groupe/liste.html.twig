@@ -1,0 +1,67 @@
+{% extends "admin/base.html.twig" %}
+
+{%  block css %}
+    {{ parent() }}
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+{% endblock %}
+
+{%  block javascripts %}
+    {{ parent() }}
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+                    <h1>Validation des groupes locaux</h1>
+                </div>
+                <table class="updatableContent table" data-updateIndex="1">
+                  <thead>
+                    <th>Circonscription</th>
+                    <th>Photo</th>
+                    <th>Mandataire</th>
+                    <th>Commentaire</th>
+                    <th>Actions</th>
+                  </thead>
+                  <tbody>
+
+                {% for group in groups %}
+
+                <tr>
+                  <td><a class="anchor" name="{{ group.id }}"></a><span style="font-size:2em">{{ group.departement.name}} ({{group.departement.id}}) ({{ sup(group.circonscription.number,'f',false) }})</span></td>
+                  <td>
+                   <a href="/groupe/groupe.html?id={{ group.id }}"><div style="background-image:url('/{{ group.path_pic_fit }}');" class="square-pic-group-small jsLink" ></div></a>
+                  </td>
+
+                  <td>
+                    <p>{{ group.mandataire.civility }} {{ group.mandataire.firstname|ucwords }} {{  group.mandataire.name|upper }}</p>
+                    <p>{{  group.mandataire.city|capitalizefirst }} ({{  group.mandataire.zipcode }})</p>
+                  </td>
+
+                  <td>
+                  <div class="scrollable">
+                    {{ group.comment_nl2br|raw }}
+                  </div>
+                  </td>
+
+                  <td>
+                    <a href="{{ ConfigService.get("urlSite") }}/groupe/formulaire.html?id={{ group.id }}&key={{ group.key_edit }}" class="btn btn-info btn-block">Editer</a>
+                    <label class="checkbox-inline" >
+                        <input type="checkbox" class="jsSwitchAjax" {%  if group.state=='online'  %}checked{% endif %} data-onstyle="success"  data-toggle="toggle" data-url="/groupe/state.json" data-param="id={{ group.id }}"> En ligne
+                    </label>
+
+                            </td>
+                </tr>
+
+
+                {% endfor %}
+              </tbody>
+            </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

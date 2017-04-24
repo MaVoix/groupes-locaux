@@ -1,0 +1,45 @@
+{
+	"system": {
+		"entry": {
+			"check-input": {
+				"type": "error",
+				"number": 1,
+				"title": "Erreur",
+				"text": "Merci de vérifier votre saisie."
+			},
+			"all-fields-required": {
+				"type": "error",
+				"number": 2,
+				"title": "Erreur",
+				"text": "Tous les champs sont obligatoires, merci de vérifier votre saisie."
+			}
+		}
+	},
+	"demo": {
+		"donnees": {
+			"success": {
+				"type": "success",
+				"number": 1,
+				"title": "Félicitation",
+				"text": "Données envoyées correctement"
+			}
+
+		}
+	},"connexion": {
+		"login": {
+			"success": {
+				"type": "success",
+				"number": 1,
+				"title": "Félicitation",
+				"text": "Connexion réussie !"
+			},
+			"error": {
+				"type": "error",
+				"number": 1,
+				"title": "Erreur",
+				"text": "Connexion refusée !"
+			}
+
+		}
+	}
+}

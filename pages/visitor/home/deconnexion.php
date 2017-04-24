@@ -5,10 +5,11 @@ $aResponse = array();
 $aResponse["type"] = "message";
 
 
+SessionService::set("user-email","");
+SessionService::set("user-type","visitor");
+SessionService::set("user-id",0);
 
-SessionService::set("user-id",null);
-
-$aResponse["redirect"] = "/candidature/candidatures.html";
+$aResponse["redirect"] = "/";
 $aResponse["durationMessage"] = "2000";
 $aResponse["durationRedirect"] = "2000";
 $aResponse["durationFade"] = "10000";

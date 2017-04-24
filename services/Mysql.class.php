@@ -1,8 +1,6 @@
 <?php
 
-
 class Mysql extends PDO {
-
     private $sHost				=	"";
     private $sLogin				=	"";
     private $sPwd				=	"";
@@ -21,46 +19,34 @@ class Mysql extends PDO {
     private $bShowError			= true;
     private $sLastRequete		=  "";
     private $aBigInsert			=array();
-
     public function __toString()
     {
         return "Objet ". get_class($this);
     }
-
     //constructeur (connexion)
     public function __construct($aParam){
-
         $this->sHost			=	$aParam["host"];
         $this->sLogin			=	$aParam["login"];
         $this->sPwd				=	$aParam["pass"];
         $this->sDb				=	$aParam["base"];
         $this->bShowErreur		=	ConfigService::get("bdd-showerreur");
         $this->nMaxDisplayError =   ConfigService::get("bdd-max-show");
-
         SessionService::set("erreur-sql",0);
-
         try{
             parent::__construct('mysql:host='.$this->sHost.';dbname='.$this->sDb, $this->sLogin, $this->sPwd, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',PDO::MYSQL_ATTR_INIT_COMMAND => "SET sql_mode=''") );
             parent::setAttribute(PDO::ATTR_STATEMENT_CLASS, array ('MysqlStatement', array($this)));
             parent::exec("SET CHARACTER SET utf8");
         }catch(PDOException $e){
-
         }
-
     }
-
     //affiche l'erreur
     private function displayError(){
         if($this->sErreur && $this->bShowError && SessionService::get("erreur-sql")<=$this->nMaxDisplayError){
             echo $this->sErreur;
         }
     }
-
-
-
     //requete SELECT
     public function select($sRequete){
-
         $this->sLastRequete=$sRequete;
         $oPdoStatement=$this->query($sRequete);
         if(!$oPdoStatement){
@@ -79,13 +65,11 @@ class Mysql extends PDO {
             $this->sErreur.='<hr \>'.$this->dumpStr($_SESSION);
             $this->sErreur.='</div>';
             $this->displayError();
-
         }else{
             $this->aResult=$oPdoStatement->fetchAll();
             return $this->aResult;
         }
     }
-
     //requete select sous renvoyé sous forme de tableau ou INSERT,UPDATE,DELETE etc...
     function execute($sRequete){
         $bExecuted=false;
@@ -112,7 +96,6 @@ class Mysql extends PDO {
                         $this->sErreur.='<hr \>'.$this->dumpStr($_SESSION);
                         $this->sErreur.='</div>';
                         $this->displayError();
-
                     }
                     return $nCount;
                     break;
@@ -120,19 +103,16 @@ class Mysql extends PDO {
         }else{
             echo "ERREUR : ->execute() attend une chaine(string) ";
         }
-
     }
-
     function insert($sTable,$aParam,$bExecute=true){
         //$sTable => nom de la table
         //$aParam => tableau associatif nomdecolonne=>valeur
         //$bExecute => execute ou non la requete (facultatif...)
-
         if(!isset($this->aBigInsert[$sTable])){
             $this->aBigInsert[$sTable]=array();
         }
         if($aParam){
-            $sSql="DESCRIBE $sTable";
+            $sSql="DESCRIBE `$sTable`";
             $this->select($sSql);
             $aLignes=$this->getRes();
             $sColonnes="(";
@@ -145,10 +125,8 @@ class Mysql extends PDO {
                     $sColonnes .= ",";
                     $sValeurs .= ",";
                 }
-
                 $field = $aCol["Field"];
                 $sColonnes .= "`{$field}`";
-
                 if( !array_key_exists($field, $aParam) )
                 {
                     if( $aCol["Null"]=="YES" )
@@ -172,20 +150,17 @@ class Mysql extends PDO {
                     $value = Vars::secureInjection($aParam[$field]);
                     $sValeurs .= "'{$value}'";
                 }
-
                 $n++;
             }
-
             $sColonnes .= ")";
             $sValeurs .= ")";
             $sSqlReturn = $sValeurs;
-
-
         }
+
         if($bExecute){
             array_push($this->aBigInsert[$sTable],$sSqlReturn);
             if($this->aBigInsert[$sTable]){
-                $sSql="INSERT INTO $sTable $sColonnes VALUES ";
+                $sSql="INSERT INTO `$sTable` $sColonnes VALUES ";
                 $n=0;
                 foreach($this->aBigInsert[$sTable] as $sInsertValeurs){
                     if($n>0){
@@ -196,24 +171,21 @@ class Mysql extends PDO {
                 }
                 $this->aBigInsert[$sTable]=array();
                 $this->execute($sSql);
-
                 return $this->lastInsertId();
             }
-            $this->execute("INSERT INTO $sTable $sColonnes VALUES ".$sSqlReturn);
+            $this->execute("INSERT INTO `$sTable` $sColonnes VALUES ".$sSqlReturn);
             //echo "INSERT INTO $sTable $sColonnes VALUES ".$sSqlReturn;
             return intval( $this->lastInsertId() );
         }else{
             array_push($this->aBigInsert[$sTable],$sSqlReturn);
         }
     }
-
     //insert avec on duplicate key
     function insertDuplicateKey($sTable,$aParam){
         //$sTable => nom de la table
         //$aParam => tableau associatif nomdecolonne=>valeur
-
         if($aParam){
-            $sSql="DESCRIBE $sTable";
+            $sSql="DESCRIBE `$sTable`";
             $this->select($sSql);
             $aLignes=$this->getRes();
             $sColonnes="(";
@@ -243,43 +215,32 @@ class Mysql extends PDO {
             }
             $sColonnes.=")";
             $sValeurs.=")";
-
-            $sSql="INSERT INTO $sTable $sColonnes VALUES ".$sValeurs." ON DUPLICATE KEY UPDATE ".$sUpdate;
-
+            $sSql="INSERT INTO `$sTable` $sColonnes VALUES ".$sValeurs." ON DUPLICATE KEY UPDATE ".$sUpdate;
             $this->execute($sSql);
         }
-
         return $this->lastInsertId();
-
     }
-
     //update des données a partir d'un tableau
     function update($sTable,$aParam,$sSqlCondition){
-        $sSql="DESCRIBE $sTable";
+        $sSql="DESCRIBE `$sTable`";
         $this->select($sSql);
         $aLignes=$this->getRes();
         $sValeurs="";
         $n=0;
         $nbCol=0;
         $sColonnes="";
-
         foreach($aLignes as $aCol)
         {
-
             $field = $aCol["Field"];
-
             if( array_key_exists($field,$aParam) )
             {
                 $value = $aParam[$field];
-
                 if($nbCol>0 && substr($sValeurs,-1)!=",")
                 {
                     $sColonnes .= ",";
                     $sValeurs .= ",";
                 }
-
                 $nbCol++;
-
                 if( $aCol["Null"]=="YES" AND is_null($value) )
                 {
                     $sValue = "NULL";
@@ -300,30 +261,24 @@ class Mysql extends PDO {
                         $sValue = "'{$value}'";
                     }
                 }
-
                 $sValeurs .= "`{$field}`={$sValue}";
             }
-
             $n++;
-
         }
         if( $sSqlCondition )
         {
             $sSqlCondition = "AND {$sSqlCondition}";
         }
-
-        $sSqlReturn = "UPDATE {$sTable} SET {$sValeurs} WHERE 1=1 {$sSqlCondition}";
-
+        $sSqlReturn = "UPDATE `{$sTable}` SET {$sValeurs} WHERE 1=1 {$sSqlCondition}";
         if($nbCol){
             return $this->execute($sSqlReturn);
         }else{
             return 0;
         }
     }
-
     //duplique une ligne sur des conditions
     function duplicate($sTable,$sSqlCondition){
-        $sSql="DESCRIBE $sTable";
+        $sSql="DESCRIBE `$sTable`";
         if($sSqlCondition){
             $sSqlCondition="AND ".$sSqlCondition;
         }
@@ -340,30 +295,24 @@ class Mysql extends PDO {
                 $n++;
             }
         }
-        $this->execute("INSERT INTO $sTable ($sCol) SELECT $sCol FROM $sTable WHERE 1=1 $sSqlCondition ");
+        $this->execute("INSERT INTO `$sTable` ($sCol) SELECT $sCol FROM `$sTable` WHERE 1=1 $sSqlCondition ");
         return $this->lastInsertId();
     }
-
     //recupere un tableau d'une table en vu d'une hydratation simple d'un objet / nId peut etre de la forme id1='value' AND id2='value2'
     public function selectForHydrate($nId,$sTable,$aFields)
     {
-        $sSql="DESCRIBE ". $sTable;
+        $sSql="DESCRIBE `". $sTable."`";
         $this->select($sSql);
         $aColonnes=$this->getCol("Field");
-
         $sPrimaryKey = "";
-
         $aRows = $this->getRes();
         foreach( $aRows as $aLine )
         {
-
-
             if( $aLine['Key']=="PRI" )
             {
                 $sPrimaryKey = $aLine['Field'];
             }
         }
-
         $sSqlSelect="";
         if($aFields[0]!="*")
         {
@@ -379,36 +328,30 @@ class Mysql extends PDO {
         {
             $sSqlSelect="*";
         }
-
         if(strstr($nId, "=")!==false)
         {
-            $aReturns=$this->execute("SELECT ".$sSqlSelect." FROM ".$sTable." WHERE ".$nId." ");
+            $aReturns=$this->execute("SELECT ".$sSqlSelect." FROM `".$sTable."` WHERE ".$nId." ");
         }
         else
         {
-            $aReturns=$this->execute("SELECT ".$sSqlSelect." FROM ".$sTable." WHERE `".$sPrimaryKey."`=".intval($nId)." ");
+            $aReturns=$this->execute("SELECT ".$sSqlSelect." FROM `".$sTable."` WHERE `".$sPrimaryKey."`=".intval($nId)." ");
             //print_r( "SELECT ".$sSqlSelect." FROM ".$sTable." WHERE `".$sPrimaryKey."`=".intval($nId)." " );
         }
         if(!isset($aReturns[0])){
             $aReturns[0]=array();
         }
         $aTab=debug_backtrace();
-
         SessionService::set("hydrate-debug",SessionService::get("hydrate-debug")+1);
-
         return $aReturns[0];
     }
-
     //recupere le tableau de donné
     public function getRes(){
         return $this->aResult;
     }
-
     //recupere une ligne precise
     public function getRow($nRowNumber){
         return $this->aResult[$nRowNumber];
     }
-
     //recupere une colonne précise
     public function getCol($sFieldName){
         $aCol=array();
@@ -417,12 +360,10 @@ class Mysql extends PDO {
         }
         return $aCol;
     }
-
     //recupere une colonne précise (fonction identique a getCol)
     public function getField($sFieldName){
         return getCol($sFieldName);
     }
-
     //recuper la valeur d'un champs à une ligne précise
     public function getCase($sFieldName,$nRowNumber){
         if(count($this->aResult)>$nRowNumber){
@@ -431,26 +372,21 @@ class Mysql extends PDO {
             return "";
         }
     }
-
     //recupere la derniere requete saisie
     public function getLastQuery(){
         return $this->sLastRequete;
     }
-
     //affiche la derniere requete
     public function showLastQuery(){
         echo $this->formatQueryDebug($this->getLastQuery());
     }
-
     //met en forme une requete pour un affichage debug
     public function formatQueryDebug($sRequest){
         if( $sRequest!=NULL && trim($sRequest)!="" )
         {
             $result = "";
-
             $result = preg_replace("#(,)\s+#is",",<br />",$sRequest);
             $result = preg_replace("#(\=)#","<span style='color: green; font-weight: bold;'>$1</span>",$result);
-
             $result = preg_replace("#(SELECT)\s+#is","<span style='color: blue; font-weight: bold;'>$1</span>&nbsp;",$result);
             $result = preg_replace("#\s+(FROM)\s+#is","<br /><span style='color: blue; font-weight: bold;'>$1</span>&nbsp;",$result);
             $result = preg_replace("#\s+(INNER\s{1,1}JOIN|LEFT\s{1,1}JOIN|RIGHT\s{1,1}JOIN|JOIN)\s+#is","<br /><span style='color: blue; font-weight: bold;'>$1</span>&nbsp;",$result);
@@ -467,27 +403,21 @@ class Mysql extends PDO {
             $result = preg_replace("#\s+(NOT)\s+#is","&nbsp;<span style='color: blue; font-weight: bold;'>$1</span>&nbsp;",$result);
             $result = preg_replace("#\s+(EXISTS)\s+#is","&nbsp;<span style='color: blue; font-weight: bold;'>$1</span>&nbsp;",$result);
             $result = preg_replace("#\s+(BETWEEN)\s+#is","&nbsp;<span style='color: blue; font-weight: bold;'>$1</span>&nbsp;",$result);
-
             $result = preg_replace("#\s+(LIKE)\s+#is","&nbsp;<span style='color: #C9A87C; font-weight: bold;'>$1</span>&nbsp;",$result);
-
             $result = preg_replace("#(COUNT\()#is","<span style='color: #F268E2; font-weight: bold;'>COUNT</span>(",$result);
             $result = preg_replace("#(SUM\()#is","<span style='color: #F268E2; font-weight: bold;'>SUM</span>(",$result);
             $result = preg_replace("#(DISTINCT)#is","<span style='color: #F268E2; font-weight: bold;'>$1</span>",$result);
-
             return "<div contenteditable='true'>".$result."</div>";
         }
     }
-
     private function dumpStr(&$var, $info = FALSE)
     {
         $sReturn =  "";
         $scope = false;
         $prefix = 'unique';
         $suffix = 'value';
-
         if($scope) $vals = $scope;
         else $vals = $GLOBALS;
-
         $old = $var;
         $var = $new = $prefix.rand().$suffix; $vname = FALSE;
         foreach($vals as $key => $val) {
@@ -502,15 +432,12 @@ class Mysql extends PDO {
         $sReturn .= "</div>";
         return $sReturn;
     }
-
     private function do_dumpStr(&$var, $var_name = NULL, $indent = NULL, $reference = NULL)
     {
         $sReturn = "";
         $do_dump_indent = "<span style='color:#eeeeee;'>|</span> &nbsp;&nbsp;\n ";
         $reference = $reference.$var_name;
         $keyvar = 'the_do_dump_recursion_protection_scheme'; $keyname = 'referenced_object_name';
-
-
         if (is_array($var) && isset($var[$keyvar]))
         {
             $real_var = &$var[$keyvar];
@@ -522,15 +449,12 @@ class Mysql extends PDO {
         {
             $var = array($keyvar => $var, $keyname => $reference);
             $avar = &$var[$keyvar];
-
             $type = ucfirst(gettype($avar));
             if($type == "String") $type_color = "<span style='color:green'>";
             elseif($type == "Integer") $type_color = "<span style='color:red'>";
             elseif($type == "Double"){ $type_color = "<span style='color:#0099c5'>"; $type = "Float"; }
             elseif($type == "Boolean") $type_color = "<span style='color:#92008d'>";
             elseif($type == "NULL") $type_color = "<span style='color:black'>";
-
-
             if(is_array($avar))
             {
                 $count = count($avar);
@@ -557,12 +481,8 @@ class Mysql extends PDO {
             elseif(is_bool($avar)) $sReturn .=   "$indent$var_name = <span style='color:#a2a2a2'>$type(".strlen($avar).")</span> $type_color".($avar == 1 ? "TRUE":"FALSE")."</span><br>\n";
             elseif(is_null($avar)) $sReturn .=   "$indent$var_name = <span style='color:#a2a2a2'>$type(".strlen($avar).")</span> {$type_color}NULL</span><br>\n";
             else $sReturn .= "$indent$var_name = <span style='color:#a2a2a2'>$type(".strlen($avar).")</span> $avar<br>\n";
-
             $var = $var[$keyvar];
             return $sReturn;
         }
-
     }
-
-
 }

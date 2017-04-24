@@ -1,48 +1,19 @@
 <?php
 
-
 class MysqlStatement extends PDOStatement {
 	
-	private $sTitreMail			=   "";
-	private $sExpediteur		=   "";
-	private $aDestinataires		=    array();
-	private $bSendMail			=    false;
-	private $nMaxDisplayError	=	 20;
-	private $nMaxSendMailError	=	 5;
+
 	private $nNbError			=    0;
-	private $bShowError			= true;
 	private $sLastRequete		=   "";
-	private $sErreur			=   "";
+
 	 
 	protected function __construct($dbh) {
         $this->dbh = $dbh;
-		$this->sTitreMail		=	ConfigService::get("bdd-titremail");
-		$this->sExpediteur		=	ConfigService::get("bdd-expediteur");
-		$this->bSendMail		=	ConfigService::get("bdd-sendmail");
-		$this->bShowError		=	ConfigService::get("bdd-showerreur");
-		$this->aDestinataires	=   ConfigService::get("bdd-destinataires");
-		$this->nMaxDisplayError =   ConfigService::get("bdd-max-show");
-		$this->nMaxSendMailError =  ConfigService::get("bdd-max-mail");
+
     }
 	
 	 public function execute($aParam=array()){
-		if(!parent::execute($aParam)){			
-			$aErreur=$this->errorInfo();
-            SessionService::set("erreur-sql",SessionService::get("erreur-sql")+1);
-			$this->sErreur='<div style="background-color:#ffffff;color:#000000;font-size:12px;font-family:arial;padding:10px;">';			
-			$this->sErreur.='<div style="border:1px solid #000000;padding:10px;color:#990000;">';
-			$this->sErreur.=$this->formatQueryDebug($this->queryString);
-			$this->sErreur.='</div>';				
-			$this->sErreur.='<br \>CODE='.$aErreur[0];
-			$this->sErreur.='<br \>ERREUR=<strong>'.$aErreur[2].'</strong>';
-			$this->sErreur.='<br \>SCRIPT='.$_SERVER['PHP_SELF'];
-			$this->sErreur.='<br \>AREA='.$_GET["area"];
-			$this->sErreur.='<br \>PAGE='.$_GET["page"];
-			$this->sErreur.='<br \>FORMAT='.$_GET["format"];
-			$this->sErreur.='<hr \>'.$this->dumpStr($_SESSION);
-			$this->sErreur.='</div>';		
-			$this->displayError();
-			
+		if(!parent::execute($aParam)){
 			return false;
 		}else{
 			return true;
@@ -90,14 +61,8 @@ class MysqlStatement extends PDOStatement {
 			return 0;
 		}
 	}
-	 
-	 //affiche l'erreur
-	private function displayError(){		
-		if($this->sErreur && $this->bShowError && SessionService::get("erreur-sql")<=$this->nMaxDisplayError){				
-			echo $this->sErreur;
-		}
-	}
-	
+
+
 
 	
 	

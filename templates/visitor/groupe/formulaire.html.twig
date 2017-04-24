@@ -1,0 +1,509 @@
+{% extends "visitor/base.html.twig" %}
+
+{% block meta %}
+    {{ parent() }}
+    <meta property="og:title" content="#MAVOIX - Formulaire d'engagement"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ urlPage }}"/>
+    <meta property="og:image" content="{{ urlSite }}/css/images/image-panneaux.png"/>
+    <meta property="og:description"  content="Affirmez votre engagement de porter une candidature #MAVOIX aux élections législatives."/>
+    <meta name="description"  content=""/>
+    <!-- TWITTER --->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@MAVOIX2017">
+    <meta name="twitter:creator" content="@MAVOIX2017">
+    <meta name="twitter:title" content="#MAVOIX - Formulaire d'engagement">
+    <meta name="twitter:description" content="Affirmez votre engagement de porter une candidature #MAVOIX aux élections législatives.">
+    <meta name="twitter:image" content="{{ urlSite }}/css/images/image-panneaux.png">
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                    <form action="/groupe/save.json" id="formgroup" method="post" autocomplete="off"
+                          data-ajax="true"
+                          enctype="multipart/form-data">
+                        {% if group.id!='' %}
+                            <input type="hidden" id="id" name="id" value="{{ group.id }}"/>
+                            <input type="hidden" id="key" name="key" value="{{ key }}"/>
+                        {% endif %}
+
+                        <p><strong>Bienvenue sur le formulaire d'engagement des groupes locaux #MAVOIX !</strong></p>
+                        <p>Les informations <span style="color:#05a60d;font-weight:bold;">en vert</span> seront rendues publiques.</p>
+
+                        <div class="form-group">
+                            <label for="group_name" class="control-label"><strong>Nous groupe local de</strong></label>
+                            <input title="Nom du groupe local" type="text" class="form-control publicinfo" id="group_name" name="group_name"
+                                   value="{{ group.name }}"
+                                   placeholder="Auxerre ouest, Paris sud, Haut-Rhin, etc...">
+                        </div>
+                        <div class="form-group">
+                            <label for="nom" class="control-label"><strong>Nous engageons à réaliser la campagne législative #MAVOIX dans la circonscription</strong></label>
+                            <select title="Département" class="form-control updateContentOnChange publicinfo" id="departement" name="departement" data-url="/groupe/formulaire.html" data-blocks="['divCirconsciptions']" >
+                                <option value="">Choisissez un département</option>
+                              {% for departement in departements  %}
+                                <option value="{{ departement.id }}" {%  if group.departement_id==departement.id %} selected {% endif %}>{{ departement.code }} - {{ departement.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="updatableContent" data-updateIndex="divCirconsciptions">
+                                {% if circonscriptions|length>0 %}
+                                    <select title="Numéro de circonscription" class="form-control  publicinfo" id="circonscription" name="circonscription"  >
+                                        <option value="">Choisissez une circonscription</option>
+                                    {% for circonscription in circonscriptions  %}
+                                        <option value="{{ circonscription.id }}" {%  if group.circonscription_id==circonscription.id %} selected {% endif %}>{{ sup(circonscription.number,'f',true) }} circonscription</option>
+                                    {% endfor %}
+                                    </select>
+                                {% else %}
+                                    <select title="Numéro de circonscription" class="form-control" id="circonscription" name="circonscription"  disabled>
+                                        <option value="">Choisissez une circonscription</option>
+                                </select>
+                                {% endif %}
+
+                            </div>
+                            <p class="help-block">Si votre groupe fait campagne dans plusieurs circonscriptions, remplissez un formulaire par circonscription.</p>
+                        </div>
+
+
+                        <h3>Le ou la mandataire financier</h3>
+
+                        <input type="hidden" id="user_id[mandataire]" name="user_id[mandataire]"
+                               value="{{ user["mandataire"].id }}" >
+
+                        <input type="hidden" id="user_delete[mandataire]" name="user_delete[mandataire]"
+                               value="0" >
+
+                        <div class="form-group ">
+                            <label for="user_civility[mandataire]" class="control-label">Civilité : *</label>
+                            <select id="user_civility[mandataire]" name="user_civility[mandataire]" class="form-control publicinfo">
+                                <option value="">Choisir ...</option>
+                                <option value="M." {% if user["mandataire"].civility=='M.' %} selected {% endif %}>M.</option>
+                                <option value="Mme" {% if user["mandataire"].civility=='Mme' or user["mandataire"].civility=='Mme.' %} selected {% endif %}>Mme</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="user_name[mandataire]" class="control-label">Nom de famille : *</label>
+                            <input title="Nom de famille du mandataire financier" type="text" class="form-control publicinfo" id="user_name[mandataire]" name="user_name[mandataire]"
+                                   value="{{ user["mandataire"].name|ucwords }}"
+                                   placeholder="Nom de famille">
+                        </div>
+                        <div class="form-group">
+
+                            <label for="user_firstname[mandataire]" class="control-label">Prénom : *</label>
+                            <input  title="Prénom du mandataire financier"type="text" class="form-control publicinfo" id="user_firstname[mandataire]" name="user_firstname[mandataire]"
+                                   value="{{ user["mandataire"].firstname|ucwords }}"
+                                   placeholder="Prénom">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user_email[mandataire]" class="control-label">E-mail : *</label>
+                            <input  title="Adresse email du mandataire financier"type="email" class="form-control" id="user_email[mandataire]" name="user_email[mandataire]"
+                                   value="{{ user["mandataire"].email }}"
+                                   placeholder="xxxxxx@xxxxx.com ">
+                        </div>
+
+                        {% if group.id=='' %}
+                        <h3>Mot de passe du mandataire financier</h3>
+                          <p>Si vous n'êtes pas le ou la mandataire financier, merci de penser à lui transmettre le mot de passe choisi. Les administrateurs de ce site n'ont pas accès aux mots de passe.</p>
+                          <p>Ce mot de passe donnera accès à l'interface de gestion des dons pour la circonscription.</p>
+
+                        <div class="form-group">
+                            <label for="mandataire_pass" class="control-label">Mot de passe : *</label>
+                            <input  title="Mot de passe du mandataire financier"type="password" class="form-control" id="mandataire_pass" name="mandataire_pass"
+                                   value=""
+                                   placeholder=" ">
+                        </div>
+                        <div class="form-group">
+                            <label for="mandataire_pass_confirm" class="control-label">Confirmation du mot de passe : *</label>
+                            <input  title="Confirmation du mot de passe" type="password" class="form-control" id="mandataire_pass_confirm" name="mandataire_pass_confirm"
+                                   value=""
+                                   placeholder=" ">
+                            <p class="help-block">Votre mot de passe doit contenir des lettres et des chiffres (6 caractères minimum). Conservez-le précieusement, il vous servira à vous connecter à la page de votre groupe.</p>
+                        </div>
+
+                        <p>&nbsp;</p>
+                        {%  endif %}
+                        <div class="form-group">
+                            <label for="user_tel_display[mandataire]" class="control-label">Téléphone : *</label>
+                            <br /><input  title="Numéro de téléphone du mandataire financier" id="user_tel_display[mandataire]"  value="{{ user["mandataire"].tel  }}" type="text" class="form-control telInput" name="user_tel_display[mandataire]" >
+                            <input type="hidden" class="form-control" id="user_tel[mandataire]" name="user_tel[mandataire]" placeholder="XXXXXXXXX"
+                                   value="{{ user["mandataire"].tel  }}" style="position:absolute;top:-10000px;">
+
+
+
+                        </div>
+
+                        <h4>L'adresse à laquelle le ou la mandataire recevra les chèques de dons :</h4>
+                        <div class="form-group">
+                            <label for="user_ad1[mandataire]" class="control-label">Adresse champ 1 : *</label>
+                            <input   title="Ligne 1 de l'adresse postale du mandataire financier" type="text" class="form-control publicinfo" id="user_ad1[mandataire]" name="user_ad1[mandataire]"
+                                   placeholder="N°, type de voie, nom de la voie" value="{{ user["mandataire"].ad1 }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="user_ad2[mandataire]" class="control-label">Adresse champ 2 :</label>
+                            <input  title="Ligne 2 de l'adresse postale du mandataire financier" type="text" class="form-control publicinfo" id="user_ad2[mandataire]" name="user_ad2[mandataire]" value="{{ user["mandataire"].ad2 }}"
+                                   placeholder="Immeuble, Résidence, Z.I ...">
+                        </div>
+                        <div class="form-group">
+                            <label for="user_ad3[mandataire]" class="control-label">Adresse champ 3 :</label>
+                            <input  title="Ligne 3 de l'adresse postale du mandataire financier" type="text" class="form-control publicinfo" id="user_ad3[mandataire]" name="user_ad3[mandataire]" value="{{ user["mandataire"].ad3}}"
+                                   placeholder="BP, TSA, Lieu dit">
+                        </div>
+                        <div class="form-group">
+                            <label for="user_zipcode[mandataire]" class="control-label">Code postal : *</label>
+                            <input   title="Code postal du mandataire financier"type="text" class="form-control publicinfo" id="user_zipcode[mandataire]" name="user_zipcode[mandataire]" value="{{ user["mandataire"].zipcode }}"
+                                   placeholder="XXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="user_city[mandataire]" class="control-label">Ville : *</label>
+                            <input   title="Ville du mandataire financier" type="text" class="form-control publicinfo" id="user_city[mandataire]" name="user_city[mandataire]"
+                                   value="{{ user["mandataire"].city|capitalizefirst }}"
+                                   placeholder="Nom de la ville">
+                        </div>
+                        <p>Cette personne est d'accord pour contribuer et partager les informations avec les autres mandataires financiers qui se réunissent chaque mercredi soir en ligne. 
+                            Elle a déjà pris contact avec la banque suivante afin de préparer l’ouverture du compte.</p>
+                        <div class="form-group">
+                            <label for="bank_name" class="control-label">Nom de la banque :</label>
+                            <input   title="Nom de la banque du groupe local" type="text" class="form-control" id="banque_nom" name="bank_name" value="{{ group.bank_name }}"
+                                   placeholder="Crédit Démocratique de la Madeleine">
+                        </div>
+                        <div class="form-group">
+                            <label for="bank_city" class="control-label">Ville :</label>
+                            <input   title="Ville de la banque du groupe local" type="text" class="form-control" id="bank_city" name="bank_city" value="{{ group.bank_city }}"
+                                   placeholder="Ville de votre banque">
+                        </div>
+
+
+                        <hr/>
+                        <p>&nbsp;</p>
+                        <h2>Les membres du groupe*</h2>
+                        <p>Tout particulièrement les personnes qui s'engagent à se rendre au tirage au sort du 6 mai, ou à accompagner le candidat dans la circonscription lors de sa venue.</p>
+                        <div id="MemberList">
+                        {%  for member in user %}
+                            {% if member.type=="membre" %}
+                                {%  set num=loop.index %}
+                                {% embed "visitor/blocks/member.html.twig" %}{% endembed %}
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                        <button type="button" class="btn btn-primary jsAddItem" data-target="MemberList" data-url="/groupe/membre.html" >Ajouter un membre</button>
+
+
+                        <p>&nbsp;</p>
+                        <h2>Les engagements</h2>
+                        <h3>Collecte de dons</h3>
+
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+
+                                <label class="label-checkbox" for="engagement-a1"><strong>Nous nous engageons sur la commande d'affiches, de bulletins de vote et de professions de foi.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a1" value="ok" type="checkbox"
+                                           name="engagement-a1" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+
+                        </div>
+                        <p>A partir du <a href="https://fr.wikipedia.org/wiki/Liste_des_circonscriptions_l%C3%A9gislatives_de_la_France" target="_blank" title="Liste des circonscriptions">nombre d'inscrits dans la circonscription (chiffres de 2012)</a> et du nombre de panneaux <a href="https://forum.mavoix.info/t/renseigner-le-nombre-de-panneaux-et-dinscrits-dans-chaque-circo-des-points-de-contact-locaux/1092?u=colinmaudry" title="Forum MAVOIX" target="_blank">(méthode de calcul)</a>, vous pouvez calculer le nombre d'impressions <a title="Framacalc budget impressions" href="https://framacalc.org/qG1VtZO5A3" target="_blank">ici</a>.</p>
+                        <div class="form-group">
+                            <label for="posters" class="control-label">Nombre d'affiches *:</label>
+                            <input type="text" class="form-control" id="posters" name="posters" value="{{ group.posters }}"
+                                   placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="ballots" class="control-label">Nombre de bulletins de vote *:</label>
+                            <input type="text" class="form-control" id="ballots" name="ballots" value="{{ group.ballots }}"
+                                   placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="professions_de_foi" class="control-label">Nombre de professions de foi *:</label>
+                            <input type="text" class="form-control" id="professions_de_foi" name="professions_de_foi" value="{{group.professions_de_foi}}"
+                                   placeholder="0">
+                        </div>
+
+
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a2"><strong>Nous nous engageons à tout mettre en oeuvre pour réunir la somme d’environ 2500 à 3000€ nécessaire pour payer les frais d’imprimerie (affiches, bulletins de vote, professions de foi), les frais postaux (timbres pour envoyer les reçus fiscaux), les frais bancaires éventuels, les menues dépenses pour faire l’affichage (colle néoprène, brosse), l’expert comptable. Les collectifs locaux partagent leurs bonnes pratiques, outils et idées créatives expérimentées en local, mais aussi parfois les difficultés rencontrées, pour se soutenir les uns les autres dans la réalisation de cet objectif par chacun.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a2" value="ok" type="checkbox"
+                                           name="engagement-a2" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <h3>Engagement pour le tirage au sort</h3>
+
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a3"><strong>Nous nous engageons à envoyer au moins l’une ou l’un d’entre nous au tirage au sort à Paris le 6 mai de 10h à 14h pour vivre ce moment qui fera date, y contribuer et aussi rencontrer les titulaires et suppléant.e.s désigné.e.s par le tirage au sort et organiser avec elles et eux leur venue le 15 mai pour déposer dès l’ouverture à la préfecture la candidature, enregistrer le mandataire.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a3" value="ok" type="checkbox"
+                                           name="engagement-a3" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <!-- Liste des personnes -->
+
+                        <h3>Engagements pendant la campagne</h3>
+                      <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a4"><strong>Nous nous engageons à organiser l’arrivée du candidat ou du suppléant le 15 mai à la préfecture en faisant une animation collective (par exemple filmer ce joli moment de rencontre).</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a4" value="ok" type="checkbox"
+                                           name="engagement-a4" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a5"><strong>Nous nous engageons à nous déplacer à la Préfecture lors du tirage au sort des panneaux d’affichages, le vendredi 19 mai à 18h30 (possibilité de filmer cet évènement, très peu connu du public, en live sur notre page Facebook).</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a5" value="ok" type="checkbox"
+                                           name="engagement-a5" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a6"><strong>Nous nous engageons à coller les affiches sur les panneaux électoraux dès le lundi 22 mai jour de démarrage de la campagne officielle, et à vérifier que tous les panneaux à l’entrée des bureaux de vote sont collés et propres le jour du scrutin. Nous pourrons partager avec les autres contributeurs notre façon de faire (un tutoriel filmé par exemple) .</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a6" value="ok" type="checkbox"
+                                           name="engagement-a6" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a7"><strong>Nous nous engageons à préparer le jour de vote du 11 juin en nous formant au préalable les uns les autres aux rôles de délégué, scrutateurs, assesseurs et constituant l’équipe nécessaire pour tenir ces rôles le jour J.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a7" value="ok" type="checkbox"
+                                           name="engagement-a7" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <h3>Engagement en cas de passage au second tour</h3>
+
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a8"><strong>Nous nous engageons, si nous passons au second tour, à financer à nouveau le matériel électoral (nouvelle circulaire + bulletins) : nous avons conscience que nous serons alors soutenu.e.s par l’ensemble des contributeurs.tries #MAVOIX sur le territoire car ce serait historique ;-).
+</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a8" value="ok" type="checkbox"
+                                           name="engagement-a8" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <h3>Engagement de soutien et de partage entre groupes locaux</h3>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a9"><strong>Nous nous engageons à soutenir le mandataire financier dans le remplissage des reçus fiscaux (ça va beaucoup plus vite à plusieurs).</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a9" value="ok" type="checkbox"
+                                           name="engagement-a9" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a10"><strong>Nous nous engageons à envoyer l’un.e d’entre nous aux réunions des jeudis soirs en ligne où se construisent collectivement les réponses, à chaque étape de la campagne, où nous partageons les bonnes et mauvaises expériences vécues, les solutions trouvées pour inspirer les autres collectifs et faire grandir l’expérience.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a10" value="ok" type="checkbox"
+                                           name="engagement-a10" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a11"><strong>Nous nous engageons à ne jamais rester seul.e.s devant un problème, un collectif local a sûrement déjà trouvé la réponse ;-) et en tout cas il sera plus facile de la trouver en s’inspirant les un.e.s les autres.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a11" value="ok" type="checkbox"
+                                           name="engagement-a11" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <h3>Engagements sur l'ADN de #MAVOIX</h3>
+
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a12"><strong>Nous nous engageons à respecter les ingrédients fondateurs de l’expérimentation #MAVOIX : coopératif et décentralisé : pas de structure, pas de parti / pas de personnification dans les médias et pas de relation presse (communiqués de presse), mais une incarnation horizontale et une publication de nos créations / contenus via nos propres réseaux sociaux / co-construction / intelligence collective / processus créatif / entraide / formation pair à pair / transparence des comptes de campagnes / financement par des petits dons / pas de financement public / logiciel libre</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a12" value="ok" type="checkbox"
+                                           name="engagement-a12" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a13"><strong>Nous nous engageons à respecter la posture de #MAVOIX "NO DEAL" (pas d'accord avec d'autres mouvements quels qu'ils soient voir article https://www.mavoix.info/project/mavoix-et-les-autres-partismouvements-politiques/), ni avant le premier tour, ni entre les deux tours. La nature des projets ne serait de fait pas compatible. </strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a13" value="ok" type="checkbox"
+                                           name="engagement-a13" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a14"><strong>Nous avons bien compris que la.le député.e #MAVOIX, une fois élu.e, n’est plus rattaché.e à sa circonscription d’élection. Nous reviendrons ainsi dans l’esprit de la loi originel de la fonction de député telle que décrite sur le site de l’Assemblée nationale : « Chaque député, bien qu'élu dans un cadre géographique déterminé, est le représentant de la Nation tout entière »</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a14" value="ok" type="checkbox"
+                                           name="engagement-a14" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a15"><strong>Nous sommes d’accord avec l’objectif de l’expérimentation : que chaque citoyen.ne qui le souhaite puisse décider directement des lois à travers des député.e.s #MAVOIX qui relaieront leurs décisions à la proportionnelle dans l’hémicycle.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a15" value="ok" type="checkbox"
+                                           name="engagement-a15" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+                        <h3>Engagements pour l'après-élection</h3>
+
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a16"><strong>S’il devait y avoir des élu.e.s #MAVOIX nous notons qu’il y aura un séminaire après le second tour et avant la première session extraordinaire parlementaire auquel nous sommes toutes et tous conviés pour mettre en place les premiers jours de l’expérimentation dans une nouvelle phase.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a16" value="ok" type="checkbox"
+                                           name="engagement-a16" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+                        <div class="form-group engagements-a">
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="engagement-a17"><strong>S’il ne devait pas y avoir d’élu.e.s #MAVOIX, nous notons que nous pourrons enfin prendre des vacances et que nous ferons un séminaire en septembre pour documenter l’expérimentation, analyser les bénéfices et limites des ingrédients choisis, écrire collectivement ce que nous offrons au bien commun et à la démocratie.</strong></label>
+                                <label class="control-label">
+                                    <input id="engagement-a17" value="ok" type="checkbox"
+                                           name="engagement-a17" {{ checkedengagement }}>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                </label>
+                                <span>Oui *</span>
+                            </div>
+                        </div>
+
+
+                        <h2>La photo (facultative)</h2>
+
+                        <div class="form-group" >
+                            <label for="imagefile" class="control-label"></label>
+
+
+                            <div class="input-group image-preview  publicinfo">
+                                <input type="file" accept="image/jpeg" name="image" id="imagefile"/>
+                                <input type="hidden" id="imageData" name="imageData"
+                                       value="{% if group.path_pic!='' %}{{ base64image }}{% endif %}"/>
+                                <input type="hidden" id="imageFilename" name="imageFilename"
+                                       value="{% if group.path_pic!='' %}{{ nameimage }}{% endif %}"/>
+                                <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default image-preview-clear"
+                                            style="display:none;">
+                                        <span class="fa fa-times"></span>
+                                    </button>
+                                    <div class="btn btn-default image-preview-input">
+                                        <span class="fa fa-folder-open"></span>
+                                        <span class="image-preview-input-title">Choisir</span>
+                                        <input type="hidden" name="MAX_FILE_SIZE"
+                                               value="{{ ConfigService.get("max-filesize")*1024*1024 }}"/>
+                                    </div>
+                                </span>
+                            </div>
+
+                            <div class="help-block">Idéalement format carré (entre {{ ConfigService.get("min-width") }}px et {{ ConfigService.get("max-height") }}px ). {{  ConfigService.get("max-filesize") }}Mo max</div>
+
+                            <div class="drop-zone publicinfo"
+                                 style="{%  if group.path_pic!='' %}background-image:url('/{{ group.path_pic }}'){% endif %}"></div>
+
+                        </div>
+
+
+                        {% if ConfigService.get("enable-captcha")== 1  %}
+                            <div class="form-group">
+                                <label for="captcha" class="control-label">Code de sécurité : *</label>
+                                <div class="p-b">
+                                    <img src="/captcha/image.jpg" class="jsCaptcha" style="border:1px solid #000000;"/><br /><a href="javascript:void(0);" class="text-primary jsCaptchaRefresh" style="color:#000000;"> Ce code est illisible !  </a>
+                                </div>
+                                <input type="text" class="form-control" id="captcha" name="captcha"
+                                       value=""
+                                       placeholder="copiez ici le code de sécurité">
+                            </div>
+                        {% endif  %}
+
+                        <hr />
+                        <p>En cliquant sur le bouton ci-dessous, vous reconnaissez avoir pris connaissance de notre <a href="/home/mentions-legales.html">politique de gestion des données personnelles</a> et acceptez que les informations des champs encadrés en <span style="color:#05a60d;font-weight:bold">vert</span> soient rendues publiques.</p>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">
+                                {% if group.id!='' %}
+                                    Enregistrer
+                                {% else %}
+                                    Envoyer notre engagement
+                                {% endif %}
+                            </button>
+                        </div>
+                        {% if oMe.type=='admin' and group.state=='offline' %}
+                            <div class="text-center p-t-x2 p-b-x2">
+                                <input type="hidden" name="autovalid" id="autovalid" value="0" >
+                                <button type="button" class="btn  btn-primary jsBtAutoValid">Enregistrer et mettre en ligne</button>
+                            </div>
+                        {% endif %}
+                        {% if oMe.type=='admin' %}
+                            <div class="text-center p-t-x4 p-b-x4">
+                                <button type="button" class="btn btn-primary jsBackButton">
+                                    Retour
+                                </button>
+                            </div>
+                        {% endif %}
+                        <div class="text-center p-t-x4 p-b-x4">
+                            <div class="fb-share-button" data-href="{{ urlPage }}" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlPageEncoded }}&amp;src=sdkpreparse">Partager</a></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

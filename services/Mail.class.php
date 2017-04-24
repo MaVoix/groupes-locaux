@@ -3,9 +3,9 @@
 class Mail
 {
 
-	public static function sendMail($to, $title, $body, $sAltBody , $isHtml, $cc=[], $bcc=[], $files=[])
-	{
-	    if( is_string($to) )
+    public static function sendMail($to, $title, $body, $sAltBody , $isHtml, $cc=[], $bcc=[], $files=[])
+    {
+        if( is_string($to) )
         {
             if( empty($to) )
             {
@@ -17,7 +17,7 @@ class Mail
             }
         }
 
-	    if( !is_array($to) OR count($to)==0 )
+        if( !is_array($to) OR count($to)==0 )
         {
             throw new InvalidArgumentException("Argument 'To' expected to be non empty array or string");
         }
@@ -58,6 +58,7 @@ class Mail
         {
             $mail->isSMTP();                                      // Set mailer to use SMTP
             $mail->Host = ConfigService::get("mail-smtp-serveur");  // Specify main and backup server
+            $mail->Port = ConfigService::get("mail-smtp-port"); 
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = ConfigService::get("mail-smtp-login");                            // SMTP username
             $mail->Password = ConfigService::get("mail-smtp-pass");                           // SMTP password
@@ -70,37 +71,37 @@ class Mail
 
         // Envois de mails activés
 
-            // Destinataire
-            foreach( $to as $sDestinataire )
-            {
-                Vars::pushIfNotInArray($aTo, $sDestinataire);
-            }
+        // Destinataire
+        foreach( $to as $sDestinataire )
+        {
+            Vars::pushIfNotInArray($aTo, $sDestinataire);
+        }
 
-            // Copie
-            foreach( $cc as $sDestinataire )
-            {
-                Vars::pushIfNotInArray($aCc, $sDestinataire);
-            }
+        // Copie
+        foreach( $cc as $sDestinataire )
+        {
+            Vars::pushIfNotInArray($aCc, $sDestinataire);
+        }
 
-            // Copie cachée
-            foreach( $bcc as $sDestinataire )
-            {
-                Vars::pushIfNotInArray($aBcc, $sDestinataire);
-            }
+        // Copie cachée
+        foreach( $bcc as $sDestinataire )
+        {
+            Vars::pushIfNotInArray($aBcc, $sDestinataire);
+        }
 
-            // Copies cachées automatiques
-            $config_mail_bcc = ConfigService::get("mail-bcc");
-            if( is_array($config_mail_bcc) )
+        // Copies cachées automatiques
+        $config_mail_bcc = ConfigService::get("mail-bcc");
+        if( is_array($config_mail_bcc) )
+        {
+            foreach( $config_mail_bcc as $sEmail )
             {
-                foreach( $config_mail_bcc as $sEmail )
-                {
-                    Vars::pushIfNotInArray($aBcc, $sEmail);
-                }
+                Vars::pushIfNotInArray($aBcc, $sEmail);
             }
-            elseif( !is_array($config_mail_bcc) and !empty($config_mail_bcc) )
-            {
-                Vars::pushIfNotInArray($aBcc, $config_mail_bcc);
-            }
+        }
+        elseif( !is_array($config_mail_bcc) and !empty($config_mail_bcc) )
+        {
+            Vars::pushIfNotInArray($aBcc, $config_mail_bcc);
+        }
 
 
 
@@ -153,8 +154,8 @@ class Mail
             return false;
         }
         else return true;
-	}
-	
+    }
+
 
 
 }

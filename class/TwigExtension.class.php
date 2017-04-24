@@ -1,5 +1,6 @@
 <?php
 
+
 class TwigExtension
 {
     public function getPath($filepath){

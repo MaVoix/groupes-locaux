@@ -1,3 +1,12 @@
+DirectoryIndex index.php
+
+#php_value display_errors 1
+#php_value error_reporting 32767
+
+php_value upload_max_filesize 30M
+php_value post_max_size 30M
+php_value memory_limit 512M
+
 Options +FollowSymlinks
 RewriteEngine On
-RewriteRule ^(?!css|js|fonts|data|tool)(.*)/(.*)\.(.*)$ /index.php?area=$1&page=$2&format=$3&%{QUERY_STRING} [L]
+RewriteRule ^(?!dbdump|assets|css|js|fonts|data|tool)(.*)/(.*)\.(.*)$ /index.php?area=$1&page=$2&format=$3&%{QUERY_STRING} [L]

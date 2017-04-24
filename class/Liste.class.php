@@ -325,7 +325,7 @@ class Liste {
             //si sTablePrincipal non trouve : Error
             if($aTableDeclare['table']==$this->getTablePrincipale() && $aTableDeclare['tb_alias']==$this->getAliasPrincipal()){
                 $bFoundPrincipale = true;
-                $sListePrincipale = $aTableDeclare['table']." AS `".$aTableDeclare['tb_alias']."` ";
+                $sListePrincipale = "`".$aTableDeclare['table']."` AS `".$aTableDeclare['tb_alias']."` ";
             }
         }
         if(!$bFoundPrincipale){

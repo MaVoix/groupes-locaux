@@ -1,5 +1,6 @@
 <?php
 
+
 class App
 {
     const TWIG_TEMPLATE_DIR     = '../templates';       //without "/" at the end
@@ -14,10 +15,8 @@ class App
         $oNavigate->loadPage(self::PAGE_DIR , self::TWIG_TEMPLATE_DIR);
         $twig = self::getTwig($oNavigate);
         $twig->addGlobal("oMe", $oMe );
-        $twig->addGlobal("urlPage", $oNavigate->getUrl() );
-        $twig->addGlobal("urlPageEncoded", urlencode($oNavigate->getUrl()) );
-        $twig->addGlobal("urlSite", ConfigService::get("urlSite"));
-        $twig->addGlobal("urlSiteHTTP", str_replace("https://","http://",ConfigService::get("urlSite")));
+        $twig->addGlobal("oNavigate", $oNavigate);
+
 
         if(file_exists( self::TWIG_TEMPLATE_DIR."/".$oNavigate->getTemplate()))
         {
@@ -31,7 +30,6 @@ class App
 
     public static function getTwig($oNavigate=null)
     {
-
         $loader = new Twig_Loader_Filesystem(self::TWIG_TEMPLATE_DIR);
         $twig = new Twig_Environment($loader, array(
             'cache' => self::TWIG_TEMPLATE_CACHE,
@@ -39,7 +37,7 @@ class App
         ));
         $twig->addGlobal('TwigExtension', new TwigExtension() );
         $twig->addGlobal("ConfigService", new ConfigService());
-
+        $twig->addGlobal("MessageService", new MessageService());
 
         $twig->addGlobal("get", $_GET);
         $twig->addGlobal("post", $_POST);
@@ -49,7 +47,7 @@ class App
             $twig->addGlobal('navigate', $oNavigate );
         }
 
-        $twig->addExtension(new Twig_Extension_Filter());
+        $twig->addExtension(new Twig_AppExtension());
         $twig->addExtension(new Twig_Extension_Debug());
 
 
@@ -58,14 +56,18 @@ class App
 
     private static function init_user(){
 
+
         if(SessionService::get("user-id")){
             $oUser=new User(array("id"=>SessionService::get("user-id")));
             $oUser->hydrateFromBDD(array('*'));
         }else{
             $oUser=new User();
+            $oUser->setId(0);
             $oUser->setType("visitor");
+            $oUser->setEmail("xxx@xxx.xxx");
         }
         return $oUser;
+
 
     }
 

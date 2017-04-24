@@ -10,7 +10,7 @@ class Navigate
     private $template=null;
     private $data_template=array();
 
-    public function __construct(User $oUser )
+    public function __construct(User $oUser)
     {
         $this->user = $oUser;
 
@@ -103,7 +103,8 @@ class Navigate
             }
         }
         $sPathOfTemplate="";
-        if( $this->format == "html"){
+        if( $this->format == "html")
+        {
             $sPathOfTemplate=$sTemplateDir."/".$this->type."/".$this->area."/".$this->page.".html.twig";
 
             if(!file_exists( $sPathOfTemplate)){
@@ -137,23 +138,6 @@ class Navigate
             $sPathOfTemplate = $sTemplateDir."/json.twig";
         }
 
-        if( $this->format == "csv")
-        {
-            header("Content-type: text/csv");
-            header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
-            header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
-            $sPathOfTemplate = $sTemplateDir."/csv.twig";
-        }
-
-        if( $this->format == "jpg")
-        {
-            header('Content-type: image/jpeg');
-            header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
-            header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
-            $sPathOfTemplate = $sTemplateDir."/jpg.twig";
-        }
-
-
         $aDataScript = [];
         $oMe = $this->user;
         $oNavigate = $this;
@@ -163,20 +147,30 @@ class Navigate
             require_once $sPathOfScript;
         }
 
-        $aDataScript["versionjs"]=time();
-        $aDataScript["versioncss"]=time();
+        //compilation JS
+        if(ConfigService::get("js_auto_reload")==true){
+            $retour=file_get_contents(ConfigService::get("urlSite")."/tool/make-js.php");
+            if($retour==0){
+                echo "Impossible de compiler le fichier JS.(vérifier la liste des IP dans maintenance.php)";
+            }
+        }
+        $aDataScript["versionjs"]=filemtime('js/site.min.js');
+
+        //compilation CSS
+        if(ConfigService::get("css_auto_reload")==true){
+            $retour=file_get_contents(ConfigService::get("urlSite")."/tool/make-css.php");
+            if($retour==0){
+                echo "Impossible de compiler le fichier CSS.(vérifier la liste des IP dans maintenance.php)";
+            }
+        }
+        $aDataScript["versioncss"]=filemtime('css/site.min.css');
 
         $this->data_template=$aDataScript;
 
         $this->template=substr($sPathOfTemplate,strlen($sTemplateDir."/"));
 
-    }
-    public function getUrl(){
-        $sParam='';
-        if(isset($_GET["id"])){
-            $sParam="?id=".$_GET["id"];
-        }
-        return ConfigService::get("urlSite")."/".$this->getArea()."/".$this->getPage().".".$this->getFormat().$sParam;
+        $this->historyTrack();
+
     }
 
     public function getUser(){
@@ -195,6 +189,10 @@ class Navigate
         return $this->type;
     }
 
+    public function getKeyclt(){
+        return $this->keyclt;
+    }
+
     public function getFormat(){
         return $this->format;
     }
@@ -205,5 +203,142 @@ class Navigate
 
     public function getDataTemplate(){
         return $this->data_template;
+    }
+
+    public function getHistory()
+    {
+        $history = SessionService::get("history");
+
+        if( is_null($history) )
+        {
+            $history = [];
+            SessionService::set("history", $history);
+        }
+
+        return $history;
+    }
+
+/*    public function getPath()
+    {
+        return sprintf("%s/%s/%s.%s", ConfigService::get("urlSite"), $this->getArea(), $this->getPage(), $this->getFormat());
+    }*/
+
+    public function removeHistoryPreviousUrl($howMany=1)
+    {
+        $howMany++;
+        $history = $this->getHistory();
+
+        if( count($history)>1 )
+        {
+            $n = count($history)-$howMany;
+            if( array_key_exists($n, $history) )
+            {
+                unset($history[$n]);
+            }
+        }
+
+        SessionService::set("history", $history);
+    }
+
+    public function getHistoryPreviousUrl($howMany=1, $andDeleteCurrent=false)
+    {
+        $howMany++;
+
+        $history = $this->getHistory();
+        $url = null;
+
+        if( count($history)>1 )
+        {
+            $n = count($history)-$howMany;
+            if( array_key_exists($n, $history) )
+            {
+                $url = $history[$n];
+
+                if( $andDeleteCurrent )
+                {
+                    $this->addParametersToURLStr($url, [
+                        "hdp" => 1
+                    ]);
+                }
+            }
+        }
+
+        return $url;
+    }
+
+    private function addParametersToURLStr(&$url, array $newParameters)
+    {
+        $parsedUrl = parse_url($url);
+
+        if (is_null(@$parsedUrl['path']))
+        {
+            $url .= '/';
+        }
+
+        $separator = (is_null(@$parsedUrl['query'])) ? '?' : '&';
+
+        $query = http_build_query($newParameters);
+
+        $url .= $separator . $query;
+    }
+
+    private function removeParametersFromURLStr(&$url, array $removeParameters)
+    {
+        $parsed = parse_url($url);
+        $query = is_null(@$parsed['query']) ? "" : $parsed['query'];
+        $path = is_null(@$parsed["path"]) ? "/" : $parsed["path"];
+        $port = is_null(@$parsed["port"]) ? "" : ":{$parsed["port"]}";
+
+        parse_str($query, $params);
+
+        foreach( $removeParameters as $paramName )
+        {
+            if( array_key_exists($paramName, $params) )
+            {
+                unset($params[$paramName]);
+            }
+        }
+
+        $separator = (count($params)>0) ? '?' : '';
+
+        $query = http_build_query($params);
+        $url = "{$parsed["scheme"]}://{$parsed["host"]}{$port}{$path}{$separator}{$query}";
+    }
+
+    public function historyTrack()
+    {
+        global $_GET, $_POST;
+
+        if( !($this->getArea()==="home" AND $this->getPage()==="keep-awake") )
+        {
+
+//            if ($this->getFormat() === "html") echo '<div style="height: 150px;"></div>';
+
+            $history = $this->getHistory();
+
+            $uri = $_SERVER["REQUEST_URI"];
+            $host = ConfigService::get("urlSite");
+
+            if (array_key_exists("hdp", $_GET)) {
+                array_pop($history);
+                SessionService::set("history", $history);
+            }
+
+            if ($this->getFormat() === "html"
+                AND !array_key_exists("noHistoryTrack", $_GET)
+                AND !array_key_exists("noHistoryTrack", $_POST)
+            ) {
+                $previousUrl = $this->getHistoryPreviousUrl(0);
+                $url = sprintf("%s%s", $host, $uri);
+                $this->removeParametersFromURLStr($url, ["hdp"]);
+                if ($previousUrl != $url) {
+                    $history[] = $url;
+                }
+            }
+
+//            if ($this->getFormat() === "html") var_dump($history);
+
+            SessionService::set("history", $history);
+        }
     }
 }

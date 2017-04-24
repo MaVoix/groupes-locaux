@@ -1,0 +1,52 @@
+{% if num!=0 %}
+<div class="panel" style="background-color:#eeeeee;" data-num="{{ num }}">
+    <div class="panel-body">
+        <input type="hidden" id="user_id[membre{{ num }}]" name="user_id[membre{{ num }}]"
+               value="{{ member.id }}" >
+
+        <input type="hidden" class="jsItemDeleted" id="user_delete[membre{{ num }}]" name="user_delete[membre{{ num }}]"
+               value="0" >
+        <div class="row">
+            <div class="col-xs-6"><h3 class="no-margin">Coordonnées :</h3></div>
+            <div class="col-xs-6 text-right">  <button type="button" class="jsDeleteItem primary btn btn-s"><i class="fa fa-trash" aria-hidden="true"></i></button></div>
+        </div>
+
+        <div class="form-group">
+            <label for="user_civility[membre{{ num }}]" class="control-label">Civilité : *</label>
+            <select id="user_civility[membre{{ num }}]" name="user_civility[membre{{ num }}]" class="form-control publicinfo">
+                <option value="">Choisir ...</option>
+                <option value="M." {% if member.civility=='M.' %} selected {% endif %}>M.</option>
+                <option value="Mme" {% if member.civility=='Mme' or member.civility=='Mme.' %} selected {% endif %}>Mme</option>
+            </select>
+        </div>
+        <div class="form-group">
+
+            <label for="user_name[membre{{ num }}]" class="control-label">Nom de famille : *</label>
+            <input type="text" class="form-control publicinfo" id="user_name[membre{{ num }}]" name="user_name[membre{{ num }}]"
+                   value="{{ member.name|ucwords }}"
+                   placeholder="Nom de famille">
+        </div>
+        <div class="form-group">
+
+            <label for="user_firstname[membre{{ num }}]" class="control-label">Prénom : *</label>
+            <input type="text" class="form-control publicinfo" id="user_firstname[membre{{ num }}]" name="user_firstname[membre{{ num }}]"
+                   value="{{ member.firstname|ucwords }}"
+                   placeholder="Prénom">
+        </div>
+
+        <div class="form-group">
+            <label for="user_email[membre{{ num }}]" class="control-label">E-mail : *</label>
+            <input type="email" class="form-control" id="user_email[membre{{ num }}]" name="user_email[membre{{ num }}]"
+                   value="{{ member.email }}"
+                   placeholder="xxxxxx@xxxxx.com ">
+        </div>
+        <div class="form-group">
+            <label for="user_tel_display[membre{{ num }}]" class="control-label">Téléphone : *</label>
+            <br /><input id="user_tel_display[membre{{ num }}]"  value="{{ user["mandataire"].tel  }}" type="text" class="form-control telInput" name="user_tel_display[membre{{ num }}]" >
+            <input type="hidden" class="form-control" id="user_tel[membre{{ num }}]" name="user_tel[membre{{ num }}]" placeholder="XXXXXXXXX"
+                   value="{{ member.tel  }}" style="position:absolute;top:-10000px;">
+        </div>
+
+    </div>
+</div>
+{% endif %}

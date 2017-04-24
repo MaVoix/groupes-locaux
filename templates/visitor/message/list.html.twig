@@ -1,0 +1,60 @@
+{% extends "visitor/message/base.html.twig" %}
+{% block body %}
+
+        {{  parent() }}
+        <div class="wrapper">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2>Numéro Max Utilisé : {{ max }}</h2>
+                            {% for key, number in numbers %}
+                                {% if number|length>1 %}
+                                    <div class="conflitnumber">{{ number|length-1 }}
+                                    Conflit / Numéro : {{ key }}<br/> - cle :
+                                    {% for numb in number %}
+                                        {{ numb }} /
+                                    {% endfor %}
+                                    </div><br/>
+                                {% endif %}
+                            {% endfor %}<br/>
+                        </div>
+                        <div class="col-xs-12">
+                            <H2>Liste des messages :</H2>
+                        </div>
+                    </div>
+                    <ul class="preview-listing">
+                        {% if messages|length > 0 %}
+                        <div id="toast-container" class="">
+                            {% for message in messages %}
+                                {% if message.type == 'error' %}
+                                    {% include '/visitor/message/item-error.html.twig' %}
+                                {% endif %}
+                                {% if message.type == 'success' %}
+                                    {% include '/visitor/message/item-success.html.twig' %}
+                                {% endif %}
+                                {% if message.type == 'warning' %}
+                                    {% include '/visitor/message/item-warning.html.twig' %}
+                                {% endif %}
+                                {% if message.type == 'info' %}
+                                    {% include '/visitor/message/item-info.html.twig' %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                            {% for message in messages %}
+                                {% if message.type == 'confirm' %}
+                                    {% include '/visitor/message/item-confirm.html.twig' %}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <hr class="hr-default">
+                            <div class="text-center"><h4>Aucun message</h4></div>
+                            <hr class="hr-default">
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -7,19 +7,12 @@ body{
     padding-top: 50px;
 }
 
-#loading{
-    z-index:100000;
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    height:100%;
-    width:100%;
-    background-color:rgba(0,0,0,0.6);
+.publicinfo {
+    border-color: #05a60d;
+    border-width: 2px;
 }
-#loading.show{
-    display:block;
-}
+
+
 .error{
     top:50px;
     left:0;
@@ -34,22 +27,8 @@ body{
     box-shadow: 0px 0px 13px -2px rgba(0,0,0,0.75);
 }
 
-.loading-display{
-    background-color:#ffffff;
-    border-radius:5px;
-    width:280px;
-    height:130px;
-    position:absolute;
-    margin-left:-140px;
-    margin-top:-65px;
-    left:50%;
-    top:50%;
-    text-align:center;
-    padding:25px 10px 10px 10px;
-}
-
 .btn {
-  font-size: 1em;
+    font-size: 1em;
 }
 
 .btn-group-fontsize{
@@ -170,7 +149,7 @@ body{
 
 .wrapper-page{
     padding:20px 0;
-    min-height: calc(100% - 100px);
+    min-height: calc(100% - 50px);
 }
 
 .wrapper-menu{
@@ -188,51 +167,12 @@ body{
 }
 
 
-.square-pic-candidature{
-    width:100%;
-    margin:auto;
-    padding-bottom:100%;
-    background-size:cover;
-    background-position:center center;
-    background-color:#000000;
-}
-
-.square-pic-candidature-small{
-    height:140px;
-    width:140px;
-      /*margin:0;
-      padding:0;*/
-    background-size: cover;
-    background-position: center center;
-    background-color:#000000;
-}
-
-
-
-
-.circle-pic-candidature{
-    width:100%;
-    margin:auto;
-    padding-bottom:100%;
-    background-size:cover;
-    background-position:center center;
-    border-radius: 100%;
-    background-color:#000000;
-}
-
-
-.sticker-name{
-    background-color:rgba(255,255,255,0.8);
-    position:absolute;
-    padding:20px 40px 10px 10px;
-    width:100%;
-}
 
 @font-face {
     font-family: 'myriad';
     font-style: normal;
-    src: url('../fonts/Myriad.eot');
-    src: local('myriad'), url('../fonts/Myriad.eot') format('embedded-opentype'), url('../fonts/Myriad.woff') format('woff');
+    src: url('fonts/Myriad.eot');
+    src: local('myriad'), url('fonts/Myriad.eot') format('embedded-opentype'), url('fonts/Myriad.woff') format('woff');
 }
 .myriad {
     font-family: 'myriad' !important;
@@ -254,65 +194,17 @@ a {
 
 }
 
-.topmenu {
+
+.btn.btn-primary, button.btn-primary,button.btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary, .btn.focus, .btn:focus {
+    background-color: white;
+    border-color: black;
+    color: black;
+    transition: all 0.4s;
+}
+
+.btn.btn-primary:hover , button.btn-primary:hover, .btn:hover {
     background-color: #f2e732;
-    color:#000000;
-}
-
-.navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a{
-text-decoration: none;
-    background-color: transparent;
-    color:#000;
-}
-.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
-text-decoration: none;
-    background-color: #eee;
-}
-.topmenu .navbar-toggle,.topmenu .navbar-toggle:focus,.topmenu .navbar-toggle:hover, .topmenu .navbar-toggle:active {
-    border-color: #000000;
-    color:#000000;
-    background-color: transparent;
-}
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-    border:none;
-}
-
-.navbar-right {
-  font-weight: bold;
-
-}
-
-.navbar-right a {
-  color: black;
-}
-
-#logo {
-  padding-top: 7px;
-}
-
-footer {
-  background-color: #222;
-  /*position: absolute;*/
-  width: 100%;
-  /*bottom: 0;*/
-  height: 50px;
-  color: #ccc;
-}
-
-footer a, footer a:hover, footer a:visited {
-  color: #f2e732;
-}
-
-button.btn-primary,button.btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary, .btn.focus, .btn:focus {
-  background-color: white;
-  border-color: black;
-  color: black;
-  transition: all 0.4s;
-}
-
-button.btn-primary:hover, .btn:hover {
-  background-color: #f2e732;
-  color: black;
+    color: black;
 }
 
 .form-control:focus {
@@ -320,62 +212,20 @@ button.btn-primary:hover, .btn:hover {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(242, 231, 50, 0.6);
 }
 
-.button.btn-primary, button.btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary, .btn.focus, .btn:focus, .btn.active, .btn:active{
+.btn.btn-primary, .button.btn-primary, button.btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary, .btn.focus, .btn:focus, .btn.active, .btn:active{
     border-color: black;
     box-shadow: none;
     outline:5px auto #f2e732;
 }
 
-.engagements-a span.cr {
-  top:5px;
-}
 
 
 h2, h3 {
-  margin-top: 35px;
-  margin-bottom: 15px;
+    margin-top: 35px;
+    margin-bottom: 15px;
 }
 
-.publicinfo {
-  border-color: #05a60d;
-  border-width: 2px;
-}
 
-.table.updatableContent .checkbox-inline {
-  margin-top: 5px;
-}
 
-.updatableContent .anchor {
-  position: relative;
-  bottom: 100px;
-}
 
-.updatableContent button, .updatableContent a.btn {
-  min-width: 120px;
-  font-size: 0.8em;
-}
-.updatableContent .checkbox-inline {
-  font-size: 14px;
-}
 
-.updatableContent .checkbox-inline+.checkbox-inline {
-  margin-left: 0px;
-}
-
-div.scrollable {
-  max-width: 400px;
-  max-height: 120px;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-    font-size: 16px;
-}
-
-.blocedit_fiche.online{
-    display:block;
-    border:none;
-}
-.blocedit_fiche.offline{
-    display:none;
-    border:none;
-}

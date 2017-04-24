@@ -1,0 +1,12 @@
+footer {
+    background-color: #222;
+    /*position: absolute;*/
+    width: 100%;
+    /*bottom: 0;*/
+    height: 50px;
+    color: #ccc;
+}
+
+footer a, footer a:hover, footer a:visited {
+    color: #f2e732;
+}

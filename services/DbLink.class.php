@@ -2,7 +2,6 @@
 
 
 
-
 	class DbLink
 	{
 		private static $_instance;

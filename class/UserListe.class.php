@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class UserListe
  */
@@ -11,10 +10,24 @@ class UserListe extends Liste
      */
     private static $_champs = array(
         "id",
-        "login",
+        "date_created",
+        "date_amended",
+        "date_deleted",
+        "email",
         "pass",
         "type",
-        "enable"
+        "enable",
+        "group_id",
+        "civility",
+        "firstname",
+        "name",
+        "ad1",
+        "ad2",
+        "ad3",
+        "city",
+        "zipcode",
+        "country",
+        "tel"
     );
 
     /**
@@ -49,16 +62,64 @@ class UserListe extends Liste
         $this->setFields(self::$_champs);
     }
 
-
-    public function applyRules4Connexion($login, $pass)
+    private function notDeleted()
     {
         $this->setAllFields();
+        $this->addCriteres([
+            [
+                "field" => "date_deleted",
+                "compare" => "IS NULL",
+                "value" => ""
+            ]
+        ]);
+        return $this;
+    }
+    private function withEmail($sEmail,$sType)
+    {
+        $this-> setAllFields();
+        $this->addCritere(array("field"=>"email", "value"=>strtolower(Vars::secureInjection($sEmail)), "compare"=>"="));
+        if(!is_null($sType)){
+            $this->addCritere(array("field"=>"type", "value"=>strtolower(Vars::secureInjection($sType)), "compare"=>"="));
+        }
+        return $this;
+    }
+    public function applyRules4Group($id,$type=null)
+    {
+        $this->setAllFields();
+        $this->addCriteres([
+            [
+                "field" => "group_id",
+                "compare" => "=",
+                "value" => vars::secureInjection(intval($id))
+            ]
+        ]);
+        if(!is_null($type)){
+            $this->addCriteres([
+                [
+                    "field" => "type",
+                    "compare" => "=",
+                    "value" => vars::secureInjection($type)
+                ]
+            ]);
+        }
+        $this->notDeleted();
+    }
+    public function applyRules4SearchByEmail($email,$sType=null)
+    {
+        return  $this->notDeleted()->withEmail($email,$sType);
+    }
+
+
+    public function applyRules4Connexion($email, $pass)
+    {
+        $this->setAllFields();
+        $this->notDeleted();
 
         $this->addCriteres([
             [
-                "field" => "login",
+                "field" => "email",
                 "compare" => "=",
-                "value" => vars::secureInjection($login)
+                "value" => vars::secureInjection($email)
             ]
         ]);
 
@@ -72,14 +133,31 @@ class UserListe extends Liste
 
         $this->addCriteres([
             [
+                "field" => "pass",
+                "compare" => "!=",
+                "value" => ""
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
                 "field" => "enable",
                 "compare" => "=",
                 "value" => "1"
             ]
         ]);
 
+        $this->addCriteres([
+            [
+                "field" => "type",
+                "compare" => "!=",
+                "value" => "membre"
+            ]
+        ]);
+
         return $this;
     }
+
 
 
 }

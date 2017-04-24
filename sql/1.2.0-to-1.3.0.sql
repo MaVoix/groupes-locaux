@@ -1,1 +1,0 @@
-ALTER TABLE `candidature` ADD `comment` TEXT NOT NULL AFTER `is_criminal_record`;
