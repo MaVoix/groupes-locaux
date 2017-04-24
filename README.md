@@ -1,31 +1,34 @@
-# Engagement des groupe locaux #MAVOIX v0.0.1
+# Engagement des groupe locaux #MAVOIX v1.0.0
 
-Formulaire d'engagement des groupe locaux [#MAVOIX](https://mavoix.info) à faire campagne.
+Formulaire d'engagement des groupe locaux [#MAVOIX](https://mavoix.info) à faire campagne, et gestion des dons.
 
-Le formulaire se trouvera à l'adresse : https://engagement.mavoix.info.
+Le formulaire se trouve à l'adresse : https://groupes-locaux.mavoix.info.
 
-Version de test : https://engagement.maudry.fr
+Version de test : https://groupes-locaux.maudry.fr
 
 
 ## Notes de version
 
-### 0.0.1
+### 1.0.0
 
+- formulaire en place
+- pas encore de validation des groupes locaux
 
 ## Prerequisites
 
 - PHP 5 or later
 - Composer
+- sendmail
 - PHP mcrypt module
 - PHP curl module
 - PHP GD module
 - MySQL database
 
-## Installation 
+## Installation
 
-- Clonage du dépot 
+- Clonage du dépot
 ```
-git clone https://github.com/MaVoix/groupes-locaux.git 
+git clone https://github.com/MaVoix/groupes-locaux.git
 ```
 -  Mettre à jour les paquets composer
 ```

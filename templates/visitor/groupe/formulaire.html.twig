@@ -182,6 +182,7 @@
                         <hr/>
                         <p>&nbsp;</p>
                         <h2>Les membres du groupe*</h2>
+                        <p>Tout particulièrement les personnes qui s'engagent à se rendre au tirage au sort du 6 mai, ou à accompagner le candidat dans la circonscription lors de sa venue.</p>
                         <div id="MemberList">
                         {%  for member in user %}
                             {% if member.type=="membre" %}
@@ -210,18 +211,19 @@
                             </div>
 
                         </div>
+                        <p>A partir du <a href="https://fr.wikipedia.org/wiki/Liste_des_circonscriptions_l%C3%A9gislatives_de_la_France" target="_blank" title="Liste des circonscriptions">nombre d'inscrits dans la circonscription (chiffres de 2012)</a> et du nombre de panneaux <a href="https://forum.mavoix.info/t/renseigner-le-nombre-de-panneaux-et-dinscrits-dans-chaque-circo-des-points-de-contact-locaux/1092?u=colinmaudry" title="Forum MAVOIX" target="_blank">(méthode de calcul)</a>, vous pouvez calculer le nombre d'impressions <a title="Framacalc budget impressions" href="https://framacalc.org/qG1VtZO5A3" target="_blank">ici</a>.</p>
                         <div class="form-group">
-                            <label for="posters" class="control-label">Nombre d'affiches :</label>
+                            <label for="posters" class="control-label">Nombre d'affiches *:</label>
                             <input type="text" class="form-control" id="posters" name="posters" value="{{ group.posters }}"
                                    placeholder="0">
                         </div>
                         <div class="form-group">
-                            <label for="ballots" class="control-label">Nombre de bulletins de vote :</label>
+                            <label for="ballots" class="control-label">Nombre de bulletins de vote *:</label>
                             <input type="text" class="form-control" id="ballots" name="ballots" value="{{ group.ballots }}"
                                    placeholder="0">
                         </div>
                         <div class="form-group">
-                            <label for="professions_de_foi" class="control-label">Nombre de professions de foi :</label>
+                            <label for="professions_de_foi" class="control-label">Nombre de professions de foi *:</label>
                             <input type="text" class="form-control" id="professions_de_foi" name="professions_de_foi" value="{{group.professions_de_foi}}"
                                    placeholder="0">
                         </div>
