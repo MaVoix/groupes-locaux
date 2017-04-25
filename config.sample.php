@@ -8,6 +8,7 @@ $_CONFIG["twig_auto_reload"]                = true; //set true to disable cache 
 $_CONFIG["js_auto_reload"]                  = true; //set true to disable cache js
 $_CONFIG["css_auto_reload"]                 = true; //set true to disable cache css
 $_CONFIG["urlSite"]                         = "http://groupeslocaux";
+$_CONFIG["key"]                             = "changeit"; //string for generate key links
 
 // mysql
 $_CONFIG["bdd-login"]			            = "root";
