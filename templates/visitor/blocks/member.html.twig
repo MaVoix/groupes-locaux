@@ -42,7 +42,7 @@
         </div>
         <div class="form-group">
             <label for="user_tel_display[membre{{ num }}]" class="control-label">Téléphone : *</label>
-            <br /><input id="user_tel_display[membre{{ num }}]"  value="{{ user["mandataire"].tel  }}" type="text" class="form-control telInput" name="user_tel_display[membre{{ num }}]" >
+            <br /><input id="user_tel_display[membre{{ num }}]"  value="{{ member.tel  }}" type="text" class="form-control telInput" name="user_tel_display[membre{{ num }}]" >
             <input type="hidden" class="form-control" id="user_tel[membre{{ num }}]" name="user_tel[membre{{ num }}]" placeholder="XXXXXXXXX"
                    value="{{ member.tel  }}" style="position:absolute;top:-10000px;">
         </div>
