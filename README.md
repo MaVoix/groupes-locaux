@@ -9,6 +9,11 @@ Version de test : https://groupes-locaux.maudry.fr
 
 ## Notes de version
 
+### 1.1.0
+
+- interface de validation
+- liste publique des circonscriptions
+
 ### 1.0.0
 
 - formulaire en place
@@ -30,7 +35,7 @@ Version de test : https://groupes-locaux.maudry.fr
 ```
 git clone https://github.com/MaVoix/groupes-locaux.git
 ```
--  Mettre à jour les paquets composer
+- Mettre à jour les paquets composer
 ```
   php composer.phar update
 ```
