@@ -11,15 +11,30 @@ if(isset($_POST["departement"])){
     $listCirconscriptions->applyRules4Departement(intval($_POST["departement"]));
     $aDataScript["circonscriptions"]=  $listCirconscriptions->getPage();
 }
-
-if(isset($_GET["key"]) && isset($_GET["id"])){
-
-    $oListeGroup=new GroupListe();
-    $oListeGroup->applyRules4Key($_GET["key"],$_GET["id"]);
-    $aGroups=$oListeGroup->getPage();
-    if(count($aGroups)==1){
-        $Group=new Group(array("id"=>$aGroups[0]["id"]));
+$bOpenFromMandataire=false;
+if( isset($_GET["edit"]) && $_GET["edit"]=="true" && $oMe->getType()=="mandataire"){
+   $bOpenFromMandataire=true;
+}
+if( (isset($_GET["key"]) && isset($_GET["id"])) || $bOpenFromMandataire ){
+    $Group = new Group();
+    $bGroupFound=false;
+    if(!$bOpenFromMandataire){
+        $oListeGroup=new GroupListe();
+        $oListeGroup->applyRules4Key($_GET["key"],$_GET["id"]);
+        $aGroups=$oListeGroup->getPage();
+        if(count($aGroups)==1) {
+            $Group = new Group(array("id" => $aGroups[0]["id"]));
+            $Group->hydrateFromBDD(array('*'));
+            $aDataScript["key"]=$_GET["key"];
+            $bGroupFound=true;
+        }
+    }else {
+        $Group = new Group(array("id" => $oMe->getGroup_id()));
         $Group->hydrateFromBDD(array('*'));
+        $aDataScript["key"]= $Group->getKey_edit();
+        $bGroupFound=true;
+    }
+   if( $bGroupFound){
         $aDataScript["group"]=$Group;
         $aDataScript["nameimage"]=basename($Group->getPath_pic());
         $aDataScript["checkedengagement"]="checked";
@@ -28,7 +43,7 @@ if(isset($_GET["key"]) && isset($_GET["id"])){
             $data = file_get_contents($Group->getPath_pic());
             $aDataScript["base64image"]= 'data:image/' . $type . ';base64,' . base64_encode($data);
         }
-        $aDataScript["key"]=$_GET["key"];
+
 
         //criconscription
         $listCirconscriptions=new CirconscriptionListe();

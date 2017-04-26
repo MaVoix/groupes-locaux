@@ -1,0 +1,32 @@
+{% extends "mandataire/base.html.twig" %}
+
+
+{% block body %}
+    <div class="wrapper-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+                    <h1>Les groupes locaux #MAVOIX sont en campagne dans {{ groups|length }} circonscriptions !</h1>
+
+                    <p>Cliquez sur les circonscriptions pour savoir quelles villes s'y trouvent.</p>
+                    {% for group in groups %}
+
+                            <a href="http://www.elections-legislatives.fr/circonscriptions/0{{group.departement.code}}.asp"><div class="col-xs-12 col-md-6 p-t-x2">
+
+                                <div class="text-center sticker-name">
+                                    <h3 class="no-margin">{{group.departement.code}} - {{ group.departement.name}}</h3>
+                                        <div>{{ sup(group.circonscription.number,'f',false) }} circonscription</div>
+
+                                </div>
+                                <div style="background-image:url('/{{ group.path_pic_fit }}');"
+                                     class="square-pic-group"></div>
+
+
+                            </div>
+                          </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
