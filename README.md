@@ -9,6 +9,10 @@ Version de test : https://groupes-locaux.maudry.fr
 
 ## Notes de version
 
+### 1.1.1
+
+- lors de l'édition d'un groupe local, le numéro de téléphone du membre est affiché, non celui du mandataire
+
 ### 1.1.0
 
 - interface de validation
