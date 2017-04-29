@@ -35,10 +35,7 @@ CREATE TABLE `circonscription` (
   `date_deleted` datetime DEFAULT NULL,
   `code` varchar(10) NOT NULL,
   `code_departement` varchar(10) NOT NULL,
-  `number` int(11) NOT NULL,
-  `posters` int(11) NOT NULL,
-  `ballots` int(11) NOT NULL,
-  `professions_de_foi` int(11) NOT NULL
+  `number` int(11) NOT NULL
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -190,14 +187,14 @@ INSERT INTO `circonscription` (`id`, `date_created`, `date_amended`, `date_delet
   (141, NULL, NULL, NULL, '97401', '974', 1),
   (142, NULL, NULL, NULL, '98701', '987', 1),
   (143, NULL, NULL, NULL, '98703', '987', 3),
-  (144, NULL, NULL, NULL, 'ZZ002', 'ZZ', 2),
-  (145, NULL, NULL, NULL, 'ZZ003', 'ZZ', 3),
-  (146, NULL, NULL, NULL, 'ZZ008', 'ZZ', 8),
-  (147, NULL, NULL, NULL, 'ZZ009', 'ZZ', 9),
-  (148, NULL, NULL, NULL, 'ZZ010', 'ZZ', 10),
-  (149, NULL, NULL, NULL, 'ZZ011', 'ZZ', 11),
-  (150, NULL, NULL, NULL, 'ZZ004', 'ZZ', 4),
-  (151, NULL, NULL, NULL, 'ZZ005', 'ZZ', 5),
+  (144, NULL, NULL, NULL, '99002', '99', 2),
+  (145, NULL, NULL, NULL, '99003', '99', 3),
+  (146, NULL, NULL, NULL, '99008', '99', 8),
+  (147, NULL, NULL, NULL, '99009', '99', 9),
+  (148, NULL, NULL, NULL, '99010', '99', 10),
+  (149, NULL, NULL, NULL, '99011', '99', 11),
+  (150, NULL, NULL, NULL, '99004', '99', 4),
+  (151, NULL, NULL, NULL, '99005', '99', 5),
   (152, NULL, NULL, NULL, '28002', '28', 2),
   (153, NULL, NULL, NULL, '28003', '28', 3),
   (154, NULL, NULL, NULL, '28004', '28', 4),
@@ -619,9 +616,9 @@ INSERT INTO `circonscription` (`id`, `date_created`, `date_amended`, `date_delet
   (570, NULL, NULL, NULL, '97203', '972', 3),
   (571, NULL, NULL, NULL, '97404', '974', 4),
   (572, NULL, NULL, NULL, '98801', '988', 1),
-  (573, NULL, NULL, NULL, 'ZZ001', 'ZZ', 1),
-  (574, NULL, NULL, NULL, 'ZZ006', 'ZZ', 6),
-  (575, NULL, NULL, NULL, 'ZZ007', 'ZZ', 7),
+  (573, NULL, NULL, NULL, '99001', '99', 1),
+  (574, NULL, NULL, NULL, '99006', '99', 6),
+  (575, NULL, NULL, NULL, '99007', '99', 7),
   (576, NULL, NULL, NULL, '98702', '987', 2),
   (577, NULL, NULL, NULL, '68001', '68', 1);
 
@@ -749,7 +746,7 @@ INSERT INTO `departement` (`id`, `date_created`, `date_amended`, `date_deleted`,
   (99, NULL, NULL, NULL, '973', 'Guyane', 'GUYANE', 'guyane', 'G500'),
   (100, NULL, NULL, NULL, '972', 'Martinique', 'MARTINIQUE', 'martinique', 'M6352'),
   (101, NULL, NULL, NULL, '974', 'Réunion', 'RÉUNION', 'reunion', 'R500'),
-  (102, NULL, NULL, NULL, 'ZZ', 'Français de l\'étranger', 'FRANCAIS DE L\'ETRANGER', 'francais-de-l-etranger', NULL);
+  (102, NULL, NULL, NULL, '99', 'Français de l\'étranger', 'FRANCAIS DE L\'ETRANGER', 'francais-de-l-etranger', NULL);
 
 -- --------------------------------------------------------
 
