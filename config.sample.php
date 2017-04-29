@@ -33,9 +33,11 @@ $_CONFIG["mail-smtp-pass"]			        =""; //server smtp pass
 $_CONFIG["idSite"]                          = "collectedon"; //for unique session var prefix
 $_CONFIG["types"]			                = "visitor|donor>visitor|mandataire>donor>visitor|admin>mandataire>donor>visitor";
 if(strstr($_SERVER["HTTP_HOST"],"groupes")){
+    $_CONFIG["navigation"]                      ="groupes";
     $_CONFIG["area-default"]                    = array("visitor"=>"groupe","mandataire"=>"groupe","admin"=>"groupe");
     $_CONFIG["page-default"]                    = array("visitor"=>"formulaire","mandataire"=>"accueil","admin"=>"liste");
 }else{
+    $_CONFIG["navigation"]                      ="dons";
     $_CONFIG["area-default"]                    = array("visitor"=>"dons","mandataire"=>"groupe","admin"=>"groupe");
     $_CONFIG["page-default"]                    = array("visitor"=>"accueil","mandataire"=>"accueil","admin"=>"liste");
 }
