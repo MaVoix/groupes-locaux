@@ -20,6 +20,12 @@ class Group	{
     private $sPath_pic;
     private $sBank_name;
     private $sBank_city;
+    private $sEmail;
+    private $sFacebook_page;
+    private $sFacebook_group;
+    private $sTwitter;
+    private $sComment;
+    private $sPresentation;
     private $nAmount_promises;
     private $nAmount_donations;
     private $nPosters;
@@ -199,6 +205,36 @@ class Group	{
             $aData["bank_city"]=$this->getBank_city();
         }
 
+        if(isset($this->aDataSet["email"]))
+        {
+            $aData["email"]=$this->getEmail();
+        }
+
+        if(isset($this->aDataSet["facebook_page"]))
+        {
+            $aData["facebook_page"]=$this->getFacebook_page();
+        }
+
+        if(isset($this->aDataSet["facebook_group"]))
+        {
+            $aData["facebook_group"]=$this->getFacebook_group();
+        }
+
+        if(isset($this->aDataSet["twitter"]))
+        {
+            $aData["twitter"]=$this->getTwitter();
+        }
+
+        if(isset($this->aDataSet["comment"]))
+        {
+            $aData["comment"]=$this->getComment();
+        }
+
+        if(isset($this->aDataSet["presentation"]))
+        {
+            $aData["presentation"]=$this->getPresentation();
+        }
+
         if(isset($this->aDataSet["amount_promises"]))
         {
             $aData["amount_promises"]=$this->getAmount_promises();
@@ -257,6 +293,12 @@ class Group	{
         $this->setPath_pic(NULL);
         $this->setBank_name(NULL);
         $this->setBank_city(NULL);
+        $this->setEmail(NULL);
+        $this->setFacebook_page(NULL);
+        $this->setFacebook_group(NULL);
+        $this->setTwitter(NULL);
+        $this->setComment(NULL);
+        $this->setPresentation(NULL);
         $this->setAmount_promises(0);
         $this->setAmount_donations(0);
         $this->setPosters(NULL);
@@ -282,6 +324,12 @@ class Group	{
             "path_pic" => $this->getPath_pic(),
             "bank_name" => $this->getBank_name(),
             "bank_city" => $this->getBank_city(),
+            "email" => $this->getEmail(),
+            "facebook_page" => $this->getFacebook_page(),
+            "facebook_group" => $this->getFacebook_group(),
+            "twitter" => $this->getTwitter(),
+            "comment" => $this->getComment(),
+            "presentation" => $this->getPresentation(),
             "amount_promises" => $this->getAmount_promises(),
             "amount_donations" => $this->getAmount_donations(),
             "posters" => $this->getPosters(),
@@ -612,7 +660,7 @@ class Group	{
         }
     }
 
-    public function getDepartement()
+    public function Departement()
     {
         if( $this->nDepartement_id){
             $oDepartement = new Departement(array("id"=>$this->nDepartement_id));
@@ -669,7 +717,7 @@ class Group	{
         }
     }
 
-    public function getCirconscription()
+    public function Circonscription()
     {
         if( $this->nCirconscription_id){
             $oCirconscription = new Circonscription(array("id"=>$this->nCirconscription_id));
@@ -808,6 +856,270 @@ class Group	{
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
             return $this->sBank_city;
+        }
+    }
+
+
+
+    /**
+     * Set le champ email
+     * @param string $sEmail nouvelle valeur pour le champ email
+     */
+    public function setEmail($sEmail)
+    {
+        if( is_null($sEmail) ) $sEmail='';
+        $this->sEmail = $sEmail;
+        $this->aDataSet["email"]=1;
+    }
+
+
+
+    /**
+     * Get le champ email
+     * @return string valeur du champ email
+     */
+    public function getEmail()
+    {
+        if( !is_null($this->sEmail) )
+        {
+            if( $this->sEmail==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sEmail;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('email'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sEmail;
+        }
+    }
+
+
+
+    /**
+     * Set le champ facebook_page
+     * @param string $sFacebook_page nouvelle valeur pour le champ facebook_page
+     */
+    public function setFacebook_page($sFacebook_page)
+    {
+        if( is_null($sFacebook_page) ) $sFacebook_page='';
+        $this->sFacebook_page = $sFacebook_page;
+        $this->aDataSet["facebook_page"]=1;
+    }
+
+
+
+    /**
+     * Get le champ facebook_page
+     * @return string valeur du champ facebook_page
+     */
+    public function getFacebook_page()
+    {
+        if( !is_null($this->sFacebook_page) )
+        {
+            if( $this->sFacebook_page==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sFacebook_page;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('facebook_page'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sFacebook_page;
+        }
+    }
+
+
+
+    /**
+     * Set le champ facebook_group
+     * @param string $sFacebook_group nouvelle valeur pour le champ facebook_group
+     */
+    public function setFacebook_group($sFacebook_group)
+    {
+        if( is_null($sFacebook_group) ) $sFacebook_group='';
+        $this->sFacebook_group = $sFacebook_group;
+        $this->aDataSet["facebook_group"]=1;
+    }
+
+
+
+    /**
+     * Get le champ facebook_group
+     * @return string valeur du champ facebook_group
+     */
+    public function getFacebook_group()
+    {
+        if( !is_null($this->sFacebook_group) )
+        {
+            if( $this->sFacebook_group==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sFacebook_group;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('facebook_group'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sFacebook_group;
+        }
+    }
+
+
+
+    /**
+     * Set le champ twitter
+     * @param string $sTwitter nouvelle valeur pour le champ twitter
+     */
+    public function setTwitter($sTwitter)
+    {
+        if( is_null($sTwitter) ) $sTwitter='';
+        $this->sTwitter = $sTwitter;
+        $this->aDataSet["twitter"]=1;
+    }
+
+
+
+    /**
+     * Get le champ twitter
+     * @return string valeur du champ twitter
+     */
+    public function getTwitter()
+    {
+        if( !is_null($this->sTwitter) )
+        {
+            if( $this->sTwitter==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sTwitter;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('twitter'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sTwitter;
+        }
+    }
+
+
+
+    /**
+     * Set le champ comment
+     * @param string $sComment nouvelle valeur pour le champ comment
+     */
+    public function setComment($sComment)
+    {
+        if( is_null($sComment) ) $sComment='';
+        $this->sComment = $sComment;
+        $this->aDataSet["comment"]=1;
+    }
+
+
+
+    /**
+     * Get le champ comment
+     * @return string valeur du champ comment
+     */
+    public function getComment()
+    {
+        if( !is_null($this->sComment) )
+        {
+            if( $this->sComment==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sComment;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('comment'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sComment;
+        }
+    }
+
+
+
+    /**
+     * Set le champ presentation
+     * @param string $sPresentation nouvelle valeur pour le champ presentation
+     */
+    public function setPresentation($sPresentation)
+    {
+        if( is_null($sPresentation) ) $sPresentation='';
+        $this->sPresentation = $sPresentation;
+        $this->aDataSet["presentation"]=1;
+    }
+
+
+
+    /**
+     * Get le champ presentation
+     * @return string valeur du champ presentation
+     */
+    public function getPresentation()
+    {
+        if( !is_null($this->sPresentation) )
+        {
+            if( $this->sPresentation==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sPresentation;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('presentation'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sPresentation;
         }
     }
 
@@ -1123,6 +1435,15 @@ class Group	{
          return "css/images/go.jpg";
      }
 
+    }
+
+    /* Lien TWIG vers les accesseurs */
+    public function getDepartement(){
+        return $this->Departement();
+    }
+
+    public function getCirconscription(){
+        return $this->Circonscription();
     }
 
 

@@ -19,6 +19,6 @@ foreach($groups as $datagroup){
    $groupsOut[$oDepartement->getCode()."-".$oCirconscription->getCode()."-".$group->getId()]=$datagroup;
 
 }
-
+ksort($groupsOut);
 $aDataScript["groups"]=$groupsOut;
 
