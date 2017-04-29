@@ -255,3 +255,38 @@ h2, h3 {
     padding:20px 40px 10px 10px;
     width:100%;
 }
+
+.progress.mavoix{
+    height:25px;
+}
+.progress.mavoix >div{
+    height:25px;
+    line-height:25px;
+}
+.progress.mavoix >div:first-child{
+    border-bottom-right-radius: 0;
+    background-color:#f2e732;
+    border-top-right-radius: 0;
+    color:#000000;
+
+}
+.progress.mavoix >div:last-child{
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    background-color:#000000;
+    color:#ffffff;
+}
+/* pour garder un contenu lisible */
+.progress.mavoix >div{
+    min-width:5%;
+}
+@media screen and (max-width: 1200px){
+    .progress.mavoix >div{
+        min-width:9%;
+    }
+}
+@media screen and (max-width: 400px){
+    .progress.mavoix >div{
+        min-width:12%;
+    }
+}
