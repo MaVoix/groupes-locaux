@@ -1,0 +1,99 @@
+{% extends "visitor/base.html.twig" %}
+
+{% block body %}
+<div class="wrapper-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-md-offset-3">
+                <form action="/dons/save-pledge.json" id="formpledge" method="post" autocomplete="off"
+                      data-ajax="true"
+                      enctype="multipart/form-data">
+                    <input type="hidden" value="{{ group.id }}" name="group_id" id="group_id">
+                    <input type="hidden" value="{{ subkey }}" name="group_subkey" id="group_subkey">
+                    <div class="form-group ">
+                        <label for="civility" class="control-label">Civilité : *</label>
+                        <select id="civility" name="civility" class="form-control ">
+                            <option value="">Choisir ...</option>
+                            <option value="M." {% if pledge.civility=='M.' %} selected {% endif %}>M.</option>
+                            <option value="Mme" {% if pledge.civility=='Mme' or pledge.civility=='Mme.' %} selected {% endif %}>Mme</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="name" class="control-label">Nom de famille : *</label>
+                        <input title="Votre nom de famille" type="text" class="form-control " id="name" name="name"
+                               value="{{ pledge.name|ucwords }}"
+                               placeholder="Nom de famille">
+                    </div>
+                    <div class="form-group">
+
+                        <label for="firstname" class="control-label">Prénom : *</label>
+                        <input  title="Votre prénom" type="text" class="form-control " id="firstname" name="firstname"
+                                value="{{ pledge.firstname|ucwords }}"
+                                placeholder="Prénom">
+                    </div>
+                    <div class="form-group">
+
+                        <label for="email" class="control-label">Email : *</label>
+                        <input  title="Votre email" type="text" class="form-control " id="email" name="email"
+                                value="{{ pledge.firstname|ucwords }}"
+                                placeholder="xxxxx@xxxxxx.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="tel_display" class="control-label">Téléphone : *</label>
+                        <br /><input  title="Votre numéro de téléphone" id="tel_display"  value="{{ pledge.tel  }}" type="text" class="form-control telInput" name="tel_display" >
+                        <input type="hidden" class="form-control" id="tel" name="tel" placeholder="XXXXXXXXX"
+                               value="{{ pledge.tel  }}" style="position:absolute;top:-10000px;">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="zipcode" class="control-label">Code postal : *</label>
+                        <br /><input  title="Votre code postal" id="zipcode"  value="{{ pledge.zipcode  }}" type="text" class="form-control" name="zipcode" >
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="amount" class="control-label">Montant de votre promesse : *</label>
+                        <input  title="Montant de votre promesse" type="text" class="form-control " id="amount" name="amount"
+                                value="{{ pledge.amount }}"
+                                placeholder="XXX">
+                    </div>
+
+                    <h2>Les engagements</h2>
+
+                    <div class="form-group engagements-a">
+                        <div class="checkbox">
+                            <label class="label-checkbox" for="engagement-a1"><strong>Je m'engage à ....</strong></label>
+                            <label class="control-label">
+                                <input id="engagement-a1" value="ok" type="checkbox"
+                                       name="engagement-a1" {{ checkedengagement }}>
+                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                            </label>
+                            <span>Oui *</span>
+                        </div>
+
+                        <div class="checkbox">
+                            <label class="label-checkbox" for="engagement-a2"><strong>Je m'engage à ....</strong></label>
+                            <label class="control-label">
+                                <input id="engagement-a2" value="ok" type="checkbox"
+                                       name="engagement-a2" {{ checkedengagement }}>
+                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                            </label>
+                            <span>Oui *</span>
+                        </div>
+
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">
+                                Envoyer ma promesse de don
+
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
