@@ -160,6 +160,40 @@ if (!$bEdit) {
         }
     }
 }
+
+
+//verifie les informations pour la page collectif
+//informations publiques pour la page collectif
+if(isset($_POST["email"]) && $_POST["email"]!=""){
+    if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+        $aResponse["message"]["text"] = "L'adresse e-mail de contact de votre collectif n'est pas correcte";
+        array_push($aResponse["required"], array("field" => "email"));
+        $nError++;
+    }
+}
+if(isset($_POST["facebook_page"]) && $_POST["facebook_page"]!="" ){
+    if (!filter_var($_POST["facebook_page"], FILTER_VALIDATE_URL)) {
+        $aResponse["message"]["text"] = "L'adresse de votre page facebook n'est pas correcte";
+        array_push($aResponse["required"], array("field" => "facebook_page"));
+        $nError++;
+    }
+}
+if(isset($_POST["facebook_group"]) && $_POST["facebook_group"]!="" ){
+    if (!filter_var($_POST["facebook_group"], FILTER_VALIDATE_URL)) {
+        $aResponse["message"]["text"] = "L'adresse de votre groupe facebook n'est pas correcte";
+        array_push($aResponse["required"], array("field" => "facebook_group"));
+        $nError++;
+    }
+}
+
+if(isset($_POST["twitter"]) && $_POST["twitter"]!="" ){
+    if (!filter_var($_POST["twitter"], FILTER_VALIDATE_URL)) {
+        $aResponse["message"]["text"] = "L'adresse de votre page twitter n'est pas correcte";
+        array_push($aResponse["required"], array("field" => "twitter"));
+        $nError++;
+    }
+}
+
 /*
 if(ConfigService::get("enable-captcha")){
     if (!isset($_POST["captcha"]) || $_POST["captcha"] == "") {
@@ -271,16 +305,16 @@ if ($nError == 0) {
     $Group->setCirconscription_id(intval($_POST["circonscription"]));
 
     //informations publiques pour la page collectif
-    if(isset($_POST["email"])){
+    if(isset($_POST["email"]) && $_POST["email"]!="" ){
       $Group->setEmail($_POST["email"]);
     }
-    if(isset($_POST["facebook_page"])){
+    if(isset($_POST["facebook_page"]) && $_POST["facebook_page"]!=""){
         $Group->setFacebook_page($_POST["facebook_page"]);
     }
-    if(isset($_POST["facebook_group"])){
+    if(isset($_POST["facebook_group"]) && $_POST["facebook_group"]!=""){
         $Group->setFacebook_group($_POST["facebook_group"]);
     }
-    if(isset($_POST["twitter"])){
+    if(isset($_POST["twitter"]) && $_POST["twitter"]!=""){
         $Group->setTwitter($_POST["twitter"]);
     }
 
