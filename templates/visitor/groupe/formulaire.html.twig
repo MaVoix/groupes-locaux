@@ -30,12 +30,19 @@
                             <input type="hidden" id="key" name="key" value="{{ key }}"/>
                         {% endif %}
 
-                        <p><strong>Bienvenue sur le formulaire d'engagement des groupes locaux #MAVOIX !</strong></p>
+                        <p><strong>Bienvenue sur le formulaire d'engagement des collectifs locaux #MAVOIX !</strong></p>
+                        <p>Pour des raisons de logistique, <strong>seuls les collectifs locaux suivants, qui avaient déjà envoyé une partie des informations, sont invités à remplir le formulaire</strong> : </p>
+                        <ul>
+                          <li>Nord, 1ère circonscription</li>
+                          <li>Paris, 1ère circonscription</li>
+                          <li>Vendée, 1ère circonscription</li>
+                          <li>Vienne, 1ère circonscription</li>
+                        </ul>
                         <p>Les informations <span style="color:#05a60d;font-weight:bold;">en vert</span> seront rendues publiques.</p>
 
                         <div class="form-group">
-                            <label for="group_name" class="control-label"><strong>Nous groupe local de</strong></label>
-                            <input title="Nom du groupe local" type="text" class="form-control publicinfo" id="group_name" name="group_name"
+                            <label for="group_name" class="control-label"><strong>Nous collectif local de</strong></label>
+                            <input title="Nom du collectif local" type="text" class="form-control publicinfo" id="group_name" name="group_name"
                                    value="{{ group.name }}"
                                    placeholder="Auxerre ouest, Paris sud, Haut-Rhin, etc...">
                         </div>
@@ -64,7 +71,7 @@
                                 {% endif %}
 
                             </div>
-                            <p class="help-block">Si votre groupe fait campagne dans plusieurs circonscriptions, remplissez un formulaire par circonscription.</p>
+                            <p class="help-block">Si votre collectif fait campagne dans plusieurs circonscriptions, remplissez un formulaire par circonscription.</p>
                         </div>
 
 
@@ -123,7 +130,7 @@
                             <input  title="Confirmation du mot de passe" type="password" class="form-control" id="mandataire_pass_confirm" name="mandataire_pass_confirm"
                                    value=""
                                    placeholder=" ">
-                            <p class="help-block">Votre mot de passe doit contenir des lettres et des chiffres (6 caractères minimum). Conservez-le précieusement, il vous servira à vous connecter à la page de votre groupe.</p>
+                            <p class="help-block">Votre mot de passe doit contenir des lettres et des chiffres (6 caractères minimum). Conservez-le précieusement, il vous servira à vous connecter à la page de votre collectif.</p>
                         </div>
 
                         <p>&nbsp;</p>
@@ -169,19 +176,19 @@
                             Elle a déjà pris contact avec la banque suivante afin de préparer l’ouverture du compte.</p>
                         <div class="form-group">
                             <label for="bank_name" class="control-label">Nom de la banque :</label>
-                            <input   title="Nom de la banque du groupe local" type="text" class="form-control" id="banque_nom" name="bank_name" value="{{ group.bank_name }}"
+                            <input   title="Nom de la banque du collectif local" type="text" class="form-control" id="banque_nom" name="bank_name" value="{{ group.bank_name }}"
                                    placeholder="Crédit Démocratique de la Madeleine">
                         </div>
                         <div class="form-group">
                             <label for="bank_city" class="control-label">Ville :</label>
-                            <input   title="Ville de la banque du groupe local" type="text" class="form-control" id="bank_city" name="bank_city" value="{{ group.bank_city }}"
+                            <input   title="Ville de la banque du collectif local" type="text" class="form-control" id="bank_city" name="bank_city" value="{{ group.bank_city }}"
                                    placeholder="Ville de votre banque">
                         </div>
 
 
                         <hr/>
                         <p>&nbsp;</p>
-                        <h2>Les membres du groupe*</h2>
+                        <h2>Les membres du collectif*</h2>
                         <p>Tout particulièrement les personnes qui s'engagent à se rendre au tirage au sort du 6 mai, ou à accompagner le candidat dans la circonscription lors de sa venue.</p>
                         <div id="MemberList">
                         {%  for member in user %}
@@ -318,7 +325,7 @@
                             </div>
                         </div>
 
-                        <h3>Engagement de soutien et de partage entre groupes locaux</h3>
+                        <h3>Engagement de soutien et de partage entre collectifs locaux</h3>
                         <div class="form-group engagements-a">
                             <div class="checkbox">
                                 <label class="label-checkbox" for="engagement-a9"><strong>Nous nous engageons à soutenir le mandataire financier dans le remplissage des reçus fiscaux (ça va beaucoup plus vite à plusieurs).</strong></label>
