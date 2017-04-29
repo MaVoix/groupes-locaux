@@ -7,7 +7,14 @@
     <meta name="format-detection" content="telephone=no" >
     <meta name="HandheldFriendly" content="true" >
     <meta name="viewport" content="width = device-width,initial-scale = 1,minimum-scale = 1,maximum-scale = 1,  user-scalable=no" >
-    <title>{% block title %}Collectifs locaux #MAVOIX{% endblock %}</title>
+    <title>{% block title %}
+        {%  if navigation=="groupes" %}
+             Groupes locaux #MAVOIX
+        {% else %}
+            Tirelire #MAVOIX
+        {% endif %}
+        {% endblock %}
+    </title>
     <link rel="stylesheet" href="/css/site.min.css?v={{  versioncss }}">
     <link rel="icon" type="image/png" href="/css/images/favicon.png">
     {% block stylesheets %}{% endblock %}
@@ -29,7 +36,11 @@
             {% embed "#{oMe.type}/menu.html.twig" %}{% endembed %}
         </div>
     {% else %}
-        {% embed "#{oMe.type}/menu.html.twig" %}{% endembed %}
+        {%  if navigation=="groupes" %}
+            {% embed "#{oMe.type}/menu.html.twig" %}{% endembed %}
+        {%  else %}
+            {% embed "#{oMe.type}/menu-dons.html.twig" %}{% endembed %}
+        {%  endif %}
     {% endif %}
 {% endblock %}
 {% block body %}{% endblock %}
