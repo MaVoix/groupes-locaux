@@ -270,6 +270,22 @@ if ($nError == 0) {
     $Group->setDepartement_id(intval($_POST["departement"]));
     $Group->setCirconscription_id(intval($_POST["circonscription"]));
 
+    //informations publiques pour la page collectif
+    if(isset($_POST["email"])){
+      $Group->setEmail($_POST["email"]);
+    }
+    if(isset($_POST["facebook_page"])){
+        $Group->setFacebook_page($_POST["facebook_page"]);
+    }
+    if(isset($_POST["facebook_group"])){
+        $Group->setFacebook_group($_POST["facebook_group"]);
+    }
+    if(isset($_POST["twitter"])){
+        $Group->setTwitter($_POST["twitter"]);
+    }
+
+
+    //information bank
     if (isset($_POST["bank_name"])) {
         $Group->setBank_name($_POST["bank_name"]);
     }
