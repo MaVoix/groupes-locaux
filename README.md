@@ -1,4 +1,4 @@
-# Engagement des groupe locaux #MAVOIX v1.0.0
+# Engagement des groupe locaux #MAVOIX v1.1.2
 
 Formulaire d'engagement des groupe locaux [#MAVOIX](https://mavoix.info) à faire campagne, et gestion des dons.
 
@@ -8,6 +8,12 @@ Version de test : https://groupes-locaux.maudry.fr
 
 
 ## Notes de version
+
+### 1.1.2
+
+- Nombre de collectifs en campagne fixé à 42
+- Début de la transition groupe > collectif
+- Département des circonscription des Français de l'étrangeer : ZZ > 99
 
 ### 1.1.1
 
