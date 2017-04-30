@@ -51,12 +51,13 @@ if($nError==0){
     }
 }
 
+$group = new Group();
 if($nError==0) {
     //verification de l'existence du groupe
-    $Group = new Group(array("id" => intval($_POST["group_id"])));
-    $Group->hydrateFromBDD(array('*'));
-    $subkey=sha1(substr($Group->getKey_edit(),0,10).$Group->getId());
-    if(!isset($_POST["group_subkey"]) || $subkey!=$_POST["group_subkey"] || intval($Group->getId())==0){
+    $group = new Group(array("id" => intval($_POST["group_id"])));
+    $group->hydrateFromBDD(array('*'));
+    $subkey=sha1(substr($group->getKey_edit(),0,10).$group->getId());
+    if(!isset($_POST["group_subkey"]) || $subkey!=$_POST["group_subkey"] || intval($group->getId())==0){
         $aResponse["message"]["text"] = "Impossible d'enregistrer votre promesse de don sur ce collectif local !";
         $nError++;
     }
@@ -80,7 +81,19 @@ if($nError==0){
     $pledge->setReference(Pledge::genereRandomReference( $pledge->getId()));
     $pledge->save();
 
-    //TODO : finir sauvgarde avec lien vers le groupe, (verif du goupe avec la clé), génération de la réféfence et envoi du mail + redirect vers la page de remerciement
+    //envoi du mail
+    $TwigEngine = App::getTwig();
+    $sBodyMailHTML = $TwigEngine->render("visitor/mail/don-body.html.twig", [
+        "group" => $group,
+        "pledge" =>$pledge
+    ]);
+    $sBodyMailTXT = $TwigEngine->render("visitor/mail/don-body.txt.twig", [
+        "group" => $group,
+        "pledge" =>$pledge
+    ]);
+
+    Mail::sendMail( $pledge->getEmail(), "Confirmation de promesse", $sBodyMailHTML, $sBodyMailTXT, true);
+
     $aResponse["durationMessage"] = "2000";
     $aResponse["durationRedirect"] = "2000";
     $aResponse["durationFade"] = "10000";
