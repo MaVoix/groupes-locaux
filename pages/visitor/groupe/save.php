@@ -194,6 +194,18 @@ if(isset($_POST["twitter"]) && $_POST["twitter"]!="" ){
     }
 }
 
+
+//verification IBAN
+if ($nError == 0) {
+    if(isset($_POST["iban"]) && $_POST["iban"]!=""){
+        if(!vars::checkIBAN($_POST["iban"])){
+            $aResponse["message"]["text"] = "L'IBAN saisi ne semble pas valide.";
+            array_push($aResponse["required"], array("field" => "iban"));
+            $nError++;
+        }
+    }
+}
+
 /*
 if(ConfigService::get("enable-captcha")){
     if (!isset($_POST["captcha"]) || $_POST["captcha"] == "") {
@@ -322,6 +334,9 @@ if ($nError == 0) {
     //information bank
     if (isset($_POST["bank_name"])) {
         $Group->setBank_name($_POST["bank_name"]);
+    }
+    if (isset($_POST["iban"])) {
+        $Group->setIban($_POST["iban"]);
     }
     if (isset($_POST["bank_city"])) {
         $Group->setBank_city($_POST["bank_city"]);

@@ -46,8 +46,8 @@ $(document).ready(function () {
 
     //iban
     if ($('#iban').length > 0) {
-        $('#iban').mask('SS00 0000 0000 0000 0000 00', {
-            placeholder: 'FRXX 0000 0000 0000 0000 00'
+        $('#iban').mask('SS00 0000 0000 0000 0000 0000 000', {
+            placeholder:'FRXX 0000 0000 0000 0000 0000 000'
         });
     }
 

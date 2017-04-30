@@ -1137,11 +1137,9 @@ class Group	{
     public function getDepartement(){
         return $this->Departement();
     }
-
     public function getCirconscription(){
         return $this->Circonscription();
     }
-
 
     /*
     ********************************************************************************************
