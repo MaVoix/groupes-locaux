@@ -42,13 +42,13 @@ if (!$bEdit) {
 }
 
 //ajoute les engagements si l'utilisateur n'est pas admin
-if($oMe->getType()!="admin"){
-    $aEngagements=array();
+if ($oMe->getType() != "admin") {
+    $aEngagements = array();
     //verification des engagements 1 à 17
-    for($i=2;$i<=17;$i++){
-        $aEngagements[]="engagement-a".$i;
+    for ($i = 2; $i <= 17; $i++) {
+        $aEngagements[] = "engagement-a" . $i;
     }
-    $aMandoryFields=array_merge($aMandoryFields,$aEngagements);
+    $aMandoryFields = array_merge($aMandoryFields, $aEngagements);
 }
 
 
@@ -63,7 +63,7 @@ foreach ($aMandoryFields as $sField) {
 
 //parcours des users
 $fieldsUser = ["user_id", "user_delete", "user_civility", "user_name", "user_firstname", "user_tel", "user_email", "user_ad1", "user_ad2", "user_ad3", "user_zipcode", "user_city"];
-$fieldsUserMandatory = ["user_name", "user_civility","user_firstname", "user_tel", "user_email", "user_ad1", "user_zipcode", "user_city"];
+$fieldsUserMandatory = ["user_name", "user_civility", "user_firstname", "user_tel", "user_email", "user_ad1", "user_zipcode", "user_city"];
 $nUserMax = ConfigService::get("member-max"); // nombres de user MAX (hors mandataire)
 
 $aUsersMember = [];
@@ -71,6 +71,9 @@ for ($n = 0; $n <= $nUserMax + 1; $n++) {
     if ($n == 0) {
         $aUsersMember["mandataire"] = [];
         $aUsersMember["mandataire"]["type"] = "mandataire";
+    } elseif ($n == 1) {
+        $aUsersMember["candidat"] = [];
+        $aUsersMember["candidat"]["type"] = "candidat";
     } else {
         $aUsersMember["membre" . $n] = [];
         $aUsersMember["membre" . $n]["type"] = "membre";
@@ -80,7 +83,8 @@ for ($n = 0; $n <= $nUserMax + 1; $n++) {
 foreach ($fieldsUser as $field) {
     if (isset($_POST[$field])) {
         foreach ($_POST[$field] as $type => $value) {
-            if (in_array($field, $fieldsUserMandatory) && $_POST[$field][$type] == "") {
+
+            if (in_array($field, $fieldsUserMandatory) && $_POST[$field][$type] == "" && $type!="candidat") {
                 $nError++;
                 array_push($aResponse["required"], array("field" => $field . "\\[" . $type . "\\]"));
                 if ($field == "user_tel") {
@@ -197,8 +201,8 @@ if(isset($_POST["twitter"]) && $_POST["twitter"]!="" ){
 
 //verification IBAN
 if ($nError == 0) {
-    if(isset($_POST["iban"]) && $_POST["iban"]!=""){
-        if(!vars::checkIBAN($_POST["iban"])){
+    if (isset($_POST["iban"]) && $_POST["iban"] != "") {
+        if (!vars::checkIBAN($_POST["iban"])) {
             $aResponse["message"]["text"] = "L'IBAN saisi ne semble pas valide.";
             array_push($aResponse["required"], array("field" => "iban"));
             $nError++;
@@ -305,7 +309,7 @@ if ($nError == 0) {
     //force le mode offline sur l'enregistrement par un utilisateur
     if ($oMe->getType() != "admin") {
         $Group->setState("offline");
-    }else{
+    } else {
         if (isset($_POST["autovalid"]) && $_POST["autovalid"] == "1") {
             $Group->setState("online");
         }
@@ -400,7 +404,7 @@ if ($nError == 0) {
 
 
                 //recuperation du mail du mandataire
-                if($user["type"]=="mandataire"){
+                if ($user["type"] == "mandataire") {
                     $oUser->setAd1($user["ad1"]);
                     $oUser->setAd2($user["ad2"]);
                     $oUser->setAd3($user["ad3"]);
@@ -411,9 +415,9 @@ if ($nError == 0) {
                         $oUser->setPass($sPassword);
                     }
 
-                    $sEmail=$user["email"];
-                }else{
-                    if($user["delete"]==1){
+                    $sEmail = $user["email"];
+                } else {
+                    if ($user["delete"] == 1) {
                         $oUser->setDate_deleted(date("Y-m-d H:i:s"));
                     }
                 }
@@ -438,10 +442,10 @@ if ($nError == 0) {
         if ($oMe->getType() == "admin") {
             $aResponse["message"]["text"] = "Informations enregistrées correctement !";
             $aResponse["redirect"] = "/groupe/liste.html";
-        } elseif($oMe->getType() == "mandataire") {
+        } elseif ($oMe->getType() == "mandataire") {
             $aResponse["message"]["text"] = "Informations enregistrées correctement !";
             $aResponse["redirect"] = "/groupe/accueil.html";
-        }else{
+        } else {
             $aResponse["message"]["text"] = "Félicitations !";
             $aResponse["redirect"] = "/groupe/felicitations.html";
         }
