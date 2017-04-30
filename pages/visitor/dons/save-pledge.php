@@ -75,8 +75,12 @@ if($nError==0){
     $pledge->setAmount($nAmount);
     $pledge->setGroup_id(intval($_POST["group_id"]));
     $pledge->save();
-    //TODO : finir sauvgarde avec lien vers le groupe, (verif du goupe avec la clé), génération de la réféfence et envoi du mail + redirect vers la page de remerciement
 
+    //reference
+    $pledge->setReference(Pledge::genereRandomReference( $pledge->getId()));
+    $pledge->save();
+
+    //TODO : finir sauvgarde avec lien vers le groupe, (verif du goupe avec la clé), génération de la réféfence et envoi du mail + redirect vers la page de remerciement
     $aResponse["durationMessage"] = "2000";
     $aResponse["durationRedirect"] = "2000";
     $aResponse["durationFade"] = "10000";

@@ -971,7 +971,18 @@ class Pledge	{
     ********************************************************************************************
     */
 
+    public static function genereRandomReference($nId=0){
+        $nTailleMax=8;
+        $nTaille=$nTailleMax-strlen($nId)-3;
+        if( $nTaille<=2){
+            $nTaille=2;
+        }
+        $sField="".(rand(100000,999999)*5);
+        $a=['A','B','C','D','E','F','G','H','J','K','M','N'];
+        shuffle($a);
 
+        return $nId.$a[0].$a[1].substr($sField,0,$nTaille).$a[2];
+    }
     /*
     ********************************************************************************************
     *                             FIN FONCTIONS PERSONNALISES                     	           *

@@ -17,7 +17,7 @@ CREATE TABLE `pledge` (
   `amount` double DEFAULT NULL,
   `key_edit` int(11) DEFAULT NULL,
   `group_id` int(11) NOT NULL,
-  `reference` varchar(6) NOT NULL
+  `reference` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
