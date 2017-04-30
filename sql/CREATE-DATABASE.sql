@@ -773,6 +773,7 @@ CREATE TABLE `group` (
   `map_url` varchar(255) DEFAULT NULL,
   `comment` text,
   `presentation` text,
+  `iban` varchar(255) NOT NULL,
   `amount_promises` decimal(10,2) NOT NULL,
   `amount_donations` decimal(10,2) NOT NULL,
   `posters` int(11) NOT NULL DEFAULT '0',

@@ -39,3 +39,6 @@ ALTER TABLE `pledge`
 --
 ALTER TABLE `pledge`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `group` ADD `iban` VARCHAR(255) NULL AFTER `bank_city`;
