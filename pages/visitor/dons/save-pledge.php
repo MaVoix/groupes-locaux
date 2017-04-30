@@ -51,6 +51,18 @@ if($nError==0){
     }
 }
 
+if($nError==0) {
+    //verification de l'existence du groupe
+    $Group = new Group(array("id" => intval($_POST["group_id"])));
+    $Group->hydrateFromBDD(array('*'));
+    $subkey=sha1(substr($Group->getKey_edit(),0,10).$Group->getId());
+    if(!isset($_POST["group_subkey"]) || $subkey!=$_POST["group_subkey"] || intval($Group->getId())==0){
+        $aResponse["message"]["text"] = "Impossible d'enregistrer votre promesse de don sur ce collectif local !";
+        $nError++;
+    }
+}
+
+
 if($nError==0){
     $pledge=new Pledge();
     $pledge->setDate_created(date("Y-m-d H:i:s"));
