@@ -14,9 +14,10 @@ class Pledge	{
     private $sDate_amended;
     private $sDate_deleted;
     private $sDate_completed;
-    private $sCivilite;
+    private $sCivility;
     private $sName;
     private $sFirstname;
+    private $sZipcode;
     private $sEmail;
     private $sTel;
     private $nAmount;
@@ -166,9 +167,9 @@ class Pledge	{
             $aData["date_completed"]=$this->getDate_completed();
         }
 
-        if(isset($this->aDataSet["civilite"]))
+        if(isset($this->aDataSet["civility"]))
         {
-            $aData["civilite"]=$this->getCivilite();
+            $aData["civility"]=$this->getCivility();
         }
 
         if(isset($this->aDataSet["name"]))
@@ -179,6 +180,11 @@ class Pledge	{
         if(isset($this->aDataSet["firstname"]))
         {
             $aData["firstname"]=$this->getFirstname();
+        }
+
+        if(isset($this->aDataSet["zipcode"]))
+        {
+            $aData["zipcode"]=$this->getZipcode();
         }
 
         if(isset($this->aDataSet["email"]))
@@ -233,9 +239,10 @@ class Pledge	{
         $this->setDate_amended(NULL);
         $this->setDate_deleted(NULL);
         $this->setDate_completed(NULL);
-        $this->setCivilite(NULL);
+        $this->setCivility(NULL);
         $this->setName(NULL);
         $this->setFirstname(NULL);
+        $this->setZipcode(NULL);
         $this->setEmail(NULL);
         $this->setTel(NULL);
         $this->setAmount(0);
@@ -255,9 +262,10 @@ class Pledge	{
             "date_amended" => $this->getDate_amended(),
             "date_deleted" => $this->getDate_deleted(),
             "date_completed" => $this->getDate_completed(),
-            "civilite" => $this->getCivilite(),
+            "civility" => $this->getCivility(),
             "name" => $this->getName(),
             "firstname" => $this->getFirstname(),
+            "zipcode" => $this->getZipcode(),
             "email" => $this->getEmail(),
             "tel" => $this->getTel(),
             "amount" => $this->getAmount(),
@@ -500,44 +508,44 @@ class Pledge	{
 
 
     /**
-     * Set le champ civilite
-     * @param string $sCivilite nouvelle valeur pour le champ civilite
+     * Set le champ civility
+     * @param string $sCivility nouvelle valeur pour le champ civility
      */
-    public function setCivilite($sCivilite)
+    public function setCivility($sCivility)
     {
-        if( is_null($sCivilite) ) $sCivilite='';
-        $this->sCivilite = $sCivilite;
-        $this->aDataSet["civilite"]=1;
+        if( is_null($sCivility) ) $sCivility='';
+        $this->sCivility = $sCivility;
+        $this->aDataSet["civility"]=1;
     }
 
 
 
     /**
-     * Get le champ civilite
-     * @return string valeur du champ civilite
+     * Get le champ civility
+     * @return string valeur du champ civility
      */
-    public function getCivilite()
+    public function getCivility()
     {
-        if( !is_null($this->sCivilite) )
+        if( !is_null($this->sCivility) )
         {
-            if( $this->sCivilite==='' )
+            if( $this->sCivility==='' )
             {
                 return NULL;
             }
             else
             {
-                return $this->sCivilite;
+                return $this->sCivility;
             }
         }
         else
         {
-            $this->hydrateFromBDD(array('civilite'));
+            $this->hydrateFromBDD(array('civility'));
             $this->callHydrateFromBDDOnGet++;
             if($this->callHydrateFromBDDOnGet>10)
             {
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
-            return $this->sCivilite;
+            return $this->sCivility;
         }
     }
 
@@ -626,6 +634,50 @@ class Pledge	{
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
             return $this->sFirstname;
+        }
+    }
+
+
+
+    /**
+     * Set le champ zipcode
+     * @param string $sZipcode nouvelle valeur pour le champ zipcode
+     */
+    public function setZipcode($sZipcode)
+    {
+        if( is_null($sZipcode) ) $sZipcode='';
+        $this->sZipcode = $sZipcode;
+        $this->aDataSet["zipcode"]=1;
+    }
+
+
+
+    /**
+     * Get le champ zipcode
+     * @return string valeur du champ zipcode
+     */
+    public function getZipcode()
+    {
+        if( !is_null($this->sZipcode) )
+        {
+            if( $this->sZipcode==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sZipcode;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('zipcode'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sZipcode;
         }
     }
 
@@ -911,6 +963,7 @@ class Pledge	{
             return $this->sReference;
         }
     }
+
 
     /*
     ********************************************************************************************
