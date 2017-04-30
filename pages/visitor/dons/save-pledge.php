@@ -94,13 +94,15 @@ if($nError==0){
 
     Mail::sendMail( $pledge->getEmail(), "Confirmation de promesse", $sBodyMailHTML, $sBodyMailTXT, true);
 
+    SessionService::set("last-pledge-save-id",$pledge->getId());
+
     $aResponse["durationMessage"] = "2000";
     $aResponse["durationRedirect"] = "2000";
     $aResponse["durationFade"] = "10000";
     $aResponse["message"]["title"] = "";
     $aResponse["message"]["type"] = "success";
     $aResponse["message"]["text"] = "Merci !";
-    $aResponse["redirect"] = "/dons/participation.html";
+    $aResponse["redirect"] = "/dons/merci.html";
 
 }
 
