@@ -27,23 +27,29 @@ $(document).ready(function () {
 
     var $body = $('body');
 
-    $body.on("click",".jsLink",function(){
-        window.location.href=$(this).data("url");
+    $body.on("click", ".jsLink", function () {
+        window.location.href = $(this).data("url");
 
     });
 
-    $body.on("change",".updateContentOnChange",function(e){
+    $body.on("change", ".updateContentOnChange", function (e) {
         e.preventDefault();
 
         var $element = $(this);
 
-        if (!isSendingForm)
-        {
-            var data =$element.attr("name")+"="+$element.val();
-            ajaxUpdateContent(data, $element.data("blocks"),$element.data("url"))
+        if (!isSendingForm) {
+            var data = $element.attr("name") + "=" + $element.val();
+            ajaxUpdateContent(data, $element.data("blocks"), $element.data("url"))
         }
 
     });
+
+    //iban
+    if ($('#iban').length > 0) {
+        $('#iban').mask('SS00 0000 0000 0000 0000 00', {
+            placeholder: 'FRXX 0000 0000 0000 0000 00'
+        });
+    }
 
 
     $body.on('dblclick', '.error', function (e)
