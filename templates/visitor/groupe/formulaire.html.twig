@@ -193,7 +193,59 @@
 
                         <hr/>
                         <p>&nbsp;</p>
-                        <h2>Les membres du collectif*</h2>
+                        <h2>Le candidat</h2>
+                        <div class="panel" style="background-color:#eeeeee;" >
+                            <div class="panel-body">
+                                <input type="hidden" id="user_id[candidat]" name="user_id[candidat]"
+                                       value="{{ user["candidat"].id }}" >
+
+                                <div class="row">
+                                    <div class="col-xs-6"><h3 class="no-margin">Coordonnées :</h3></div>
+                                    <div class="col-xs-6 text-right"> &nbsp;</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="user_civility[candidat]" class="control-label">Civilité : *</label>
+                                    <select id="user_civility[candidat]" name="user_civility[candidat]" class="form-control publicinfo">
+                                        <option value="">Choisir ...</option>
+                                        <option value="M." {% if user["candidat"].civility=='M.' %} selected {% endif %}>M.</option>
+                                        <option value="Mme" {% if muser["candidat"].civility=='Mme' or user["candidat"].civility=='Mme.' %} selected {% endif %}>Mme</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="user_name[candidat]" class="control-label">Nom de famille : *</label>
+                                    <input type="text" class="form-control publicinfo" id="user_name[candidat]" name="user_name[candidat]"
+                                           value="{{ user["candidat"].name|ucwords }}"
+                                           placeholder="Nom de famille">
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="user_firstname[candidat]" class="control-label">Prénom : *</label>
+                                    <input type="text" class="form-control publicinfo" id="user_firstname[candidat]" name="user_firstname[candidat]"
+                                           value="{{ user["candidat"].firstname|ucwords }}"
+                                           placeholder="Prénom">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="user_email[candidat]" class="control-label">E-mail : *</label>
+                                    <input type="email" class="form-control" id="user_email[candidat]" name="user_email[candidat]"
+                                           value="{{ user["candidat"].email }}"
+                                           placeholder="xxxxxx@xxxxx.com ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_tel_display[candidat]" class="control-label">Téléphone : *</label>
+                                    <br /><input id="user_tel_display[candidat]"  value="{{ user["candidat"].tel  }}" type="text" class="form-control telInput" name="user_tel_display[candidat]" >
+                                    <input type="hidden" class="form-control" id="user_tel[candidat]" name="user_tel[candidat]" placeholder="XXXXXXXXX"
+                                           value="{{ user["candidat"].tel  }}" style="position:absolute;top:-10000px;">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <hr/>
+                        <p></p>
+                        <h2>Les membres du groupe*</h2>
                         <p>Tout particulièrement les personnes qui s'engagent à se rendre au tirage au sort du 6 mai, ou à accompagner le candidat dans la circonscription lors de sa venue.</p>
                         <div id="MemberList">
                         {%  for member in user %}
