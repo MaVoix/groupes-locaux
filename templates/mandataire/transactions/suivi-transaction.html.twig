@@ -14,7 +14,7 @@
             <hr/>
             <div class="row">
                 <div class="col-xs-6 "><h2>Transaction</h2></div>
-                <div class="col-xs-6 "><a class="btn btn-sm btn-success pull-right"><i class="fa fa-plus"></i> Ajouter une transaction</a></div>
+                <div class="col-xs-6 "><a href="/transactions/formulaire.html" class="btn btn-sm btn-success pull-right"><i class="fa fa-plus"></i> Ajouter une transaction</a></div>
             </div>
             <div class="row">
                         <div class="col-xs-12 ">
@@ -29,8 +29,7 @@
                         </tr>
                         {%  set solde=0 %}
                         {%  for transaction in transactions %}
-                            {%  set solde=solde+transaction.income %}
-                            {%  set solde=solde-transaction.expense %}
+                            {%  set solde=solde+transaction.amount %}
                         <tr>
                             <td>{{ transaction.reference }}</td>
                             <td>{{ transaction.date|date("d/m") }} à {{ transaction.date|date("H:i") }} </td>
