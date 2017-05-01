@@ -10,9 +10,10 @@ class Transaction	{
     private $_sDbInstance = null;
 
     private $nId;
-    private $nDate_created;
-    private $nDate_amended;
-    private $nDate_deleted;
+    private $sDate_created;
+    private $sDate_amended;
+    private $sDate_deleted;
+    private $sReference;
     private $nGroup_id;
     private $nUser_id;
     private $nAmount;
@@ -20,6 +21,7 @@ class Transaction	{
     private $sPath_file;
     private $nIncome;
     private $nExpense;
+    private $sComment;
 
 
     /**
@@ -158,6 +160,11 @@ class Transaction	{
             $aData["date_deleted"]=$this->getDate_deleted();
         }
 
+        if(isset($this->aDataSet["reference"]))
+        {
+            $aData["reference"]=$this->getReference();
+        }
+
         if(isset($this->aDataSet["group_id"]))
         {
             $aData["group_id"]=$this->getGroup_id();
@@ -193,6 +200,11 @@ class Transaction	{
             $aData["expense"]=$this->getExpense();
         }
 
+        if(isset($this->aDataSet["comment"]))
+        {
+            $aData["comment"]=$this->getComment();
+        }
+
         if($this->getId()>0)
         {
             DbLink::getInstance($this->_sDbInstance)->update("transaction",$aData,' id="'.$this->getId().'" ');
@@ -214,6 +226,7 @@ class Transaction	{
         $this->setDate_created(NULL);
         $this->setDate_amended(NULL);
         $this->setDate_deleted(NULL);
+        $this->setReference(NULL);
         $this->setGroup_id(NULL);
         $this->setUser_id(NULL);
         $this->setAmount(0);
@@ -221,6 +234,7 @@ class Transaction	{
         $this->setPath_file(NULL);
         $this->setIncome(0);
         $this->setExpense(0);
+        $this->setComment(NULL);
     }
 
     /**
@@ -233,13 +247,15 @@ class Transaction	{
             "date_created" => $this->getDate_created(),
             "date_amended" => $this->getDate_amended(),
             "date_deleted" => $this->getDate_deleted(),
+            "reference" => $this->getReference(),
             "group_id" => $this->getGroup_id(),
             "user_id" => $this->getUser_id(),
             "amount" => $this->getAmount(),
             "pledge_id" => $this->getPledge_id(),
             "path_file" => $this->getPath_file(),
             "income" => $this->getIncome(),
-            "expense" => $this->getExpense()
+            "expense" => $this->getExpense(),
+            "comment" => $this->getComment()
         ];
 
         return json_encode($aObjet);
@@ -301,35 +317,32 @@ class Transaction	{
 
     /**
      * Set le champ date_created
-     * @param number $nDate_created nouvelle valeur pour le champ date_created
+     * @param string $sDate_created nouvelle valeur pour le champ date_created
      */
-    public function setDate_created($nDate_created)
+    public function setDate_created($sDate_created)
     {
-        if( is_null($nDate_created) ) $nDate_created='';
-        if( is_numeric($nDate_created)  || $nDate_created=='' )
-        {
-            $this->nDate_created = $nDate_created;
-            $this->aDataSet["date_created"]=1;
-        }
+        if( is_null($sDate_created) ) $sDate_created='';
+        $this->sDate_created = $sDate_created;
+        $this->aDataSet["date_created"]=1;
     }
 
 
 
     /**
      * Get le champ date_created
-     * @return number valeur du champ date_created
+     * @return string valeur du champ date_created
      */
     public function getDate_created()
     {
-        if( !is_null($this->nDate_created) )
+        if( !is_null($this->sDate_created) )
         {
-            if( $this->nDate_created==='' )
+            if( $this->sDate_created==='' )
             {
                 return NULL;
             }
             else
             {
-                return $this->nDate_created;
+                return $this->sDate_created;
             }
         }
         else
@@ -340,7 +353,7 @@ class Transaction	{
             {
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
-            return $this->nDate_created;
+            return $this->sDate_created;
         }
     }
 
@@ -348,35 +361,32 @@ class Transaction	{
 
     /**
      * Set le champ date_amended
-     * @param number $nDate_amended nouvelle valeur pour le champ date_amended
+     * @param string $sDate_amended nouvelle valeur pour le champ date_amended
      */
-    public function setDate_amended($nDate_amended)
+    public function setDate_amended($sDate_amended)
     {
-        if( is_null($nDate_amended) ) $nDate_amended='';
-        if( is_numeric($nDate_amended)  || $nDate_amended=='' )
-        {
-            $this->nDate_amended = $nDate_amended;
-            $this->aDataSet["date_amended"]=1;
-        }
+        if( is_null($sDate_amended) ) $sDate_amended='';
+        $this->sDate_amended = $sDate_amended;
+        $this->aDataSet["date_amended"]=1;
     }
 
 
 
     /**
      * Get le champ date_amended
-     * @return number valeur du champ date_amended
+     * @return string valeur du champ date_amended
      */
     public function getDate_amended()
     {
-        if( !is_null($this->nDate_amended) )
+        if( !is_null($this->sDate_amended) )
         {
-            if( $this->nDate_amended==='' )
+            if( $this->sDate_amended==='' )
             {
                 return NULL;
             }
             else
             {
-                return $this->nDate_amended;
+                return $this->sDate_amended;
             }
         }
         else
@@ -387,7 +397,7 @@ class Transaction	{
             {
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
-            return $this->nDate_amended;
+            return $this->sDate_amended;
         }
     }
 
@@ -395,35 +405,32 @@ class Transaction	{
 
     /**
      * Set le champ date_deleted
-     * @param number $nDate_deleted nouvelle valeur pour le champ date_deleted
+     * @param string $sDate_deleted nouvelle valeur pour le champ date_deleted
      */
-    public function setDate_deleted($nDate_deleted)
+    public function setDate_deleted($sDate_deleted)
     {
-        if( is_null($nDate_deleted) ) $nDate_deleted='';
-        if( is_numeric($nDate_deleted)  || $nDate_deleted=='' )
-        {
-            $this->nDate_deleted = $nDate_deleted;
-            $this->aDataSet["date_deleted"]=1;
-        }
+        if( is_null($sDate_deleted) ) $sDate_deleted='';
+        $this->sDate_deleted = $sDate_deleted;
+        $this->aDataSet["date_deleted"]=1;
     }
 
 
 
     /**
      * Get le champ date_deleted
-     * @return number valeur du champ date_deleted
+     * @return string valeur du champ date_deleted
      */
     public function getDate_deleted()
     {
-        if( !is_null($this->nDate_deleted) )
+        if( !is_null($this->sDate_deleted) )
         {
-            if( $this->nDate_deleted==='' )
+            if( $this->sDate_deleted==='' )
             {
                 return NULL;
             }
             else
             {
-                return $this->nDate_deleted;
+                return $this->sDate_deleted;
             }
         }
         else
@@ -434,7 +441,51 @@ class Transaction	{
             {
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
-            return $this->nDate_deleted;
+            return $this->sDate_deleted;
+        }
+    }
+
+
+
+    /**
+     * Set le champ reference
+     * @param string $sReference nouvelle valeur pour le champ reference
+     */
+    public function setReference($sReference)
+    {
+        if( is_null($sReference) ) $sReference='';
+        $this->sReference = $sReference;
+        $this->aDataSet["reference"]=1;
+    }
+
+
+
+    /**
+     * Get le champ reference
+     * @return string valeur du champ reference
+     */
+    public function getReference()
+    {
+        if( !is_null($this->sReference) )
+        {
+            if( $this->sReference==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sReference;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('reference'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sReference;
         }
     }
 
@@ -791,6 +842,50 @@ class Transaction	{
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
             return $this->nExpense;
+        }
+    }
+
+
+
+    /**
+     * Set le champ comment
+     * @param string $sComment nouvelle valeur pour le champ comment
+     */
+    public function setComment($sComment)
+    {
+        if( is_null($sComment) ) $sComment='';
+        $this->sComment = $sComment;
+        $this->aDataSet["comment"]=1;
+    }
+
+
+
+    /**
+     * Get le champ comment
+     * @return string valeur du champ comment
+     */
+    public function getComment()
+    {
+        if( !is_null($this->sComment) )
+        {
+            if( $this->sComment==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sComment;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('comment'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sComment;
         }
     }
 

@@ -46,16 +46,18 @@ ALTER TABLE `group` ADD `iban` VARCHAR(255) NULL AFTER `bank_city`;
 
 CREATE TABLE `transaction` (
   `id` int(11) NOT NULL,
-  `date_created` int(11) DEFAULT NULL,
-  `date_amended` int(11) DEFAULT NULL,
-  `date_deleted` int(11) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `date_amended` datetime DEFAULT NULL,
+  `date_deleted` datetime DEFAULT NULL,
+  `reference` text NOT NULL,
   `group_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL COMMENT 'auteur de l insert en base',
   `amount` double DEFAULT NULL,
   `pledge_id` int(11) DEFAULT NULL,
   `path_file` varchar(255) DEFAULT NULL COMMENT 'chemin vers le justificatif',
   `income` double DEFAULT NULL,
-  `expense` double DEFAULT NULL
+  `expense` double DEFAULT NULL,
+  `comment` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

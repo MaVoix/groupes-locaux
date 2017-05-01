@@ -14,13 +14,15 @@ class TransactionListe extends Liste
         "date_created",
         "date_amended",
         "date_deleted",
+        "reference",
         "group_id",
         "user_id",
         "amount",
         "pledge_id",
         "path_file",
         "income",
-        "expense"
+        "expense",
+        "comment"
     );
 
     /**
