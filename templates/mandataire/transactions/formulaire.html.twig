@@ -17,7 +17,7 @@
                             <label class="label-radio" for="is_income"></label>
                             <label class="control-label">
                                 <input id="is_income" value="income" type="radio"
-                                       name="income_expense" {{ checked_is_pledge }}>
+                                       name="income_expense" {% if transaction.amount>0 %}checked{% endif %}>
                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                 <span>Credit *</span>
                             </label>
@@ -25,7 +25,7 @@
                             <label class="label-radio" for="is_expense"></label>
                             <label class="control-label">
                                 <input id="is_expense" value="expense" type="radio"
-                                       name="income_expense" {{ checked_is_pledge }}>
+                                       name="income_expense" {% if transaction.amount<0 %}checked{% endif %}>
                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                 <span>Débit *</span>
                             </label>
@@ -42,7 +42,7 @@
                         <div class="checkbox">
                             <label class="control-label">
                                 <input id="is_pledge" value="ok" type="checkbox"
-                                       name="is_pledge" {{ checked_is_pledge }}>
+                                       name="is_pledge" {% if transaction.pledge_id %}checked{% endif %}>
                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                             </label>
                             <label class="label-checkbox" for="is_pledge">Correspond à une promesse de don (celle-ci sera comptabilisé comme complète)</label>
@@ -58,8 +58,8 @@
                     <div class="form-group">
                         <label for="pledge" class="control-label">Commentaire :</label>
                         <textarea title="commentaire"  class="form-control" id="comment" name="comment"
-                               value="{{ transaction.comment }}"
-                                   placeholder=""></textarea>
+
+                                   placeholder="">{{ transaction.comment }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="pledge" class="control-label">Justificatif :</label>
