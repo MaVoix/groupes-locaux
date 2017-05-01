@@ -4,4 +4,4 @@
 //liste des transaction
  $TransactionList= new TransactionListe();
 $TransactionList->applyRules4Group($oMe->getGroup_id());
-$aDataScript["transaction"]=$TransactionList->getPage();
+$aDataScript["transactions"]=$TransactionList->getPage();
