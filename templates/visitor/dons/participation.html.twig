@@ -47,10 +47,37 @@
                                value="{{ pledge.tel  }}" style="position:absolute;top:-10000px;">
 
                     </div>
+
+                    <div class="form-group">
+                        <label for="ad1" class="control-label">Adresse champ 1 : *</label>
+                        <input type="text" class="form-control" id="ad1" name="ad1"
+                               placeholder="N° | type de voie | nom de la voie" value="{{ pledge.ad1 }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="ad2" class="control-label">Adresse champ 2 :</label>
+                        <input type="text" class="form-control" id="ad2" name="ad2" value="{{ pledge.ad2 }}"
+                               placeholder="Immeuble, Résidence, Z.I ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="ad3" class="control-label">Adresse champ 3 :</label>
+                        <input type="text" class="form-control" id="ad3" name="ad3" value="{{ pledge.ad3 }}"
+                               placeholder="BP, TSA, Lieu dit">
+                    </div>
+
                     <div class="form-group">
                         <label for="zipcode" class="control-label">Code postal : *</label>
-                        <br /><input  title="Votre code postal" id="zipcode"  value="{{ pledge.zipcode  }}" type="text" class="form-control" name="zipcode" >
+                        <br /><input  title="Votre code postal"  placeholder="XXXXX" id="zipcode"  value="{{ pledge.zipcode  }}" type="text" class="form-control" name="zipcode" >
                     </div>
+
+                    <div class="form-group">
+                        <label for="city" class="control-label">Ville : *</label>
+                        <input type="text" class="form-control" id="city" name="city"
+                               value="{{ pledge.city|capitalizefirst }}"
+                               placeholder="Nom de la ville">
+                    </div>
+
+
+
 
                     <div class="form-group">
 
