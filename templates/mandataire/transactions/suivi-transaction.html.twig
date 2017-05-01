@@ -31,13 +31,24 @@
                         {%  for transaction in transactions %}
                             {%  set solde=solde+transaction.amount %}
                         <tr>
-                            <td>{{ transaction.reference }}</td>
+                            <td>
+                                {% if transaction.pledge_id %}
+                                    <b>{{ transaction.reference }}</b>
+                                    <div class="p-t p-b">
+                                        <div>{{ transaction.pledge.civility }} {{ transaction.pledge.name|ucwords }} {{ transaction.pledge.firstname|ucwords }}</div>
+                                        <div>{{ transaction.pledge.zipcode }} - tel : {{ transaction.pledge.tel }}</div>
+                                    </div>
+                                {% else %}
+                                    {{ transaction.reference }}
+                                {% endif %}
+
+                            </td>
                             <td>{{ transaction.date|date("d/m") }} à {{ transaction.date|date("H:i") }} </td>
                             <td class="text-right"><span class="{%  if  transaction.income>0 %}text-success{% endif %}">{{ transaction.income|number_format(2, ',', ' ') }} €</span></td>
-                            <td class="text-right"><span class="{%  if  transaction.expense>0 %}text-danger{% endif %}">{{ transaction.expense|number_format(2, ',', ' ') }} €</span></td>
+                            <td class="text-right"><span class="{%  if  transaction.expense>0 %}text-danger{% endif %}">{%  if  transaction.expense>0 %}-{% endif %}{{ transaction.expense|number_format(2, ',', ' ') }} €</span></td>
                             <td>&nbsp;</td>
                             <td class="text-right">
-                                <button class="btn btn-primary btn-success">Editer</button>
+                                <a href="/transactions/formulaire.html?id={{ transaction.id }}" class="btn btn-primary btn-success">Editer</a>
                             </td>
                         </tr>
                             <tr><td colspan="6"><hr /></td></tr>

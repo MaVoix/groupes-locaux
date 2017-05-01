@@ -895,6 +895,16 @@ class Transaction	{
     ********************************************************************************************
     */
 
+    /* Lien TWIG vers les accesseurs */
+    public function getPledge(){
+        return $this->Pledge();
+    }
+    public function getGroup(){
+        return $this->Group();
+    }
+    public function getUser(){
+        return $this->User();
+    }
 
     /*
     ********************************************************************************************

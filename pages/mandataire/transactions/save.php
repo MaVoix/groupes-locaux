@@ -84,9 +84,9 @@ if($nError==0){
     $transaction->setAmount($nAmount);
     $transaction->setPledge_id($pledge_id);
     if($nAmount>0){
-        $transaction->setIncome($nAmount);
+        $transaction->setIncome(abs($nAmount));
     }else{
-        $transaction->setExpense($nAmount);
+        $transaction->setExpense(abs($nAmount));
     }
     if(isset($_POST["comment"]) && $_POST["comment"]!=""){
         $transaction->setComment(trim($_POST["comment"]));
