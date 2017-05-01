@@ -38,8 +38,22 @@
                             <td class="text-right">{{ pledge.amount|number_format(2, ',', ' ') }} €</td>
                             <td>&nbsp;</td>
                             <td class="text-right">
-                                <button class="btn btn-primary btn-success">Valider (reçu)</button>
-                                <button class="btn btn-primary btn-danger">Supprimer</button>
+                                <button  class="btn btn-primary click-send-ajax-confirm"
+                                         data-modal-title="Confirmation"
+                                         data-modal-body="Êtes-vous sûr de vouloir valider cette promesse ?"
+                                         data-modal-confirm="Valider"
+                                         data-modal-cancel="Annuler"
+                                         data-url="/dons/complete.json"
+                                         data-param="{'id':'{{ pledge.id }}'}" >
+                                Valider (reçu)</button>
+                                <button  class="btn btn-primary click-send-ajax-confirm"
+                                                  data-modal-title="Confirmation"
+                                                  data-modal-body="Êtes-vous sûr de vouloir supprimer cette promesse ?"
+                                                  data-modal-confirm="Supprimer"
+                                                  data-modal-cancel="Annuler"
+                                                  data-url="/dons/delete.json"
+                                                  data-param="{'id':'{{ pledge.id }}'}" >
+                                <i class="fa fa-trash text-danger"></i></button>
                             </td>
                         </tr>
                             <tr><td colspan="6"><hr /></td></tr>
