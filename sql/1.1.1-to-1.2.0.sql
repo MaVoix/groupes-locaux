@@ -9,7 +9,7 @@ UPDATE `group` SET map_url='https://umap.openstreetmap.fr/en/map/ma-voix-cartes-
 UPDATE `group` SET map_url='https://umap.openstreetmap.fr/en/map/ma-voix-cartes-des-groupes-locaux-et-des-circonscr_137053#13/43.3091/5.3632' WHERE id='7';
 UPDATE `group` SET map_url='https://umap.openstreetmap.fr/en/map/ma-voix-cartes-des-groupes-locaux-et-des-circonscr_137053#14/48.8652/2.4439' WHERE id='8';
 UPDATE `group` SET map_url='https://umap.openstreetmap.fr/en/map/ma-voix-cartes-des-groupes-locaux-et-des-circonscr_137053#10/43.5057/3.0597' WHERE id='9';
-UPDATE `group` SET map_url='https://umap.openstreetmap.fr/en/map/ma-voix-cartes-des-groupes-locaux-et-des-circonscr_137053#12/43.5831/1.4169' WHERE id='1';UPDATE `group` SET map_url='' WHERE id='10';
+UPDATE `group` SET map_url='https://umap.openstreetmap.fr/en/map/ma-voix-cartes-des-groupes-locaux-et-des-circonscr_137053#12/43.5831/1.4169' WHERE id='10';
 UPDATE `group` SET map_url='https://umap.openstreetmap.fr/en/map/ma-voix-cartes-des-groupes-locaux-et-des-circonscr_137053#10/43.6619/4.1858' WHERE id='11';
 
 UPDATE `group` SET map_url='https://umap.openstreetmap.fr/en/map/ma-voix-cartes-des-groupes-locaux-et-des-circonscr_137053#10/43.5147/5.5440' WHERE id='12';
