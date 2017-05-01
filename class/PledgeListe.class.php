@@ -59,7 +59,7 @@ class PledgeListe extends Liste
         $this->setFields(self::$_champs);
     }
 
-    public function applyRules4GroupCurrent($id_group){
+    public function applyRules4GroupCurrent($group_id){
         $this->setAllFields();
         $this->addCriteres([
             [
@@ -77,11 +77,29 @@ class PledgeListe extends Liste
             [
                 "field" => "group_id",
                 "compare" => "=",
-                "value" => intval($id_group)
+                "value" => intval($group_id)
             ]
         ]);
         $this->setTri("date_created");
         $this->setSens("ASC");
+    }
+
+    public function applyRules4Reference($reference, $group_id){
+        $this->setAllFields();
+        $this->addCriteres([
+            [
+                "field" => "reference",
+                "compare" => "=",
+                "value" => vars::secureInjection(trim($reference))
+            ]
+        ]);
+        $this->addCriteres([
+            [
+                "field" => "group_id",
+                "compare" => "=",
+                "value" => intval($group_id)
+            ]
+        ]);
     }
 
 }

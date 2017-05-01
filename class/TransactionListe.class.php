@@ -58,7 +58,7 @@ class TransactionListe extends Liste
     }
 
 
-    public function applyRules4Group($id_group){
+    public function applyRules4Group($group_id){
         $this->setAllFields();
         $this->addCriteres([
             [
@@ -71,7 +71,7 @@ class TransactionListe extends Liste
             [
                 "field" => "group_id",
                 "compare" => "=",
-                "value" => intval($id_group)
+                "value" => intval($group_id)
             ]
         ]);
         $this->setTri("date_created");

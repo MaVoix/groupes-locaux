@@ -10,17 +10,16 @@
                       enctype="multipart/form-data">
                     {% if transaction.id!='' %}
                         <input type="hidden" id="id" name="id" value="{{ transaction.id }}"/>
-                        <input type="hidden" id="key" name="key" value="{{ key }}"/>
                     {% endif %}
 <h2>Formulaire de transaction :</h2>
                     <div class="form-group" >
-                        <div class="radio">
+                        <div class="radio" style="margin-left:-25px;">
                             <label class="label-radio" for="is_income"></label>
                             <label class="control-label">
                                 <input id="is_income" value="income" type="radio"
                                        name="income_expense" {{ checked_is_pledge }}>
                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                <span>Débit</span>
+                                <span>Credit *</span>
                             </label>
 
                             <label class="label-radio" for="is_expense"></label>
@@ -28,20 +27,17 @@
                                 <input id="is_expense" value="expense" type="radio"
                                        name="income_expense" {{ checked_is_pledge }}>
                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                <span>Crédit</span>
+                                <span>Débit *</span>
                             </label>
 
                         </div>
                     </div>
-
-
                     <div class="form-group">
-                        <label for="pledge" class="control-label">Référence :</label>
-                        <input title="Reference de la transaction" type="text" class="form-control" id="group_name" name="group_name"
+                        <label for="reference" class="control-label">Référence : *</label>
+                        <input title="Reference de la transaction" type="text" class="form-control" id="reference" name="reference"
                                value="{{ transaction.reference }}"
                                placeholder="Libre ou Référence de promesse de don">
                     </div>
-
                     <div class="form-group" >
                         <div class="checkbox">
                             <label class="control-label">
@@ -54,7 +50,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="pledge" class="control-label">Montant :</label>
+                        <label for="pledge" class="control-label">Montant : *</label>
                         <input title="montant de la transaction" type="text" class="form-control" id="amount" name="amount"
                                value="{{ transaction.amount }}"
                                placeholder="">
@@ -69,9 +65,11 @@
                         <label for="pledge" class="control-label">Justificatif :</label>
                         <input title="Justificatif" type="file" class="form-control" id="proof" name="proof"
                                value=""
-                               placeholder="">
+                               placeholder="" disabled ><span class="help-block">En construction ...</span>
                     </div>
-
+                    <div class="text-center">
+                    <button type="submit" class="btn  btn-primary">Enregistrer</button>
+                    </div>
                 </form>
             </div>
         </div>
