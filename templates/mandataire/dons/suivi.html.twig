@@ -5,9 +5,23 @@
     <div class="wrapper-page">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                    <div class="text-center">
                     <h1>Bienvenue sur l'espace de gestion de suivi de dons</h1>
-                    <p>PAGE EN CONSTRUCTION</p>
+                    </div>
+                    <hr/>
+                    <h2>Promesses (en cours)</h2>
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th>Montant</th>
+                        </tr>
+
+                        {%  for pledge in pledges %}
+                        <tr>
+                            <td>{{ pledge.amount|number_format(2, ',', ' ') }} €</td>
+                        </tr>
+                            {%  endfor %}
+                    </table>
                 </div>
             </div>
         </div>

@@ -55,4 +55,24 @@ class TransactionListe extends Liste
         $this->setFields(self::$_champs);
     }
 
+
+    public function applyRules4Group($id_group){
+        $this->setAllFields();
+        $this->addCriteres([
+            [
+                "field" => "date_deleted",
+                "compare" => "IS NULL",
+                "value" => ""
+            ]
+        ]);
+        $this->addCriteres([
+            [
+                "field" => "group_id",
+                "compare" => "=",
+                "value" => intval($id_group)
+            ]
+        ]);
+        $this->setTri("date_created");
+        $this->setSens("ASC");
+    }
 }
