@@ -42,3 +42,38 @@ ALTER TABLE `pledge`
 
 
 ALTER TABLE `group` ADD `iban` VARCHAR(255) NULL AFTER `bank_city`;
+
+
+CREATE TABLE `transaction` (
+  `id` int(11) NOT NULL,
+  `date_created` int(11) DEFAULT NULL,
+  `date_amended` int(11) DEFAULT NULL,
+  `date_deleted` int(11) DEFAULT NULL,
+  `group_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL COMMENT 'auteur de l insert en base',
+  `amount` double DEFAULT NULL,
+  `pledge_id` int(11) DEFAULT NULL,
+  `path_file` varchar(255) DEFAULT NULL COMMENT 'chemin vers le justificatif',
+  `income` double DEFAULT NULL,
+  `expense` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

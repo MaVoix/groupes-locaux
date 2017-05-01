@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 16 Avril 2017 à 14:08
+-- Généré le :  Lun 01 Mai 2017 à 10:08
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -35,13 +35,32 @@ CREATE TABLE `circonscription` (
   `date_deleted` datetime DEFAULT NULL,
   `code` varchar(10) NOT NULL,
   `code_departement` varchar(10) NOT NULL,
-  `number` int(11) NOT NULL
+  `number` int(11) NOT NULL,
+  `posters` int(11) NOT NULL,
+  `ballots` int(11) NOT NULL,
+  `professions_de_foi` int(11) NOT NULL
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Contenu de la table `circonscription`
+-- Structure de la table `departement`
 --
+
+CREATE TABLE `departement` (
+  `id` int(11) NOT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `date_amended` datetime DEFAULT NULL,
+  `date_deleted` datetime DEFAULT NULL,
+  `code` varchar(3) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `name_uppercase` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `name_soundex` varchar(20) CHARACTER SET latin1 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 INSERT INTO `circonscription` (`id`, `date_created`, `date_amended`, `date_deleted`, `code`, `code_departement`, `number`) VALUES
   (1, NULL, NULL, NULL, '33004', '33', 4),
@@ -622,24 +641,6 @@ INSERT INTO `circonscription` (`id`, `date_created`, `date_amended`, `date_delet
   (576, NULL, NULL, NULL, '98702', '987', 2),
   (577, NULL, NULL, NULL, '68001', '68', 1);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `departement`
---
-
-CREATE TABLE `departement` (
-  `id` int(11) NOT NULL,
-  `date_created` datetime DEFAULT NULL,
-  `date_amended` datetime DEFAULT NULL,
-  `date_deleted` datetime DEFAULT NULL,
-  `code` varchar(3) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `name_uppercase` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `name_soundex` varchar(20) CHARACTER SET latin1 DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Contenu de la table `departement`
 --
@@ -748,7 +749,6 @@ INSERT INTO `departement` (`id`, `date_created`, `date_amended`, `date_deleted`,
   (101, NULL, NULL, NULL, '974', 'Réunion', 'RÉUNION', 'reunion', 'R500'),
   (102, NULL, NULL, NULL, '99', 'Français de l\'étranger', 'FRANCAIS DE L\'ETRANGER', 'francais-de-l-etranger', NULL);
 
--- --------------------------------------------------------
 
 --
 -- Structure de la table `group`
@@ -766,13 +766,6 @@ CREATE TABLE `group` (
   `path_pic` varchar(255) NOT NULL,
   `bank_name` varchar(255) NOT NULL,
   `bank_city` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `facebook_page` varchar(255) DEFAULT NULL,
-  `facebook_group` varchar(255) DEFAULT NULL,
-  `twitter` varchar(255) DEFAULT NULL,
-  `map_url` varchar(255) DEFAULT NULL,
-  `comment` text,
-  `presentation` text,
   `iban` varchar(255) NOT NULL,
   `amount_promises` decimal(10,2) NOT NULL,
   `amount_donations` decimal(10,2) NOT NULL,
@@ -781,6 +774,52 @@ CREATE TABLE `group` (
   `professions_de_foi` int(11) NOT NULL DEFAULT '0',
   `key_edit` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pledge`
+--
+
+CREATE TABLE `pledge` (
+  `id` int(11) NOT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `date_amended` datetime DEFAULT NULL,
+  `date_deleted` datetime DEFAULT NULL,
+  `date_completed` datetime DEFAULT NULL,
+  `civility` varchar(4) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `zipcode` varchar(10) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `tel` varchar(20) DEFAULT NULL,
+  `amount` double DEFAULT NULL,
+  `key_edit` int(11) DEFAULT NULL,
+  `group_id` int(11) NOT NULL,
+  `reference` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `transaction`
+--
+
+CREATE TABLE `transaction` (
+  `id` int(11) NOT NULL,
+  `date_created` int(11) DEFAULT NULL,
+  `date_amended` int(11) DEFAULT NULL,
+  `date_deleted` int(11) DEFAULT NULL,
+  `group_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL COMMENT 'auteur de l insert en base',
+  `amount` double DEFAULT NULL,
+  `pledge_id` int(11) DEFAULT NULL,
+  `path_file` varchar(255) DEFAULT NULL COMMENT 'chemin vers le justificatif',
+  `income` double DEFAULT NULL,
+  `expense` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `user`
@@ -795,19 +834,18 @@ CREATE TABLE `user` (
   `pass` varchar(100) NOT NULL,
   `type` varchar(20) NOT NULL,
   `enable` tinyint(1) NOT NULL DEFAULT '1',
-  `group_id` int(11) NULL,
-  `civility` varchar(4) NULL,
-  `firstname` varchar(100) NULL,
-  `name` varchar(100) NULL,
-  `ad1` varchar(255)  NULL,
-  `ad2` varchar(255) NULL,
-  `ad3` varchar(255) NULL,
-  `city` varchar(255) NULL,
-  `zipcode` varchar(10) NULL,
-  `country` varchar(255) NULL,
-  `tel` varchar(100) NULL
+  `group_id` int(11) DEFAULT NULL,
+  `civility` varchar(4) DEFAULT NULL,
+  `firstname` varchar(100) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `ad1` varchar(255) DEFAULT NULL,
+  `ad2` varchar(255) DEFAULT NULL,
+  `ad3` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `zipcode` varchar(10) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `tel` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 --
 -- Index pour les tables exportées
@@ -834,6 +872,17 @@ ALTER TABLE `departement`
 ALTER TABLE `group`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Index pour la table `pledge`
+--
+ALTER TABLE `pledge`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `user`
@@ -854,62 +903,27 @@ ALTER TABLE `circonscription`
 -- AUTO_INCREMENT pour la table `departement`
 --
 ALTER TABLE `departement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 --
 -- AUTO_INCREMENT pour la table `group`
 --
 ALTER TABLE `group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-
---
--- Structure de la table `pledge`
---
-
-CREATE TABLE `pledge` (
-  `id` int(11) NOT NULL,
-  `date_created` datetime DEFAULT NULL,
-  `date_amended` datetime DEFAULT NULL,
-  `date_deleted` datetime DEFAULT NULL,
-  `date_completed` datetime DEFAULT NULL,
-  `civilite` varchar(4) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `firstname` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `tel` varchar(20) DEFAULT NULL,
-  `amount` double DEFAULT NULL,
-  `key_edit` int(11) DEFAULT NULL,
-  `group_id` int(11) NOT NULL,
-  `reference` varchar(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `pledge`
---
-ALTER TABLE `pledge`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
 --
 -- AUTO_INCREMENT pour la table `pledge`
 --
 ALTER TABLE `pledge`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-COMMIT;
+--
+-- AUTO_INCREMENT pour la table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
