@@ -35,8 +35,14 @@
                                 {% if transaction.pledge_id %}
                                     PROMESSE : {{ transaction.reference }}
                                     <div class="p-t p-b">
-                                        <div><em>{{ transaction.pledge.civility }} {{ transaction.pledge.name|ucwords }} {{ transaction.pledge.firstname|ucwords }}</em></div>
-                                        <div><em>{{ transaction.pledge.zipcode }} - tel : {{ transaction.pledge.tel }}</em></div>
+                                        <div><em><b>{{ transaction.pledge.civility }} {{ transaction.pledge.name|ucwords }} {{ transaction.pledge.firstname|ucwords }}</em></b></div>
+                                        <div><em>{{ transaction.pledge.email }} - tel : {{ transaction.pledge.tel }}</em></div>
+                                        <div><em>
+                                                {{ transaction.pledge.ad1 }}
+                                                {%  if transaction.pledge.ad2 %}<br />{{ transaction.pledge.ad2 }}{%  endif %}
+                                                {%  if transaction.pledge.ad3 %}<br />{{ transaction.pledge.ad3 }}{%  endif %}
+                                                <br />    {{ transaction.pledge.zipcode }},     {{ transaction.pledge.city }}
+                                            </em></div>
                                     </div>
                                 {% else %}
                                     {{ transaction.reference }}
