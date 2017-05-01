@@ -33,10 +33,10 @@
                         <tr>
                             <td>
                                 {% if transaction.pledge_id %}
-                                    <b>{{ transaction.reference }}</b>
+                                    PROMESSE : {{ transaction.reference }}
                                     <div class="p-t p-b">
-                                        <div>{{ transaction.pledge.civility }} {{ transaction.pledge.name|ucwords }} {{ transaction.pledge.firstname|ucwords }}</div>
-                                        <div>{{ transaction.pledge.zipcode }} - tel : {{ transaction.pledge.tel }}</div>
+                                        <div><em>{{ transaction.pledge.civility }} {{ transaction.pledge.name|ucwords }} {{ transaction.pledge.firstname|ucwords }}</em></div>
+                                        <div><em>{{ transaction.pledge.zipcode }} - tel : {{ transaction.pledge.tel }}</em></div>
                                     </div>
                                 {% else %}
                                     {{ transaction.reference }}
@@ -49,6 +49,13 @@
                             <td>&nbsp;</td>
                             <td class="text-right">
                                 <a href="/transactions/formulaire.html?id={{ transaction.id }}" class="btn btn-primary btn-success">Editer</a>
+                                <button  class="btn btn-primary click-send-ajax-confirm"
+                                         data-modal-title="Confirmation"
+                                         data-modal-body="Êtes-vous sûr de vouloir supprimer cette transaction ?"
+                                         data-modal-confirm="Supprimer"
+                                         data-modal-cancel="Annuler"
+                                         data-url="/transactions/delete.json"
+                                         data-param='{"id":"{{ transaction.id }}"}' ><i class="fa fa-trash text-danger"></i></button>
                             </td>
                         </tr>
                             <tr><td colspan="6"><hr /></td></tr>
