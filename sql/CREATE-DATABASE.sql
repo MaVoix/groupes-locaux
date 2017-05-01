@@ -770,6 +770,7 @@ CREATE TABLE `group` (
   `facebook_page` varchar(255) DEFAULT NULL,
   `facebook_group` varchar(255) DEFAULT NULL,
   `twitter` varchar(255) DEFAULT NULL,
+  `map_url` varchar(255) DEFAULT NULL,
   `comment` text,
   `presentation` text,
   `amount_promises` decimal(10,2) NOT NULL,
