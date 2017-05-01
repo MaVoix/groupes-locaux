@@ -66,6 +66,7 @@ if($nError==0 && isset($_POST["is_pledge"]) && $_POST["is_pledge"]=="ok"){
         $nError++;
     }else{
         $pledge_id= $plegdes[0]["id"];
+
     }
 }
 
@@ -91,6 +92,13 @@ if($nError==0){
         $transaction->setComment(trim($_POST["comment"]));
     }
     $transaction->save();
+
+    if(!is_null($pledge_id)){
+        $pledge=new Pledge(array("id"=>$pledge_id));
+        $pledge->setDate_completed(date("Y-m-d H:i:s"));
+        $pledge->save();
+    }
+
     $aResponse["durationMessage"] = "2000";
     $aResponse["durationRedirect"] = "2000";
     $aResponse["durationFade"] = "10000";
