@@ -31,6 +31,8 @@ if($bMaintenance){
     require_once '../class/Pledge.class.php';
     require_once '../class/PledgeListe.class.php';
     require_once '../class/Navigate.class.php';
+    require_once '../class/Transaction.class.php';
+    require_once '../class/TransactionListe.class.php';
     require_once '../class/TwigAppExtension.class.php';
     require_once '../class/TwigExtension.class.php';
     require_once '../class/User.class.php';
