@@ -1,4 +1,4 @@
-{% extends "mandataire/base.html.twig" %}
+{% extends "visitor/base.html.twig" %}
 
 
 {% block body %}
@@ -11,7 +11,8 @@
                     <p>Cliquez sur les circonscriptions pour savoir quelles villes s'y trouvent.</p>
                     {% for group in groups %}
 
-                            <a href="http://www.elections-legislatives.fr/circonscriptions/0{{group.departement.code}}.asp"><div class="col-xs-12 col-md-6 p-t-x2">
+                            {# <a href="http://www.elections-legislatives.fr/circonscriptions/0{{group.departement.code}}.asp">#}
+                        <a href="/groupe/page.html?id={{ group.id }}"><div class="col-xs-12 col-md-6 p-t-x2">
 
                                 <div class="text-center sticker-name">
                                     <h3 class="no-margin">{{group.departement.code}} - {{ group.departement.name}}</h3>
