@@ -46,6 +46,7 @@ ALTER TABLE `pledge`
 
 
 ALTER TABLE `group` ADD `iban` VARCHAR(255) NULL AFTER `bank_city`;
+ALTER TABLE `group` ADD `amount_target` INT NULL AFTER `professions_de_foi`;
 
 
 CREATE TABLE `transaction` (

@@ -771,6 +771,7 @@ CREATE TABLE `group` (
   `amount_donations` decimal(10,2) NOT NULL,
   `posters` int(11) NOT NULL DEFAULT '0',
   `ballots` int(11) NOT NULL DEFAULT '0',
+  `amount_target` int(11) DEFAULT NULL,
   `professions_de_foi` int(11) NOT NULL DEFAULT '0',
   `key_edit` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
