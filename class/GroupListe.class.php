@@ -33,6 +33,7 @@ class GroupListe extends Liste
         "posters",
         "ballots",
         "professions_de_foi",
+        "amount_target",
         "key_edit"
     );
 

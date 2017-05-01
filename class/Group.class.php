@@ -33,6 +33,7 @@ class Group	{
     private $nPosters;
     private $nBallots;
     private $nProfessions_de_foi;
+    private $nAmount_target;
     private $sKey_edit;
 
 
@@ -232,6 +233,11 @@ class Group	{
             $aData["professions_de_foi"]=$this->getProfessions_de_foi();
         }
 
+        if(isset($this->aDataSet["amount_target"]))
+        {
+            $aData["amount_target"]=$this->getAmount_target();
+        }
+
         if(isset($this->aDataSet["key_edit"]))
         {
             $aData["key_edit"]=$this->getKey_edit();
@@ -270,6 +276,7 @@ class Group	{
         $this->setPosters(NULL);
         $this->setBallots(NULL);
         $this->setProfessions_de_foi(NULL);
+        $this->setAmount_target(NULL);
         $this->setKey_edit(NULL);
     }
 
@@ -295,6 +302,7 @@ class Group	{
             "posters" => $this->getPosters(),
             "ballots" => $this->getBallots(),
             "professions_de_foi" => $this->getProfessions_de_foi(),
+            "amount_target" => $this->getAmount_target(),
             "key_edit" => $this->getKey_edit()
         ];
 
@@ -1057,6 +1065,53 @@ class Group	{
 
 
     /**
+     * Set le champ amount_target
+     * @param number $nAmount_target nouvelle valeur pour le champ amount_target
+     */
+    public function setAmount_target($nAmount_target)
+    {
+        if( is_null($nAmount_target) ) $nAmount_target='';
+        if( is_numeric($nAmount_target)  || $nAmount_target=='' )
+        {
+            $this->nAmount_target = $nAmount_target;
+            $this->aDataSet["amount_target"]=1;
+        }
+    }
+
+
+
+    /**
+     * Get le champ amount_target
+     * @return number valeur du champ amount_target
+     */
+    public function getAmount_target()
+    {
+        if( !is_null($this->nAmount_target) )
+        {
+            if( $this->nAmount_target==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->nAmount_target;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('amount_target'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->nAmount_target;
+        }
+    }
+
+
+
+    /**
      * Set le champ key_edit
      * @param string $sKey_edit nouvelle valeur pour le champ key_edit
      */
@@ -1097,6 +1152,7 @@ class Group	{
             return $this->sKey_edit;
         }
     }
+
 
     /*
     ********************************************************************************************
