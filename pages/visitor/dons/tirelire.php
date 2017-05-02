@@ -61,8 +61,8 @@ if(isset($_GET["id"])){
         $img->overlay( $overlayPledge, 'top left', 1, $x1Pledge, 0);
 
         //ajoute le texte
-        $img->text("DONS : ".$amountPledge." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x1Income+10,"yOffset"=>$marginTopForTextIncome ) );
-        $img->text("PROMESSE : ".$amountIncome." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x1Pledge+10,"yOffset"=>$marginTopForTextPledge ) );
+        $img->text("DONS : ".$amountIncome." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x1Income+10,"yOffset"=>$marginTopForTextIncome ) );
+        $img->text("PROMESSE : ".$amountPledge." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x1Pledge+10,"yOffset"=>$marginTopForTextPledge ) );
     }
 }
 
