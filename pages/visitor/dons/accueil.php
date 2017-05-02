@@ -19,9 +19,9 @@ foreach($groups as $datagroup){
     if($group->getAmount_target()==0){
         $group->setAmount_target(1);
     }
-    $datagroup["pledge_amount"]=2500;
+    $datagroup["pledge_amount"]=$group->getAmount_plegde();
     $datagroup["pledge_percent"]= round($datagroup["pledge_amount"]*100/ $group->getAmount_target());
-    $datagroup["income_amount"]=1250;
+    $datagroup["income_amount"]=$group->getAmount_income();
     $datagroup["income_percent"] = round($datagroup["income_amount"]*100/ $group->getAmount_target());
     if($datagroup["income_percent"]>100){
         $datagroup["income_percent"]=100;

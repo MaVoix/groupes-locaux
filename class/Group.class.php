@@ -1189,6 +1189,30 @@ class Group	{
 
     }
 
+    public function getAmount_plegde(){
+        $amount=0;
+        $pledgeListe= new PledgeListe();
+        //todo : sum avec jointure pour améliorer performance
+        $pledgeListe->applyRules4GroupCurrent($this->getId());
+        $pledges=$pledgeListe->getPage();
+        foreach($pledges as $pledge){
+            $amount+=doubleval($pledge["amount"]);
+        }
+        return $amount;
+    }
+    public function getAmount_income(){
+        $amount=0;
+        $transactionListe= new TransactionListe();
+        //todo : sum avec jointure pour améliorer performance
+        $transactionListe->applyRules4Group($this->getId());
+        $transactions=$transactionListe->getPage();
+        foreach($transactions as $transaction){
+            $amount+=doubleval($transaction["income"]);
+        }
+        return $amount;
+
+    }
+
     /* Lien TWIG vers les accesseurs */
     public function getDepartement(){
         return $this->Departement();
