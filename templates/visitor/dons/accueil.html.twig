@@ -29,11 +29,11 @@
                             <div class="row">
                                 <div class="col-xs-10 col-xs-offset-1">
                                     <div class="progress mavoix ">
-                                        <div class="progress-bar"   role="progressbar"  style="width: 1%">
-                                            <span >1 €</span>
+                                        <div class="progress-bar"   role="progressbar"  style="width: {{  group.income_percent }}%">
+                                            <span >{{  group.income_amount|number_format(0, ',', ' ') }} €</span>
                                         </div>
-                                        <div class="progress-bar"  role="progressbar"  style="width: 1%">
-                                            <span >150 €</span>
+                                        <div class="progress-bar"  role="progressbar"  style="width: {{  group.pledge_percent }}%">
+                                            <span >{{  group.pledge_amount|number_format(0, ',', ' ') }} €</span>
                                         </div>
                                     </div>
                                 </div>
