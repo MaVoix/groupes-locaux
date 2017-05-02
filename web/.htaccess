@@ -9,4 +9,6 @@ php_value memory_limit 512M
 
 Options +FollowSymlinks
 RewriteEngine On
+RewriteRule ^(?!dbdump|assets|css|js|fonts|data|tool)pic/(.*)/(.*)/(.*)\.(.*)$ /index.php?area=$1&page=$3&format=$4&id=$2&%{QUERY_STRING} [L]
 RewriteRule ^(?!dbdump|assets|css|js|fonts|data|tool)(.*)/(.*)\.(.*)$ /index.php?area=$1&page=$2&format=$3&%{QUERY_STRING} [L]
+
