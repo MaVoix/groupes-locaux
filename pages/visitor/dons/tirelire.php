@@ -30,6 +30,10 @@ if(isset($_GET["id"])){
         //calcul des pourcentages
         $amountPledge=$group->getAmount_plegde();
         $amountIncome=$group->getAmount_income();
+        $amountMiss=$group->getAmount_target()-$amountIncome-$amountPledge;
+        if($amountMiss<0){
+            $amountMiss=0;
+        }
         $pledge_percent = round($amountPledge*100/ $group->getAmount_target());
         $income_percent = round($amountIncome*100/ $group->getAmount_target());
 
@@ -61,8 +65,11 @@ if(isset($_GET["id"])){
         $img->overlay( $overlayPledge, 'top left', 1, $x1Pledge, 0);
 
         //ajoute le texte
-        $img->text("DONS : ".$amountIncome." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x1Income+10,"yOffset"=>$marginTopForTextIncome ) );
-        $img->text("PROMESSE : ".$amountPledge." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x1Pledge+10,"yOffset"=>$marginTopForTextPledge ) );
+        $img->text("DONS : ".number_format($amountIncome,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x1Income+10,"yOffset"=>$marginTopForTextIncome ) );
+
+        $img->text("PROMESSE : ".number_format($amountPledge,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top right","xOffset"=>-($width-$x2Pledge),"yOffset"=>$marginTopForTextPledge ) );
+
+        $img->text("RESTE A FINANCER : ".number_format($amountMiss,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top right","xOffset"=>-$marginRight,"yOffset"=>$marginTopForTextIncome ) );
     }
 }
 
