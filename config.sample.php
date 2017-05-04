@@ -32,7 +32,7 @@ $_CONFIG["mail-smtp-pass"]			        =""; //server smtp pass
 //main
 $_CONFIG["idSite"]                          = "collectedon"; //for unique session var prefix
 $_CONFIG["types"]			                = "visitor|donor>visitor|mandataire>donor>visitor|admin>mandataire>donor>visitor";
-if(strstr($_SERVER["HTTP_HOST"],"groupes")){
+if(strstr($_SERVER["HTTP_HOST"],"collectifs")){
     $_CONFIG["navigation"]                      ="groupes";
     $_CONFIG["area-default"]                    = array("visitor"=>"groupe","mandataire"=>"groupe","admin"=>"groupe");
     $_CONFIG["page-default"]                    = array("visitor"=>"formulaire","mandataire"=>"accueil","admin"=>"liste");
