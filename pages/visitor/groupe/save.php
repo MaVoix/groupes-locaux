@@ -354,6 +354,9 @@ if ($nError == 0) {
     if (isset($_POST["posters"])) {
         $Group->setPosters(intval($_POST["posters"]));
     }
+    if (isset($_POST["amount_target"])) {
+        $Group->setAmount_target(intval($_POST["amount_target"]));
+    }
 
 
     //save Files
