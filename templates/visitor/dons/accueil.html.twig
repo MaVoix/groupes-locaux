@@ -14,7 +14,7 @@
                             <div class="panel-heading p-b ">
                                 <h3 class="no-margin" >{{group.departement.code}} - {{ group.departement.name}}<span class="btn btn-default pull-right">Objectif : <span class="badge">{{  group.amount_target|number_format(0, ',', ' ') }} €</span></span></h3>
                                 <div>{{ sup(group.circonscription.number,'f',false) }} circonscription</div>
-                                <a href="http://www.elections-legislatives.fr/circonscriptions/0{{group.departement.code}}.asp" target="_blank">C'est ou ?</a>
+                                <a href="{{group.map_url}}" target="_blank">Où est-ce ?</a>
                             </div>
                             <div class="panel-body">
 
