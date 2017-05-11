@@ -11,13 +11,24 @@
 
                         <div class="form-group">
                             <label for="reference" class="control-label">Référence : *</label>
-                            <input type="text" class="form-control text-uppercase" id="reference" name="reference" placeholder="XXXXXXXX">
+                            <input type="text" class="form-control text-uppercase" id="reference" value="{{  pledge_ref }}" name="reference" placeholder="XXXXXXXX">
                         </div>
 
                         <button type="submit" class="btn btn-primary pull-right">Valider</button>
                     </form>
-
                 </div>
+
+                {%  if( pledge_ref!="" ) %}
+                <div class="row p-t-x4">
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <p>Rappel concernant votre promesse #MAVOIX pour le Collectif {{group.departement.code}} - {{ group.departement.name}} {{ sup(group.circonscription.number,'f',false) }} circonscription</p>
+
+                        <p>Reference à rappeler pour accompagner votre chèque : <b>{{  pledge_ref }}</b></p>
+                    </div>
+                </div>
+                {%  endif %}
+
+
             </div>
         </div>
     </div>

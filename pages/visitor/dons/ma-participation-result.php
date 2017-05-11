@@ -25,6 +25,7 @@ if(isset($_POST["reference"])){
         $aResponse["durationMessage"] = "0";
         $aResponse["durationRedirect"] = "0";
         SessionService::set("last-group-id",$group_id);
+        SessionService::set("last-pledge-ref",$_POST["reference"]);
         $aResponse["redirect"] = "/dons/ma-participation.html?display=true";
     }
 
