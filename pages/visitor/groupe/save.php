@@ -342,6 +342,9 @@ if ($nError == 0) {
     if (isset($_POST["iban"])) {
         $Group->setIban($_POST["iban"]);
     }
+    if (isset($_POST["bic"])) {
+        $Group->setBic($_POST["bic"]);
+    }
     if (isset($_POST["bank_city"])) {
         $Group->setBank_city($_POST["bank_city"]);
     }

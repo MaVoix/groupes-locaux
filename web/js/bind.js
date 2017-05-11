@@ -50,6 +50,12 @@ $(document).ready(function () {
             placeholder:'FRXX 0000 0000 0000 0000 0000 000'
         });
     }
+    //iban
+    if ($('#bic').length > 0) {
+        $('#bic').mask('AAAA AA AA AAA', {
+            placeholder:'XXXX XX XX (XXX)'
+        });
+    }
 
 
     $body.on('dblclick', '.error', function (e)
