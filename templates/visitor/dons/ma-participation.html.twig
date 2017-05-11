@@ -5,46 +5,56 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3">
-                    <form action="/dons/ma-participation-result.json"  method="post" autocomplete="off"  data-ajax="true" >
+                    <form action="/dons/ma-participation-result.json" method="post" autocomplete="off" data-ajax="true">
                         <h1>Retrouvez les coordonées nécessaire à votre participation</h1>
                         <hr>
 
                         <div class="form-group">
                             <label for="reference" class="control-label">Référence : *</label>
-                            <input type="text" class="form-control text-uppercase" id="reference" value="{{  pledge_ref }}" name="reference" placeholder="XXXXXXXX">
+                            <input type="text" class="form-control text-uppercase" id="reference"
+                                   value="{{ pledge_ref }}" name="reference" placeholder="XXXXXXXX">
                         </div>
 
                         <button type="submit" class="btn btn-primary pull-right">Valider</button>
                     </form>
                 </div>
 
-                {%  if( pledge_ref!="" ) %}
-                <div class="row ">
-                    <div class="col-lg-6 col-lg-offset-3 p-t-x4">
-                        <p>Rappel concernant votre promesse #MAVOIX pour le Collectif {{group.departement.code}} - {{ group.departement.name}} {{ sup(group.circonscription.number,'f',false) }} circonscription</p>
+                {% if( pledge_ref!="" ) %}
+                    <div class="row ">
+                        <div class="col-lg-6 col-lg-offset-3 p-t-x4">
+                            <p>Rappel concernant votre promesse #MAVOIX pour le Collectif {{ group.departement.code }}
+                                - {{ group.departement.name }} {{ sup(group.circonscription.number,'f',false) }}
+                                circonscription</p>
 
-                        <p>Reference à rappeler pour accompagner votre chèque : <b>{{  pledge_ref }}</b></p>
+                            <p>Reference à rappeler pour accompagner votre chèque : <b>{{ pledge_ref }}</b></p>
 
-                        {%  if group.iban!="" %}
+                            {% if group.iban!="" %}
+                                <h3>Virement</h3>
+                                <p><b>IBAN :</b>
+                                    <br/>{{ group.iban|upper }}
+                                    {% if group.bic!="" %}
+                                        <br/><br/><b>Code BIC :</b>
+                                        <br/>{{ group.bic|upper }}
+                                    {% endif %}
+                                    <br/><br/><b>Titulaire du compte :</b>
+                                    <br/>{{ group.mandataire.civility|ucwords }} {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name|upper }}
+                                    MF {{ group.candidat.civility|ucwords }} {{ group.candidat.firstname|ucwords }} {{ group.candidat.name|upper }}
+                                    / LEGIS 2017
+                                    <br/><br/><b>Référence accompagnant le virement :</b>
+                                    <br/> {{ pledge_ref }}
+                                <hr/>
 
-                            <h3>Virement</h3>
-                            <p><b>IBAN  :</b>
-                                <br />{{ group.iban|upper }}
-                                <br /><br /><b>Titulaire du compte :</b>
-                                <br />{{ group.mandataire.civility|ucwords }} {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name|upper }} MF {{ group.candidat.civility|ucwords }} {{ group.candidat.firstname|ucwords }} {{ group.candidat.name|upper }} / LEGIS 2017
-                                <br /><br /><b>Référence accompagnant le virement :</b>
-                            <br />  {{  pledge_ref }}
-                            <hr />
-
-                        {%  endif %}
-                        <h3>Chèque</h3>
-                        <b>Ordre :</b><br />
-                        {{ group.mandataire.civility|ucwords }} {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name|upper }}, mandataire financier de {{ group.candidat.civility|ucwords }} {{ group.candidat.firstname|ucwords }} {{ group.candidat.name|upper }}
-                        <br /><br /><b>Référence accompagnant le chèque :</b>
-                        <br />  {{  pledge_ref }}
+                            {% endif %}
+                            <h3>Chèque</h3>
+                            <b>Ordre :</b><br/>
+                            {{ group.mandataire.civility|ucwords }} {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name|upper }}
+                            , mandataire financier
+                            de {{ group.candidat.civility|ucwords }} {{ group.candidat.firstname|ucwords }} {{ group.candidat.name|upper }}
+                            <br/><br/><b>Référence accompagnant le chèque :</b>
+                            <br/> {{ pledge_ref }}
+                        </div>
                     </div>
-                </div>
-                {%  endif %}
+                {% endif %}
 
 
             </div>
