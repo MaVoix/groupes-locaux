@@ -19,11 +19,29 @@
                 </div>
 
                 {%  if( pledge_ref!="" ) %}
-                <div class="row p-t-x4">
-                    <div class="col-lg-6 col-lg-offset-3">
+                <div class="row ">
+                    <div class="col-lg-6 col-lg-offset-3 p-t-x4">
                         <p>Rappel concernant votre promesse #MAVOIX pour le Collectif {{group.departement.code}} - {{ group.departement.name}} {{ sup(group.circonscription.number,'f',false) }} circonscription</p>
 
                         <p>Reference à rappeler pour accompagner votre chèque : <b>{{  pledge_ref }}</b></p>
+
+                        {%  if group.iban!="" %}
+
+                            <h3>Virement</h3>
+                            <p><b>IBAN  :</b>
+                                <br />{{ group.iban|upper }}
+                                <br /><br /><b>Titulaire du compte :</b>
+                                <br />{{ group.mandataire.civility|ucwords }} {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name|upper }} MF {{ group.candidat.civility|ucwords }} {{ group.candidat.firstname|ucwords }} {{ group.candidat.name|upper }} / LEGIS 2017
+                                <br /><br /><b>Référence accompagnant le virement :</b>
+                            <br />  {{  pledge_ref }}
+                            <hr />
+
+                        {%  endif %}
+                        <h3>Chèque</h3>
+                        <b>Ordre :</b><br />
+                        {{ group.mandataire.civility|ucwords }} {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name|upper }}, mandataire financier de {{ group.candidat.civility|ucwords }} {{ group.candidat.firstname|ucwords }} {{ group.candidat.name|upper }}
+                        <br /><br /><b>Référence accompagnant le chèque :</b>
+                        <br />  {{  pledge_ref }}
                     </div>
                 </div>
                 {%  endif %}

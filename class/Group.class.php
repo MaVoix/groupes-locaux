@@ -1173,6 +1173,19 @@ class Group	{
         return  $user;
     }
 
+    public function getCandidat(){
+        $oListeUser= new UserListe();
+        $oListeUser->applyRules4Group($this->getId(),"candidat");
+        $aUsers=$oListeUser->getPage();
+        if(count($aUsers)){
+            $user=new User(array("id"=>$aUsers[0]["id"]));
+            $user->hydrate($aUsers[0]);
+        }else{
+            $user=new User();
+        }
+        return  $user;
+    }
+
     public function getListeMember(){
         $oListeUser= new UserListe();
         $oListeUser->applyRules4Group($this->getId(),"membre");
