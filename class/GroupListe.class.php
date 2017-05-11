@@ -28,6 +28,7 @@ class GroupListe extends Liste
         "comment",
         "presentation",
         "iban",
+        "bic",
         "amount_promises",
         "amount_donations",
         "posters",
