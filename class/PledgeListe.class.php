@@ -88,7 +88,7 @@ class PledgeListe extends Liste
         $this->setSens("ASC");
     }
 
-    public function applyRules4Reference($reference, $group_id){
+    public function applyRules4Reference($reference, $group_id=null){
         $this->setAllFields();
         $this->addCriteres([
             [
@@ -97,13 +97,16 @@ class PledgeListe extends Liste
                 "value" => vars::secureInjection(trim($reference))
             ]
         ]);
-        $this->addCriteres([
-            [
-                "field" => "group_id",
-                "compare" => "=",
-                "value" => intval($group_id)
-            ]
-        ]);
+        if(!is_null($group_id)){
+            $this->addCriteres([
+                [
+                    "field" => "group_id",
+                    "compare" => "=",
+                    "value" => intval($group_id)
+                ]
+            ]);
+        }
+
     }
 
 }
