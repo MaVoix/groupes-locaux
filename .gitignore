@@ -6,8 +6,7 @@
 *.iml
 /config.php
 /maintenance.php
-/web/css/site.min.css
-/web/js/site.min.js
+
 /undo.bat
 out
 gen### Dreamweaver template
