@@ -45,7 +45,7 @@
                                        name="is_pledge" {% if transaction.pledge_id %}checked{% endif %}>
                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                             </label>
-                            <label class="label-checkbox" for="is_pledge">Correspond à une promesse de don (celle-ci sera comptabilisé comme complète)</label>
+                            <label class="label-checkbox" for="is_pledge">Correspond à une promesse de don. Une fois la transaction enregistrée, la promesse sera comptabilisée comme tenue.</label>
                         </div>
                     </div>
 
@@ -59,14 +59,14 @@
                         <label for="pledge" class="control-label">Commentaire :</label>
                         <textarea title="commentaire"  class="form-control" id="comment" name="comment"
 
-                                   placeholder="">{{ transaction.comment }}</textarea>
+                                   placeholder="virement / chèque / dépôt d'espèces / bla bla">{{ transaction.comment }}</textarea>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="pledge" class="control-label">Justificatif :</label>
                         <input title="Justificatif" type="file" class="form-control" id="proof" name="proof"
                                value=""
                                placeholder="" disabled ><span class="help-block">En construction ...</span>
-                    </div>
+                    </div> -->
                     <div class="text-center">
                     <button type="submit" class="btn  btn-primary">Enregistrer</button>
                     </div>
