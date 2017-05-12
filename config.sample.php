@@ -35,12 +35,12 @@ $_CONFIG["types"]			                = "visitor|donor>visitor|mandataire>donor>vi
 if(strstr($_SERVER["HTTP_HOST"],"collectifs")){
     $_CONFIG["navigation"]                      ="groupes";
     $_CONFIG["area-default"]                    = array("visitor"=>"groupe","mandataire"=>"groupe","admin"=>"groupe");
-    $_CONFIG["page-default"]                    = array("visitor"=>"formulaire","mandataire"=>"accueil","admin"=>"liste");
-}else{
-    $_CONFIG["navigation"]                      ="dons";
-    $_CONFIG["area-default"]                    = array("visitor"=>"dons","mandataire"=>"groupe","admin"=>"groupe");
-    $_CONFIG["page-default"]                    = array("visitor"=>"accueil","mandataire"=>"accueil","admin"=>"liste");
-}
+    $_CONFIG["page-default"]                    = array("visitor"=>"groupes","mandataire"=>"suivi-promesse","admin"=>"liste");
+  }else{
+      $_CONFIG["navigation"]                      ="dons";
+      $_CONFIG["area-default"]                    = array("visitor"=>"dons","mandataire"=>"dons","admin"=>"groupe");
+      $_CONFIG["page-default"]                    = array("visitor"=>"accueil","mandataire"=>"suivi-promesse","admin"=>"liste");
+  }
 $_CONFIG["format-default"]                  = "html";
 $_CONFIG["max-filesize"]                    = 8; // in Mb
 $_CONFIG["max-width"]                       = 4000; // in PX
