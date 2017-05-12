@@ -195,12 +195,13 @@
                                      placeholder="" >
                         </div>
 
+                        {% if oMe.type=="admin" %}
                         <div class="form-group">
                             <label for="amount_target" class="control-label">Objectif de collecte (€) :</label>
-                            <p>Veillez à bien ajuster le montant, l'argent non dépensé devra être reversé à une association après les élections. Vous pouvez le changer à tout moment. Une fois atteint (encaissé + somme des promesses), les informations de paiement n'apparaîtront plus sur la plateforme publique de dons.</p>
                             <input   title="Objectif de collecte" type="text"  class="form-control publicinfo" id="amount_target" name="amount_target" value="{{ group.amount_target }}"
                                      placeholder="2500">
                         </div>
+                        {% endif %}
 
 
                         <hr/>
