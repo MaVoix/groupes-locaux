@@ -306,14 +306,9 @@ if ($nError == 0) {
         $Group->setState("offline");
     }
 
-    //force le mode offline sur l'enregistrement par un utilisateur
-    if ($oMe->getType() != "admin") {
-        $Group->setState("offline");
-    } else {
-        if (isset($_POST["autovalid"]) && $_POST["autovalid"] == "1") {
+   if (isset($_POST["autovalid"]) && $_POST["autovalid"] == "1") {
             $Group->setState("online");
         }
-    }
 
     $Group->setName($_POST["group_name"]);
     //todo : vérifier les ID avant sauvegarde
