@@ -33,10 +33,10 @@
                         <tr>
                             <td>
                                 {% if transaction.pledge_id %}
-                                    PROMESSE : {{ transaction.reference }}
+                                    Promesse : {{ transaction.reference }}
                                     <div class="p-t p-b">
                                         <div><em><b>{{ transaction.pledge.civility }} {{ transaction.pledge.name|ucwords }} {{ transaction.pledge.firstname|ucwords }}</em></b></div>
-                                        <div><em>{{ transaction.pledge.email }} - tel : {{ transaction.pledge.tel }}</em></div>
+                                        <div><em>{{ transaction.pledge.email }} - tél : {{ transaction.pledge.tel }}</em></div>
                                         <div><em>
                                                 {{ transaction.pledge.ad1 }}
                                                 {%  if transaction.pledge.ad2 %}<br />{{ transaction.pledge.ad2 }}{%  endif %}
@@ -67,7 +67,7 @@
                             <tr><td colspan="6"><hr /></td></tr>
                         {%  endfor %}
                         <tr>
-                            <td><h2>SOLDE :</h2></td>
+                            <td><h2>Solde :</h2></td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td class="text-right"><h2>{{ solde|number_format(2, ',', ' ') }} €</h2></td>
