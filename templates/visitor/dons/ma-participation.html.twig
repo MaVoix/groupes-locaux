@@ -6,13 +6,13 @@
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3">
                     <form action="/dons/ma-participation-result.json" method="post" autocomplete="off" data-ajax="true">
-                        <h1>Retrouvez les coordonées nécessaire à votre participation</h1>
+                        <h1>Retrouvez les informations nécessaire à l'envoi de votre don.</h1>
                         <hr>
 
                         <div class="form-group">
                             <label for="reference" class="control-label">Référence : *</label>
                             <input type="text" class="form-control text-uppercase" id="reference"
-                                   value="{{ pledge_ref }}" name="reference" placeholder="XXXXXXXX">
+                                   value="{{ pledge_ref }}" name="reference" placeholder="">
                         </div>
 
                         <button type="submit" class="btn btn-primary pull-right">Valider</button>
@@ -22,37 +22,40 @@
                 {% if( pledge_ref!="" ) %}
                     <div class="row ">
                         <div class="col-lg-6 col-lg-offset-3 p-t-x4">
-                            <p>Rappel concernant votre promesse #MAVOIX pour le Collectif {{ group.departement.code }}
+                            <p>Votre promesse #MAVOIX pour le collectif {{ group.departement.code }}
                                 - {{ group.departement.name }} {{ sup(group.circonscription.number,'f',false) }}
                                 circonscription</p>
 
-                            <p>Reference à rappeler pour accompagner votre chèque : <b>{{ pledge_ref }}</b></p>
+                                <p>Votre référence : {{ pledge_ref }}</p>
 
-                            {% if group.iban!="" %}
-                                <h3>Virement</h3>
-                                <p><b>IBAN :</b>
-                                    <br/>{{ group.iban|upper }}
-                                    {% if group.bic!="" %}
-                                        <br/><br/><b>Code BIC :</b>
-                                        <br/>{{ group.bic|upper }}
-                                    {% endif %}
-                                    <br/><br/><b>Titulaire du compte :</b>
-                                    <br/>{{ group.mandataire.civility|ucwords }} {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name|upper }}
-                                    MF {{ group.candidat.civility|ucwords }} {{ group.candidat.firstname|ucwords }} {{ group.candidat.name|upper }}
-                                    / LEGIS 2017
-                                    <br/><br/><b>Référence accompagnant le virement :</b>
-                                    <br/> {{ pledge_ref }}
-                                <hr/>
+                                <p>Vous pouvez envoyer votre don de deux manières :</p>
 
-                            {% endif %}
-                            <h3>Chèque</h3>
-                            <b>Ordre :</b><br/>
-                            {{ group.mandataire.civility|ucwords }} {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name|upper }}
-                            , mandataire financier
-                            de {{ group.candidat.civility|ucwords }} {{ group.candidat.firstname|ucwords }} {{ group.candidat.name|upper }}
-                            <br/><br/><b>Référence accompagnant le chèque :</b>
-                            <br/> {{ pledge_ref }}
-                        </div>
+                                <h2>Par chèque</h2>
+
+                                <p>Le chèque est à faire à l'ordre de <br/><span style="font-size:1.2em">{{group.mandataire.firstname|ucwords}} {{group.mandataire.name}} mandataire de {{group.candidat.firstname|ucwords}} {{ group.candidat.name }}</span>
+                                </p>
+
+                                <p>De façon à ce que nous puissions faire le lien entre votre promesse et votre don, merci d'indiquer la référence de votre promesse au dos du chèque : <span style="font-size:1.2em">{{ pledge_ref }}</span></p>
+
+                                <p>Puis envoyez ce chèque par courrier au mandataire financier, à l'adresse suivante :</p>
+
+                                <p style="font-size:1.2em">
+                                  {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name }}<br/>
+                                  {{ group.mandataire.ad1}}<br/>
+                                  {% if group.mandataire.ad2 != ''%}{{group.mandataire.ad2}}{% endif %}<br/>
+                                  {% if group.mandataire.ad3 != ''%}{{group.mandataire.ad3}}{% endif %}<br/>
+                                  {{ group.mandataire.zipcode }} {{ group.mandataire.city }}<br/>
+                                </p>
+
+                                <h2>Par virement bancaire</h2>
+                                {% if group.iban!="" %}
+                                <p>Nom du destinataire : <span style="font-size:1.2em">{{group.mandataire.firstname|ucwords}} {{group.mandataire.name|upper}} mandataire de {{group.candidat.firstname|ucwords}} {{ group.candidat.name|upper }}</span></p>
+                                <p>Numéro IBAN : <span style="font-size:1.2em">{{ group.iban }}</span></p>
+                                <p>Code BIC/SWIFT : <span style="font-size:1.2em">{{ group.bic }}</span></p>
+                                <p>Référence à indiquer : <span style="font-size:1.2em">{{ pledge_ref }}</span></p>
+                                {% else %}
+                                <p>Ce collectif local n'a pas encore renseigné ses coordonnées bancaires, merci de réessayer plus tard ou d'envoyer un chèque.</p>
+                                {% endif %}
                     </div>
                 {% endif %}
 
