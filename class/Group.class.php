@@ -318,6 +318,7 @@ class Group	{
         $this->setBank_name(NULL);
         $this->setBank_city(NULL);
         $this->setIban(NULL);
+        $this->setBic(NULL);
         $this->setEmail(NULL);
         $this->setFacebook_page(NULL);
         $this->setFacebook_group(NULL);
