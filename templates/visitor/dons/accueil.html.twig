@@ -43,7 +43,11 @@
                                             <p><span class="label">Dons promis</span></p>
                                         </div>
                                           <div class="col-md-6 col-xs-6 text-center">
-                                              <a href="/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je veux faire un don à ce groupe !</a>
+                                              {%  if  group.income_amount+group.pledge_amount >= group.amount_target %}
+                                                  <button type="button" class="btn btn-lg btn-primary" disabled >Objectif atteint !</button>
+                                              {%  else  %}
+                                                  <a href="/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je veux faire un don à ce groupe !</a>
+                                              {%  endif  %}
                                           </div>
                                     </div>
                                   </div>
