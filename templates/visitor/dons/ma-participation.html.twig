@@ -42,8 +42,8 @@
                                 <p style="font-size:1.2em">
                                   {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name }}<br/>
                                   {{ group.mandataire.ad1}}<br/>
-                                  {% if group.mandataire.ad2 != ''%}{{group.mandataire.ad2}}{% endif %}<br/>
-                                  {% if group.mandataire.ad3 != ''%}{{group.mandataire.ad3}}{% endif %}<br/>
+                                  {% if group.mandataire.ad2 != ''%}{{group.mandataire.ad2}}<br/>{% endif %}
+                                  {% if group.mandataire.ad3 != ''%}{{group.mandataire.ad3}}<br/>{% endif %}
                                   {{ group.mandataire.zipcode }} {{ group.mandataire.city }}<br/>
                                 </p>
 
