@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes" >
+    <meta name="format-detection" content="telephone=no" >
+    <meta name="HandheldFriendly" content="true" >
+    <meta name="viewport" content="width = device-width,initial-scale = 1,minimum-scale = 1,maximum-scale = 1,  user-scalable=no" >
+    <title>{% block title %}Tirelire #MAVOIX{% endblock %}</title>
+    <link rel="stylesheet" href="/css/site.min.css?v={{  versioncss }}">
+    <link rel="icon" type="image/png" href="/css/images/favicon-tirelire.png">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<div id="loading">
+    <div class="loading-display"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        <div class="loading-display"><!--<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>-->
+            <h5 class="typo no-margin ">Chargement         <i class="fa fa-spinner fa-spin  fa-fw"></i></h5>
+        </div>
+        <div id="progress-wrp">
+            <div class="progress-bar"></div ><div class="status typo">0%</div>
+        </div>
+    </div>
+</div>
+{% block header %}
+    {% if navigate.page=='list' and navigate.area=='message' %}
+        <div class="navbar-overall">
+            {% embed "#{oMe.type}/menu.html.twig" %}{% endembed %}
+        </div>
+    {% else %}
+        {% embed "#{oMe.type}/menu.html.twig" %}{% endembed %}
+    {% endif %}
+{% endblock %}
+{% block body %}{% endblock %}
+
+{% block footer %}
+    {% embed "#{oMe.type}/footer.html.twig" %}{% endembed %}
+{% endblock %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modalConfirm">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title text-primary" id="modal-title" ></h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default typo" data-dismiss="modal" id="modal-cancel">Annuler</button>
+                <button type="button" class="btn btn-primary typo" id="modal-confirm">Ok</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript" src="/js/site.min.js?v={{  versionjs }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>
