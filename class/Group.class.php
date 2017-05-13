@@ -934,6 +934,48 @@ class Group	{
         }
     }
 
+    /**
+     * Set le champ bic
+     * @param string $sBic nouvelle valeur pour le champ bic
+     */
+    public function setIban($sBic)
+    {
+        if( is_null($sBic) ) $sBic='';
+        $this->sBic = $sBic;
+        $this->aDataSet["bic"]=1;
+    }
+
+
+
+    /**
+     * Get le champ iban
+     * @return string valeur du champ iban
+     */
+    public function getBic()
+    {
+        if( !is_null($this->sBic) )
+        {
+            if( $this->sBic==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sBic;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('bic'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sBic;
+        }
+    }
+
 
 
     /**
