@@ -21,9 +21,10 @@ $aMandatoryFields = array("civility","name", "firstname", "email","tel","ad1","c
 
 $aEngagements=array();
 //verification des engagements 1 à 2
-for($i=1;$i<=2;$i++){
-    $aEngagements[]="engagement-a".$i;
-}
+// Pas d'engagements pour les promesses de don
+// for($i=1;$i<=2;$i++){
+//     $aEngagements[]="engagement-a".$i;
+// }
 $aMandatoryFields=array_merge($aMandatoryFields,$aEngagements);
 
 foreach ($aMandatoryFields as $sField) {
