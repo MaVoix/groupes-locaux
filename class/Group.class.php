@@ -938,7 +938,7 @@ class Group	{
      * Set le champ bic
      * @param string $sBic nouvelle valeur pour le champ bic
      */
-    public function setIban($sBic)
+    public function setBic($sBic)
     {
         if( is_null($sBic) ) $sBic='';
         $this->sBic = $sBic;
