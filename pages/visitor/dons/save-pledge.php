@@ -96,7 +96,7 @@ if($nError==0){
         "pledge" =>$pledge
     ]);
 
-    Mail::sendMail( $pledge->getEmail(), "Confirmation de promesse", $sBodyMailHTML, $sBodyMailTXT, true);
+    Mail::sendMail( $pledge->getEmail(), "Confirmation de promesse de don", $sBodyMailHTML, $sBodyMailTXT, true);
 
     SessionService::set("last-pledge-save-id",$pledge->getId());
 
@@ -113,4 +113,3 @@ if($nError==0){
 
 //return
 $aDataScript['data'] = json_encode($aResponse);
-
