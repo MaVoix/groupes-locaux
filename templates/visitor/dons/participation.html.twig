@@ -85,35 +85,10 @@
 
                     <div class="form-group">
 
-                        <label for="amount" class="control-label">Montant de votre promesse : *</label>
-                        <input  title="Montant de votre promesse" type="text" class="form-control " id="amount" name="amount"
+                        <label for="amount" class="control-label">Montant de votre promesse de don, en euros : *</label>
+                        <input  title="Montant de votre promesse" type="text" class="form-control " id="amount" name="amount" style="font-size:1.4em;height:1.4em"
                                 value="{{ pledge.amount }}"
-                                placeholder="XXX">
-                    </div>
-
-                    <h2>Les engagements</h2>
-
-                    <div class="form-group engagements-a">
-                        <div class="checkbox">
-                            <label class="label-checkbox" for="engagement-a1"><strong>Je m'engage à ....</strong></label>
-                            <label class="control-label">
-                                <input id="engagement-a1" value="ok" type="checkbox"
-                                       name="engagement-a1" {{ checkedengagement }}>
-                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                            </label>
-                            <span>Oui *</span>
-                        </div>
-
-                        <div class="checkbox">
-                            <label class="label-checkbox" for="engagement-a2"><strong>Je m'engage à ....</strong></label>
-                            <label class="control-label">
-                                <input id="engagement-a2" value="ok" type="checkbox"
-                                       name="engagement-a2" {{ checkedengagement }}>
-                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                            </label>
-                            <span>Oui *</span>
-                        </div>
-
+                                placeholder="">
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">
