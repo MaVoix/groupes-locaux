@@ -14,6 +14,7 @@ foreach($groups as $datagroup){
     $datagroup["departement"]=  $oDepartement;
     $datagroup["circonscription"]= $oCirconscription;
     $datagroup["mandataire"]=$group->getMandataire();
+    $datagroup["candidat"]=$group->getCandidat();
     $datagroup["path_pic_fit"]=$group->getPath_pic_fit();
     //protection division par 0
     if($group->getAmount_target()==0){
