@@ -46,7 +46,7 @@
                                               {%  if  group.income_amount+group.pledge_amount >= group.amount_target %}
                                                   <button type="button" class="btn btn-lg btn-primary" disabled >Objectif atteint !</button>
                                               {%  else  %}
-                                                  <a href="/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je veux faire un don à ce groupe !</a>
+                                                  <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je veux faire un don à ce groupe !</a>
                                               {%  endif  %}
                                           </div>
                                     </div>

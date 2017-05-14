@@ -14,16 +14,16 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/groupe/groupes.html">Collectifs locaux</a>
+                    <a href="{{ ConfigService.get("urlSite") }}/groupe/groupes.html">Collectifs locaux</a>
                 </li>
                 <li>
-                    <a href="/dons/accueil.html">Faire un don</a>
+                    <a href="{{ ConfigService.get("urlSiteDons") }}/dons/accueil.html">Faire un don</a>
                 </li>
                 <li>
-                    <a href="/dons/ma-participation.html">Ma promesse de don</a>
+                    <a href="{{ ConfigService.get("urlSiteDons") }}/dons/ma-participation.html">Ma promesse de don</a>
                 </li>
                 <li>
-                    <a href="/home/connexion.html">Connexion</a>
+                    <a href="{{ ConfigService.get("urlSite") }}/home/connexion.html">Connexion</a>
                 </li>
             </ul>
         </div><!--/.nav-collapse -->
