@@ -26,10 +26,10 @@
 {% block header %}
     {% if navigate.page=='list' and navigate.area=='message' %}
         <div class="navbar-overall">
-            {% embed "#{oMe.type}/menu.html.twig" %}{% endembed %}
+            {% embed "#{oMe.type}/menu-dons.html.twig" %}{% endembed %}
         </div>
     {% else %}
-        {% embed "#{oMe.type}/menu.html.twig" %}{% endembed %}
+        {% embed "#{oMe.type}/menu-dons.html.twig" %}{% endembed %}
     {% endif %}
 {% endblock %}
 {% block body %}{% endblock %}
