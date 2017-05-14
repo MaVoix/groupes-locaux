@@ -18,13 +18,13 @@
             </div>
           </div>
             <div class="row m-t-x3">
-                <div class="col-xs-6 col-md-6 col-lg-6">
+                <div class="col-xs-4 col-md-4 col-lg-4">
                     <div style="background-image:url('/{{ group.path_pic_fit }}');"
                          class="square-pic-group"></div>
                 </div>
-                <div class="col-xs-6 col-md-6 col-lg-6">
+                <div class="col-xs-8 col-md-8 col-lg-8">
 
-                                  <h2>Contacter le groupe local<h2>
+                                  <h3>Contacter le groupe local<h3>
                                     <ul>
 
 
@@ -42,7 +42,28 @@
                                   {% endif %}
                                 </ul>
 
-                                <h2><a href="{{ ConfigService.get("urlSiteDons") }}/dons/accueil.html#col{{ group.id }}">Faire un don</a></h2>
+                                <p><strong><a href="{{ ConfigService.get("urlSiteDons") }}/dons/accueil.html#col{{ group.id }}">Faire un don</a></strong></p>
+                                <h3 id="budget">Budget de campagne</h3>
+
+                                <table class="table">
+                                  <tr><td>Impression des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
+                                  {% if group.departement.code == 'ZZ' %}
+                                  <tr><td>Impression des bulletins de vote </td><td>{{ ballotsEtrCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Campagne de mails à destination des Français de l'étranger </td><td>{{ remainingEtrCost  }}&nbsp;euros</td><tr>
+                                  <tr><td>Expertise comptable du compte de campagne </td><td>{{ accountantEtrCost }}&nbsp;euros</td><tr>
+                                  {% else %}
+                                  <tr><td>Impression des bulletins de vote </td><td>{{ ballotsCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Livraison des impressions </td><td>{{ remainingCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Expertise comptable du compte de campagne </td><td>{{ accountantCost }}&nbsp;euros</td><tr>
+                                  {% endif %}
+                                  <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ postalCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Frais bancaires </td><td>{{ bankingCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Autres dépenses </td><td>{{ smallExpensesCost }}&nbsp;euros</td><tr>
+                                </table>
+
+                                <p>Total : <strong><span style="font-size:1.2em">{{ group.amount_target }} euros</span></strong></p>
+
+
 
                 </div>
 
