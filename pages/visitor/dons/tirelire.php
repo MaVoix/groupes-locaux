@@ -17,10 +17,10 @@ if(isset($_GET["id"])){
     if ($group->getState() == "online") {
 
         //reglage de l'image
-        $marginLeft=89;
-        $marginRight=89;
-        $marginTopForTextIncome=240;
-        $marginTopForTextPledge=375;
+        $marginLeft=90;
+        $marginRight=90;
+        $marginTopForTextIncome=590;
+        $marginTopForTextPledge=722;
 
         $widthBar=$width-$marginLeft-$marginRight;
 
@@ -76,13 +76,13 @@ if(isset($_GET["id"])){
         $img->text("Reste à financer : ".number_format($amountMiss,0,","," ")." € / ".number_format($group->getAmount_target(),0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top right","xOffset"=>-$marginRight,"yOffset"=>$marginTopForTextIncome ) );
 
         //text de la circo
-        $img->text($group->getDepartement()->getCode()." - ".$group->getDepartement()->getName(),array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 40,"color"=> "000000","anchor"=> "left","xOffset"=>320,"yOffset"=>-round($height/2 )+50 ) );
-        $img->text("Circonscription n° ".$group->getCirconscription()->getNumber(),array("fontFile"=> "css/images/progressbar/MyriadPro-Regular.otf","size"=> 30,"color"=> "000000","anchor"=> "left","xOffset"=>320,"yOffset"=>-round($height/2 )+90 ) );
+        $img->text($group->getDepartement()->getCode()." - ".$group->getDepartement()->getName(),array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 40,"color"=> "000000","anchor"=> "center","xOffset"=>0,"yOffset"=>-90 ));
+        $img->text("Circonscription n° ".$group->getCirconscription()->getNumber(),array("fontFile"=> "css/images/progressbar/MyriadPro-Regular.otf","size"=> 30,"color"=> "000000","anchor"=> "center","xOffset"=>0,"yOffset"=>-60 ) );
 
         //image
-        $overlayPic=new \claviska\SimpleImage($group->getPath_pic_fit());
-        $overlayPic->bestFit(200,200);
-        $img->overlay(  $overlayPic, 'top left', 1, $marginLeft, 25);
+        //$overlayPic=new \claviska\SimpleImage($group->getPath_pic_fit());
+        //$overlayPic->bestFit(200,200);
+        //$img->overlay(  $overlayPic, 'top left', 1, $marginLeft, 25);
 
     }
 }
