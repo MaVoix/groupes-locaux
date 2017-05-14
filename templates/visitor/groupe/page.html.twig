@@ -11,7 +11,7 @@
             </div>
             <div class="row">
               <div class="col-xs-12 col-md-12 col-lg-12">
-              <iframe width="100%" height="450px" frameBorder="0" src="{{ group.map_url  }}?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=false&onLoadPanel=undefined&captionBar=false"></iframe>
+              <iframe width="100%" height="450px" frameBorder="0" src="{{ group.map_url }}?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=false&onLoadPanel=undefined&captionBar=false"></iframe>
               <p>
                 <a href="{{ group.map_url  }}">Voir en plein écran</a> -- Si vous habitez dans la zone jaune, vous pourrez voter pour un·e candidat·e #MAVOIX aux élections législatives du 11 juin.
               </p>
@@ -41,6 +41,9 @@
                                     <li><a href="{{  group.twitter }}">Compte Twitter</a></li>
                                   {% endif %}
                                 </ul>
+
+                                <h2><a href="{{ ConfigService.get("urlSiteDons") }}/dons/accueil.html#col{{ group.id }}">Faire un don</a></h2>
+
                 </div>
 
             </div>
