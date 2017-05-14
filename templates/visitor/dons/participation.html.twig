@@ -89,6 +89,7 @@
                         <input  title="Montant de votre promesse" type="text" class="form-control " id="amount" name="amount" style="font-size:1.4em;height:1.4em"
                                 value="{{ pledge.amount }}"
                                 placeholder="">
+                        <div class="help-block">Actuellement : {{  amountMax|number_format(0, ',', ' ') }} € maximum <i>(ce chiffre peut évoluer en fonction de l'activité du site)</i></div>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">
