@@ -65,15 +65,15 @@ if(isset($_GET["id"])){
         $img->overlay( $overlayPledge, 'top left', 1, $x1Pledge, 0);
 
         //ajoute le texte
-        $img->text("DONS : ".number_format($amountIncome,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x1Income+10,"yOffset"=>$marginTopForTextIncome ) );
+        $img->text("Dons : ".number_format($amountIncome,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x1Income+10,"yOffset"=>$marginTopForTextIncome ) );
 
         if($x2Pledge>$width/2){
-            $img->text("PROMESSES : ".number_format($amountPledge,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top right","xOffset"=>-($width-$x2Pledge),"yOffset"=>$marginTopForTextPledge ) );
+            $img->text("Promesses : ".number_format($amountPledge,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top right","xOffset"=>-($width-$x2Pledge),"yOffset"=>$marginTopForTextPledge ) );
         }else{
-            $img->text("PROMESSES : ".number_format($amountPledge,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x2Pledge,"yOffset"=>$marginTopForTextPledge ) );
+            $img->text("Promesses : ".number_format($amountPledge,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x2Pledge,"yOffset"=>$marginTopForTextPledge ) );
         }
 
-        $img->text("RESTE A FINANCER : ".number_format($amountMiss,0,","," ")." € / ".number_format($group->getAmount_target(),0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top right","xOffset"=>-$marginRight,"yOffset"=>$marginTopForTextIncome ) );
+        $img->text("Reste à financer : ".number_format($amountMiss,0,","," ")." € / ".number_format($group->getAmount_target(),0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top right","xOffset"=>-$marginRight,"yOffset"=>$marginTopForTextIncome ) );
 
         //text de la circo
         $img->text($group->getDepartement()->getCode()." - ".$group->getDepartement()->getName(),array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 40,"color"=> "000000","anchor"=> "left","xOffset"=>320,"yOffset"=>-round($height/2 )+50 ) );
