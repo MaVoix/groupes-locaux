@@ -75,7 +75,9 @@ if($nError==0){
     $pledge->setTel($_POST["tel"]);
     $pledge->setAd1($_POST["ad1"]);
     $pledge->setAd2($_POST["ad2"]);
-    $pledge->setAd3($_POST["ad3"]);
+    if(isset($_POST["ad3"])){
+        $pledge->setAd3($_POST["ad3"]);
+    }
     $pledge->setZipcode($_POST["zipcode"]);
     $pledge->setCity($_POST["city"]);
     $pledge->setAmount($nAmount);
