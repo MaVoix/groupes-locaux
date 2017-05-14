@@ -4,29 +4,7 @@
 
 $imgPath="css/images/progressbar/";
 
-if ($_GET["page"]=='tirelire_s') {
-  $pledgeImgFile="pledge_s.png";
-  $incomeImgFile="income_s.png";
-  $backgroundImgFile="background_s.png";
-  $marginTopForTextIncome=115;
-  $marginTopForTextPledge=247;
 
-} else {
-  $pledgeImgFile="pledge.png";
-  $incomeImgFile="income.png";
-  $backgroundImgFile="background.png";
-  $marginTopForTextIncome=590;
-  $marginTopForTextPledge=722;
-}
-
-
-
-//recupere l'image de fond
-$img=new \claviska\SimpleImage($imgPath . $backgroundImgFile);
-
-//dimension de l'image de départ
-$width=$img->getWidth();
-$height=$img->getHeight();
 
 if(isset($_GET["id"])){
 
@@ -34,6 +12,30 @@ if(isset($_GET["id"])){
     $group = new Group(array("id" => intval($_GET["id"])));
     $group->hydrateFromBDD(array('*'));
     if ($group->getState() == "online") {
+
+      if ($_GET['pic']=="smallpic") {
+        $pledgeImgFile="pledge_s.png";
+        $incomeImgFile="income_s.png";
+        $backgroundImgFile="background_s.png";
+        $marginTopForTextIncome=120;
+        $marginTopForTextPledge=250;
+
+      } else {
+        $pledgeImgFile="pledge.png";
+        $incomeImgFile="income.png";
+        $backgroundImgFile="background.png";
+        $marginTopForTextIncome=590;
+        $marginTopForTextPledge=722;
+      }
+
+
+
+      //recupere l'image de fond
+      $img=new \claviska\SimpleImage($imgPath . $backgroundImgFile);
+
+      //dimension de l'image de départ
+      $width=$img->getWidth();
+      $height=$img->getHeight();
 
         //reglage de l'image
         $marginLeft=90;
