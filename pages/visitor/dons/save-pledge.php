@@ -52,6 +52,11 @@ if($nError==0){
     }
 }
 
+
+
+
+
+
 $group = new Group();
 if($nError==0) {
     //verification de l'existence du groupe
@@ -60,6 +65,17 @@ if($nError==0) {
     $subkey=sha1(substr($group->getKey_edit(),0,10).$group->getId());
     if(!isset($_POST["group_subkey"]) || $subkey!=$_POST["group_subkey"] || intval($group->getId())==0){
         $aResponse["message"]["text"] = "Impossible d'enregistrer votre promesse de don sur ce collectif local !";
+        $nError++;
+    }
+}
+
+//verification du montant maximum
+if($nError==0){
+    $nAmount= floatval(str_replace(array(" ",","),array("","."),$_POST["amount"]));
+    $nAmountMax=$group->getAmount_target()-$group->getAmount_plegde()-$group->getAmount_income();
+    if( $nAmount>$nAmountMax){
+        $aResponse["message"]["text"] = "Le montant dépasse l'objectif ( ".number_format($nAmountMax, 2, ',', ' ')." € max.)";
+        array_push($aResponse["required"], array("field" => "amount"));
         $nError++;
     }
 }
