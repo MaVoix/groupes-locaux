@@ -1,5 +1,22 @@
 {% extends "visitor/base-dons.html.twig" %}
 
+{% block meta %}
+    {{ parent() }}
+    <meta property="og:title" content="#MAVOIX - {{ sup(group.circonscription.number,'f',true) }} circonscription / {{  group.departement.name}}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}"/>
+    <meta property="og:image" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png"/>
+    <meta property="og:description"  content="Soutenez #MAVOIX aux élections législatives."/>
+    <meta name="description"  content=""/>
+    <!-- TWITTER --->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@MAVOIX2017">
+    <meta name="twitter:creator" content="@MAVOIX2017">
+    <meta name="twitter:title" content="#MAVOIX - {{ sup(group.circonscription.number,'f',true) }} circonscription / {{ group.departement.name}}">
+    <meta name="twitter:description" content="Soutenez #MAVOIX aux élections législatives.">
+    <meta name="twitter:image" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png">
+{% endblock %}
+
 {% block body %}
 <div class="wrapper-page">
     <div class="container">
