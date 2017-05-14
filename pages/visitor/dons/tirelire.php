@@ -2,8 +2,27 @@
 
 //url http://XXXXXX/pic/dons/[ID]/tirelire.png
 
+$imgPath="css/images/progressbar/";
+
+if ($_GET["page"]=='tirelire_s') {
+  $pledgeImgFile="pledge_s.png";
+  $incomeImgFile="income_s.png";
+  $backgroundImgFile="background_s.png";
+  $marginTopForTextIncome=115;
+  $marginTopForTextPledge=247;
+
+} else {
+  $pledgeImgFile="pledge.png";
+  $incomeImgFile="income.png";
+  $backgroundImgFile="background.png";
+  $marginTopForTextIncome=590;
+  $marginTopForTextPledge=722;
+}
+
+
+
 //recupere l'image de fond
-$img=new \claviska\SimpleImage("css/images/progressbar/background.png");
+$img=new \claviska\SimpleImage($imgPath . $backgroundImgFile);
 
 //dimension de l'image de départ
 $width=$img->getWidth();
@@ -19,13 +38,12 @@ if(isset($_GET["id"])){
         //reglage de l'image
         $marginLeft=90;
         $marginRight=90;
-        $marginTopForTextIncome=590;
-        $marginTopForTextPledge=722;
+
 
         $widthBar=$width-$marginLeft-$marginRight;
 
-        $overlayIncome=new \claviska\SimpleImage("css/images/progressbar/income.png");
-        $overlayPledge=new \claviska\SimpleImage("css/images/progressbar/pledge.png");
+        $overlayIncome=new \claviska\SimpleImage($imgPath . $incomeImgFile);
+        $overlayPledge=new \claviska\SimpleImage($imgPath . $pledgeImgFile);
 
         //calcul des pourcentages
         $amountPledge=$group->getAmount_plegde();
