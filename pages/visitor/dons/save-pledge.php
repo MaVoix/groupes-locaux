@@ -73,7 +73,7 @@ if($nError==0){
     $nAmount= floatval(str_replace(array(" ",","),array("","."),$_POST["amount"]));
     $nAmountMax=$group->getAmount_target()-$group->getAmount_plegde()-$group->getAmount_income();
     if( $nAmount>$nAmountMax){
-        $aResponse["message"]["text"] = "Le montant dépasse l'objectif ( ".number_format($nAmountMax, 2, ',', ' ')." € max.)";
+        $aResponse["message"]["text"] = "Le montant dépasse l'objectif ( ".number_format($nAmountMax, 2, ',', ' ')." € max.) \nMerci de faire un plus petit don, mais ensuite vous pourrez faire un don pour une autre circonscription ;-)";
         array_push($aResponse["required"], array("field" => "amount"));
         $nError++;
     }
