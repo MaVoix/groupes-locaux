@@ -200,6 +200,47 @@ class UserListe extends Liste
         return $this;
     }
 
+    public function applyRules4Key($key)
+    {
+        $this->setAllFields();
+        $this->notDeleted();
+
+        $this->addCriteres([
+            [
+                "field" => "key_edit",
+                "compare" => "=",
+                "value" => vars::secureInjection($key)
+            ]
+        ]);
+
+
+        $this->addCriteres([
+            [
+                "field" => "key_edit_limit",
+                "compare" => ">=",
+                "value" => date("Y-m-d H:i:s")
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "type",
+                "compare" => "=",
+                "value" => "mandataire"
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "enable",
+                "compare" => "=",
+                "value" => "1"
+            ]
+        ]);
+
+        return $this;
+    }
+
 
 
 }

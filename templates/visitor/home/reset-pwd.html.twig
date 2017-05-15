@@ -1,0 +1,48 @@
+{% extends "visitor/base.html.twig" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="wrapper-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+
+                    {%  if error==0 %}
+                    <form action="/home/pass-new.json"  method="post" autocomplete="off" data-ajax="true">
+                        <h1>Nouveau mot de passe</h1>
+                        <hr>
+                        <p>Saisissez ici votre nouveau mot de passe.</p>
+
+                        <div class="form-group">
+                            <label for="pass" class="control-label">Mot de passe : *</label>
+                            <input  title="Mot de passe" type="password" class="form-control" id="pass" name="pass"
+                                    value=""
+                                    placeholder=" ">
+                        </div>
+                        <div class="form-group">
+                            <label for="pass_confirm" class="control-label">Confirmation du mot de passe : *</label>
+                            <input  title="Confirmation du mot de passe" type="password" class="form-control" id="pass_confirm" name="pass_confirm"
+                                    value=""
+                                    placeholder=" ">
+                            <p class="help-block">Votre mot de passe doit contenir des lettres et des chiffres (6 caractères minimum). Conservez-le précieusement, il vous servira à vous connecter à la page de votre collectif.</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary pull-right">Valider</button>
+                    </form>
+                    {%  else %}
+                        <h1>Nouveau mot de passe</h1>
+                        <hr>
+                        <p>Désolé ! Votre lien de récupération ne fonctionne plus. Veuillez essayer à nouveau en <a href="/home/pass-oublie.html">cliquant ici</a>
+
+                        </p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
