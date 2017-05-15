@@ -1,5 +1,28 @@
 {% extends "visitor/base.html.twig" %}
 
+{% block meta %}
+    {{ parent() }}
+    <meta property="og:title" content="#MAVOIX - {{ sup(group.circonscription.number,'f',true) }} circonscription / {{  group.departement.name}}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ ConfigService.get("urlSite") }}/groupe/page.html?id={{ group.id }}"/>
+
+    <meta property="og:image" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png"/>
+    <meta property="og:image:secure_url" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="1200" />
+
+    <meta property="og:description"  content="Soutenez #MAVOIX aux élections législatives."/>
+    <meta name="description"  content=""/>
+    <!-- TWITTER --->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@MAVOIX2017">
+    <meta name="twitter:creator" content="@MAVOIX2017">
+    <meta name="twitter:title" content="#MAVOIX - {{ sup(group.circonscription.number,'f',true) }} circonscription / {{ group.departement.name}}">
+    <meta name="twitter:description" content="Soutenez #MAVOIX aux élections législatives.">
+    <meta name="twitter:image" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png">
+{% endblock %}
+
 {% block body %}
 <div class="wrapper-page">
     <div class="container">
@@ -11,23 +34,22 @@
             </div>
             <div class="row">
               <div class="col-xs-12 col-md-12 col-lg-12">
-              <iframe width="100%" height="450px" frameBorder="0" src="{{ group.map_url  }}?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=false&onLoadPanel=undefined&captionBar=false"></iframe>
+              <iframe width="100%" height="450px" frameBorder="0" src="{{ group.map_url }}?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=false&onLoadPanel=undefined&captionBar=false"></iframe>
               <p>
                 <a href="{{ group.map_url  }}">Voir en plein écran</a> -- Si vous habitez dans la zone jaune, vous pourrez voter pour un·e candidat·e #MAVOIX aux élections législatives du 11 juin.
               </p>
             </div>
           </div>
             <div class="row m-t-x3">
-                <div class="col-xs-6 col-md-6 col-lg-6">
+                <div class="col-xs-5 col-md-5 col-lg-5">
                     <div style="background-image:url('/{{ group.path_pic_fit }}');"
                          class="square-pic-group"></div>
+
                 </div>
-                <div class="col-xs-6 col-md-6 col-lg-6">
+                <div class="col-xs-7 col-md-7 col-lg-7">
 
-                                  <h2>Contacter le groupe local<h2>
+                                  <h3>Contacter le groupe local<h3>
                                     <ul>
-
-
                                   {% if group.email != ''%}
                                     <li><a href="mailto:{{  group.email }}">{{ group.email }}</a></li>
                                   {% endif %}
@@ -41,6 +63,36 @@
                                     <li><a href="{{  group.twitter }}">Compte Twitter</a></li>
                                   {% endif %}
                                 </ul>
+
+                                 <img src="{{ ConfigService.get("urlSiteDons") }}/smallpic/dons/{{ group.id }}/tirelire.png" alt="Progression des dons" style="width:100%"/>
+
+                                <p><strong><a href="{{ ConfigService.get("urlSiteDons") }}/dons/accueil.html#col{{ group.id }}">Faire un don</a></strong></p>
+
+
+
+
+                                <h3 id="budget">Budget de campagne</h3>
+
+                                <table class="table">
+                                  <tr><td>Impression des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
+                                  {% if group.departement.code == '99' %}
+                                  <tr><td>Impression des bulletins de vote </td><td>{{ ballotsEtrCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Campagne de mails à destination des Français de l'étranger </td><td>{{ remainingEtrCost  }}&nbsp;euros</td><tr>
+                                  <tr><td>Expertise comptable du compte de campagne </td><td>{{ accountantEtrCost }}&nbsp;euros</td><tr>
+                                  {% else %}
+                                  <tr><td>Impression des bulletins de vote </td><td>{{ ballotsCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Livraison des impressions </td><td>{{ remainingCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Expertise comptable du compte de campagne </td><td>{{ accountantCost }}&nbsp;euros</td><tr>
+                                  {% endif %}
+                                  <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ postalCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Frais bancaires </td><td>{{ bankingCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Autres dépenses </td><td>{{ smallExpensesCost }}&nbsp;euros</td><tr>
+                                </table>
+
+                                <p>Total : <strong><span style="font-size:1.2em">{{ group.amount_target }} euros</span></strong></p>
+
+
+
                 </div>
 
             </div>

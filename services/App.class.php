@@ -16,6 +16,8 @@ class App
         $twig = self::getTwig($oNavigate);
         $twig->addGlobal("oMe", $oMe );
         $twig->addGlobal("oNavigate", $oNavigate);
+        $twig->addGlobal("navigation",ConfigService::get("navigation"));
+
 
 
         if(file_exists( self::TWIG_TEMPLATE_DIR."/".$oNavigate->getTemplate()))

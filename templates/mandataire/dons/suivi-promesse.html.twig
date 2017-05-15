@@ -1,0 +1,71 @@
+{% extends "mandataire/base-dons.html.twig" %}
+
+
+{% block body %}
+    <div class="wrapper-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                    <div class="text-center">
+                    <h1>Bienvenue sur l'espace de gestion des promesses de don</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 ">
+                    <hr/>
+                    <h2>Promesses (en cours)</h2>
+                    <table style="width:100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th>Référence</th>
+                            <th>Date</th>
+                            <th>Auteur</th>
+                            <th class="text-right">Montant</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        {%  set total=0 %}
+                        {%  for pledge in pledges %}
+                            {%  set total=total+pledge.amount %}
+                        <tr>
+                            <td>{{ pledge.reference }}</td>
+                            <td>{{ pledge.date|date("d/m") }} à {{ pledge.date|date("H:i") }} </td>
+                            <td><div class="p-t p-b">
+                                <div>{{ pledge.civility }} {{ pledge.name|ucwords }} {{ pledge.firstname|ucwords }}</div>
+                                <div>{{ pledge.zipcode }} - tel : {{ pledge.tel }}</div>
+                                </div>
+                            </td>
+                            <td class="text-right">{{ pledge.amount|number_format(2, ',', ' ') }} €</td>
+                            <td>&nbsp;</td>
+                            <td class="text-right">
+                                <a class="btn btn-primary" href="/transactions/formulaire.html?from_pledge={{ pledge.id }}" >
+                                    Valider (reçu)</a>
+                                <button  class="btn btn-primary click-send-ajax-confirm"
+                                                  data-modal-title="Confirmation"
+                                                  data-modal-body="Êtes-vous sûr de vouloir supprimer cette promesse ?"
+                                                  data-modal-confirm="Supprimer"
+                                                  data-modal-cancel="Annuler"
+                                                  data-url="/dons/delete.json"
+                                                  data-param='{"id":"{{ pledge.id }}"}' >
+                                <i class="fa fa-trash text-danger"></i></button>
+                            </td>
+                        </tr>
+                            <tr><td colspan="6"><hr /></td></tr>
+                        {%  endfor %}
+                        <tr>
+                            <td><h2>TOTAL :</h2></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td class="text-right"><h2>{{ total|number_format(2, ',', ' ') }} €</h2></td>
+                            <td>&nbsp;</td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

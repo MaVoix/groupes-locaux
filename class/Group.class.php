@@ -20,18 +20,21 @@ class Group	{
     private $sPath_pic;
     private $sBank_name;
     private $sBank_city;
+    private $sIban;
+    private $sBic;
     private $sEmail;
     private $sFacebook_page;
     private $sFacebook_group;
     private $sTwitter;
-    private $sMap_url;
     private $sComment;
     private $sPresentation;
+    private $sMap_url;
     private $nAmount_promises;
     private $nAmount_donations;
     private $nPosters;
     private $nBallots;
     private $nProfessions_de_foi;
+    private $nAmount_target;
     private $sKey_edit;
 
 
@@ -206,6 +209,16 @@ class Group	{
             $aData["bank_city"]=$this->getBank_city();
         }
 
+        if(isset($this->aDataSet["iban"]))
+        {
+            $aData["iban"]=$this->getIban();
+        }
+
+        if(isset($this->aDataSet["bic"]))
+        {
+            $aData["bic"]=$this->getBic();
+        }
+
         if(isset($this->aDataSet["email"]))
         {
             $aData["email"]=$this->getEmail();
@@ -227,9 +240,9 @@ class Group	{
         }
 
         if(isset($this->aDataSet["map_url"]))
-        {
-            $aData["map_url"]=$this->getMap_url();
-        }
+              {
+                  $aData["map_url"]=$this->getMap_url();
+              }
 
         if(isset($this->aDataSet["comment"]))
         {
@@ -266,6 +279,11 @@ class Group	{
             $aData["professions_de_foi"]=$this->getProfessions_de_foi();
         }
 
+        if(isset($this->aDataSet["amount_target"]))
+        {
+            $aData["amount_target"]=$this->getAmount_target();
+        }
+
         if(isset($this->aDataSet["key_edit"]))
         {
             $aData["key_edit"]=$this->getKey_edit();
@@ -299,6 +317,8 @@ class Group	{
         $this->setPath_pic(NULL);
         $this->setBank_name(NULL);
         $this->setBank_city(NULL);
+        $this->setIban(NULL);
+        $this->setBic(NULL);
         $this->setEmail(NULL);
         $this->setFacebook_page(NULL);
         $this->setFacebook_group(NULL);
@@ -311,6 +331,7 @@ class Group	{
         $this->setPosters(NULL);
         $this->setBallots(NULL);
         $this->setProfessions_de_foi(NULL);
+        $this->setAmount_target(NULL);
         $this->setKey_edit(NULL);
     }
 
@@ -331,6 +352,7 @@ class Group	{
             "path_pic" => $this->getPath_pic(),
             "bank_name" => $this->getBank_name(),
             "bank_city" => $this->getBank_city(),
+            "iban" => $this->getIban(),
             "email" => $this->getEmail(),
             "facebook_page" => $this->getFacebook_page(),
             "facebook_group" => $this->getFacebook_group(),
@@ -343,6 +365,7 @@ class Group	{
             "posters" => $this->getPosters(),
             "ballots" => $this->getBallots(),
             "professions_de_foi" => $this->getProfessions_de_foi(),
+            "amount_target" => $this->getAmount_target(),
             "key_edit" => $this->getKey_edit()
         ];
 
@@ -870,6 +893,92 @@ class Group	{
 
 
     /**
+     * Set le champ iban
+     * @param string $sIban nouvelle valeur pour le champ iban
+     */
+    public function setIban($sIban)
+    {
+        if( is_null($sIban) ) $sIban='';
+        $this->sIban = $sIban;
+        $this->aDataSet["iban"]=1;
+    }
+
+
+
+    /**
+     * Get le champ iban
+     * @return string valeur du champ iban
+     */
+    public function getIban()
+    {
+        if( !is_null($this->sIban) )
+        {
+            if( $this->sIban==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sIban;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('iban'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sIban;
+        }
+    }
+
+    /**
+     * Set le champ bic
+     * @param string $sBic nouvelle valeur pour le champ bic
+     */
+    public function setBic($sBic)
+    {
+        if( is_null($sBic) ) $sBic='';
+        $this->sBic = $sBic;
+        $this->aDataSet["bic"]=1;
+    }
+
+
+
+    /**
+     * Get le champ iban
+     * @return string valeur du champ iban
+     */
+    public function getBic()
+    {
+        if( !is_null($this->sBic) )
+        {
+            if( $this->sBic==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sBic;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('bic'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sBic;
+        }
+    }
+
+
+
+    /**
      * Set le champ email
      * @param string $sEmail nouvelle valeur pour le champ email
      */
@@ -1042,49 +1151,47 @@ class Group	{
             return $this->sTwitter;
         }
     }
-
     /**
-     * Set le champ map_url
-     * @param string $sMap_url nouvelle valeur pour le champ map_url
-     */
-    public function setMap_url($sMap_url)
-    {
-        if( is_null($sMap_url) ) $sMap_url='';
-        $this->sMap_url = $sMap_url;
-        $this->aDataSet["map_url"]=1;
-    }
-
-
-
-    /**
-     * Get le champ twitter
-     * @return string valeur du champ twitter
-     */
-    public function getMap_url()
-    {
-        if( !is_null($this->sMap_url) )
+         * Set le champ map_url
+         * @param string $sMap_url nouvelle valeur pour le champ map_url
+         */
+        public function setMap_url($sMap_url)
         {
-            if( $this->sMap_url==='' )
+            if( is_null($sMap_url) ) $sMap_url='';
+            $this->sMap_url = $sMap_url;
+            $this->aDataSet["map_url"]=1;
+        }
+
+
+
+        /**
+         * Get le champ map_url
+         * @return string valeur du champ map_url
+         */
+        public function getMap_url()
+        {
+            if( !is_null($this->sMap_url) )
             {
-                return NULL;
+                if( $this->sMap_url==='' )
+                {
+                    return NULL;
+                }
+                else
+                {
+                    return $this->sMap_url;
+                }
             }
             else
             {
+                $this->hydrateFromBDD(array('map_url'));
+                $this->callHydrateFromBDDOnGet++;
+                if($this->callHydrateFromBDDOnGet>10)
+                {
+                    echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+                }
                 return $this->sMap_url;
             }
         }
-        else
-        {
-            $this->hydrateFromBDD(array('map_url'));
-            $this->callHydrateFromBDDOnGet++;
-            if($this->callHydrateFromBDDOnGet>10)
-            {
-                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
-            }
-            return $this->sMap_url;
-        }
-    }
-
 
 
     /**
@@ -1411,6 +1518,53 @@ class Group	{
 
 
     /**
+     * Set le champ amount_target
+     * @param number $nAmount_target nouvelle valeur pour le champ amount_target
+     */
+    public function setAmount_target($nAmount_target)
+    {
+        if( is_null($nAmount_target) ) $nAmount_target='';
+        if( is_numeric($nAmount_target)  || $nAmount_target=='' )
+        {
+            $this->nAmount_target = $nAmount_target;
+            $this->aDataSet["amount_target"]=1;
+        }
+    }
+
+
+
+    /**
+     * Get le champ amount_target
+     * @return number valeur du champ amount_target
+     */
+    public function getAmount_target()
+    {
+        if( !is_null($this->nAmount_target) )
+        {
+            if( $this->nAmount_target==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->nAmount_target;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('amount_target'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->nAmount_target;
+        }
+    }
+
+
+
+    /**
      * Set le champ key_edit
      * @param string $sKey_edit nouvelle valeur pour le champ key_edit
      */
@@ -1471,6 +1625,19 @@ class Group	{
         return  $user;
     }
 
+    public function getCandidat(){
+        $oListeUser= new UserListe();
+        $oListeUser->applyRules4Group($this->getId(),"candidat");
+        $aUsers=$oListeUser->getPage();
+        if(count($aUsers)){
+            $user=new User(array("id"=>$aUsers[0]["id"]));
+            $user->hydrate($aUsers[0]);
+        }else{
+            $user=new User();
+        }
+        return  $user;
+    }
+
     public function getListeMember(){
         $oListeUser= new UserListe();
         $oListeUser->applyRules4Group($this->getId(),"membre");
@@ -1487,15 +1654,37 @@ class Group	{
 
     }
 
+    public function getAmount_plegde(){
+        $amount=0;
+        $pledgeListe= new PledgeListe();
+        //todo : sum avec jointure pour améliorer performance
+        $pledgeListe->applyRules4GroupCurrent($this->getId());
+        $pledges=$pledgeListe->getPage();
+        foreach($pledges as $pledge){
+            $amount+=doubleval($pledge["amount"]);
+        }
+        return $amount;
+    }
+    public function getAmount_income(){
+        $amount=0;
+        $transactionListe= new TransactionListe();
+        //todo : sum avec jointure pour améliorer performance
+        $transactionListe->applyRules4Group($this->getId());
+        $transactions=$transactionListe->getPage();
+        foreach($transactions as $transaction){
+            $amount+=doubleval($transaction["income"]);
+        }
+        return $amount;
+
+    }
+
     /* Lien TWIG vers les accesseurs */
     public function getDepartement(){
         return $this->Departement();
     }
-
     public function getCirconscription(){
         return $this->Circonscription();
     }
-
 
     /*
     ********************************************************************************************

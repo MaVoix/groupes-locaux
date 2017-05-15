@@ -225,11 +225,6 @@ h2, h3 {
     margin-bottom: 15px;
 }
 
-
-
-
-
-
 .square-pic-group{
     width:100%;
     margin:auto;
@@ -254,4 +249,61 @@ h2, h3 {
     position:absolute;
     padding:20px 40px 10px 10px;
     width:100%;
+}
+
+.progress-bar > span {
+  font-size: 18px;
+  font-weight: bold;
+
+}
+
+.progress.mavoix{
+    height:40px;
+}
+.progress.mavoix >div{
+    height:40px;
+    line-height:40px;
+}
+
+.badge, .label {
+  font-size:16px;
+  padding-top: 6px;
+}
+
+.progress-bar-key > p:first-child span {
+  color:#000000;
+  background-color: #f2e732;
+}
+
+.progress-bar-key > p:last-child span {
+  color:#ffffff;
+  background-color: #000000;
+}
+
+.progress.mavoix > div:first-child {
+    border-bottom-right-radius: 0;
+    background-color:#f2e732;
+    border-top-right-radius: 0;
+    color:#000000;
+
+}
+.progress.mavoix >div:last-child {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    background-color:#000000;
+    color:#ffffff;
+}
+/* pour garder un contenu lisible */
+.progress.mavoix >div{
+    min-width:5%;
+}
+@media screen and (max-width: 1200px){
+    .progress.mavoix >div{
+        min-width:9%;
+    }
+}
+@media screen and (max-width: 400px){
+    .progress.mavoix >div{
+        min-width:12%;
+    }
 }

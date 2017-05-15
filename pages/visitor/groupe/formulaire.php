@@ -61,7 +61,10 @@ if( (isset($_GET["key"]) && isset($_GET["id"])) || $bOpenFromMandataire ){
             if($aUser["type"]=="membre"){
                 $n++;
                 $sKey="membre".$n;
-            }else{
+            }elseif($aUser["type"]=="candidat"){
+                $sKey="candidat";
+            }
+            else{
                 $sKey="mandataire";
             }
             $aDataScript["user"][$sKey]=$aUser;

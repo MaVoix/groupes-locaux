@@ -27,11 +27,14 @@ class GroupListe extends Liste
         "twitter",
         "comment",
         "presentation",
+        "iban",
+        "bic",
         "amount_promises",
         "amount_donations",
         "posters",
         "ballots",
         "professions_de_foi",
+        "amount_target",
         "key_edit"
     );
 

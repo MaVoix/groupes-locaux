@@ -8,6 +8,7 @@ $_CONFIG["twig_auto_reload"]                = true; //set true to disable cache 
 $_CONFIG["js_auto_reload"]                  = true; //set true to disable cache js
 $_CONFIG["css_auto_reload"]                 = true; //set true to disable cache css
 $_CONFIG["urlSite"]                         = "http://groupeslocaux";
+$_CONFIG["urlSiteDons"]                     = "http://tirelire";
 $_CONFIG["key"]                             = "changeit"; //string for generate key links
 
 // mysql
@@ -31,8 +32,15 @@ $_CONFIG["mail-smtp-pass"]			        =""; //server smtp pass
 //main
 $_CONFIG["idSite"]                          = "collectedon"; //for unique session var prefix
 $_CONFIG["types"]			                = "visitor|donor>visitor|mandataire>donor>visitor|admin>mandataire>donor>visitor";
-$_CONFIG["area-default"]                    = array("visitor"=>"groupe","mandataire"=>"groupe","admin"=>"groupe");
-$_CONFIG["page-default"]                    = array("visitor"=>"formulaire","mandataire"=>"accueil","admin"=>"liste");
+if(strstr($_SERVER["HTTP_HOST"],"collectifs")){
+    $_CONFIG["navigation"]                      ="groupes";
+    $_CONFIG["area-default"]                    = array("visitor"=>"groupe","mandataire"=>"groupe","admin"=>"groupe");
+    $_CONFIG["page-default"]                    = array("visitor"=>"groupes","mandataire"=>"suivi-promesse","admin"=>"liste");
+  }else{
+      $_CONFIG["navigation"]                      ="dons";
+      $_CONFIG["area-default"]                    = array("visitor"=>"dons","mandataire"=>"dons","admin"=>"groupe");
+      $_CONFIG["page-default"]                    = array("visitor"=>"accueil","mandataire"=>"suivi-promesse","admin"=>"liste");
+  }
 $_CONFIG["format-default"]                  = "html";
 $_CONFIG["max-filesize"]                    = 8; // in Mb
 $_CONFIG["max-width"]                       = 4000; // in PX
