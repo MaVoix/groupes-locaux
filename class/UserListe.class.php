@@ -160,6 +160,46 @@ class UserListe extends Liste
         return $this;
     }
 
+    public function applyRules4Password($email)
+    {
+        $this->setAllFields();
+        $this->notDeleted();
+
+        $this->addCriteres([
+            [
+                "field" => "email",
+                "compare" => "=",
+                "value" => vars::secureInjection($email)
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "pass",
+                "compare" => "!=",
+                "value" => ""
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "enable",
+                "compare" => "=",
+                "value" => "1"
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "type",
+                "compare" => "=",
+                "value" => "mandataire"
+            ]
+        ]);
+
+        return $this;
+    }
+
 
 
 }
