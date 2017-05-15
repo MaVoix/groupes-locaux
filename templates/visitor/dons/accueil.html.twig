@@ -17,7 +17,7 @@
                             <div class="panel-heading p-b ">
                                 <h3 id="col{{group.id}}" class="no-margin" >{{group.departement.code}} - {{ group.departement.name}}<span class="btn btn-default pull-right">Objectif : <span class="badge">{{  group.amount_target|number_format(0, ',', ' ') }} €</span></span></h3>
                                 <div>{{ sup(group.circonscription.number,'f',false) }} circonscription</div>
-                                <a href="{{ ConfigService.get("urlSite") }}/groupe/page.html?id={{ group.id }}" target="_blank">Où est-ce ? Comment les contacter ?</a>
+                                <a href="{{ ConfigService.get("urlSite") }}/groupe/page.html?id={{ group.id }}" target="_blank">Où sont-ils ? Comment les contacter ?</a>
                             </div>
                             <div class="panel-body">
 
@@ -49,7 +49,7 @@
                                               {%  if  group.income_amount+group.pledge_amount >= group.amount_target %}
                                                   <button type="button" class="btn btn-lg btn-primary" disabled >Objectif atteint !</button>
                                               {%  else  %}
-                                                  <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je veux faire un don à ce groupe !</a>
+                                                  <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je co-finance cette campagne !</a>
                                               {%  endif  %}
                                           </div>
                                     </div>
