@@ -61,7 +61,19 @@ if ($nError == 0) {
     }
 }
 if($nError==0) {
-
+    $user= new User(array("id"=> SessionService::get("last-user-pass-id")));
+    $user->hydrateFromBDD(array("*"));
+    if(strtotime($user->getKey_edit_limit())>strtotime("now")){
+        $sPassword = User::encodePassword($_POST["pass"]);
+        $user->setPass($sPassword);
+        $user->save();
+        $aResponse["message"]["type"] = "success";
+        $aResponse["message"]["text"] = "Mot de passe enregistré !";
+        $aResponse["redirect"] = "/home/connexion.html";
+    }else{
+        $aResponse["message"]["text"] = "La clé utilisée n'est plus valide !";
+        $aResponse["redirect"] = "/home/reset-pwd.html?k=00";
+    }
     
 
 }
