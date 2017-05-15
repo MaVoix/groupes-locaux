@@ -27,7 +27,9 @@ class UserListe extends Liste
         "city",
         "zipcode",
         "country",
-        "tel"
+        "tel",
+        "key_edit",
+        "key_edit_limit"
     );
 
     /**

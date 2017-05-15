@@ -28,6 +28,8 @@ class User	{
     private $sZipcode;
     private $sCountry;
     private $sTel;
+    private $sKey_edit;
+    private $sKey_edit_limit;
 
 
     /**
@@ -241,6 +243,16 @@ class User	{
             $aData["tel"]=$this->getTel();
         }
 
+        if(isset($this->aDataSet["key_edit"]))
+        {
+            $aData["key_edit"]=$this->getKey_edit();
+        }
+
+        if(isset($this->aDataSet["key_edit_limit"]))
+        {
+            $aData["key_edit_limit"]=$this->getKey_edit_limit();
+        }
+
         if($this->getId()>0)
         {
             DbLink::getInstance($this->_sDbInstance)->update("user",$aData,' id="'.$this->getId().'" ');
@@ -277,6 +289,8 @@ class User	{
         $this->setZipcode(NULL);
         $this->setCountry(NULL);
         $this->setTel(NULL);
+        $this->setKey_edit(NULL);
+        $this->setKey_edit_limit(NULL);
     }
 
     /**
@@ -303,7 +317,9 @@ class User	{
             "city" => $this->getCity(),
             "zipcode" => $this->getZipcode(),
             "country" => $this->getCountry(),
-            "tel" => $this->getTel()
+            "tel" => $this->getTel(),
+            "key_edit" => $this->getKey_edit(),
+            "key_edit_limit" => $this->getKey_edit_limit()
         ];
 
         return json_encode($aObjet);
@@ -1168,6 +1184,95 @@ class User	{
             return $this->sTel;
         }
     }
+
+
+
+    /**
+     * Set le champ key_edit
+     * @param string $sKey_edit nouvelle valeur pour le champ key_edit
+     */
+    public function setKey_edit($sKey_edit)
+    {
+        if( is_null($sKey_edit) ) $sKey_edit='';
+        $this->sKey_edit = $sKey_edit;
+        $this->aDataSet["key_edit"]=1;
+    }
+
+
+
+    /**
+     * Get le champ key_edit
+     * @return string valeur du champ key_edit
+     */
+    public function getKey_edit()
+    {
+        if( !is_null($this->sKey_edit) )
+        {
+            if( $this->sKey_edit==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sKey_edit;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('key_edit'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sKey_edit;
+        }
+    }
+
+
+
+    /**
+     * Set le champ key_edit_limit
+     * @param string $sKey_edit_limit nouvelle valeur pour le champ key_edit_limit
+     */
+    public function setKey_edit_limit($sKey_edit_limit)
+    {
+        if( is_null($sKey_edit_limit) ) $sKey_edit_limit='';
+        $this->sKey_edit_limit = $sKey_edit_limit;
+        $this->aDataSet["key_edit_limit"]=1;
+    }
+
+
+
+    /**
+     * Get le champ key_edit_limit
+     * @return string valeur du champ key_edit_limit
+     */
+    public function getKey_edit_limit()
+    {
+        if( !is_null($this->sKey_edit_limit) )
+        {
+            if( $this->sKey_edit_limit==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sKey_edit_limit;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('key_edit_limit'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sKey_edit_limit;
+        }
+    }
+
 
     /*
     ********************************************************************************************
