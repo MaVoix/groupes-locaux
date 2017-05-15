@@ -1,0 +1,37 @@
+Merci beaucoup !
+
+Nous avons bien reçu votre promesse de don pour le collectif {{group.departement.code}} - {{ group.departement.name}} {{ sup(group.circonscription.number,'f',false) }} circonscription.
+
+La référence de votre don :
+
+{{  pledge.reference }}
+
+Vous pouvez envoyer votre don de deux manières :
+
+Par chèque :
+
+Le chèque est à faire à l'ordre de
+{{group.mandataire.firstname|ucwords}} {{group.mandataire.name}} mandataire de {{group.candidat.firstname|ucwords}} {{ group.candidat.name }}
+
+De façon à ce que nous puissions faire le lien entre votre promesse et votre don, merci d'indiquer la référence de votre promesse au dos du chèque : {{ pledge.reference }}>
+
+Puis envoyez ce chèque par courrier au mandataire financier, à l'adresse suivante :
+
+
+  {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name }}
+  {{ group.mandataire.ad1}}
+  {% if group.mandataire.ad2 != ''%}{{group.mandataire.ad2}}{% endif %}
+  {% if group.mandataire.ad3 != ''%}{{group.mandataire.ad3}}{% endif %}
+  {{ group.mandataire.zipcode }} {{ group.mandataire.city }}
+
+
+Par virement bancaire
+
+{% if group.iban!="" %}
+Nom du destinataire : {{group.mandataire.firstname|ucwords}} {{group.mandataire.name|upper}} mandataire de {{group.candidat.firstname|ucwords}} {{ group.candidat.name|upper }}
+Numéro IBAN : {{ group.iban }}
+Code BIC/SWIFT : {{ group.bic }}
+Référence à indiquer : {{ pledge.reference }}
+{% else %}
+Ce collectif local n'a pas encore renseigné ses coordonnées bancaires, merci de réessayer plus tard ou d'envoyer un chèque.
+{% endif %}

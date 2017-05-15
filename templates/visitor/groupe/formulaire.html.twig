@@ -5,7 +5,12 @@
     <meta property="og:title" content="#MAVOIX - Formulaire d'engagement"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="{{ urlPage }}"/>
-    <meta property="og:image" content="{{ urlSite }}/css/images/image-panneaux.png"/>
+    <meta property="og:image" content="{{ urlSiteDons }}/css/images/image-panneaux.png"/>
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="1200" />
+
+
     <meta property="og:description"  content="Affirmez votre engagement de porter une candidature #MAVOIX aux élections législatives."/>
     <meta name="description"  content=""/>
     <!-- TWITTER --->
@@ -14,7 +19,7 @@
     <meta name="twitter:creator" content="@MAVOIX2017">
     <meta name="twitter:title" content="#MAVOIX - Formulaire d'engagement">
     <meta name="twitter:description" content="Affirmez votre engagement de porter une candidature #MAVOIX aux élections législatives.">
-    <meta name="twitter:image" content="{{ urlSite }}/css/images/image-panneaux.png">
+    <meta name="twitter:image" content="{{ urlSiteDons }}/css/images/image-panneaux.png">
 {% endblock %}
 
 {% block body %}
@@ -184,11 +189,84 @@
                             <input   title="Ville de la banque du collectif local" type="text" class="form-control" id="bank_city" name="bank_city" value="{{ group.bank_city }}"
                                    placeholder="Ville de votre banque">
                         </div>
+                        <div class="form-group">
+                            <label for="iban" class="control-label">IBAN :</label>
+                            <input   title="IBAN" type="text"  class="form-control text-uppercase publicinfo" id="iban" name="iban" value="{{ group.iban }}"
+                                     placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="bic" class="control-label">Code BIC :</label>
+                            <input   title="code bic" type="text"  class="form-control text-uppercase publicinfo" id="bic" name="bic" value="{{ group.bic }}"
+                                     placeholder="" >
+                        </div>
+
+                        {% if oMe.type=="admin" %}
+                        <div class="form-group">
+                            <label for="amount_target" class="control-label">Objectif de collecte (€) :</label>
+                            <input   title="Objectif de collecte" type="text"  class="form-control publicinfo" id="amount_target" name="amount_target" value="{{ group.amount_target }}"
+                                     placeholder="2500">
+                        </div>
+                        {% endif %}
 
 
                         <hr/>
                         <p>&nbsp;</p>
-                        <h2>Les membres du collectif*</h2>
+                        <h2>Le candidat</h2>
+                        <p>Le nom du candidat est nécessaire afin de donner aux donateurs l'ordre à indiquer sur les chèques.</p>
+                        <div class="panel" style="background-color:#eeeeee;" >
+                            <div class="panel-body">
+                                <input type="hidden" id="user_id[candidat]" name="user_id[candidat]"
+                                       value="{{ user["candidat"].id }}" >
+                                <input type="hidden"  id="user_delete[candidat]" name="user_delete[candidat]"
+                                       value="0" >
+
+                                <div class="row p-b">
+                                    <div class="col-xs-6"><h3 class="no-margin">Coordonnées :</h3></div>
+                                    <div class="col-xs-6 text-right"> &nbsp;</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="user_civility[candidat]" class="control-label">Civilité : </label>
+                                    <select id="user_civility[candidat]" name="user_civility[candidat]" class="form-control publicinfo">
+                                        <option value="">Choisir ...</option>
+                                        <option value="M." {% if user["candidat"].civility=='M.' %} selected {% endif %}>M.</option>
+                                        <option value="Mme" {% if muser["candidat"].civility=='Mme' or user["candidat"].civility=='Mme.' %} selected {% endif %}>Mme</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="user_name[candidat]" class="control-label">Nom de famille : </label>
+                                    <input type="text" class="form-control publicinfo" id="user_name[candidat]" name="user_name[candidat]"
+                                           value="{{ user["candidat"].name|ucwords }}"
+                                           placeholder="Nom de famille">
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="user_firstname[candidat]" class="control-label">Prénom : </label>
+                                    <input type="text" class="form-control publicinfo" id="user_firstname[candidat]" name="user_firstname[candidat]"
+                                           value="{{ user["candidat"].firstname|ucwords }}"
+                                           placeholder="Prénom">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="user_email[candidat]" class="control-label">E-mail : </label>
+                                    <input type="email" class="form-control" id="user_email[candidat]" name="user_email[candidat]"
+                                           value="{{ user["candidat"].email }}"
+                                           placeholder="xxxxxx@xxxxx.com ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_tel_display[candidat]" class="control-label">Téléphone : </label>
+                                    <br /><input id="user_tel_display[candidat]"  value="{{ user["candidat"].tel  }}" type="text" class="form-control telInput" name="user_tel_display[candidat]" >
+                                    <input type="hidden" class="form-control" id="user_tel[candidat]" name="user_tel[candidat]" placeholder="XXXXXXXXX"
+                                           value="{{ user["candidat"].tel  }}" style="position:absolute;top:-10000px;">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <hr/>
+                        <p></p>
+                        <h2>Les membres du groupe*</h2>
                         <p>Tout particulièrement les personnes qui s'engagent à se rendre au tirage au sort du 6 mai, ou à accompagner le candidat dans la circonscription lors de sa venue.</p>
                         <div id="MemberList">
                         {%  for member in user %}

@@ -1,0 +1,85 @@
+{% extends "mandataire/base-dons.html.twig" %}
+
+
+{% block body %}
+    <div class="wrapper-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                    <div class="text-center">
+                    <h1>Bienvenue sur l'espace de gestion des transactions</h1>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xs-6 "><h2>Transaction</h2></div>
+                <div class="col-xs-6 "><a href="/transactions/formulaire.html" class="btn btn-sm btn-success pull-right"><i class="fa fa-plus"></i> Ajouter une transaction</a></div>
+            </div>
+            <div class="row">
+                        <div class="col-xs-12 ">
+                    <table style="width:100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th>Référence</th>
+                            <th>Date</th>
+
+                            <th class="text-right">Credit</th>
+                            <th class="text-right">Débit</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        {%  set solde=0 %}
+                        {%  for transaction in transactions %}
+                            {%  set solde=solde+transaction.amount %}
+                        <tr>
+                            <td>
+                                {% if transaction.pledge_id %}
+                                    Promesse : {{ transaction.reference }}
+                                    <div class="p-t p-b">
+                                        <div><em><b>{{ transaction.pledge.civility }} {{ transaction.pledge.name|ucwords }} {{ transaction.pledge.firstname|ucwords }}</em></b></div>
+                                        <div><em>{{ transaction.pledge.email }} - tél : {{ transaction.pledge.tel }}</em></div>
+                                        <div><em>
+                                                {{ transaction.pledge.ad1 }}
+                                                {%  if transaction.pledge.ad2 %}<br />{{ transaction.pledge.ad2 }}{%  endif %}
+                                                {%  if transaction.pledge.ad3 %}<br />{{ transaction.pledge.ad3 }}{%  endif %}
+                                                <br />    {{ transaction.pledge.zipcode }},     {{ transaction.pledge.city }}
+                                            </em></div>
+                                    </div>
+                                {% else %}
+                                    {{ transaction.reference }}
+                                {% endif %}
+
+                            </td>
+                            <td>{{ transaction.date|date("d/m") }} à {{ transaction.date|date("H:i") }} </td>
+                            <td class="text-right"><span class="{%  if  transaction.income>0 %}text-success{% endif %}">{{ transaction.income|number_format(2, ',', ' ') }} €</span></td>
+                            <td class="text-right"><span class="{%  if  transaction.expense>0 %}text-danger{% endif %}">{%  if  transaction.expense>0 %}-{% endif %}{{ transaction.expense|number_format(2, ',', ' ') }} €</span></td>
+                            <td>&nbsp;</td>
+                            <td class="text-right">
+                                <a href="/transactions/formulaire.html?id={{ transaction.id }}" class="btn btn-primary btn-success">Editer</a>
+                                <button  class="btn btn-primary click-send-ajax-confirm"
+                                         data-modal-title="Confirmation"
+                                         data-modal-body="Êtes-vous sûr de vouloir supprimer cette transaction ?"
+                                         data-modal-confirm="Supprimer"
+                                         data-modal-cancel="Annuler"
+                                         data-url="/transactions/delete.json"
+                                         data-param='{"id":"{{ transaction.id }}"}' ><i class="fa fa-trash text-danger"></i></button>
+                            </td>
+                        </tr>
+                            <tr><td colspan="6"><hr /></td></tr>
+                        {%  endfor %}
+                        <tr>
+                            <td><h2>Solde :</h2></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td class="text-right"><h2>{{ solde|number_format(2, ',', ' ') }} €</h2></td>
+                            <td>&nbsp;</td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
