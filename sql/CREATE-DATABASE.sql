@@ -858,7 +858,9 @@ CREATE TABLE `user` (
   `city` varchar(255) DEFAULT NULL,
   `zipcode` varchar(10) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
-  `tel` varchar(100) DEFAULT NULL
+  `tel` varchar(100) DEFAULT NULL,
+  `key_edit` varchar(255) NOT NULL,
+  `key_edit_limit` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
