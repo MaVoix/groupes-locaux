@@ -39,6 +39,20 @@ if($nError==0) {
         $user->setKey_edit_limit(date("Y-m-d H:i:s",time() + 4*60*60)); //4h
         $user->save();
 
+        //envoi du mail
+        $TwigEngine = App::getTwig();
+        $sBodyMailHTML = $TwigEngine->render("visitor/mail/reset-pass-body.html.twig", [
+            "user" =>  $user,
+            "lien" =>  ConfigService::get("urlSite")."/home/reset-pwd.html?k=".$sKey
+
+        ]);
+        $sBodyMailTXT = $TwigEngine->render("visitor/mail/reset-pass-body.txt.twig", [
+            "user" =>  $user,
+            "lien" =>  ConfigService::get("urlSite")."/home/reset-pwd.html?k=".$sKey
+        ]);
+
+        Mail::sendMail( $user->getEmail(), "Récupération de mot de passe", $sBodyMailHTML, $sBodyMailTXT, true);
+
 
         $aResponse["redirect"] = "/home/connexion.html";
 
