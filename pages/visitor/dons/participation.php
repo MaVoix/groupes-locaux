@@ -22,7 +22,7 @@ if (!$bFoundGroup) {
     $aDataScript["smallExpensesCost"] = 100;
     $aDataScript["accountantCost"] = 150;
     $aDataScript["bankingCost"] = 150;
-    $aDataScript["accountantEtrCost"] = 115;
+    $aDataScript["bankingEtrCost"] = 115;
     $aDataScript["postalCost"] = 60;
     $aDataScript["remainingCost"] =
     $Group->getAmount_target()
@@ -35,9 +35,9 @@ if (!$bFoundGroup) {
     - $aDataScript["ballotsCost"];
     $aDataScript["remainingEtrCost"] =
     $Group->getAmount_target()
-    - $aDataScript["bankingCost"]
+    - $aDataScript["bankingEtrCost"]
     - $aDataScript["postalCost"]
-    - $aDataScript["accountantEtrCost"]
+    - $aDataScript["accountantCost"]
     - $aDataScript["smallExpensesCost"]
     - $aDataScript["postersCost"]
     - $aDataScript["ballotsEtrCost"];
