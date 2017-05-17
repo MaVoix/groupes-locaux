@@ -9,6 +9,12 @@ Version de test : https://collectifs-locaux.maudry.fr
 
 ## Notes de version
 
+### 2.2.0
+
+- Ajout des métadonnées sociales (FB, Twitter)
+- Lien vers le budget de chaque circo via la page d'accueil des dons
+- Correction de l'inversion frais bancaires / frais comptables pour les circos FDE
+
 ### 2.1.0
 
 - Mise à jour du format de l'ordre pour les chèques
