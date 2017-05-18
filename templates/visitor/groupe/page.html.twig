@@ -6,21 +6,21 @@
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="{{ ConfigService.get("urlSite") }}/groupe/page.html?id={{ group.id }}"/>
 
-    <meta property="og:image" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png"/>
-    <meta property="og:image:secure_url" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png" />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image" content="{{ ConfigService.get("urlSiteDons") }}/css/images/banner.jpg"/>
+    <meta property="og:image" content="{{ ConfigService.get("urlSiteDons") }}/css/images/banner.jpg"/>
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="1200" />
 
-    <meta property="og:description"  content="Soutenez #MAVOIX aux élections législatives."/>
-    <meta name="description"  content=""/>
+    <meta property="og:description"  content="Je cofinance les législatives #MAVOIX pour décider directement des lois pendant 5 ans."/>
+    <meta name="description"  content="Je cofinance les législatives #MAVOIX pour décider directement des lois pendant 5 ans"/>
     <!-- TWITTER --->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@MAVOIX2017">
     <meta name="twitter:creator" content="@MAVOIX2017">
     <meta name="twitter:title" content="#MAVOIX - {{ sup(group.circonscription.number,'f',true) }} circonscription / {{ group.departement.name}}">
-    <meta name="twitter:description" content="Soutenez #MAVOIX aux élections législatives.">
-    <meta name="twitter:image" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png">
+    <meta name="twitter:description" content="Je cofinance les législatives #MAVOIX pour décider directement des lois pendant 5 ans.">
+    <meta property="og:image" content="{{ ConfigService.get("urlSiteDons") }}/css/images/banner.jpg"/>
 {% endblock %}
 
 {% block body %}
@@ -74,15 +74,15 @@
                                 <h3 id="budget">Budget de campagne</h3>
 
                                 <table class="table">
-                                  <tr><td>Impression des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Impression et livraison des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
                                   {% if group.departement.code == '99' %}
                                   <tr><td>Impression des bulletins de vote </td><td>{{ ballotsEtrCost }}&nbsp;euros</td><tr>
-                                  <tr><td>Campagne de mails à destination des Français de l'étranger </td><td>{{ remainingEtrCost  }}&nbsp;euros</td><tr>
+                                  <tr><td>Campagne d'emails à destination des Français de l'étranger </td><td>{{ remainingEtrCost  }}&nbsp;euros</td><tr>
                                   <t><td>Frais bancaires</td><td>{{ bankingEtrCost }}&nbsp;euros</td><tr>
                                   {% else %}
                                   <tr><td>Impression des bulletins de vote </td><td>{{ ballotsCost }}&nbsp;euros</td><tr>
                                   <tr><td>Impression des professions de foi </td><td>{{ professions_de_foiCost }}&nbsp;euros</td><tr>
-                                  <tr><td>Livraison des impressions</td><td>{{ remainingCost }}&nbsp;euros</td><tr>
+                                  <tr><td>Livraison des bulletins et professions de foi</td><td>{{ remainingCost }}&nbsp;euros</td><tr>
                                   <tr><td>Frais bancaires </td><td>{{ bankingCost }}&nbsp;euros</td><tr>
                                   {% endif %}
                                   <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ postalCost }}&nbsp;euros</td><tr>

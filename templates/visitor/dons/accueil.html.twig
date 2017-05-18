@@ -30,12 +30,10 @@
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
                     <h1>Les collectifs locaux #MAVOIX sont en campagne !</h1>
-                    <p>Les circonscriptions de France seront affichées un peu plus tard</p>
+                    <p>Les circonscriptions par ordre décroissant de montant restant à collecter pour atteindre l'objectif.</p>
 
 <!-- Dans un premier temps, on n'affiche que les circos des Français de l'étranger, car le scrutin est une semaine plus tôt. -->
                     {% for group in groups %}
-
-                    {% if group.departement.code == '99' %}
 
                         <div class="panel panel-default m-b-x2 text-left">
                             <div class="panel-heading p-b ">
@@ -74,7 +72,7 @@
                                               {%  if  group.income_amount+group.pledge_amount >= group.amount_target %}
                                                   <button type="button" class="btn btn-lg btn-primary" disabled >Objectif atteint !</button>
                                               {%  else  %}
-                                                  <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je co-finance cette campagne !</a>
+                                                  <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je cofinance cette campagne !</a>
                                               {%  endif  %}
                                           </div>
                                     </div>
@@ -90,15 +88,7 @@
 
                                 </div>
                             </div>
-
-
-
-
                         </div>
-
-                        {% endif %}
-
-
                     {% endfor %}
                 </div>
             </div>
