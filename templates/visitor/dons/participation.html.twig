@@ -118,7 +118,7 @@
                     <h2 id="budget">Budget de campagne du collectif {{ group.departement.name}}, {{ sup(group.circonscription.number,'f',false) }} circonscription</h2>
 
                     <table class="table">
-                      <tr><td>Impression des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
+                      <tr><td>Impression et livraison des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
                       {% if group.departement.code == '99' %}
                       <tr><td>Impression des bulletins de vote </td><td>{{ ballotsEtrCost }}&nbsp;euros</td><tr>
                       <tr><td>Campagne de mails à destination des Français de l'étranger </td><td>{{ remainingEtrCost  }}&nbsp;euros</td><tr>
@@ -126,7 +126,7 @@
                       {% else %}
                       <tr><td>Impression des bulletins de vote </td><td>{{ ballotsCost }}&nbsp;euros</td><tr>
                       <tr><td>Impression des professions de foi </td><td>{{ professions_de_foiCost }}&nbsp;euros</td><tr>
-                      <tr><td>Livraison des impressions</td><td>{{ remainingCost }}&nbsp;euros</td><tr>
+                      <tr><td>Livraison des bulletins et professions de foi</td><td>{{ remainingCost }}&nbsp;euros</td><tr>
                       <tr><td>Frais bancaires </td><td>{{ bankingCost }}&nbsp;euros</td><tr>
                       {% endif %}
                       <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ postalCost }}&nbsp;euros</td><tr>
