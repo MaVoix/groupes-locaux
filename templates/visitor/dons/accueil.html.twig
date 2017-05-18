@@ -72,7 +72,7 @@
                                               {%  if  group.income_amount+group.pledge_amount >= group.amount_target %}
                                                   <button type="button" class="btn btn-lg btn-primary" disabled >Objectif atteint !</button>
                                               {%  else  %}
-                                                  <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je co-finance cette campagne !</a>
+                                                  <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je cofinance cette campagne !</a>
                                               {%  endif  %}
                                           </div>
                                     </div>
