@@ -6,21 +6,21 @@
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="{{ ConfigService.get("urlSite") }}/groupe/page.html?id={{ group.id }}"/>
 
-    <meta property="og:image" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png"/>
-    <meta property="og:image:secure_url" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png" />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image" content="{{ ConfigService.get("urlSiteDons") }}/css/images/banner.jpg"/>
+    <meta property="og:image" content="{{ ConfigService.get("urlSiteDons") }}/css/images/banner.jpg"/>
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="1200" />
 
-    <meta property="og:description"  content="Soutenez #MAVOIX aux élections législatives."/>
-    <meta name="description"  content=""/>
+    <meta property="og:description"  content="Je cofinance les législatives #MAVOIX pour décider directement des lois pendant 5 ans."/>
+    <meta name="description"  content="Je cofinance les législatives #MAVOIX pour décider directement des lois pendant 5 ans"/>
     <!-- TWITTER --->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@MAVOIX2017">
     <meta name="twitter:creator" content="@MAVOIX2017">
     <meta name="twitter:title" content="#MAVOIX - {{ sup(group.circonscription.number,'f',true) }} circonscription / {{ group.departement.name}}">
-    <meta name="twitter:description" content="Soutenez #MAVOIX aux élections législatives.">
-    <meta name="twitter:image" content="{{ ConfigService.get("urlSiteDons") }}/pic/dons/{{ group.id }}/tirelire.png">
+    <meta name="twitter:description" content="Je cofinance les législatives #MAVOIX pour décider directement des lois pendant 5 ans.">
+    <meta property="og:image" content="{{ ConfigService.get("urlSiteDons") }}/css/images/banner.jpg"/>
 {% endblock %}
 
 {% block body %}
