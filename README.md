@@ -1,17 +1,21 @@
-# Engagement des groupe locaux #MAVOIX v2.3.0
+# Engagement des groupes locaux et collecte de dons #MAVOIX v2.4.0
 
 Formulaire d'engagement des groupe locaux [#MAVOIX](https://mavoix.info) à faire campagne, et gestion des dons.
 
 Le formulaire se trouve à l'adresse : https://collectifs-locaux.mavoix.info.
+
+La page de collecte de dons se trouve ici : https://collecte.mavoix.info.
 
 Version de test : https://collectifs-locaux.maudry.fr
 
 
 ## Notes de version
 
-### 2.3.1
+### 2.4.0
 
 - Correction de l'affichage des dates sur les pages de suivis des promesses et des transactions (accès mandataire)
+- Réorganisation de la page du collectif local
+- Lien direct de la page du collectif local vers le formulaire de promesse
 
 ### 2.3.0
 
