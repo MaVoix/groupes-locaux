@@ -29,7 +29,7 @@
                             {%  set total=total+pledge.amount %}
                         <tr>
                             <td>{{ pledge.reference }}</td>
-                            <td>{{ pledge.date|date("d/m") }} à {{ pledge.date|date("H:i") }} </td>
+                            <td>{{ pledge.date_created|date("d/m") }} à {{ pledge.date_created|date("H:i") }} </td>
                             <td><div class="p-t p-b">
                                 <div>{{ pledge.civility }} {{ pledge.name|ucwords }} {{ pledge.firstname|ucwords }}</div>
                                 <div>{{ pledge.zipcode }} - tel : {{ pledge.tel }}</div>

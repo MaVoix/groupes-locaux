@@ -49,7 +49,7 @@
                                 {% endif %}
 
                             </td>
-                            <td>{{ transaction.date|date("d/m") }} à {{ transaction.date|date("H:i") }} </td>
+                            <td>{{ transaction.date_created|date("d/m") }} à {{ transaction.date_created|date("H:i") }} </td>
                             <td class="text-right"><span class="{%  if  transaction.income>0 %}text-success{% endif %}">{{ transaction.income|number_format(2, ',', ' ') }} €</span></td>
                             <td class="text-right"><span class="{%  if  transaction.expense>0 %}text-danger{% endif %}">{%  if  transaction.expense>0 %}-{% endif %}{{ transaction.expense|number_format(2, ',', ' ') }} €</span></td>
                             <td>&nbsp;</td>

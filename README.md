@@ -9,6 +9,10 @@ Version de test : https://collectifs-locaux.maudry.fr
 
 ## Notes de version
 
+### 2.3.1
+
+- Correction de l'affichage des dates sur les pages de suivis des promesses et des transactions (accès mandataire)
+
 ### 2.3.0
 
 - Affichage de toutes les circonscriptions
