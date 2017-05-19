@@ -32,17 +32,9 @@
                    <h1> {{group.departement.code}} - {{ group.departement.name}}<br /><small>{{ sup(group.circonscription.number,'f',false) }} circonscription</small></h1>
                 </a>
             </div>
-            <div class="row">
-              <div class="col-xs-12 col-md-12 col-lg-12">
-              <iframe width="100%" height="450px" frameBorder="0" src="{{ group.map_url }}?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=false&onLoadPanel=undefined&captionBar=false"></iframe>
-              <p>
-                <a href="{{ group.map_url  }}">Voir en plein écran</a> -- Si vous habitez dans la zone jaune, vous pourrez voter pour un·e candidat·e #MAVOIX aux élections législatives du 11 juin.
-              </p>
-            </div>
-          </div>
             <div class="row m-t-x3">
                 <div class="col-xs-5 col-md-5 col-lg-5">
-                    <div style="background-image:url('/{{ group.path_pic_fit }}');"
+                    <div style="margin-top:35px; background-image:url('/{{ group.path_pic_fit }}');"
                          class="square-pic-group"></div>
 
                 </div>
@@ -66,9 +58,18 @@
 
                                  <img src="{{ ConfigService.get("urlSiteDons") }}/smallpic/dons/{{ group.id }}/tirelire.png" alt="Progression des dons" style="width:100%"/>
 
-                                <p><strong><a href="{{ ConfigService.get("urlSiteDons") }}/dons/accueil.html#col{{ group.id }}">Faire un don</a></strong></p>
 
+                                 <div class="row">
 
+                                 <div class="col-md-12 text-center m-t-x2 m-b-x2">
+                                     {%  if  income_amount+pledge_amount >= group.amount_target %}
+                                         <button type="button" class="btn btn-lg btn-primary" disabled >Objectif atteint !</button>
+                                     {%  else  %}
+                                         <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je cofinance cette campagne !</a>
+                                     {%  endif  %}
+                                 </div>
+
+                               </div>
 
 
                                 <h3 id="budget">Budget de campagne</h3>
@@ -97,7 +98,15 @@
                 </div>
 
             </div>
-
+            <div class="row">
+              <h3>Carte de la circonscription</h3>
+              <div class="col-xs-12 col-md-12 col-lg-12">
+              <iframe width="100%" height="450px" frameBorder="0" src="{{ group.map_url }}?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=false&onLoadPanel=undefined&captionBar=false"></iframe>
+              <p>
+                <a href="{{ group.map_url  }}">Voir en plein écran</a> -- Si vous habitez dans la zone jaune, vous pourrez voter pour un·e candidat·e #MAVOIX aux élections législatives du 11 juin.
+              </p>
+            </div>
+            </div>
         </div>
     </div>
 </div>

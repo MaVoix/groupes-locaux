@@ -12,6 +12,8 @@ if(isset($_GET["id"])){
 if(!$bFoundGroup){
     header("HTTP/1.0 404 Not Found");
 }else{
+    $aDataScript["pledge_amount"]=$Group->getAmount_plegde();
+    $aDataScript["income_amount"]=$Group->getAmount_income();
     $aDataScript["group"]=$Group;
     $aDataScript["postersCost"] = round($Group->getPosters() * 1.8161, 2);
     $aDataScript["professions_de_foiCost"] = round($Group->getProfessions_de_foi() * 0.0106656343, 2);
