@@ -32,17 +32,9 @@
                    <h1> {{group.departement.code}} - {{ group.departement.name}}<br /><small>{{ sup(group.circonscription.number,'f',false) }} circonscription</small></h1>
                 </a>
             </div>
-            <div class="row">
-              <div class="col-xs-12 col-md-12 col-lg-12">
-              <iframe width="100%" height="450px" frameBorder="0" src="{{ group.map_url }}?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=false&onLoadPanel=undefined&captionBar=false"></iframe>
-              <p>
-                <a href="{{ group.map_url  }}">Voir en plein écran</a> -- Si vous habitez dans la zone jaune, vous pourrez voter pour un·e candidat·e #MAVOIX aux élections législatives du 11 juin.
-              </p>
-            </div>
-          </div>
             <div class="row m-t-x3">
                 <div class="col-xs-5 col-md-5 col-lg-5">
-                    <div style="background-image:url('/{{ group.path_pic_fit }}');"
+                    <div style="margin-top:35px; background-image:url('/{{ group.path_pic_fit }}');"
                          class="square-pic-group"></div>
 
                 </div>
@@ -97,7 +89,15 @@
                 </div>
 
             </div>
-
+            <div class="row">
+              <h3>Carte de la circonscription</h3>
+              <div class="col-xs-12 col-md-12 col-lg-12">
+              <iframe width="100%" height="450px" frameBorder="0" src="{{ group.map_url }}?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=false&onLoadPanel=undefined&captionBar=false"></iframe>
+              <p>
+                <a href="{{ group.map_url  }}">Voir en plein écran</a> -- Si vous habitez dans la zone jaune, vous pourrez voter pour un·e candidat·e #MAVOIX aux élections législatives du 11 juin.
+              </p>
+            </div>
+            </div>
         </div>
     </div>
 </div>
