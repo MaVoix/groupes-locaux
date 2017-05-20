@@ -28,7 +28,7 @@
                             <input  title="Confirmation du mot de passe" type="password" class="form-control" id="pass_confirm" name="pass_confirm"
                                     value=""
                                     placeholder=" ">
-                            <p class="help-block">Votre mot de passe doit contenir des lettres et des chiffres (6 caractères minimum). Conservez-le précieusement, il vous servira à vous connecter à la page de votre collectif.</p>
+                            <p class="help-block">Votre mot de passe doit contenir des lettres et des chiffres et comporter 6 caractères minimum. Conservez-le précieusement, il vous servira à vous connecter à la page de votre collectif et à gérer les dons et transactions.</p>
                         </div>
 
                         <button type="submit" class="btn btn-primary pull-right">Valider</button>
@@ -36,7 +36,7 @@
                     {%  else %}
                         <h1>Nouveau mot de passe</h1>
                         <hr>
-                        <p>Désolé ! Votre lien de récupération ne fonctionne plus. Veuillez essayer à nouveau en <a href="/home/pass-oublie.html">cliquant ici</a>
+                        <p>Désolé ! Votre lien de réinitialisation a expiré. Veuillez essayer à nouveau en <a href="/home/pass-oublie.html">cliquant ici</a>
 
                         </p>
                     {% endif %}
