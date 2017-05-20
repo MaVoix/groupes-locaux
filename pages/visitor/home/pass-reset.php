@@ -51,7 +51,7 @@ if($nError==0) {
             "lien" =>  ConfigService::get("urlSite")."/home/reset-pwd.html?k=".$sKey
         ]);
 
-        Mail::sendMail( $user->getEmail(), "Récupération de mot de passe", $sBodyMailHTML, $sBodyMailTXT, true);
+        Mail::sendMail( $user->getEmail(), "Réinitialisation de votre mot de passe", $sBodyMailHTML, $sBodyMailTXT, true);
 
 
         $aResponse["redirect"] = "/home/connexion.html";
