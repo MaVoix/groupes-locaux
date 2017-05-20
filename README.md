@@ -1,4 +1,4 @@
-# Engagement des groupes locaux et collecte de dons #MAVOIX v2.4.0
+# Engagement des groupes locaux et collecte de dons #MAVOIX v2.5.0
 
 Formulaire d'engagement des groupe locaux [#MAVOIX](https://mavoix.info) à faire campagne, et gestion des dons.
 
@@ -10,6 +10,11 @@ Version de test : https://collectifs-locaux.maudry.fr
 
 
 ## Notes de version
+
+### 2.5.0
+
+- Possibilité pour les mandataires financiers de réinitiliser leur mot de passe
+- Ajout du montant de la promesse de don dans le mail de confirmation
 
 ### 2.4.0
 

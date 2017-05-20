@@ -1,0 +1,30 @@
+{% extends "visitor/base.html.twig" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="wrapper-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <form action="/home/pass-reset.json"  method="post" autocomplete="off" data-ajax="true">
+                    <h1>Mot de passe oublié ?</h1>
+                    <hr>
+                    <p>Si vous êtes mandataire financier, vous pouvez réinitialiser votre mot de passe.</p>
+                    <p>Veuillez saisir l'adresse email utilisée lors de la création du compte pour commencer la procédure de réinitialisation de votre mot de passe. </p>
+
+                    <div class="form-group">
+                        <label for="email" class="control-label">Adresse email *</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="votre adresse e-mail">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary pull-right">Envoyez-moi un email de réinitialisation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

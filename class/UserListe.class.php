@@ -27,7 +27,9 @@ class UserListe extends Liste
         "city",
         "zipcode",
         "country",
-        "tel"
+        "tel",
+        "key_edit",
+        "key_edit_limit"
     );
 
     /**
@@ -152,6 +154,87 @@ class UserListe extends Liste
                 "field" => "type",
                 "compare" => "!=",
                 "value" => "membre"
+            ]
+        ]);
+
+        return $this;
+    }
+
+    public function applyRules4Password($email)
+    {
+        $this->setAllFields();
+        $this->notDeleted();
+
+        $this->addCriteres([
+            [
+                "field" => "email",
+                "compare" => "=",
+                "value" => vars::secureInjection($email)
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "pass",
+                "compare" => "!=",
+                "value" => ""
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "enable",
+                "compare" => "=",
+                "value" => "1"
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "type",
+                "compare" => "=",
+                "value" => "mandataire"
+            ]
+        ]);
+
+        return $this;
+    }
+
+    public function applyRules4Key($key)
+    {
+        $this->setAllFields();
+        $this->notDeleted();
+
+        $this->addCriteres([
+            [
+                "field" => "key_edit",
+                "compare" => "=",
+                "value" => vars::secureInjection($key)
+            ]
+        ]);
+
+
+        $this->addCriteres([
+            [
+                "field" => "key_edit_limit",
+                "compare" => ">=",
+                "value" => date("Y-m-d H:i:s")
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "type",
+                "compare" => "=",
+                "value" => "mandataire"
+            ]
+        ]);
+
+        $this->addCriteres([
+            [
+                "field" => "enable",
+                "compare" => "=",
+                "value" => "1"
             ]
         ]);
 
