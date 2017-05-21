@@ -30,7 +30,7 @@ Puis envoyez ce chèque par courrier au mandataire financier, à l'adresse suiva
 Par virement bancaire
 
 {% if group.iban!="" %}
-Nom du destinataire : {{group.mandataire.firstname|ucwords}} {{group.mandataire.name|upper}} mandataire de {{group.candidat.firstname|ucwords}} {{ group.candidat.name|upper }}
+Nom du destinataire : {{group.mandataire.firstname|ucwords}} {{group.mandataire.name|upper}} MAND FIN {{group.candidat.firstname|ucwords}} {{ group.candidat.name|upper }}
 Numéro IBAN : {{ group.iban }}
 Code BIC/SWIFT : {{ group.bic }}
 Référence à indiquer : {{ pledge.reference }}

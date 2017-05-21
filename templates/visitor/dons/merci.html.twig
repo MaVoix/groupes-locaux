@@ -35,14 +35,13 @@
 
                 <h2>Par virement bancaire</h2>
                 {% if group.iban!="" %}
-                <p>Nom du destinataire : <span style="font-size:1.2em">{{group.mandataire.firstname|ucwords}} {{group.mandataire.name|upper}} mandataire de {{group.candidat.firstname|ucwords}} {{ group.candidat.name|upper }}</span></p>
+                <p>Nom du destinataire : <span style="font-size:1.2em">{{group.mandataire.firstname|ucwords}} {{group.mandataire.name|upper}} MAND FIN {{group.candidat.firstname|ucwords}} {{ group.candidat.name|upper }}</span></p>
                 <p>Numéro IBAN : <span style="font-size:1.2em">{{ group.iban }}</span></p>
                 <p>Code BIC/SWIFT : <span style="font-size:1.2em">{{ group.bic }}</span></p>
                 <p>Référence à indiquer : <span style="font-size:1.2em">{{ pledge.reference }}</span></p>
                 {% else %}
                 <p>Ce collectif local n'a pas encore renseigné ses coordonnées bancaires, merci de réessayer plus tard ou d'envoyer un chèque.</p>
                 {% endif %}
-
             </div>
         </div>
     </div>
