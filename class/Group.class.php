@@ -29,6 +29,7 @@ class Group	{
     private $sTwitter;
     private $sComment;
     private $sPresentation;
+    private $sMap_url;
     private $nAmount_promises;
     private $nAmount_donations;
     private $nPosters;
@@ -254,6 +255,11 @@ class Group	{
             $aData["presentation"]=$this->getPresentation();
         }
 
+        if(isset($this->aDataSet["map_url"]))
+        {
+            $aData["map_url"]=$this->getMap_url();
+        }
+
         if(isset($this->aDataSet["amount_promises"]))
         {
             $aData["amount_promises"]=$this->getAmount_promises();
@@ -326,6 +332,7 @@ class Group	{
         $this->setTwitter(NULL);
         $this->setComment(NULL);
         $this->setPresentation(NULL);
+        $this->setMap_url(NULL);
         $this->setAmount_promises(0);
         $this->setAmount_donations(0);
         $this->setPosters(NULL);
@@ -361,6 +368,7 @@ class Group	{
             "twitter" => $this->getTwitter(),
             "comment" => $this->getComment(),
             "presentation" => $this->getPresentation(),
+            "map_url" => $this->getMap_url(),
             "amount_promises" => $this->getAmount_promises(),
             "amount_donations" => $this->getAmount_donations(),
             "posters" => $this->getPosters(),
@@ -1284,6 +1292,50 @@ class Group	{
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
             return $this->sPresentation;
+        }
+    }
+
+
+
+    /**
+     * Set le champ map_url
+     * @param string $sMap_url nouvelle valeur pour le champ map_url
+     */
+    public function setMap_url($sMap_url)
+    {
+        if( is_null($sMap_url) ) $sMap_url='';
+        $this->sMap_url = $sMap_url;
+        $this->aDataSet["map_url"]=1;
+    }
+
+
+
+    /**
+     * Get le champ map_url
+     * @return string valeur du champ map_url
+     */
+    public function getMap_url()
+    {
+        if( !is_null($this->sMap_url) )
+        {
+            if( $this->sMap_url==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sMap_url;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('map_url'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sMap_url;
         }
     }
 

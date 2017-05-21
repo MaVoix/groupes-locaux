@@ -27,6 +27,7 @@ class GroupListe extends Liste
         "twitter",
         "comment",
         "presentation",
+        "map_url",
         "iban",
         "bic",
         "cheque_payable_to",
