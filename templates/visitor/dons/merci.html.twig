@@ -20,7 +20,7 @@
 
                 <p>Le chèque est à faire à l'ordre de <br/>
                     {% if group.cheque_payable_to is empty %}
-                        <span style="font-size:1.2em">{{group.mandataire.firstname|upper|slice(0,1)}}. {{group.mandataire.name|ucwords}} mand fin {{group.candidat.firstname|upper|slice(0,1)}}. {{ group.candidat.name|ucwords }}</span> ("mand fin" signifie "mandataire financier")
+                        <span style="font-size:1.2em">{{group.mandataire.firstname|upper|slice(0,1)}}. {{group.mandataire.name|ucwords}} mandataire financier de {{group.candidat.firstname|upper|slice(0,1)}}. {{ group.candidat.name|ucwords }}</span>
                     {% else %}
                         <span style="font-size:1.2em">{{  group.cheque_payable_to }}</span>
                     {% endif %}

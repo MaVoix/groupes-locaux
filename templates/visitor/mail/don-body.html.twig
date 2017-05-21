@@ -14,7 +14,7 @@
 
 <p>Le chèque est à faire à l'ordre de <br/>
     {% if group.cheque_payable_to is empty %}
-  <span style="font-size:1.2em">{{group.mandataire.firstname|ucwords}} {{group.mandataire.name}} mandataire de {{group.candidat.firstname|ucwords}} {{ group.candidat.name }}</span>
+  <span style="font-size:1.2em">{{group.mandataire.firstname|ucwords}} {{group.mandataire.name}} mandataire financier de {{group.candidat.firstname|ucwords}} {{ group.candidat.name }}</span>
   {% else %}
     <span style="font-size:1.2em">{{ group.cheque_payable_to }}</span>
   {% endif %}

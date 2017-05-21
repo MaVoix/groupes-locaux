@@ -14,7 +14,7 @@ Par chèque :
 
 Le chèque est à faire à l'ordre de
 {% if group.cheque_payable_to is empty %}
-{{group.mandataire.firstname|ucwords}} {{group.mandataire.name}} mandataire de {{group.candidat.firstname|ucwords}} {{ group.candidat.name }}
+{{group.mandataire.firstname|ucwords}} {{group.mandataire.name}} mandataire financier de {{group.candidat.firstname|ucwords}} {{ group.candidat.name }}
 {% else %}
 {{  group.cheque_payable_to }}
 {% endif %}
