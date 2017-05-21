@@ -12,8 +12,8 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 require_once "../../config.php";
 require_once "../../services/ConfigService.class.php";
 require_once "../../services/SessionService.class.php";
-require_once "../../services/mysql.class.php";
-require_once "../../services/mysqlStatement.class.php";
+require_once "../../services/Mysql.class.php";
+require_once "../../services/MysqlStatement.class.php";
 
 function getTable($s){
     return $s;
