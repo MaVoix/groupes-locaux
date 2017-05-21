@@ -203,8 +203,8 @@
                         <div class="form-group">
                             <label for="cheque_payable_to" class="control-label">Ordre des chèques à indiquer aux donateurs :</label>
                             <input   title="cheque_payable_to" type="text"  class="form-control  publicinfo" id="cheque_payable_to" name="cheque_payable_to" value="{{ group.cheque_payable_to }}"
-                                     placeholder="{{group.mandataire.name|upper}} mandataire financier de {{ group.candidat.name|upper }}" >
-                            <p class="help-block">Ce champs est facultatif, si ce champ est vide, l'ordre indiqué aux donateurs sera {{group.mandataire.name|upper}} mandataire financier de {{ group.candidat.name|upper }}</p>
+                                     placeholder="{{group.mandataire.firstname|upper|slice(0,1)}}. {{group.mandataire.name|upper}} mandataire financier de {{ group.candidat.name|upper }}" >
+                            <p class="help-block">Ce champs est facultatif. Si vous laissez ce champ vide, l'ordre indiqué aux donateurs sera {{group.mandataire.firstname|upper|slice(0,1)}}. {{group.mandataire.name|upper}} mandataire financier de {{ group.candidat.name|upper }}</p>
                         </div>
 
                         {% if oMe.type=="admin" %}
