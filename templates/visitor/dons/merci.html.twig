@@ -14,34 +14,7 @@
                 <p><strong>Notez cette référence.</strong> Nous vous l'avons également envoyée par email, mais nous constatons que les emails que nous envoyons arrivent souvent dans les courriers indésirables ("spams") des destinataires, voire pas du tout. Voilà pourquoi il est préférable que vous notiez dès maintenant cette référence.</p>
                 <p>Vous pouvez retrouver toutes les informations nécessaires pour envoyer votre don sur la page <a href="{{ ConfigService.get("urlSiteDons") }}/dons/ma-participation.html" target="_blank">Ma promesse de don</a>.</p>
 
-                <p>Vous pouvez envoyer votre don de deux manières :</p>
-
-                <h2>Par chèque</h2>
-
-                <p>Le chèque est à faire à l'ordre de <br/><span style="font-size:1.2em">{{group.mandataire.firstname|upper|slice(0,1)}}. {{group.mandataire.name|ucwords}} mand fin {{group.candidat.firstname|upper|slice(0,1)}}. {{ group.candidat.name|ucwords }}</span> ("mand fin" signifie "mandataire financier")
-                </p>
-
-                <p>De façon à ce que nous puissions faire le lien entre votre promesse et votre don, merci d'indiquer la référence de votre promesse au dos du chèque : <span style="font-size:1.2em">{{ pledge.reference }}</span></p>
-
-                <p>Puis envoyez ce chèque par courrier au mandataire financier, à l'adresse suivante :</p>
-
-                <p style="font-size:1.2em">
-                  {{ group.mandataire.firstname|ucwords }} {{ group.mandataire.name }}<br/>
-                  {{ group.mandataire.ad1}}<br/>
-                  {% if group.mandataire.ad2 != ''%}{{group.mandataire.ad2}}<br/>{% endif %}
-                  {% if group.mandataire.ad3 != ''%}{{group.mandataire.ad3}}<br/>{% endif %}
-                  {{ group.mandataire.zipcode }} {{ group.mandataire.city }}<br/>
-                </p>
-
-                <h2>Par virement bancaire</h2>
-                {% if group.iban!="" %}
-                <p>Nom du destinataire : <span style="font-size:1.2em">{{group.mandataire.firstname|ucwords}} {{group.mandataire.name|upper}} mandataire de {{group.candidat.firstname|ucwords}} {{ group.candidat.name|upper }}</span></p>
-                <p>Numéro IBAN : <span style="font-size:1.2em">{{ group.iban }}</span></p>
-                <p>Code BIC/SWIFT : <span style="font-size:1.2em">{{ group.bic }}</span></p>
-                <p>Référence à indiquer : <span style="font-size:1.2em">{{ pledge.reference }}</span></p>
-                {% else %}
-                <p>Ce collectif local n'a pas encore renseigné ses coordonnées bancaires, merci de réessayer plus tard ou d'envoyer un chèque.</p>
-                {% endif %}
+                {% embed "visitor/blocks/payment-data.html.twig" %}{% endembed %}
 
             </div>
         </div>

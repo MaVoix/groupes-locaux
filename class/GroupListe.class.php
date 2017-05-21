@@ -29,6 +29,7 @@ class GroupListe extends Liste
         "presentation",
         "iban",
         "bic",
+        "cheque_payable_to",
         "amount_promises",
         "amount_donations",
         "posters",

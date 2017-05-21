@@ -307,3 +307,28 @@ h2, h3 {
         min-width:12%;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .group-amount-target-ctn {
+        text-align: center;
+    }
+
+    .group-amount-target-ctn a {
+        display: inline-block;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .progress.mavoix{
+        margin-top:10px;
+        margin-bottom: 0;
+    }
+
+    .progress-bar-key {
+        margin-bottom:10px;
+    }
+
+    .progress-bar-key > p {
+        display: inline-block;
+    }
+}

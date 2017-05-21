@@ -24,90 +24,83 @@
 {% endblock %}
 
 {% block body %}
-<div class="wrapper-page">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-6 col-md-offset-3">
-                <a  class="no-underline" href="http://www.elections-legislatives.fr/circonscriptions/0{{group.departement.code}}.asp" target="blank">
-                   <h1> {{group.departement.code}} - {{ group.departement.name}}<br /><small>{{ sup(group.circonscription.number,'f',false) }} circonscription</small></h1>
-                </a>
-            </div>
-            <div class="row m-t-x3">
-                <div class="col-xs-5 col-md-5 col-lg-5">
-                    <div style="margin-top:35px; background-image:url('/{{ group.path_pic_fit }}');"
-                         class="square-pic-group"></div>
-
+    <div class="wrapper-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <a  class="no-underline" href="http://www.elections-legislatives.fr/circonscriptions/0{{group.departement.code}}.asp" target="blank">
+                        <h1> {{group.departement.code}} - {{ group.departement.name}}<br /><small>{{ sup(group.circonscription.number,'f',false) }} circonscription</small></h1>
+                    </a>
                 </div>
-                <div class="col-xs-7 col-md-7 col-lg-7">
-
-                                  <h3>Contacter le groupe local<h3>
-                                    <ul>
-                                  {% if group.email != ''%}
-                                    <li><a href="mailto:{{  group.email }}">{{ group.email }}</a></li>
-                                  {% endif %}
-                                  {% if group.facebook_page != ''%}
-                                    <li><a href="{{  group.facebook_page }}">Page Facebook</a></li>
-                                  {% endif %}
-                                  {% if group.facebook_group != ''%}
-                                    <li><a href="{{  group.facebook_group }}">Groupe Facebook</a></li>
-                                  {% endif %}
-                                  {% if group.facebook_page != ''%}
-                                    <li><a href="{{  group.twitter }}">Compte Twitter</a></li>
-                                  {% endif %}
-                                </ul>
-
-                                 <img src="{{ ConfigService.get("urlSiteDons") }}/smallpic/dons/{{ group.id }}/tirelire.png" alt="Progression des dons" style="width:100%"/>
-
-
-                                 <div class="row">
-
-                                 <div class="col-md-12 text-center m-t-x2 m-b-x2">
-                                     {%  if  income_amount+pledge_amount >= group.amount_target %}
-                                         <button type="button" class="btn btn-lg btn-primary" disabled >Objectif atteint !</button>
-                                     {%  else  %}
-                                         <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je cofinance cette campagne !</a>
-                                     {%  endif  %}
-                                 </div>
-
-                               </div>
-
-
-                                <h3 id="budget">Budget de campagne</h3>
-
-                                <table class="table">
-                                  <tr><td>Impression et livraison des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
-                                  {% if group.departement.code == '99' %}
-                                  <tr><td>Impression des bulletins de vote </td><td>{{ ballotsEtrCost }}&nbsp;euros</td><tr>
-                                  <tr><td>Campagne d'emails à destination des Français de l'étranger </td><td>{{ remainingEtrCost  }}&nbsp;euros</td><tr>
-                                  <t><td>Frais bancaires</td><td>{{ bankingEtrCost }}&nbsp;euros</td><tr>
-                                  {% else %}
-                                  <tr><td>Impression des bulletins de vote </td><td>{{ ballotsCost }}&nbsp;euros</td><tr>
-                                  <tr><td>Impression des professions de foi </td><td>{{ professions_de_foiCost }}&nbsp;euros</td><tr>
-                                  <tr><td>Livraison des bulletins et professions de foi</td><td>{{ remainingCost }}&nbsp;euros</td><tr>
-                                  <tr><td>Frais bancaires </td><td>{{ bankingCost }}&nbsp;euros</td><tr>
-                                  {% endif %}
-                                  <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ postalCost }}&nbsp;euros</td><tr>
-                                  <tr><td>Expertise comptable du compte de campagne </td><td>{{ accountantCost }}&nbsp;euros</td><tr>
-                                  <tr><td>Autres dépenses </td><td>{{ smallExpensesCost }}&nbsp;euros</td><tr>
-                                </table>
-
-                                <p>Total : <strong><span style="font-size:1.2em">{{ group.amount_target }} euros</span></strong></p>
-
-
-
-                </div>
-
             </div>
             <div class="row">
-              <h3>Carte de la circonscription</h3>
-              <div class="col-xs-12 col-md-12 col-lg-12">
-              <iframe width="100%" height="450px" frameBorder="0" src="{{ group.map_url }}?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=false&onLoadPanel=undefined&captionBar=false"></iframe>
-              <p>
-                <a href="{{ group.map_url  }}">Voir en plein écran</a> -- Si vous habitez dans la zone jaune, vous pourrez voter pour un·e candidat·e #MAVOIX aux élections législatives du 11 juin.
-              </p>
+                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                    <div style="margin-top:35px; background-image:url('/{{ group.path_pic_fit }}');"
+                         class="square-pic-group"></div>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+
+                    <h3>Contacter le groupe local</h3>
+                    <ul>
+                        {% if group.email != ''%}
+                            <li><a href="mailto:{{  group.email }}">{{ group.email }}</a></li>
+                        {% endif %}
+                        {% if group.facebook_page != ''%}
+                            <li><a href="{{  group.facebook_page }}">Page Facebook</a></li>
+                        {% endif %}
+                        {% if group.facebook_group != ''%}
+                            <li><a href="{{  group.facebook_group }}">Groupe Facebook</a></li>
+                        {% endif %}
+                        {% if group.facebook_page != ''%}
+                            <li><a href="{{  group.twitter }}">Compte Twitter</a></li>
+                        {% endif %}
+                    </ul>
+
+                    <img src="{{ ConfigService.get("urlSiteDons") }}/smallpic/dons/{{ group.id }}/tirelire.png" alt="Progression des dons" style="width:100%"/>
+
+                    <div class="text-center m-t-x2 m-b-x2">
+                        {%  if  income_amount+pledge_amount >= group.amount_target %}
+                            <button type="button" class="btn btn-lg btn-primary" disabled >Objectif atteint !</button>
+                        {%  else  %}
+                            <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je cofinance cette campagne !</a>
+                        {%  endif  %}
+                    </div>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 id="budget">Budget de campagne</h3>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <tr><td>Impression et livraison des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
+                                {% if group.departement.code == '99' %}
+                            <tr><td>Impression des bulletins de vote </td><td>{{ ballotsEtrCost }}&nbsp;euros</td><tr>
+                            <tr><td>Campagne d'emails à destination des Français de l'étranger </td><td>{{ remainingEtrCost  }}&nbsp;euros</td><tr>
+                                <t><td>Frais bancaires</td><td>{{ bankingEtrCost }}&nbsp;euros</td><tr>
+                                {% else %}
+                            <tr><td>Impression des bulletins de vote </td><td>{{ ballotsCost }}&nbsp;euros</td><tr>
+                            <tr><td>Impression des professions de foi </td><td>{{ professions_de_foiCost }}&nbsp;euros</td><tr>
+                            <tr><td>Livraison des bulletins et professions de foi</td><td>{{ remainingCost }}&nbsp;euros</td><tr>
+                            <tr><td>Frais bancaires </td><td>{{ bankingCost }}&nbsp;euros</td><tr>
+                                {% endif %}
+                            <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ postalCost }}&nbsp;euros</td><tr>
+                            <tr><td>Expertise comptable du compte de campagne </td><td>{{ accountantCost }}&nbsp;euros</td><tr>
+                            <tr><td>Autres dépenses </td><td>{{ smallExpensesCost }}&nbsp;euros</td><tr>
+                        </table>
+                    </div>
+                    <p>Total : <strong><span style="font-size:1.2em">{{ group.amount_target }} euros</span></strong></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <h3>Carte de la circonscription</h3>
+                    <iframe width="100%" height="450px" frameBorder="0" src="{{ group.map_url }}?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=false&onLoadPanel=undefined&captionBar=false"></iframe>
+                    <p>
+                        <a href="{{ group.map_url  }}">Voir en plein écran</a> -- Si vous habitez dans la zone jaune, vous pourrez voter pour un·e candidat·e #MAVOIX aux élections législatives du 11 juin.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {%  endblock %}

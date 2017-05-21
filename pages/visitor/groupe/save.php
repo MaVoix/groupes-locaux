@@ -343,6 +343,9 @@ if ($nError == 0) {
     if (isset($_POST["bank_city"])) {
         $Group->setBank_city($_POST["bank_city"]);
     }
+    if (isset($_POST["cheque_payable_to"])) {
+        $Group->setCheque_payable_to($_POST["cheque_payable_to"]);
+    }
     if (isset($_POST["ballots"])) {
         $Group->setBallots(intval($_POST["ballots"]));
     }
