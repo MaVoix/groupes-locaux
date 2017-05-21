@@ -14,7 +14,7 @@ Par chèque :
 
 Le chèque est à faire à l'ordre de
 {% if group.cheque_payable_to is empty %}
-{{group.mandataire.firstname|ucwords}} {{group.mandataire.name}} mandataire financier de {{group.candidat.firstname|ucwords}} {{ group.candidat.name }}
+  {{group.mandataire.firstname|upper|slice(0,1)}}. {{group.mandataire.name|upper}} mandataire financier de {{ group.candidat.name|upper }}
 {% else %}
 {{  group.cheque_payable_to }}
 {% endif %}
@@ -34,7 +34,7 @@ Puis envoyez ce chèque par courrier au mandataire financier, à l'adresse suiva
 Par virement bancaire
 
 {% if group.iban!="" %}
-Nom du destinataire : {{group.mandataire.firstname|ucwords}} {{group.mandataire.name|upper}} MAND FIN {{group.candidat.firstname|ucwords}} {{ group.candidat.name|upper }}
+Nom du destinataire : {{group.mandataire.firstname|upper|slice(0,1)}}. {{group.mandataire.name|upper}} mandataire financier de {{ group.candidat.name|upper }}
 Numéro IBAN : {{ group.iban }}
 Code BIC/SWIFT : {{ group.bic }}
 Référence à indiquer : {{ pledge.reference }}
