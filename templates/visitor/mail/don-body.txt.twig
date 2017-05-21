@@ -13,7 +13,11 @@ Vous pouvez envoyer votre don de deux manières :
 Par chèque :
 
 Le chèque est à faire à l'ordre de
+{% if group.cheque_payable_to is empty %}
 {{group.mandataire.firstname|ucwords}} {{group.mandataire.name}} mandataire de {{group.candidat.firstname|ucwords}} {{ group.candidat.name }}
+{% else %}
+{{  group.cheque_payable_to }}
+{% endif %}
 
 De façon à ce que nous puissions faire le lien entre votre promesse et votre don, merci d'indiquer la référence de votre promesse au dos du chèque : {{ pledge.reference }}>
 
