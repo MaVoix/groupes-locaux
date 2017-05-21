@@ -775,6 +775,7 @@ CREATE TABLE `group` (
   `twitter` varchar(255) DEFAULT NULL,
   `comment` text,
   `presentation` text,
+  `map_url` varchar(255) DEFAULT NULL,
   `amount_promises` decimal(10,2) NOT NULL,
   `amount_donations` decimal(10,2) NOT NULL,
   `posters` int(11) NOT NULL DEFAULT '0',
