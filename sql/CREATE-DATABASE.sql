@@ -768,6 +768,7 @@ CREATE TABLE `group` (
   `bank_city` varchar(255) NOT NULL,
   `iban` varchar(255) DEFAULT NULL,
   `bic` varchar(255) DEFAULT NULL,
+  `cheque_payable_to` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `facebook_page` varchar(255) DEFAULT NULL,
   `facebook_group` varchar(255) DEFAULT NULL,
