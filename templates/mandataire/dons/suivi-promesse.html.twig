@@ -32,7 +32,8 @@
                             <td>{{ pledge.date_created|date("d/m") }} à {{ pledge.date_created|date("H:i") }} </td>
                             <td><div class="p-t p-b">
                                 <div>{{ pledge.civility }} {{ pledge.name|ucwords }} {{ pledge.firstname|ucwords }}</div>
-                                <div>{{ pledge.zipcode }} - tel : {{ pledge.tel }}</div>
+                                <div>{{ pledge.zipcode }} {{ pledge.city }}  - tel : {{ pledge.tel }}</div>
+                                    <div>{{ pledge.country }}</div>
                                 </div>
                             </td>
                             <td class="text-right">{{ pledge.amount|number_format(2, ',', ' ') }} €</td>
