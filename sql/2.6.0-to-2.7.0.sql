@@ -1,0 +1,1 @@
+ALTER TABLE `pledge` ADD `country` VARCHAR(255) NULL AFTER `zipcode`;
