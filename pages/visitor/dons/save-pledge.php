@@ -17,7 +17,7 @@ $nError=0;
 $nAmount=0;
 
 //mandatory fields
-$aMandatoryFields = array("civility","name", "firstname", "email","tel","ad1","city","zipcode","amount");
+$aMandatoryFields = array("civility","name", "firstname", "email","tel","ad1","city","zipcode","country","amount");
 
 $aEngagements=array();
 //verification des engagements 1 à 3
@@ -95,6 +95,7 @@ if($nError==0){
     }
     $pledge->setZipcode($_POST["zipcode"]);
     $pledge->setCity($_POST["city"]);
+    $pledge->setCountry($_POST["country"]);
     $pledge->setAmount($nAmount);
     $pledge->setGroup_id(intval($_POST["group_id"]));
     $pledge->save();
