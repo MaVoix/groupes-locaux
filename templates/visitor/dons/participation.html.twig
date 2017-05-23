@@ -118,7 +118,6 @@
                     <div class="form-group">
                         <label for="country" class="control-label">Pays : *</label>
                         <select id="country" class="form-control"  name="country">
-                            <option value="" {% if pledge.country=='' %} selected {% endif %} >Choisir ...</option>
                             <option value="Afghanistan" {% if pledge.country=='Afghanistan' %} selected {% endif %} >Afghanistan</option>
                             <option value="Albanie"{% if pledge.country=='Albanie' %} selected {% endif %}>Albanie</option>
                             <option value="Antarctique"{% if pledge.country=='Antarctique' %} selected {% endif %}>Antarctique</option>
@@ -193,7 +192,7 @@
                             <option value="Fidji"{% if pledge.country=='Fidji' %} selected {% endif %}>Fidji</option>
                             <option value="Finlande"{% if pledge.country=='Finlande' %} selected {% endif %}>Finlande</option>
                             <option value="Îles Åland"{% if pledge.country=='Îles Åland' %} selected {% endif %}>Îles Åland</option>
-                            <option value="France"{% if pledge.country=='France' %} selected {% endif %}>France</option>
+                            <option value="France"{% if pledge.country=='France' or pledge.country=='' %} selected {% endif %}>France</option>
                             <option value="Guyane Française"{% if pledge.country=='Guyane Française' %} selected {% endif %}>Guyane Française</option>
                             <option value="Polynésie Française"{% if pledge.country=='Polynésie Française' %} selected {% endif %}>Polynésie Française</option>
                             <option value="Terres Australes Françaises"{% if pledge.country=='Terres Australes Françaises' %} selected {% endif %}>Terres Australes Françaises</option>
