@@ -33,6 +33,11 @@
 <p>Numéro IBAN : <span style="font-size:1.2em">{{ group.iban }}</span></p>
 <p>Code BIC/SWIFT : <span style="font-size:1.2em">{{ group.bic }}</span></p>
 <p>Référence à indiquer : <span style="font-size:1.2em">{{ pledge.reference ? pledge.reference : pledge_ref }}</span></p>
+<p>Si pour effectuer un virement, votre banque demande également le nom de la banque du compte bénéficiaire :</p>
+<ol>
+  <li><a href="http://www.ibancalculator.com/validate/{{ group.iban|replace({" ":""}) }}" target="_blank">Cliquez sur ce lien pour obtenir des informations sur le compte bancaire bénéficiaire</a> (dans un nouvel onglet)</li>
+  <li>Le nom de la banque du compte bénéficiaire est indiqué après <strong>Bank:</strong></li>
+</ol>
 {% else %}
 <p>Ce collectif local n'a pas encore renseigné ses coordonnées bancaires, merci de réessayer plus tard ou d'envoyer un chèque.</p>
 {% endif %}
