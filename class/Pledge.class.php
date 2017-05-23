@@ -22,6 +22,7 @@ class Pledge	{
     private $sAd3;
     private $sCity;
     private $sZipcode;
+    private $sCountry;
     private $sEmail;
     private $sTel;
     private $nAmount;
@@ -211,6 +212,11 @@ class Pledge	{
             $aData["zipcode"]=$this->getZipcode();
         }
 
+        if(isset($this->aDataSet["country"]))
+        {
+            $aData["country"]=$this->getCountry();
+        }
+
         if(isset($this->aDataSet["email"]))
         {
             $aData["email"]=$this->getEmail();
@@ -271,6 +277,7 @@ class Pledge	{
         $this->setAd3(NULL);
         $this->setCity(NULL);
         $this->setZipcode(NULL);
+        $this->setCountry(NULL);
         $this->setEmail(NULL);
         $this->setTel(NULL);
         $this->setAmount(0);
@@ -298,6 +305,7 @@ class Pledge	{
             "ad3" => $this->getAd3(),
             "city" => $this->getCity(),
             "zipcode" => $this->getZipcode(),
+            "country" => $this->getCountry(),
             "email" => $this->getEmail(),
             "tel" => $this->getTel(),
             "amount" => $this->getAmount(),
@@ -892,6 +900,50 @@ class Pledge	{
 
 
     /**
+     * Set le champ country
+     * @param string $sCountry nouvelle valeur pour le champ country
+     */
+    public function setCountry($sCountry)
+    {
+        if( is_null($sCountry) ) $sCountry='';
+        $this->sCountry = $sCountry;
+        $this->aDataSet["country"]=1;
+    }
+
+
+
+    /**
+     * Get le champ country
+     * @return string valeur du champ country
+     */
+    public function getCountry()
+    {
+        if( !is_null($this->sCountry) )
+        {
+            if( $this->sCountry==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sCountry;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('country'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sCountry;
+        }
+    }
+
+
+
+    /**
      * Set le champ email
      * @param string $sEmail nouvelle valeur pour le champ email
      */
@@ -1171,6 +1223,7 @@ class Pledge	{
             return $this->sReference;
         }
     }
+
 
 
     /*

@@ -23,6 +23,7 @@ class PledgeListe extends Liste
         "ad3",
         "city",
         "zipcode",
+        "country",
         "email",
         "tel",
         "amount",

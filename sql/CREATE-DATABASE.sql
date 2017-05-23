@@ -805,6 +805,7 @@ CREATE TABLE `pledge` (
   `ad3` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `zipcode` varchar(10) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `tel` varchar(20) DEFAULT NULL,
   `amount` double DEFAULT NULL,
