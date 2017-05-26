@@ -11,6 +11,11 @@ Version de test : https://collectifs-locaux.maudry.fr
 
 ## Notes de version
 
+### 2.8.0
+
+- Un article de loi "dispose", il ne "stipule" pas
+- Dans le formulaire de promesse de don, le footer prend toute la largeur de l'écran
+
 ### 2.7.0
 
 - Ajout d'un champ "Pays" dans l'adresse de donateurs
