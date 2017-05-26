@@ -359,44 +359,43 @@
                             <option value="Yémen"{% if pledge.country=='Yémen' %} selected {% endif %}>Yémen</option>
                             <option value="Serbie-et-Monténégro"{% if pledge.country=='Serbie-et-Monténégro' %} selected {% endif %}>Serbie-et-Monténégro</option>
                             <option value="Zambie"{% if pledge.country=='Zambie' %} selected {% endif %}>Zambie</option>
-
-
                         </select>
 
-                    <h2 id="budget">Budget de campagne du collectif {{ group.departement.name}}, {{ sup(group.circonscription.number,'f',false) }} circonscription</h2>
+                        <h2 id="budget">Budget de campagne du collectif {{ group.departement.name}}, {{ sup(group.circonscription.number,'f',false) }} circonscription</h2>
 
-                    <table class="table">
-                      <tr><td>Impression et livraison des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
-                      {% if group.departement.code == '99' %}
-                      <tr><td>Impression des bulletins de vote </td><td>{{ ballotsEtrCost }}&nbsp;euros</td><tr>
-                      <tr><td>Campagne de mails à destination des Français de l'étranger </td><td>{{ remainingEtrCost  }}&nbsp;euros</td><tr>
-                      <t><td>Frais bancaires</td><td>{{ bankingEtrCost }}&nbsp;euros</td><tr>
-                      {% else %}
-                      <tr><td>Impression des bulletins de vote </td><td>{{ ballotsCost }}&nbsp;euros</td><tr>
-                      <tr><td>Impression des professions de foi </td><td>{{ professions_de_foiCost }}&nbsp;euros</td><tr>
-                      <tr><td>Livraison des bulletins et professions de foi</td><td>{{ remainingCost }}&nbsp;euros</td><tr>
-                      <tr><td>Frais bancaires </td><td>{{ bankingCost }}&nbsp;euros</td><tr>
-                      {% endif %}
-                      <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ postalCost }}&nbsp;euros</td><tr>
-                      <tr><td>Expertise comptable du compte de campagne </td><td>{{ accountantCost }}&nbsp;euros</td><tr>
-                      <tr><td>Autres dépenses </td><td>{{ smallExpensesCost }}&nbsp;euros</td><tr>
-                    </table>
+                        <table class="table">
+                          <tr><td>Impression et livraison des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
+                          {% if group.departement.code == '99' %}
+                          <tr><td>Impression des bulletins de vote </td><td>{{ ballotsEtrCost }}&nbsp;euros</td><tr>
+                          <tr><td>Campagne de mails à destination des Français de l'étranger </td><td>{{ remainingEtrCost  }}&nbsp;euros</td><tr>
+                          <t><td>Frais bancaires</td><td>{{ bankingEtrCost }}&nbsp;euros</td><tr>
+                          {% else %}
+                          <tr><td>Impression des bulletins de vote </td><td>{{ ballotsCost }}&nbsp;euros</td><tr>
+                          <tr><td>Impression des professions de foi </td><td>{{ professions_de_foiCost }}&nbsp;euros</td><tr>
+                          <tr><td>Livraison des bulletins et professions de foi</td><td>{{ remainingCost }}&nbsp;euros</td><tr>
+                          <tr><td>Frais bancaires </td><td>{{ bankingCost }}&nbsp;euros</td><tr>
+                          {% endif %}
+                          <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ postalCost }}&nbsp;euros</td><tr>
+                          <tr><td>Expertise comptable du compte de campagne </td><td>{{ accountantCost }}&nbsp;euros</td><tr>
+                          <tr><td>Autres dépenses </td><td>{{ smallExpensesCost }}&nbsp;euros</td><tr>
+                        </table>
 
-                    <p>Total : <strong><span style="font-size:1.2em">{{ group.amount_target }} euros</span></strong></p>
+                        <p>Total : <strong><span style="font-size:1.2em">{{ group.amount_target }} euros</span></strong></p>
 
 
-                    <h2>Montant du don</h2>
+                        <h2>Montant du don</h2>
 
-                    <p>La campagne ne peut être financée que par des personnes physiques, dans la limite de 4&nbsp;600&nbsp;€ par personne. Un.e mandataire financier est chargé de collecter les dons qui ouvrent droit à réduction d’impôt (66&nbsp;%, ce qui revient à dire que si vous êtes imposable et que vous donnez 30&nbsp;euros, votre don vous coûte réellement 10&nbsp;euros).</p>
-                    <p>À titre d’exemple :</p>
-                    <ul>
-                      <li><strong>10 €</strong> : vous offrez à 4 000 électeurs et électrices la possibilité de trouver les bulletins de vote dans leurs bureaux de vote et dans leur enveloppe électorale.</li>
-                      {% if group.departement.code != '99' %}
-                      <li><strong>20 €</strong> : vous offrez à 2 000 électeurs et électrices, la possibilité de recevoir la profession de foi (aussi appelée circulaire), envoyée avec tout le matériel de vote qu’ils et elles recevront à leur adresse postale dans la semaine précédant le scrutin du 11 juin (c’est l’enveloppe kraft que vous recevez tous et toutes dans la semaine précédant une élection avec les documents de tous les candidat.e.s). Le simple fait de recevoir la profession de foi peut multiplier par deux le nombre de voix recueillies, car le message passe mieux.</li>
-                      {% endif %}
-                      <li><strong>plus de 50 €</strong> : grâce à vous, 40 affiches seront collées sur les panneaux électoraux. Ces affiches sont inédites et constituent un exploit technique et sont déjà entrées dans les annales de la communication politique en France et à l’étranger. Nous serons heureux de vous en offrir une, elle sera à retirer lors des évènements publics du collectif local qui sera ravi de vous rencontrer à cette occasion.</li>
-                      <li><strong>plus de 100 €</strong> : vous offrez à 40&nbsp;000 inscrit.e.s (!) sur votre circonscription les bulletins de vote. Nous serons heureux de vous offrir une affiche, elle sera à retirer lors des évènements publics du collectif local qui sera ravi de vous rencontrer à cette occasion.</li>
-                    </ul>
+                        <p>La campagne ne peut être financée que par des personnes physiques, dans la limite de 4&nbsp;600&nbsp;€ par personne. Un.e mandataire financier est chargé de collecter les dons qui ouvrent droit à réduction d’impôt (66&nbsp;%, ce qui revient à dire que si vous êtes imposable et que vous donnez 30&nbsp;euros, votre don vous coûte réellement 10&nbsp;euros).</p>
+                        <p>À titre d’exemple :</p>
+                        <ul>
+                          <li><strong>10 €</strong> : vous offrez à 4 000 électeurs et électrices la possibilité de trouver les bulletins de vote dans leurs bureaux de vote et dans leur enveloppe électorale.</li>
+                          {% if group.departement.code != '99' %}
+                          <li><strong>20 €</strong> : vous offrez à 2 000 électeurs et électrices, la possibilité de recevoir la profession de foi (aussi appelée circulaire), envoyée avec tout le matériel de vote qu’ils et elles recevront à leur adresse postale dans la semaine précédant le scrutin du 11 juin (c’est l’enveloppe kraft que vous recevez tous et toutes dans la semaine précédant une élection avec les documents de tous les candidat.e.s). Le simple fait de recevoir la profession de foi peut multiplier par deux le nombre de voix recueillies, car le message passe mieux.</li>
+                          {% endif %}
+                          <li><strong>plus de 50 €</strong> : grâce à vous, 40 affiches seront collées sur les panneaux électoraux. Ces affiches sont inédites et constituent un exploit technique et sont déjà entrées dans les annales de la communication politique en France et à l’étranger. Nous serons heureux de vous en offrir une, elle sera à retirer lors des évènements publics du collectif local qui sera ravi de vous rencontrer à cette occasion.</li>
+                          <li><strong>plus de 100 €</strong> : vous offrez à 40&nbsp;000 inscrit.e.s (!) sur votre circonscription les bulletins de vote. Nous serons heureux de vous offrir une affiche, elle sera à retirer lors des évènements publics du collectif local qui sera ravi de vous rencontrer à cette occasion.</li>
+                        </ul>
+                    </div>
 
 
                     <div class="form-group">
@@ -432,7 +431,7 @@
                         </div>
 
                         <div class="checkbox">
-                            <label class="label-checkbox" for="engagement-a3"><strong>Je certifie avoir pris connaissance de <a href="https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=03D84D0FC5A59E79CFA9F61DC104497A.tpdila19v_3?idArticle=LEGIARTI000023883022&cidTexte=LEGITEXT000006070239&dateTexte=20170513" target="_blank">l'article L.52-8 du code électoral</a>, qui stipule notamment que la somme des dons versés dans le cadre des mêmes élections ne peut dépasser 4&nbsp;600 euros par donateur.</strong></label>
+                            <label class="label-checkbox" for="engagement-a3"><strong>Je certifie avoir pris connaissance de <a href="https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=03D84D0FC5A59E79CFA9F61DC104497A.tpdila19v_3?idArticle=LEGIARTI000023883022&cidTexte=LEGITEXT000006070239&dateTexte=20170513" target="_blank">l'article L.52-8 du code électoral</a>, qui dispose notamment que la somme des dons versés dans le cadre des mêmes élections ne peut dépasser 4&nbsp;600 euros par donateur.</strong></label>
                             <label class="control-label">
                                 <input id="engagement-a3" value="ok" type="checkbox"
                                        name="engagement-a3" {{ checkedengagement }}>
@@ -440,6 +439,7 @@
                             </label>
                             <span>Oui *</span>
                         </div>
+                    </div>
 
                     <p class="m-t-x2 m-b-x2">Une fois votre promesse de don envoyée, nous vous donnerons les informations nécessaires pour envoyer votre don, par chèque ou par virement bancaire.</p>
 
