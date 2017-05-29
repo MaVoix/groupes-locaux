@@ -34,7 +34,7 @@ foreach($groups as $datagroup){
     //clé par code de département puis code de circo
     //$groupsOut[$oDepartement->getCode()."-".$oCirconscription->getCode()."-".$group->getId()]=$datagroup;
     //clé par montant restant
-    $groupsOut[str_pad($group->getAmount_target()-$datagroup["pledge_amount"]-$datagroup["income_amount"],6,"0",STR_PAD_LEFT)."-".$group->getId()]=$datagroup;
+    $groupsOut[str_pad(round($group->getAmount_target()-$datagroup["pledge_amount"]-$datagroup["income_amount"]),6,"0",STR_PAD_LEFT)."-".$group->getId()]=$datagroup;
 
 }
 krsort($groupsOut);
