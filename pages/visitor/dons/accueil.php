@@ -21,8 +21,9 @@ foreach($groups as $datagroup){
         $group->setAmount_target(1);
     }
     $datagroup["pledge_amount"]=$group->getAmount_plegde();
-    $datagroup["pledge_percent"]= round($datagroup["pledge_amount"]*100/ $group->getAmount_target());
     $datagroup["income_amount"]=$group->getAmount_income();
+
+    $datagroup["pledge_percent"]= round($datagroup["pledge_amount"]*100/ $group->getAmount_target());
     $datagroup["income_percent"] = round($datagroup["income_amount"]*100/ $group->getAmount_target());
     if($datagroup["income_percent"]>100){
         $datagroup["income_percent"]=100;
@@ -30,6 +31,15 @@ foreach($groups as $datagroup){
     }
     if($datagroup["pledge_percent"]+$datagroup["income_percent"]>100){
         $datagroup["pledge_percent"]=100-$datagroup["income_percent"];
+    }
+
+    //assure un affichage minimum de 12% pour la barre de progression income (même si 0)
+    if($datagroup["income_percent"]<12){
+        $datagroup["income_percent"]=12;
+    }
+    //assure un affichage maximum de 88% pour la barre de progression pledge (même si 100%)
+    if($datagroup["pledge_percent"]>88){
+        $datagroup["pledge_percent"]=88;
     }
     //clé par code de département puis code de circo
     //$groupsOut[$oDepartement->getCode()."-".$oCirconscription->getCode()."-".$group->getId()]=$datagroup;
