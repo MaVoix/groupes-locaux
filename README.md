@@ -11,6 +11,10 @@ Version de test : https://collectifs-locaux.maudry.fr
 
 ## Notes de version
 
+### 2.10.2
+
+- Bug : l'image de la jauge de promesse ne respectait pas correctement les proportions des chiffres indiqués (et le texte indiquant le montant des promesses pouvait alors déborder de l'image)
+
 ### 2.10.1
 
 - Bug : la jauge de promesses (noire) revenait à la ligne car le total dépassait 100%
