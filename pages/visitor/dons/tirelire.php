@@ -50,6 +50,7 @@ if(isset($_GET["id"])){
         //calcul des pourcentages
         $amountPledge=$group->getAmount_plegde();
         $amountIncome=$group->getAmount_income();
+
         $amountMiss=$group->getAmount_target()-$amountIncome-$amountPledge;
         if($amountMiss<0){
             $amountMiss=0;
@@ -61,23 +62,22 @@ if(isset($_GET["id"])){
             $income_percent=99;
             $pledge_percent=1;
         }
-        if($income_percent<=0){
-            $income_percent=1;
+        if($income_percent+$pledge_percent>100){
+
+            $pledge_percent= 100-$income_percent;
         }
         if($pledge_percent<=0){
             $pledge_percent=1;
         }
 
-
-
         //crop la barre de progression INCOME
         $x1Income=$marginLeft;
-        $x2Income=$marginLeft+round($width*$income_percent/100);
+        $x2Income=$marginLeft+round(($width-$marginLeft-$marginRight)*$income_percent/100);
         $overlayIncome->crop($x1Income,0, $x2Income,$height);
 
         //crop la barre de progression PLEDGE
         $x1Pledge= $x2Income;
-        $x2Pledge= $x2Income+round($width*$pledge_percent/100);
+        $x2Pledge= $x2Income+round(($width-$marginLeft-$marginRight)*$pledge_percent/100);
         $overlayPledge->crop($x1Pledge,0,$x2Pledge,$height);
 
         //colle les morceaux de barre
@@ -88,7 +88,7 @@ if(isset($_GET["id"])){
         $img->text("Dons : ".number_format($amountIncome,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x1Income+10,"yOffset"=>$marginTopForTextIncome ) );
 
         if($x2Pledge>$width/2){
-            $img->text("Promesses : ".number_format($amountPledge,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top right","xOffset"=>-($width-$x2Pledge),"yOffset"=>$marginTopForTextPledge ) );
+            $img->text("Promesses : " . number_format($amountPledge, 0, ",", " ") . " €", array("fontFile" => "css/images/progressbar/MyriadPro-Semibold.otf", "size" => 28, "color" => "000000", "anchor" => "top right", "xOffset" => -($width - $x2Pledge), "yOffset" => $marginTopForTextPledge));
         }else{
             $img->text("Promesses : ".number_format($amountPledge,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x2Pledge,"yOffset"=>$marginTopForTextPledge ) );
         }
