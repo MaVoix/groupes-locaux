@@ -30,31 +30,25 @@
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
                     <h1>Les 43 collectifs locaux #MAVOIX sont en campagne !</h1>
-                    <p>Les circonscriptions par ordre décroissant de montant restant à collecter pour atteindre leur objectif :</p>
-                    <ul>
-                      <li>les 11 circonscriptions des Français de l'étranger</li>
-                      <li>les 32 circonscriptions de métropole</li>
-                    </ul>
+                    <p>Les circonscriptions par ordre décroissant de montant restant à collecter pour atteindre leur objectif</p>
 
-                    <h3>Circonscriptions des Français de l'étranger</h3>
+                    <h2>Les 11 circonscriptions des Français de l'étranger</h3>
 
                     {% for group in groups %}
 
-                    {% if group.departement.code == 'ZZ' %}
-                    {% embed "visitor/blocks/circonscription.html.twig" %}{% endembed %}
-                    {% endif %}
+                      {% if group.departement.code == 99 %}
+                      {% embed "visitor/blocks/circonscription.html.twig" %}{% endembed %}
+                      {% endif %}
+                    {% endfor %}
 
-                    <h3>Circonscriptions de métropole</h3>
+                    <h2>Les 32 circonscriptions de métropole</h3>
 
                     {% for group in groups %}
-
-                    {% if group.departement.code != 'ZZ' %}
-                    {% embed "visitor/blocks/circonscription.html.twig" %}{% endembed %}
-                    {% endif %}
-
+                      {% if group.departement.code != 99 %}
+                      {% embed "visitor/blocks/circonscription.html.twig" %}{% endembed %}
+                      {% endif %}
                     {% endfor %}
 
-                    {% endfor %}
                 </div>
             </div>
         </div>
