@@ -32,22 +32,9 @@
                     <h1>Les 43 collectifs locaux #MAVOIX sont en campagne !</h1>
                     <p>Les circonscriptions par ordre décroissant de montant restant à collecter pour atteindre leur objectif</p>
 
-                    <h2>Les 11 circonscriptions des Français de l'étranger</h3>
-
-                    {% for group in groups %}
-
-                      {% if group.departement.code == 99 %}
+                   {% for group in groups %}
                       {% embed "visitor/blocks/circonscription.html.twig" %}{% endembed %}
-                      {% endif %}
-                    {% endfor %}
-
-                    <h2>Les 32 circonscriptions de métropole</h3>
-
-                    {% for group in groups %}
-                      {% if group.departement.code != 99 %}
-                      {% embed "visitor/blocks/circonscription.html.twig" %}{% endembed %}
-                      {% endif %}
-                    {% endfor %}
+                  {% endfor %}
 
                 </div>
             </div>
