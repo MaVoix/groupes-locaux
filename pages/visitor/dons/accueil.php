@@ -22,6 +22,7 @@ foreach($groups as $datagroup){
     }
     $datagroup["pledge_amount"]=$group->getAmount_plegde();
     $datagroup["income_amount"]=$group->getAmount_income();
+    $datagroup["amount_target_withExpenses"]=$group->getAmount_target_withExpenses();
 
     $datagroup["pledge_percent"]= round($datagroup["pledge_amount"]*100/ $group->getAmount_target_withExpenses());
     $datagroup["income_percent"] = round($datagroup["income_amount"]*100/ $group->getAmount_target_withExpenses());
