@@ -35,6 +35,10 @@ class GroupListe extends Liste
         "amount_donations",
         "posters",
         "ballots",
+        "post_expenses",
+        "banking_fees",
+        "small_expenses",
+        "emailing_expenses",
         "professions_de_foi",
         "amount_target",
         "key_edit"
