@@ -349,6 +349,20 @@ if ($nError == 0) {
     if (isset($_POST["ballots"])) {
         $Group->setBallots(intval($_POST["ballots"]));
     }
+
+    if (isset($_POST["small_expenses"])) {
+        $Group->setSmall_expenses(doubleval(str_replace([" ",","],["","."],$_POST["small_expenses"])));
+    }
+    if (isset($_POST["banking_fees"])) {
+        $Group->setBanking_fees(doubleval(str_replace([" ",","],["","."],$_POST["banking_fees"])));
+    }
+    if (isset($_POST["post_expenses"])) {
+        $Group->setPost_expenses(doubleval(str_replace([" ",","],["","."],$_POST["post_expenses"])));
+    }
+    if (isset($_POST["emailing_expenses"])) {
+        $Group->setEmailing_expenses(doubleval(str_replace([" ",","],["","."],$_POST["emailing_expenses"])));
+    }
+
     if (isset($_POST["professions_de_foi"])) {
         $Group->setProfessions_de_foi(intval($_POST["professions_de_foi"]));
     }
