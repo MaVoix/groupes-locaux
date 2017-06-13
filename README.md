@@ -11,7 +11,14 @@ Version de test : https://collectifs-locaux.maudry.fr
 
 ## Notes de version
 
+### 2.11.2
+- Changement de l'image d'illustration de la collecte
+
+### 2.11.1
+...
+
 ### 2.11.0
+...
 
 ### 2.10.2
 
