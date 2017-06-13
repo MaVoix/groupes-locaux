@@ -25,7 +25,7 @@ if (!$bFoundGroup) {
     $aDataScript["bankingEtrCost"] = 115;
     $aDataScript["postalCost"] = 60;
     $aDataScript["remainingCost"] =
-    $Group->getAmount_target()
+    $Group->getAmount_target_withExpenses()
     - $aDataScript["postalCost"]
     - $aDataScript["accountantCost"]
     - $aDataScript["smallExpensesCost"]
@@ -34,7 +34,7 @@ if (!$bFoundGroup) {
     - $aDataScript["professions_de_foiCost"]
     - $aDataScript["ballotsCost"];
     $aDataScript["remainingEtrCost"] =
-    $Group->getAmount_target()
+    $Group->getAmount_target_withExpenses()
     - $aDataScript["bankingEtrCost"]
     - $aDataScript["postalCost"]
     - $aDataScript["accountantCost"]
