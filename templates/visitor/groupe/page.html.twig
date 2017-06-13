@@ -72,22 +72,21 @@
                     <h3 id="budget">Budget de campagne</h3>
 
                     <div class="table-responsive">
-                        <table class="table table-hover">
-                            <tr><td>Impression et livraison des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
-                                {% if group.departement.code == '99' %}
-                            <tr><td>Impression des bulletins de vote </td><td>{{ ballotsEtrCost }}&nbsp;euros</td><tr>
-                            <tr><td>Campagne d'emails à destination des Français de l'étranger </td><td>{{ remainingEtrCost  }}&nbsp;euros</td><tr>
-                                <t><td>Frais bancaires</td><td>{{ bankingEtrCost }}&nbsp;euros</td><tr>
-                                {% else %}
-                            <tr><td>Impression des bulletins de vote </td><td>{{ ballotsCost }}&nbsp;euros</td><tr>
-                            <tr><td>Impression des professions de foi </td><td>{{ professions_de_foiCost }}&nbsp;euros</td><tr>
-                            <tr><td>Livraison des bulletins et professions de foi</td><td>{{ remainingCost }}&nbsp;euros</td><tr>
-                            <tr><td>Frais bancaires </td><td>{{ bankingCost }}&nbsp;euros</td><tr>
-                                {% endif %}
-                            <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ postalCost }}&nbsp;euros</td><tr>
-                            <tr><td>Expertise comptable du compte de campagne </td><td>{{ accountantCost }}&nbsp;euros</td><tr>
-                            <tr><td>Autres dépenses </td><td>{{ smallExpensesCost }}&nbsp;euros</td><tr>
-                        </table>
+                      <table class="table">
+                        <tr><td>Impression et livraison des affiches électorales </td><td>{{ postersCost }}&nbsp;euros</td><tr>
+                        {% if group.departement.code == '99' %}
+                        <tr><td>Impression des bulletins de vote </td><td>{{ ballotsEtrCost }}&nbsp;euros</td><tr>
+                        <tr><td>Campagne de mails à destination des Français de l'étranger </td><td>{{ emailingExpenses  }}&nbsp;euros</td><tr>
+                        <t><td>Frais bancaires</td><td>{{ bankingFees }}&nbsp;euros</td><tr>
+                        {% else %}
+                        <tr><td>Impression et livraison des bulletins de vote </td><td>{{ ballotsCost }}&nbsp;euros</td><tr>
+                        <tr><td>Impression et livraison des professions de foi </td><td>{{ professions_de_foiCost }}&nbsp;euros</td><tr>
+                        <tr><td>Frais bancaires </td><td>{{ bankingFees }}&nbsp;euros</td><tr>
+                        {% endif %}
+                        <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ postExpenses }}&nbsp;euros</td><tr>
+                        <tr><td>Expertise comptable du compte de campagne </td><td>{{ accountantCost }}&nbsp;euros</td><tr>
+                        <tr><td>Autres dépenses </td><td>{{ smallExpenses }}&nbsp;euros</td><tr>
+                      </table>
                     </div>
                     <p>Total : <strong><span style="font-size:1.2em">{{ group.amount_target_withExpenses }} euros</span></strong></p>
                 </div>
