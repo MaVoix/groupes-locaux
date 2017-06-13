@@ -1,4 +1,8 @@
-ALTER TABLE `group` ADD `emailing_expenses` int(11) 0 AFTER `ballots`;
+ALTER TABLE `group` ADD `small_expenses` DOUBLE NULL DEFAULT '100' AFTER `ballots`;
+ALTER TABLE `group` ADD `banking_fees` DOUBLE NULL DEFAULT '150' AFTER `ballots`;
+ALTER TABLE `group` ADD `post_expenses` DOUBLE NULL DEFAULT '60' AFTER `ballots`;
+ALTER TABLE `group` ADD `emailing_expenses` DOUBLE NULL DEFAULT '0' AFTER `ballots`;
+
 
 
 UPDATE `group` SET posters='126',ballots='76150',professions_de_foi='79958',amount_target='2063' WHERE id='3';
