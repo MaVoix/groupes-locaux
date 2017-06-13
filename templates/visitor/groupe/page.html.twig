@@ -59,7 +59,7 @@
                     <img src="{{ ConfigService.get("urlSiteDons") }}/smallpic/dons/{{ group.id }}/tirelire.png" alt="Progression des dons" style="width:100%"/>
 
                     <div class="text-center m-t-x2 m-b-x2">
-                        {%  if  (income_amount+pledge_amount)|round >= group.amount_target %}
+                        {%  if  (income_amount+pledge_amount)|round >= group.amount_target_withExpenses %}
                             <button type="button" class="btn btn-lg btn-primary" disabled >Objectif atteint !</button>
                         {%  else  %}
                             <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je cofinance cette campagne !</a>
@@ -89,7 +89,7 @@
                             <tr><td>Autres dépenses </td><td>{{ smallExpensesCost }}&nbsp;euros</td><tr>
                         </table>
                     </div>
-                    <p>Total : <strong><span style="font-size:1.2em">{{ group.amount_target }} euros</span></strong></p>
+                    <p>Total : <strong><span style="font-size:1.2em">{{ group.amount_target_withExpenses }} euros</span></strong></p>
                 </div>
             </div>
             <div class="row">
