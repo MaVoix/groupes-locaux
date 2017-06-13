@@ -1,4 +1,4 @@
-# Engagement des groupes locaux et collecte de dons #MAVOIX v2.11.0
+# Engagement des groupes locaux et collecte de dons #MAVOIX v2.12.0
 
 Formulaire d'engagement des groupe locaux [#MAVOIX](https://mavoix.info) à faire campagne, et gestion des dons.
 
@@ -11,14 +11,23 @@ Version de test : https://collectifs-locaux.maudry.fr
 
 ## Notes de version
 
+### 2.12.0
+
+- Restructuration du budget de collectifs locaux suite à la réception des factures
+- Possibilité pour les mandataires de définir le montant de certaines dépenses
+
 ### 2.11.2
+
 - Changement de l'image d'illustration de la collecte
 
 ### 2.11.1
-...
+
+- De nouveau, toutes les circonscriptions sont listées ensemble, les CFDE ne sont plus séparées
 
 ### 2.11.0
-...
+
+- Les circonscriptions des FDE sont listées en premier pour les mettre en avant
+- Les totaux sont arrondis pour déterminer ou non l'affichage du lien vers le formulaire de don
 
 ### 2.10.2
 

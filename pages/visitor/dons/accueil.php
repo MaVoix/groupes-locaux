@@ -22,9 +22,10 @@ foreach($groups as $datagroup){
     }
     $datagroup["pledge_amount"]=$group->getAmount_plegde();
     $datagroup["income_amount"]=$group->getAmount_income();
+    $datagroup["amount_target_withExpenses"]=$group->getAmount_target_withExpenses();
 
-    $datagroup["pledge_percent"]= round($datagroup["pledge_amount"]*100/ $group->getAmount_target());
-    $datagroup["income_percent"] = round($datagroup["income_amount"]*100/ $group->getAmount_target());
+    $datagroup["pledge_percent"]= round($datagroup["pledge_amount"]*100/ $group->getAmount_target_withExpenses());
+    $datagroup["income_percent"] = round($datagroup["income_amount"]*100/ $group->getAmount_target_withExpenses());
     if($datagroup["income_percent"]>100){
         $datagroup["income_percent"]=100;
         $datagroup["pledge_percent"]=0;
@@ -44,7 +45,7 @@ foreach($groups as $datagroup){
     //clé par code de département puis code de circo
     //$groupsOut[$oDepartement->getCode()."-".$oCirconscription->getCode()."-".$group->getId()]=$datagroup;
     //clé par montant restant
-    $groupsOut[str_pad(round($group->getAmount_target()-$datagroup["pledge_amount"]-$datagroup["income_amount"]),6,"0",STR_PAD_LEFT)."-".$group->getId()]=$datagroup;
+    $groupsOut[str_pad(round($group->getAmount_target_withExpenses()-$datagroup["pledge_amount"]-$datagroup["income_amount"]),6,"0",STR_PAD_LEFT)."-".$group->getId()]=$datagroup;
 
 }
 krsort($groupsOut);

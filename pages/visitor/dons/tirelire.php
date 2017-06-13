@@ -51,12 +51,12 @@ if(isset($_GET["id"])){
         $amountPledge=$group->getAmount_plegde();
         $amountIncome=$group->getAmount_income();
 
-        $amountMiss=$group->getAmount_target()-$amountIncome-$amountPledge;
+        $amountMiss=$group->getAmount_target_withExpenses()-$amountIncome-$amountPledge;
         if($amountMiss<0){
             $amountMiss=0;
         }
-        $pledge_percent = round($amountPledge*100/ $group->getAmount_target());
-        $income_percent = round($amountIncome*100/ $group->getAmount_target());
+        $pledge_percent = round($amountPledge*100/ $group->getAmount_target_withExpenses());
+        $income_percent = round($amountIncome*100/ $group->getAmount_target_withExpenses());
 
         if($income_percent>100){
             $income_percent=99;
@@ -93,7 +93,7 @@ if(isset($_GET["id"])){
             $img->text("Promesses : ".number_format($amountPledge,0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top left","xOffset"=>$x2Pledge,"yOffset"=>$marginTopForTextPledge ) );
         }
 
-        $img->text("Reste à financer : ".number_format($amountMiss,0,","," ")." € / ".number_format($group->getAmount_target(),0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top right","xOffset"=>-$marginRight,"yOffset"=>$marginTopForTextIncome ) );
+        $img->text("Reste à financer : ".number_format($amountMiss,0,","," ")." € / ".number_format($group->getAmount_target_withExpenses(),0,","," ")." €",array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 28,"color"=> "000000","anchor"=> "top right","xOffset"=>-$marginRight,"yOffset"=>$marginTopForTextIncome ) );
 
         //text de la circo
         $img->text($group->getDepartement()->getCode()." - ".$group->getDepartement()->getName(),array("fontFile"=> "css/images/progressbar/MyriadPro-Semibold.otf","size"=> 40,"color"=> "000000","anchor"=> "center","xOffset"=>0,"yOffset"=>-90 ));

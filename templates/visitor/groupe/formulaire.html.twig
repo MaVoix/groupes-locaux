@@ -36,13 +36,6 @@
                         {% endif %}
 
                         <p><strong>Bienvenue sur le formulaire d'engagement des collectifs locaux #MAVOIX !</strong></p>
-                        <p>Pour des raisons de logistique, <strong>seuls les collectifs locaux suivants, qui avaient déjà envoyé une partie des informations, sont invités à remplir le formulaire</strong> : </p>
-                        <ul>
-                          <li>Nord, 1ère circonscription</li>
-                          <li>Paris, 1ère circonscription</li>
-                          <li>Vendée, 1ère circonscription</li>
-                          <li>Vienne, 1ère circonscription</li>
-                        </ul>
                         <p>Les informations <span style="color:#05a60d;font-weight:bold;">en vert</span> seront rendues publiques.</p>
 
                         <div class="form-group">
@@ -215,6 +208,33 @@
                         </div>
                         {% endif %}
 
+                        {% if group.departement.code!="99" %}
+                            <div class="form-group">
+                                <label for="small_expenses" class="control-label">Menues dépenses :</label>
+                                <input type="text" class="form-control" id="small_expenses" name="small_expenses" value="{{ group.small_expenses }}"
+                                       placeholder="0">
+                            </div>
+                            {% endif %}
+                            <div class="form-group">
+                                <label for="banking_fees" class="control-label">Frais bancaires :</label>
+                                <input type="text" class="form-control" id="banking_fees" name="banking_fees" value="{{ group.banking_fees }}"
+                                       placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="post_expenses" class="control-label">Coût des timbres :</label>
+                                <input type="text" class="form-control" id="post_expenses" name="post_expenses" value="{{group.post_expenses}}"
+                                       placeholder="0">
+                            </div>
+
+                            {% if group.departement.code=="99" %}
+                            <div class="form-group">
+                                <label for="emailing_expenses" class="control-label">E-mailings :</label>
+                                <input type="text" class="form-control" id="emailing_expenses" name="emailing_expenses" value="{{group.emailing_expenses}}"
+                                       placeholder="0">
+                            </div>
+                            {% endif %}
+
+
 
                         <hr/>
                         <p>&nbsp;</p>
@@ -346,6 +366,9 @@
                             <input type="text" class="form-control" id="professions_de_foi" name="professions_de_foi" value="{{group.professions_de_foi}}"
                                    placeholder="0">
                         </div>
+
+
+
 
 
                         <div class="form-group engagements-a">

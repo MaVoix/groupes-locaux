@@ -7,7 +7,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 group-amount-target-ctn">
                 <a href="{{ ConfigService.get("urlSite") }}/groupe/page.html?id={{ group.id }}#budget" target="_blank">
-                    <span class="btn btn-default pull-right">Objectif : <span class="badge">{{  group.amount_target|number_format(0, ',', ' ') }} €</span></span>
+                    <span class="btn btn-default pull-right">Objectif : <span class="badge">{{  group.amount_target_withExpenses|number_format(0, ',', ' ') }} €</span></span>
                 </a>
             </div>
         </div>
@@ -40,7 +40,7 @@
                     <p><span class="label">Dons promis</span></p>
                 </div>
                   <div class="col-sm-6 col-xs-12 text-center">
-                      {%  if  (group.income_amount+group.pledge_amount)|round >= group.amount_target %}
+                      {%  if  (group.income_amount+group.pledge_amount)|round >= group.amount_target_withExpenses %}
                           <button type="button" class="btn btn-lg btn-primary" disabled >Objectif atteint !</button>
                       {%  else  %}
                           <a href="{{ ConfigService.get("urlSiteDons") }}/dons/participation.html?id={{ group.id }}" class="btn btn-lg btn-primary">Je cofinance cette campagne !</a>

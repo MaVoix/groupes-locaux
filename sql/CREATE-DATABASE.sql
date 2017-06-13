@@ -783,6 +783,10 @@ CREATE TABLE `group` (
   `amount_target` int(11) DEFAULT NULL,
   `professions_de_foi` int(11) NOT NULL DEFAULT '0',
   `key_edit` varchar(255) NOT NULL
+  `small_expenses` DOUBLE NULL DEFAULT '100'
+  `banking_fees` DOUBLE NULL DEFAULT '150'
+  `post_expenses` DOUBLE NULL DEFAULT '60'
+  `emailing_expenses` DOUBLE NULL DEFAULT '0'  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
