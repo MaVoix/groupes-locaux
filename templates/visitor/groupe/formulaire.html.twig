@@ -213,12 +213,15 @@
                             <input   title="Objectif de collecte" type="text"  class="form-control publicinfo" id="amount_target" name="amount_target" value="{{ group.amount_target }}"
                                      placeholder="2500">
                         </div>
+                        {% endif %}
 
+                        {% if group.departement.code!="99" %}
                             <div class="form-group">
                                 <label for="small_expenses" class="control-label">Menues dépenses :</label>
                                 <input type="text" class="form-control" id="small_expenses" name="small_expenses" value="{{ group.small_expenses }}"
                                        placeholder="0">
                             </div>
+                            {% endif %}
                             <div class="form-group">
                                 <label for="banking_fees" class="control-label">Frais bancaires :</label>
                                 <input type="text" class="form-control" id="banking_fees" name="banking_fees" value="{{ group.banking_fees }}"
@@ -229,12 +232,15 @@
                                 <input type="text" class="form-control" id="post_expenses" name="post_expenses" value="{{group.post_expenses}}"
                                        placeholder="0">
                             </div>
+
+                            {% if group.departement.code=="99" %}
                             <div class="form-group">
-                                <label for="emailing_expenses" class="control-label">E-Mailings :</label>
+                                <label for="emailing_expenses" class="control-label">E-mailings :</label>
                                 <input type="text" class="form-control" id="emailing_expenses" name="emailing_expenses" value="{{group.emailing_expenses}}"
                                        placeholder="0">
                             </div>
-                        {% endif %}
+                            {% endif %}
+
 
 
                         <hr/>
