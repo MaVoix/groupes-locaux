@@ -1957,7 +1957,18 @@ class Group	{
 
     }
 
-    /* Lien TWIG vers les accesseurs */
+    public function getExpenses()
+    {
+        return $this->getSmall_expenses()+$this->getEmailing_expenses()+$this->getBanking_fees()+$this->getPost_expenses();
+    }
+
+
+    public function getAmount_target_withExpenses()
+    {
+        return $this->getAmount_target()+$this->getExpenses();
+    }
+
+        /* Lien TWIG vers les accesseurs */
     public function getDepartement(){
         return $this->Departement();
     }
