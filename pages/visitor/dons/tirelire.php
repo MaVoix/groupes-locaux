@@ -48,7 +48,7 @@ if(isset($_GET["id"])){
         $overlayPledge=new \claviska\SimpleImage($imgPath . $pledgeImgFile);
 
         //calcul des pourcentages
-        $amountPledge=$group->getAmount_plegde();
+        $amountPledge=$group->getAmount_pledge();
         $amountIncome=$group->getAmount_income();
 
         $amountMiss=$group->getAmount_target_withExpenses()-$amountIncome-$amountPledge;

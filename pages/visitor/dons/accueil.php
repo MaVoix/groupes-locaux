@@ -20,7 +20,7 @@ foreach($groups as $datagroup){
     if($group->getAmount_target()==0){
         $group->setAmount_target(1);
     }
-    $datagroup["pledge_amount"]=$group->getAmount_plegde();
+    $datagroup["pledge_amount"]=$group->getAmount_pledge();
     $datagroup["income_amount"]=$group->getAmount_income();
     $datagroup["amount_target_withExpenses"]=$group->getAmount_target_withExpenses();
 

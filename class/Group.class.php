@@ -1933,7 +1933,7 @@ class Group	{
 
     }
 
-    public function getAmount_plegde(){
+    public function getAmount_pledge(){
         $amount=0;
         $pledgeListe= new PledgeListe();
         //todo : sum avec jointure pour améliorer performance
