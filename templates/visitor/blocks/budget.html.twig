@@ -1,0 +1,19 @@
+
+<div class="table-responsive">
+  <table class="table">
+    <tr><td>Impression et livraison des affiches électorales </td><td>{{ group.posters_cost }}&nbsp;euros</td><tr>
+    {% if group.departement.code == '99' %}
+    <tr><td>Impression et livraison des bulletins de vote </td><td>{{ group.ballots_cost }}&nbsp;euros</td><tr>
+    <tr><td>Campagne de mails à destination des Français de l'étranger </td><td>{{ group.emailing_expenses  }}&nbsp;euros</td><tr>
+    <t><td>Frais bancaires</td><td>{{ group.banking_fees }}&nbsp;euros</td><tr>
+    {% else %}
+    <tr><td>Impression et livraison des bulletins de vote </td><td>{{ group.ballots_cost }}&nbsp;euros</td><tr>
+    <tr><td>Impression et livraison des professions de foi </td><td>{{ group.professions_de_foi_cost }}&nbsp;euros</td><tr>
+    <tr><td>Frais bancaires </td><td>{{ group.banking_fees }}&nbsp;euros</td><tr>
+    {% endif %}
+    <tr><td>Frais postaux pour l'envoi des reçus fiscaux </td><td>{{ group.post_expenses }}&nbsp;euros</td><tr>
+    <tr><td>Expertise comptable du compte de campagne </td><td>{{ group.accounting_expenses }}&nbsp;euros</td><tr>
+    <tr><td>Autres dépenses </td><td>{{ group.small_expenses }}&nbsp;euros</td><tr>
+  </table>
+</div>
+<p>Total : <strong><span style="font-size:1.2em">{{ group.amount_target_withExpenses }} euros</span></strong></p>
