@@ -13,7 +13,7 @@ if (!$bFoundGroup) {
     header("HTTP/1.0 404 Not Found");
   }else{
       $aDataScript["group"] = $Group;
-      $aDataScript["amountMax"]= $Group->getAmount_target()-$Group->getAmount_pledge()-$Group->getAmount_income();
+      $aDataScript["amountMax"]= $Group->getAmount_target_withExpenses()-$Group->getAmount_pledge()-$Group->getAmount_income();
       $aDataScript["subkey"] = sha1(substr($Group->getKey_edit(),0,10).$Group->getId());
       $aDataScript["postersCost"] = round($Group->getPosters() * 1.8161, 2);
       $aDataScript["professions_de_foiCost"] = round($Group->getProfessions_de_foi() * 0.011613687, 2);
