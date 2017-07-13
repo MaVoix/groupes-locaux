@@ -55,11 +55,25 @@
                                value="{{ transaction.amount }}"
                                placeholder="">
                     </div>
+
+                    <div class="form-group">
+                        <label for="pledge" class="control-label">Date versement :</label>
+                        <input type="text" title="date versement"  class="form-control" id="date_payment" name="date_payment"
+
+                                  placeholder="JJ/MM/AAAA" value="{%  if transaction.date_payment %}{{ transaction.date_payment|date("d/m/Y") }}{% endif %}">
+                    </div>
+                    <div class="form-group">
+                        <label for="pledge" class="control-label">Date encaissement :</label>
+                        <input type="text" title="date encaissement"  class="form-control" id="date_collection" name="date_collection"
+
+                               placeholder="JJ/MM/AAAA" value="{%  if transaction.date_collection %}{{ transaction.date_collection|date("d/m/Y") }}{% endif %}">
+                    </div>
+
                     <div class="form-group">
                         <label for="pledge" class="control-label">Commentaire :</label>
                         <textarea title="commentaire"  class="form-control" id="comment" name="comment"
 
-                                   placeholder="virement / chèque / dépôt d'espèces / bla bla">{{ transaction.comment }}</textarea>
+                                  placeholder="virement / chèque / dépôt d'espèces / bla bla">{{ transaction.comment }}</textarea>
                     </div>
                     <!-- <div class="form-group">
                         <label for="pledge" class="control-label">Justificatif :</label>
