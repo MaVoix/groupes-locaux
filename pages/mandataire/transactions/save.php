@@ -69,6 +69,47 @@ if($nError==0 && isset($_POST["is_pledge"]) && $_POST["is_pledge"]=="ok"){
 
     }
 }
+//verification de la saisie des dates au format JJ/MM/AAAA
+$sDatePayment=null;
+if($nError==0){
+    if(isset($_POST["date_payment"]) && $_POST["date_payment"]!=""){
+        $date=explode("/",$_POST["date_payment"]);
+        $bDateOk=false;
+        if( isset($date[0]) && isset($date[1]) && isset($date[2])) {
+            if (date("d/m/Y", strtotime($date[2] . "-" . $date[1] . "-" . $date[0])) == $_POST["date_payment"]) {
+                $bDateOk=true;
+            }
+        }
+        if(!$bDateOk){
+            $aResponse["message"]["text"] = "Vérifiez le format de la date de versement JJ/MM/AAAA";
+            array_push($aResponse["required"], array("field" => "date_payment"));
+            $nError++;
+        }else{
+            $sDatePayment=$date[2]."-".$date[1]."-".$date[0];
+        }
+    }
+}
+
+$sDateCollection=null;
+if($nError==0){
+    if(isset($_POST["date_collection"]) && $_POST["date_collection"]!=""){
+        $date=explode("/",$_POST["date_collection"]);
+        $bDateOk=false;
+        if( isset($date[0]) && isset($date[1]) && isset($date[2])) {
+            if (date("d/m/Y", strtotime($date[2] . "-" . $date[1] . "-" . $date[0])) == $_POST["date_collection"]) {
+                $bDateOk=true;
+            }
+        }
+        if(!$bDateOk){
+            $aResponse["message"]["text"] = "Vérifiez le format de la date d'encaissement JJ/MM/AAAA";
+            array_push($aResponse["required"], array("field" => "date_collection"));
+            $nError++;
+        }else{
+            $sDateCollection=$date[2]."-".$date[1]."-".$date[0];
+        }
+    }
+}
+
 
 
 if($nError==0){
@@ -90,6 +131,12 @@ if($nError==0){
     }
     if(isset($_POST["comment"]) && $_POST["comment"]!=""){
         $transaction->setComment(trim($_POST["comment"]));
+    }
+    if(!is_null($sDatePayment)){
+        $transaction->setDate_payment($sDatePayment);
+    }
+    if(!is_null($sDateCollection)){
+        $transaction->setDate_collection($sDateCollection);
     }
     $transaction->save();
 
