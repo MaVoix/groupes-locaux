@@ -837,7 +837,10 @@ CREATE TABLE `transaction` (
   `path_file` varchar(255) DEFAULT NULL COMMENT 'chemin vers le justificatif',
   `income` double DEFAULT NULL,
   `expense` double DEFAULT NULL,
-  `comment` text
+  `comment` text,
+  `payment_type` VARCHAR(250) NOT NULL,
+  `date_payment` DATETIME NULL,
+  `date_collection` DATETIME NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

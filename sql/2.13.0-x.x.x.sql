@@ -1,0 +1,1 @@
+ALTER TABLE `transaction` ADD `payment_type` VARCHAR(250) NOT NULL AFTER `comment`, ADD `date_payment` DATETIME NULL AFTER `payment_type`, ADD `date_collection` DATETIME NULL AFTER `date_payment`;
