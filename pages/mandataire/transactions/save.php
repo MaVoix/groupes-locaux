@@ -132,6 +132,9 @@ if($nError==0){
     if(isset($_POST["comment"]) && $_POST["comment"]!=""){
         $transaction->setComment(trim($_POST["comment"]));
     }
+    if(isset($_POST["payment_type"]) && $_POST["payment_type"]!=""){
+        $transaction->setPayment_type(trim($_POST["payment_type"]));
+    }
     if(!is_null($sDatePayment)){
         $transaction->setDate_payment($sDatePayment);
     }
