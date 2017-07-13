@@ -43,7 +43,9 @@
                                                 {%  if transaction.pledge.ad3 %}<br />{{ transaction.pledge.ad3 }}{%  endif %}
                                                 <br />    {{ transaction.pledge.zipcode }},     {{ transaction.pledge.city }}
                                             </em></div>
-                                    {%  if transaction.comment %}<div><br /><em><b>Commentaire :</b><br />{{ transaction.comment}}</em></div>{%  endif %}
+                                        {%  if transaction.comment %}<div><br /><em><b>Commentaire :</b><br />{{ transaction.comment}}</em></div>{%  endif %}
+                                        {%  if transaction.date_payment %}<div><br /><em><b>Date versement :</b><br />{{ transaction.date_payment|date("d/m/Y")}}</em></div>{%  endif %}
+                                        {%  if transaction.date_collection %}<div><br /><em><b>Date encaissement :</b><br />{{ transaction.date_collection|date("d/m/Y") }}</em></div>{%  endif %}
                                     </div>
                                 {% else %}
                                     {{ transaction.reference }}
