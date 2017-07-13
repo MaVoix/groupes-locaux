@@ -22,7 +22,10 @@ class TransactionListe extends Liste
         "path_file",
         "income",
         "expense",
-        "comment"
+        "comment",
+        "payment_type",
+        "date_payment",
+        "date_collection"
     );
 
     /**

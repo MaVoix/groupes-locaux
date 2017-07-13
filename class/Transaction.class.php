@@ -22,6 +22,9 @@ class Transaction	{
     private $nIncome;
     private $nExpense;
     private $sComment;
+    private $sPayment_type;
+    private $sDate_payment;
+    private $sDate_collection;
 
 
     /**
@@ -204,6 +207,21 @@ class Transaction	{
         {
             $aData["comment"]=$this->getComment();
         }
+        if(isset($this->aDataSet["payment_type"]))
+        {
+            $aData["payment_type"]=$this->getPayment_type();
+        }
+
+        if(isset($this->aDataSet["date_payment"]))
+        {
+            $aData["date_payment"]=$this->getDate_payment();
+        }
+
+        if(isset($this->aDataSet["date_collection"]))
+        {
+            $aData["date_collection"]=$this->getDate_collection();
+        }
+
 
         if($this->getId()>0)
         {
@@ -235,6 +253,9 @@ class Transaction	{
         $this->setIncome(0);
         $this->setExpense(0);
         $this->setComment(NULL);
+        $this->setPayment_type(NULL);
+        $this->setDate_payment(NULL);
+        $this->setDate_collection(NULL);
     }
 
     /**
@@ -255,7 +276,10 @@ class Transaction	{
             "path_file" => $this->getPath_file(),
             "income" => $this->getIncome(),
             "expense" => $this->getExpense(),
-            "comment" => $this->getComment()
+            "comment" => $this->getComment(),
+            "payment_type" => $this->getPayment_type(),
+            "date_payment" => $this->getDate_payment(),
+            "date_collection" => $this->getDate_collection()
         ];
 
         return json_encode($aObjet);
@@ -886,6 +910,137 @@ class Transaction	{
                 echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
             }
             return $this->sComment;
+        }
+    }
+
+
+    /**
+     * Set le champ payment_type
+     * @param string $sPayment_type nouvelle valeur pour le champ payment_type
+     */
+    public function setPayment_type($sPayment_type)
+    {
+        if( is_null($sPayment_type) ) $sPayment_type='';
+        $this->sPayment_type = $sPayment_type;
+        $this->aDataSet["payment_type"]=1;
+    }
+
+
+
+    /**
+     * Get le champ payment_type
+     * @return string valeur du champ payment_type
+     */
+    public function getPayment_type()
+    {
+        if( !is_null($this->sPayment_type) )
+        {
+            if( $this->sPayment_type==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sPayment_type;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('payment_type'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sPayment_type;
+        }
+    }
+
+
+
+    /**
+     * Set le champ date_payment
+     * @param string $sDate_payment nouvelle valeur pour le champ date_payment
+     */
+    public function setDate_payment($sDate_payment)
+    {
+        if( is_null($sDate_payment) ) $sDate_payment='';
+        $this->sDate_payment = $sDate_payment;
+        $this->aDataSet["date_payment"]=1;
+    }
+
+
+
+    /**
+     * Get le champ date_payment
+     * @return string valeur du champ date_payment
+     */
+    public function getDate_payment()
+    {
+        if( !is_null($this->sDate_payment) )
+        {
+            if( $this->sDate_payment==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sDate_payment;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('date_payment'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sDate_payment;
+        }
+    }
+
+
+
+    /**
+     * Set le champ date_collection
+     * @param string $sDate_collection nouvelle valeur pour le champ date_collection
+     */
+    public function setDate_collection($sDate_collection)
+    {
+        if( is_null($sDate_collection) ) $sDate_collection='';
+        $this->sDate_collection = $sDate_collection;
+        $this->aDataSet["date_collection"]=1;
+    }
+
+
+
+    /**
+     * Get le champ date_collection
+     * @return string valeur du champ date_collection
+     */
+    public function getDate_collection()
+    {
+        if( !is_null($this->sDate_collection) )
+        {
+            if( $this->sDate_collection==='' )
+            {
+                return NULL;
+            }
+            else
+            {
+                return $this->sDate_collection;
+            }
+        }
+        else
+        {
+            $this->hydrateFromBDD(array('date_collection'));
+            $this->callHydrateFromBDDOnGet++;
+            if($this->callHydrateFromBDDOnGet>10)
+            {
+                echo "<br />WARNING : trop d'appel en base depuis l'accesseur ". __CLASS__ ."::". __FUNCTION__ ."";
+            }
+            return $this->sDate_collection;
         }
     }
 
