@@ -10,5 +10,14 @@ curl -s https://collecte.mavoix.info/dons/accueil.html \
 /progressbar/ { x+=1; next }
 /span/ && x==1 { recu += $3 }
 /span/ && x==2 { promis += $3; x=0 }
-END { print "total=" total, "recu=" recu, "promis=" promis }
+/Objectifatteint/ { atteint += 1 }
+END {
+	print "total=" percent(recu+promis) "%",
+		"(" recu+promis "/" total ")",
+		"reçu=" percent(recu) "%",
+		"promis=" percent(promis) "%"
+	print "circos bouclées=" atteint
+}
+
+function percent(x) { return int(x/total*100 + .5) }
 '
