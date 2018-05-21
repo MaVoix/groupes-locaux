@@ -136,6 +136,7 @@ Version de test : https://collectifs-locaux.maudry.fr
 
 ## Installation
 
+- Sur Ubuntu 16.04
 - Clonage du dépot
 ```
 git clone https://github.com/MaVoix/groupes-locaux.git
